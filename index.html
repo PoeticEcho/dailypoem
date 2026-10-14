@@ -35,7 +35,7 @@
   <meta name="twitter:description" content="1,000편의 다정한 한국어 위로시 · 5대 정예 서체 · 자체 내장 재즈 & 앰비언스 라디오" />
   <meta name="twitter:image" content="https://poeticecho.github.io/dailypoem/og-image.png" />
 
-  <!-- 1. 자체 호스팅 로컬 서체 번들 최우선 로드 (setup_self_hosted.py 실행 시 오프라인 100% 독립 구동) -->
+  <!-- 1. 자체 호스팅 로컬 서체 번들 최우선 로드 -->
   <link rel="stylesheet" href="./fonts/local-fonts.css" onerror="this.remove()">
 
   <!-- 2. 로컬 ./fonts/ 미구축 환경을 위한 하이브리드 폴백 -->
@@ -88,12 +88,14 @@
 
     :root {
       --font-size: 23px;
+      --poem-line-height: 2.18;
+      --stanza-gap: 0.68em;
+      --container-v-pad: 1.1rem;
       --clock-opacity: 0.52;
       --clock-scale: 1;
       --poem-shift-x: 0px;
       --poem-shift-y: 0px;
-      /* 상하 대칭 안전 여백 변수 */
-      --stage-v-pad: max(env(safe-area-inset-top, 0px), env(safe-area-inset-bottom, 0px), 2.4rem);
+      --stage-v-pad: max(env(safe-area-inset-top, 0px), env(safe-area-inset-bottom, 0px), 1.8rem);
     }
 
     * {
@@ -131,30 +133,31 @@
       flex-direction: column;
     }
 
-    /* (1) 시 표출 공간 상단·하단 여백 100% 동일 대칭 정렬 */
+    /* 시 표출 공간: 상·하단 여백 100% 대칭 및 화면의 95% 폭 활용 */
     #viewport-stage {
       flex: 1 0 auto;
       min-height: 100dvh;
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       padding-top: var(--stage-v-pad);
       padding-bottom: var(--stage-v-pad);
-      padding-left: max(env(safe-area-inset-left, 0px), 1.5rem);
-      padding-right: max(env(safe-area-inset-right, 0px), 1.5rem);
+      padding-left: 2.5%;
+      padding-right: 2.5%;
       box-sizing: border-box;
       position: relative;
       z-index: 20;
     }
 
-    /* 📜 시 본문 컨테이너: 상하 패딩 역시 정확히 1.5rem으로 대칭 일치 */
+    /* 📜 시 본문 컨테이너: 화면 표출 영역의 95% 폭을 온전히 활용하며 상하 패딩 대칭 */
     #poem-container {
       position: relative;
       z-index: 30;
-      width: 100%;
-      max-width: 740px;
-      padding: 1.5rem 1.4rem;
+      width: 95%;
+      max-width: 780px;
+      padding: var(--container-v-pad) 0.5rem;
       margin: auto 0;
       box-sizing: border-box;
       transform: translate(var(--poem-shift-x), var(--poem-shift-y));
@@ -162,9 +165,10 @@
       pointer-events: none;
     }
 
+    /* 한 줄에 글자가 많아도 자동 줄바꿈(강제 꺾임)이 절대 발생하지 않도록 white-space: pre 적용 */
     #poem {
-      white-space: pre-wrap;
-      line-height: 2.26;
+      white-space: pre;
+      line-height: var(--poem-line-height);
       letter-spacing: -0.015em;
       word-break: keep-all;
       display: block;
@@ -190,16 +194,16 @@
       transform: translateY(-8px);
     }
 
-    /* (3) 연 구분(빈 줄) 간격을 기존 1줄 전체 높이의 2/3 수준(1.48em)으로 자연스럽게 축소 */
+    /* (1) & (6) 연 구분(빈 줄) 간격을 한층 더 타이트하고 예술적인 호흡(--stanza-gap: 기본 0.68em, 9~10줄 0.44em, 11줄+ 0.32em)으로 조정 */
     .stanza-gap {
       display: block;
-      height: 1.48em;
+      height: var(--stanza-gap);
       line-height: 0;
       font-size: 1em;
       user-select: none;
     }
 
-    /* (2) 시에 사용된 폰트와 동일한 서체를 상속받는 활자 커서 + 아래쪽으로 3px 자연스럽게 내림 */
+    /* 시 서체와 동일한 활자 커서 + 아래쪽으로 3px 하향 정렬 */
     .cursor {
       display: inline-block;
       font-family: inherit;
@@ -247,11 +251,11 @@
       color: #F0F4F8;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      padding: 0.75rem 1.4rem;
+      padding: 0.72rem 1.35rem;
       border-radius: 9999px;
       border: 1px solid rgba(255, 255, 255, 0.16);
       font-family: 'Gowun Dodum', sans-serif;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
       z-index: 180;
       pointer-events: none;
@@ -260,6 +264,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      white-space: nowrap;
     }
     body:not(.dark-ui) #touch-hud {
       background: rgba(250, 246, 238, 0.92);
@@ -374,7 +379,7 @@
       pointer-events: auto;
     }
 
-    /* 🪟 마우스오버 / 클릭 시 열리는 플로팅 조작 팝업 */
+    /* (5) 일반 설정 팝업 메뉴: 음악 켜기 / 이전 / 다음 / 자동 / 정렬 / 전체화면 / 상세 액자 설정 */
     #controls-popup {
       position: absolute;
       top: calc(100% + 0.5rem);
@@ -385,12 +390,12 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-radius: 18px;
-      padding: 0.45rem 0.55rem;
+      padding: 0.45rem 0.52rem;
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
-      min-width: 175px;
+      gap: 0.28rem;
+      min-width: 178px;
       opacity: 0;
       pointer-events: none;
       transform: translateY(-8px) scale(0.96);
@@ -414,13 +419,13 @@
       border: 1px solid transparent;
       color: inherit;
       font-family: 'Gowun Dodum', sans-serif;
-      font-size: 0.82rem;
-      padding: 0.42rem 0.65rem;
+      font-size: 0.81rem;
+      padding: 0.4rem 0.62rem;
       border-radius: 10px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.55rem;
+      gap: 0.5rem;
       transition: all 0.2s ease;
       white-space: nowrap;
       text-align: left;
@@ -438,7 +443,7 @@
     .popup-divider {
       height: 1px;
       background: rgba(128, 128, 128, 0.18);
-      margin: 0.15rem 0.2rem;
+      margin: 0.12rem 0.2rem;
     }
 
     /* 🎷 자체 내장 Pixelmood Graphite 카세트 플레이어 위젯 */
@@ -476,74 +481,188 @@
     .pm-hw-btn { background: linear-gradient(180deg, #353941 0%, #26292F 100%); border: 1px solid #454A54; color: #E2E6EC; border-radius: 7px; padding: 0.36rem 0; font-family: monospace; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35); }
     .pm-hw-btn:active, .pm-hw-btn.pm-active { transform: translateY(1px); background: #1E2228; border-color: #78A890; color: #A8D8B9; }
 
-    /* ⚙️ 상세 설정 모달 */
-    #settings-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.32); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-    #settings-backdrop.open { opacity: 1; pointer-events: auto; }
+    /* ⚙️ (3) & (4) 상세 액자 설정 모달:
+     * - 상단 헤더(X 닫기 버튼)가 절대 잘리거나 스크롤로 밀려나지 않도록 고정 헤더(flex-column) 구조 적용
+     * - 모든 옵션 문구를 간결하게 다듬고 행 간격을 컴팩트하게 설계하여 한 페이지 안에 깔끔하게 수납 */
+    #settings-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.34);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+    #settings-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
 
     #settings-modal {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -48%) scale(0.96);
-      width: min(92vw, 520px);
-      max-height: 86vh;
-      overflow-y: auto;
+      width: min(92vw, 430px);
+      max-height: calc(100dvh - max(env(safe-area-inset-top, 16px), 24px) - max(env(safe-area-inset-bottom, 16px), 24px));
       z-index: 210;
-      background: rgba(250, 247, 242, 0.96);
+      background: rgba(250, 247, 242, 0.97);
       color: #2E2925;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(128, 128, 128, 0.25);
-      border-radius: 22px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
-      padding: 1.5rem 1.65rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24);
       font-family: 'Gowun Dodum', sans-serif;
-      font-size: 0.88rem;
+      font-size: 0.82rem;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
       opacity: 0;
       pointer-events: none;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     }
     body.dark-ui #settings-modal {
-      background: rgba(26, 29, 36, 0.96);
+      background: rgba(26, 29, 36, 0.97);
       color: #E6E9EF;
-      border-color: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.15);
     }
-    #settings-modal.open { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+    #settings-modal.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
 
-    .settings-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(128, 128, 128, 0.2); padding-bottom: 0.8rem; margin-bottom: 1rem; }
-    .settings-title { font-family: 'Gowun Batang', serif; font-size: 1.08rem; font-weight: 700; margin: 0; }
-    .close-btn { background: transparent; border: 1px solid rgba(128, 128, 128, 0.25); color: inherit; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; }
+    /* 상단 고정 헤더: 스크롤해도 X 닫기 버튼이 절대 잘리지 않음 */
+    .settings-header {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.18);
+      padding: 0.78rem 1.15rem;
+      background: inherit;
+      z-index: 5;
+    }
+    .settings-title {
+      font-family: 'Gowun Batang', serif;
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    .close-btn {
+      flex: 0 0 auto;
+      background: rgba(128, 128, 128, 0.1);
+      border: 1px solid rgba(128, 128, 128, 0.25);
+      color: inherit;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.88rem;
+      line-height: 1;
+    }
+    .close-btn:hover {
+      background: rgba(128, 128, 128, 0.22);
+    }
 
-    .settings-section { margin-bottom: 1.15rem; padding-bottom: 0.95rem; border-bottom: 1px dashed rgba(128, 128, 128, 0.2); }
-    .settings-section:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-    .sec-label { font-family: 'Gowun Batang', serif; font-size: 0.88rem; font-weight: 700; margin-bottom: 0.65rem; display: flex; align-items: center; justify-content: space-between; }
-    .setting-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.55rem; font-size: 0.82rem; }
-    .setting-select, .setting-range, .setting-input { font-family: inherit; font-size: 0.79rem; padding: 0.34rem 0.58rem; border-radius: 10px; border: 1px solid rgba(128, 128, 128, 0.3); background: rgba(128, 128, 128, 0.08); color: inherit; }
-    .setting-input { width: 120px; text-align: center; font-family: monospace; }
-    .setting-range { padding: 0; width: 130px; accent-color: #6B5B4D; }
+    /* 모달 내부 본문: 한 페이지에 쏙 들어오도록 컴팩트하게 구성 */
+    .settings-body {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding: 0.65rem 1.15rem 0.85rem;
+    }
 
-    .toggle-switch { position: relative; display: inline-block; width: 42px; height: 23px; }
+    .settings-section {
+      margin-bottom: 0.7rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px dashed rgba(128, 128, 128, 0.18);
+    }
+    .settings-section:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .sec-label {
+      font-family: 'Gowun Batang', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 0.42rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.36rem;
+      font-size: 0.78rem;
+    }
+    .setting-row:last-child {
+      margin-bottom: 0;
+    }
+    .setting-row > span:first-child {
+      flex: 1 1 auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .setting-select, .setting-range, .setting-input, .setting-action-btn {
+      font-family: inherit;
+      font-size: 0.76rem;
+      padding: 0.26rem 0.48rem;
+      border-radius: 8px;
+      border: 1px solid rgba(128, 128, 128, 0.3);
+      background: rgba(128, 128, 128, 0.08);
+      color: inherit;
+      outline: none;
+    }
+    .setting-select {
+      width: 162px;
+      max-width: 48vw;
+      text-overflow: ellipsis;
+    }
+    .setting-action-btn {
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .setting-action-btn:hover {
+      background: rgba(128, 128, 128, 0.18);
+    }
+    .setting-input {
+      width: 96px;
+      text-align: center;
+      font-family: monospace;
+    }
+    .setting-range {
+      padding: 0;
+      width: 120px;
+      accent-color: #6B5B4D;
+    }
+
+    .toggle-switch { position: relative; display: inline-block; width: 38px; height: 20px; flex: 0 0 auto; }
     .toggle-switch input { opacity: 0; width: 0; height: 0; }
-    .slider-round { position: absolute; cursor: pointer; inset: 0; background-color: rgba(128, 128, 128, 0.3); transition: 0.25s; border-radius: 24px; }
-    .slider-round:before { position: absolute; content: ""; height: 17px; width: 17px; left: 3px; bottom: 3px; background-color: #fff; transition: 0.25s; border-radius: 50%; }
+    .slider-round { position: absolute; cursor: pointer; inset: 0; background-color: rgba(128, 128, 128, 0.3); transition: 0.25s; border-radius: 20px; }
+    .slider-round:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: #fff; transition: 0.25s; border-radius: 50%; }
     input:checked + .slider-round { background-color: #5C4B3B; }
     body.dark-ui input:checked + .slider-round { background-color: #8FA89B; }
-    input:checked + .slider-round:before { transform: translateX(19px); }
+    input:checked + .slider-round:before { transform: translateX(18px); }
 
-    /* 📱 모바일 반응형 최적화 (상하 여백 100% 동일 대칭 유지) */
     @media (max-width: 640px) {
       :root {
         --font-size: 20px;
-        --stage-v-pad: max(env(safe-area-inset-top, 0px), env(safe-area-inset-bottom, 0px), 2.2rem);
-      }
-      #viewport-stage {
-        padding-top: var(--stage-v-pad);
-        padding-bottom: var(--stage-v-pad);
-        padding-left: 1.1rem;
-        padding-right: 1.1rem;
+        --stage-v-pad: max(env(safe-area-inset-top, 0px), env(safe-area-inset-bottom, 0px), 1.6rem);
       }
       #poem-container {
-        padding: 1.2rem 0.5rem;
+        width: 95%;
+        padding: var(--container-v-pad) 0.2rem;
       }
       #ambient-clock.pos-top-left, #ambient-clock.pos-top-right { top: 1rem; }
       #ambient-clock.pos-bottom-left, #ambient-clock.pos-bottom-right { bottom: 2rem; }
@@ -582,7 +701,7 @@
     <div id="clock-content"></div>
   </aside>
 
-  <!-- 🪶 상단 미니멀 설정 트리거 버튼 (마우스오버 또는 클릭 시 팝업 오픈) -->
+  <!-- 🪶 상단 미니멀 설정 트리거 버튼 -->
   <div id="nav-trigger-wrap" onmouseenter="openControlsPopupOnHover()">
     <button id="gear-trigger-btn" onclick="toggleControlsPopup()" title="조작 및 설정 메뉴 열기" aria-label="설정 메뉴 열기">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -591,16 +710,11 @@
       </svg>
     </button>
 
-    <!-- 팝업 메뉴: 마우스오버 또는 아이콘 터치/클릭 시 부드럽게 등장 -->
+    <!-- (5) 일반 설정 팝업 메뉴: 음악 켜기 / 이전 / 다음 / 자동 / 정렬 / 전체화면 / 글자크기 / 상세 액자 설정 -->
     <div id="controls-popup" role="menu">
       <button class="popup-item-btn" id="popMusicBtn" onclick="toggleMusic(); closeControlsPopup();">
         <span id="popMusicIcon">🎵</span>
         <span id="popMusicText">음악 켜기 (Jazz)</span>
-      </button>
-
-      <button class="popup-item-btn" onclick="togglePixelmoodDock(); closeControlsPopup();">
-        <span>📻</span>
-        <span>픽셀라디오 플레이어</span>
       </button>
 
       <div class="popup-divider"></div>
@@ -625,12 +739,16 @@
         <span id="popAlignText">정렬: 중앙</span>
       </button>
 
+      <button class="popup-item-btn" id="popFullscreenBtn" onclick="toggleFullscreen(); closeControlsPopup();">
+        <span>⛶</span>
+        <span id="popFullscreenText">전체 화면 모드</span>
+      </button>
+
       <div class="popup-divider"></div>
 
-      <div style="display:flex;gap:0.25rem;padding:0.15rem 0.2rem;">
-        <button class="popup-item-btn" style="justify-content:center;" onclick="changeFontSize(-1)" title="글자 작게">가-</button>
-        <button class="popup-item-btn" style="justify-content:center;" onclick="changeFontSize(1)" title="글자 크게">가+</button>
-        <button class="popup-item-btn" style="justify-content:center;" onclick="toggleFullscreen()" title="전체화면">⛶</button>
+      <div style="display:flex;gap:0.25rem;padding:0.1rem 0.15rem;">
+        <button class="popup-item-btn" style="justify-content:center;padding:0.32rem 0;" onclick="changeFontSize(-1)" title="글자 작게">가−</button>
+        <button class="popup-item-btn" style="justify-content:center;padding:0.32rem 0;" onclick="changeFontSize(1)" title="글자 크게">가+</button>
       </div>
 
       <button class="popup-item-btn" onclick="toggleSettings(true); closeControlsPopup();">
@@ -640,23 +758,23 @@
     </div>
   </div>
 
-  <!-- 📱 뷰포트 래퍼: #poem 내부 앞뒤 줄바꿈 공백을 완전 제거하여 상단 1줄 빈 공간 원천 해소 & 시 서체 동일 활자 커서(|) 적용 -->
+  <!-- 📱 뷰포트 래퍼: 95% 폭 활용 & 상하 대칭 정렬 & 동일 서체 활자 커서(|) -->
   <div id="viewport-stage">
     <main id="poem-container">
       <div id="poem"><span id="typed"></span><span id="cursor" class="cursor" style="display:none" aria-hidden="true">|</span></div>
     </main>
   </div>
 
-  <!-- 📻 하단 상태 캡션 -->
+  <!-- 📻 하단 상태 캡션 (기본: 시 번호 책갈피 OFF) -->
   <div id="status-caption">
     <span id="radio-status-badge" style="display:none;">
       <span class="radio-wave-dot"></span>
       <span id="radio-channel-label">JAZZ · SEED #2494034659</span>
     </span>
-    <span id="poem-index-badge"></span>
+    <span id="poem-index-badge" style="display:none;"></span>
   </div>
 
-  <!-- 🎷 자체 내장 Pixelmood Graphite 카세트 플레이어 위젯 -->
+  <!-- 🎷 자체 내장 Pixelmood Graphite 카세트 플레이어 위젯 (상세 액자 설정에서 열기 가능) -->
   <aside id="pixelmood-dock" aria-label="내장 Pixelmood 플레이어">
     <div class="pm-top-row">
       <span>PIXELMOOD · SELF-HOSTED</span>
@@ -685,188 +803,198 @@
     </div>
   </aside>
 
-  <!-- ⚙️ 상세 설정 모달 -->
+  <!-- ⚙️ (3) & (4) & (5) 상세 액자 설정 모달 (상단 X 버튼 고정 & 한 페이지 컴팩트 수납 & 픽셀라디오 플레이어 포함) -->
   <div id="settings-backdrop" onclick="toggleSettings(false)"></div>
   <section id="settings-modal" role="dialog" aria-labelledby="settingsModalTitle">
     <div class="settings-header">
-      <h2 class="settings-title" id="settingsModalTitle">✨ 독립형 감성 시집 · 액자 설정</h2>
-      <button class="close-btn" onclick="toggleSettings(false)" title="닫기">✕</button>
+      <h2 class="settings-title" id="settingsModalTitle">✨ 상세 액자 설정</h2>
+      <button class="close-btn" onclick="toggleSettings(false)" title="닫기" aria-label="닫기">✕</button>
     </div>
 
-    <!-- 섹션 1: 자체 내장 Pixelmood 엔진 & 라디오 방송 설정 -->
-    <div class="settings-section">
-      <div class="sec-label">
-        <span>🎷 내장 Pixelmood 엔진 & 라디오 (외부 의존성 0%)</span>
-        <label class="toggle-switch">
-          <input type="checkbox" id="chkMusicOn" onchange="setMusicState(this.checked)">
-          <span class="slider-round"></span>
-        </label>
-      </div>
+    <div class="settings-body">
+      <!-- 섹션 1: 자체 내장 Pixelmood 엔진 & 라디오 방송 설정 -->
+      <div class="settings-section">
+        <div class="sec-label">
+          <span>🎷 배경 음악 & 픽셀 라디오</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chkMusicOn" onchange="setMusicState(this.checked)">
+            <span class="slider-round"></span>
+          </label>
+        </div>
 
-      <div class="setting-row">
-        <span>연주 스타일 (Style)</span>
-        <select id="selAudioChannel" class="setting-select" onchange="changeAudioChannel(this.value)">
-          <option value="jazz">Jazz (Upright Piano · Rhodes · Jazz Guitar · Bass)</option>
-          <option value="lofi">Lo-Fi (Warm Rhodes · Electric Piano · Brush)</option>
-          <option value="late_fm">심야 FM 93.1 시인의 라디오 (재즈 & 시보)</option>
-          <option value="nocturne">Nocturne & Music Box (녹턴 & 오르골)</option>
-          <option value="ambient">Forest Dawn (깊은 숲과 싱잉볼 명상)</option>
-        </select>
-      </div>
+        <div class="setting-row">
+          <span>연주 스타일</span>
+          <select id="selAudioChannel" class="setting-select" onchange="changeAudioChannel(this.value)">
+            <option value="jazz">Jazz (피아노·재즈기타)</option>
+            <option value="lofi">Lo-Fi (일렉피아노·브러시)</option>
+            <option value="late_fm">심야 FM 93.1 라디오</option>
+            <option value="nocturne">녹턴 & 오르골</option>
+            <option value="ambient">새벽 숲 싱잉볼 명상</option>
+          </select>
+        </div>
 
-      <div class="setting-row">
-        <span>배경 자연음 (Ambience)</span>
-        <select id="selAmbientLayer" class="setting-select" onchange="changeAmbientLayer(this.value)">
-          <option value="random">Random (빗소리·산새·바이닐 자동 블렌딩)</option>
-          <option value="rain">Calm Rain (창가 빗소리)</option>
-          <option value="birds">Forest Birds (숲속 산새와 바람)</option>
-          <option value="vinyl">Warm Vinyl (LP 레코드 온기)</option>
-          <option value="none">선율만 깨끗하게 듣기</option>
-        </select>
-      </div>
+        <div class="setting-row">
+          <span>배경 자연음</span>
+          <select id="selAmbientLayer" class="setting-select" onchange="changeAmbientLayer(this.value)">
+            <option value="random">자동 블렌딩 (Random)</option>
+            <option value="rain">창가 빗소리 (Rain)</option>
+            <option value="birds">숲속 산새 (Birds)</option>
+            <option value="vinyl">LP 레코드 온기 (Vinyl)</option>
+            <option value="none">선율만 듣기 (Off)</option>
+          </select>
+        </div>
 
-      <div class="setting-row">
-        <span>자연음 농도 (Ambience Level: <span id="lblAmbLevel">5</span>)</span>
-        <input type="range" id="rngAmbLevel" class="setting-range" min="0" max="10" step="1" value="5" oninput="updateAmbienceLevel(this.value)">
-      </div>
+        <div class="setting-row">
+          <span>자연음 농도 (Lv.<span id="lblAmbLevel">5</span>)</span>
+          <input type="range" id="rngAmbLevel" class="setting-range" min="0" max="10" step="1" value="5" oninput="updateAmbienceLevel(this.value)">
+        </div>
 
-      <div class="setting-row">
-        <span>전체 음악 볼륨 (기본: 잔잔하게)</span>
-        <input type="range" id="rngVolume" class="setting-range" min="0.05" max="0.7" step="0.02" value="0.22" oninput="updateVolume(this.value)">
-      </div>
+        <div class="setting-row">
+          <span>음악 볼륨</span>
+          <input type="range" id="rngVolume" class="setting-range" min="0.05" max="0.7" step="0.02" value="0.22" oninput="updateVolume(this.value)">
+        </div>
 
-      <div class="setting-row">
-        <span>작곡 시드 번호 (Seed)</span>
-        <div style="display:flex;gap:0.35rem;align-items:center;">
-          <input type="text" id="inpSeed" class="setting-input" value="2494034659" onchange="applyCustomSeed(this.value)">
-          <button class="setting-select" style="cursor:pointer;" onclick="applyCustomSeed('2494034659')" title="기본 재즈 시드로 복원">기본값</button>
-          <button class="setting-select" style="cursor:pointer;" onclick="nextPixelSeed()" title="새로운 랜덤 시드 생성">🎲</button>
+        <div class="setting-row">
+          <span>작곡 시드 (Seed)</span>
+          <div style="display:flex;gap:0.25rem;align-items:center;">
+            <input type="text" id="inpSeed" class="setting-input" value="2494034659" onchange="applyCustomSeed(this.value)">
+            <button class="setting-action-btn" onclick="applyCustomSeed('2494034659')" title="기본 시드 복원">기본</button>
+            <button class="setting-action-btn" onclick="nextPixelSeed()" title="랜덤 시드">🎲</button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <span>픽셀 라디오 플레이어</span>
+          <button class="setting-action-btn" id="btnModalPixelDock" onclick="togglePixelmoodDock(); toggleSettings(false);">
+            📻 미니 플레이어 열기/닫기
+          </button>
         </div>
       </div>
-    </div>
 
-    <!-- 섹션 2: 다이나믹 시계 설정 (5대 정예 서체 탑재) -->
-    <div class="settings-section">
-      <div class="sec-label">
-        <span>🕰️ 다이나믹 감성 시계 (시 본문 우선)</span>
-        <label class="toggle-switch">
-          <input type="checkbox" id="chkClockShow" checked onchange="updateClockConfig()">
-          <span class="slider-round"></span>
-        </label>
+      <!-- 섹션 2: 다이나믹 시계 설정 -->
+      <div class="settings-section">
+        <div class="sec-label">
+          <span>🕰️ 다이나믹 감성 시계</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chkClockShow" checked onchange="updateClockConfig()">
+            <span class="slider-round"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <span>시계 위치</span>
+          <select id="selClockPos" class="setting-select" onchange="updateClockConfig()">
+            <option value="dynamic">다이나믹 (여백 자동 이동)</option>
+            <option value="pos-bottom-right">우측 하단 고정</option>
+            <option value="pos-bottom-left">좌측 하단 고정</option>
+            <option value="pos-top-left">좌측 상단 고정</option>
+            <option value="pos-top-right">우측 상단 고정</option>
+            <option value="pos-bottom-center">하단 중앙 고정</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <span>시계 형태</span>
+          <select id="selClockFormat" class="setting-select" onchange="updateClockConfig()">
+            <option value="poetic">감성 한글 시계</option>
+            <option value="digital24">미니멀 디지털 (24시)</option>
+            <option value="digital12">클래식 디지털 (12시)</option>
+            <option value="vertical">세로형 시집 책갈피</option>
+            <option value="analog">미니멀 아날로그 바늘</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <span>시계 서체</span>
+          <select id="selClockFont" class="setting-select" onchange="updateClockConfig()">
+            <option value="sync">시 본문 서체와 동기화</option>
+            <option value="'Gowun Dodum', sans-serif">고운돋움 (정돈된 돋움)</option>
+            <option value="'Gowun Batang', serif">고운바탕 (감성 명조)</option>
+            <option value="'MaruBuri', serif">마루부리 (화면용 명조)</option>
+            <option value="'Noto Serif KR', serif">본명조 (다크 최적화)</option>
+            <option value="'Nanum Myeongjo', serif">나눔명조 (고전 명조)</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <span>시계 농도</span>
+          <input type="range" id="rngClockOpacity" class="setting-range" min="0.2" max="0.85" step="0.05" value="0.52" oninput="updateClockConfig()">
+        </div>
       </div>
 
-      <div class="setting-row">
-        <span>시계 위치 방식</span>
-        <select id="selClockPos" class="setting-select" onchange="updateClockConfig()">
-          <option value="dynamic">다이나믹 (시 여백에 맞춰 자동 이동)</option>
-          <option value="pos-bottom-right">우측 하단 고정</option>
-          <option value="pos-bottom-left">좌측 하단 고정</option>
-          <option value="pos-top-left">좌측 상단 고정</option>
-          <option value="pos-top-right">우측 상단 고정</option>
-          <option value="pos-bottom-center">하단 중앙 고정</option>
-        </select>
-      </div>
+      <!-- 섹션 3: 태블릿 액자 & 감상 호흡 설정 -->
+      <div class="settings-section">
+        <div class="sec-label">
+          <span>🖼️ 태블릿 시집 액자 & 호흡</span>
+        </div>
 
-      <div class="setting-row">
-        <span>시계 표시 형태</span>
-        <select id="selClockFormat" class="setting-select" onchange="updateClockConfig()">
-          <option value="poetic">감성 한글 시계 (문학적 시간 표현)</option>
-          <option value="digital24">미니멀 디지털 (24시간 + 날짜)</option>
-          <option value="digital12">클래식 디지털 (AM/PM + 요일)</option>
-          <option value="vertical">세로형 시집 책갈피 시계</option>
-          <option value="analog">미니멀 아날로그 바늘 + 시각</option>
-        </select>
-      </div>
+        <div class="setting-row">
+          <span>자동 넘김 주기</span>
+          <select id="selAutoInterval" class="setting-select" onchange="updateFrameConfig()">
+            <option value="18000">18초 (기본 호흡)</option>
+            <option value="35000">35초 (여유로운 감상)</option>
+            <option value="60000">1분 (차분한 액자)</option>
+            <option value="180000">3분 (독서·명상)</option>
+            <option value="300000">5분 (인테리어 액자)</option>
+          </select>
+        </div>
 
-      <div class="setting-row">
-        <span>시계 서체 (5대 정예 폰트)</span>
-        <select id="selClockFont" class="setting-select" onchange="updateClockConfig()">
-          <option value="sync">현재 시 서체와 자동 동기화</option>
-          <option value="'Gowun Dodum', sans-serif">고운돋움 (둥글고 정돈된 가독성)</option>
-          <option value="'Gowun Batang', serif">고운바탕 (부드러운 감성 명조)</option>
-          <option value="'MaruBuri', serif">마루부리 (네이버 디지털 화면용 명조)</option>
-          <option value="'Noto Serif KR', serif">본명조 (다크 배경에 또렷한 세리프)</option>
-          <option value="'Nanum Myeongjo', serif">나눔명조 (단아한 고전 시집 명조)</option>
-        </select>
-      </div>
+        <div class="setting-row">
+          <span>타이핑 속도</span>
+          <select id="selTypingSpeed" class="setting-select" onchange="updateFrameConfig()">
+            <option value="normal">서정적 필사 호흡 (기본)</option>
+            <option value="slow">느린 새벽 호흡</option>
+            <option value="fast">경쾌한 산책 호흡</option>
+            <option value="instant">즉시 한 페이지 펼치기</option>
+          </select>
+        </div>
 
-      <div class="setting-row">
-        <span>시계 농도 (시 본문 방해 금지)</span>
-        <input type="range" id="rngClockOpacity" class="setting-range" min="0.2" max="0.85" step="0.05" value="0.52" oninput="updateClockConfig()">
-      </div>
-    </div>
+        <div class="setting-row">
+          <span>배경 색감 모드</span>
+          <select id="selThemeMode" class="setting-select" onchange="updateFrameConfig()">
+            <option value="poem">시 고유 팔레트 (기본)</option>
+            <option value="time_auto">시간대 연동 (낮/밤 자동)</option>
+            <option value="always_light">항상 따스한 한지 (Day)</option>
+            <option value="always_dark">항상 고요한 밤 (Night)</option>
+          </select>
+        </div>
 
-    <!-- 섹션 3: 태블릿 액자 & 감상 호흡 설정 -->
-    <div class="settings-section">
-      <div class="sec-label">
-        <span>🖼️ 태블릿 시집 액자 & 감상 호흡</span>
-      </div>
-
-      <div class="setting-row">
-        <span>자동 넘김 주기</span>
-        <select id="selAutoInterval" class="setting-select" onchange="updateFrameConfig()">
-          <option value="18000">18초마다 (기본 호흡)</option>
-          <option value="35000">35초마다 (여유로운 감상)</option>
-          <option value="60000">1분마다 (차분한 액자)</option>
-          <option value="180000">3분마다 (독서/명상 모드)</option>
-          <option value="300000">5분마다 (인테리어 액자)</option>
-        </select>
-      </div>
-
-      <div class="setting-row">
-        <span>타이핑 속도</span>
-        <select id="selTypingSpeed" class="setting-select" onchange="updateFrameConfig()">
-          <option value="normal">서정적인 필사 호흡 (기본)</option>
-          <option value="slow">느리고 깊은 새벽 호흡</option>
-          <option value="fast">경쾌한 산책 호흡</option>
-          <option value="instant">타이핑 없이 한 페이지씩 펼치기</option>
-        </select>
-      </div>
-
-      <div class="setting-row">
-        <span>배경 색감 모드</span>
-        <select id="selThemeMode" class="setting-select" onchange="updateFrameConfig()">
-          <option value="poem">시 고유의 감성 팔레트 (기본)</option>
-          <option value="time_auto">시간대 연동 (낮엔 한지 · 밤엔 다크)</option>
-          <option value="always_light">항상 따스한 한지 톤 (Day)</option>
-          <option value="always_dark">항상 고요한 밤하늘 톤 (Night)</option>
-        </select>
-      </div>
-
-      <div class="setting-row">
-        <span>하단 시 번호 책갈피 표시</span>
-        <label class="toggle-switch">
-          <input type="checkbox" id="chkShowBadge" checked onchange="updateFrameConfig()">
-          <span class="slider-round"></span>
-        </label>
+        <div class="setting-row">
+          <span>하단 번호 책갈피 표시</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chkShowBadge" onchange="updateFrameConfig()">
+            <span class="slider-round"></span>
+          </label>
+        </div>
       </div>
     </div>
   </section>
 
   <script>
     /* =========================================================================
-     * 0. 오프라인 비상용 내장 시 뱅크
+     * 0. 오프라인 비상용 내장 시 뱅크 (4~7줄 힐링 단시)
      * ========================================================================= */
     const FALLBACK_POEMS = [
       {
-        text: "창문을 조금 열어두었다\n밤공기가 커튼 자락을 살짝 흔들고\n방 안의 묵은 생각들을 데려간다\n\n시린 공기가 뺨에 닿을 때\n비로소 오늘이 끝났음을 실감한다\n\n잘 가라, 나의 분주했던 오늘아\n남은 밤은 온전히 나의 것이다",
-        style: { background: "#161922", color: "#D8E0EB", fontFamily: "'Noto Serif KR', serif" }
-      },
-      {
-        text: "다 마신 찻잔 바닥에\n작은 찻잎 하나가 가라앉아 있다\n\n뜨거운 물을 견뎌내며\n자신의 향기를 남김없이 내어준 자리\n\n오늘 나의 하루도\n누군가에게 그런 은은한 잔향으로 남았기를",
+        text: "창가에 놓인 물 한 잔이\n아침 햇살을 둥글게 모은다\n\n비워져 있기에\n빛을 가득 담는 마음\n\n오늘의 나도 그렇게 맑기를",
         style: { background: "#FBF8F3", color: "#3C342C", fontFamily: "'Gowun Batang', serif" }
       },
       {
-        text: "너무 애쓰지 않아도 괜찮다\n바람도 나뭇가지에서 쉬어가며 불고\n구름도 제 길을 결코 서두르지 않는데\n\n오늘의 너는\n그저 묵묵히 살아낸 것만으로도\n충분히 눈부셨다",
+        text: "느리게 걸어도 괜찮다\n길가의 들꽃은\n\n천천히 걷는 사람에게만\n제 얼굴을 보여준다",
         style: { background: "#F5F3ED", color: "#3E4337", fontFamily: "'Gowun Dodum', sans-serif" }
+      },
+      {
+        text: "방 안의 불을 하나씩 끄면\n창밖의 별빛이 한 걸음 다가온다\n\n비워낸 자리마다\n고요한 평화가 차오른다",
+        style: { background: "#1C2026", color: "#E3E7ED", fontFamily: "'Noto Serif KR', serif" }
       }
     ];
 
     /* =========================================================================
-     * 1. 상태 관리 및 이전/다음 히스토리 스택
+     * 1. 상태 관리 및 기본 세팅 (하단 번호 책갈피 기본 OFF: showBadge = false)
      * ========================================================================= */
     let reflections = [];
     let currentPoemIndex = 0;
+    let currentPoemRawText = "";
     let poemHistory = [];
     let historyPtr = -1;
     let autoPlayInterval = null;
@@ -888,7 +1016,7 @@
       autoIntervalMs: 35000,
       typingSpeed: 'normal',
       themeMode: 'poem',
-      showBadge: true,
+      showBadge: false,          // (2) 하단 번호 책갈피 표시 기본값 OFF
       audioChannel: 'jazz',
       ambientLayer: 'random',
       ambienceLevel: 5,
@@ -908,7 +1036,7 @@
 
     function loadSavedConfig() {
       try {
-        const saved = localStorage.getItem('poetry_self_hosted_config_v5');
+        const saved = localStorage.getItem('poetry_self_hosted_config_v6');
         if (saved) Object.assign(CONFIG, JSON.parse(saved));
       } catch (e) {}
       parseUrlParamsIntoConfig();
@@ -917,13 +1045,11 @@
 
     function saveConfig() {
       try {
-        localStorage.setItem('poetry_self_hosted_config_v5', JSON.stringify(CONFIG));
+        localStorage.setItem('poetry_self_hosted_config_v6', JSON.stringify(CONFIG));
       } catch (e) {}
     }
 
     function applyConfigToUI() {
-      const baseFs = window.innerWidth <= 640 ? Math.min(CONFIG.fontSize, 20.5) : CONFIG.fontSize;
-      document.documentElement.style.setProperty('--font-size', `${baseFs}px`);
       document.documentElement.style.setProperty('--clock-opacity', CONFIG.clockOpacity);
 
       document.getElementById('chkClockShow').checked = CONFIG.clockShow;
@@ -937,17 +1063,76 @@
       document.getElementById('selThemeMode').value = CONFIG.themeMode;
       document.getElementById('chkShowBadge').checked = CONFIG.showBadge;
 
+      const badge = document.getElementById("poem-index-badge");
+      if (badge) badge.style.display = CONFIG.showBadge ? 'inline' : 'none';
+
       document.getElementById('selAudioChannel').value = CONFIG.audioChannel;
       document.getElementById('selAmbientLayer').value = CONFIG.ambientLayer;
       document.getElementById('rngAmbLevel').value = CONFIG.ambienceLevel;
       document.getElementById('lblAmbLevel').textContent = CONFIG.ambienceLevel;
       document.getElementById('inpSeed').value = String(CONFIG.seed);
       document.getElementById('rngVolume').value = CONFIG.volume;
+
+      if (currentPoemRawText) {
+        applyArtisticTypographyForPoem(currentPoemRawText);
+      }
     }
 
     /* =========================================================================
-     * 2. 서체 매핑, 정렬 & 2/3 높이 연 구분(빈 줄) 렌더러
+     * 2. (6) & (7) 예술적 타이포그래피 조판 엔진 (줄 수 & 글자 수 기반 다이내믹 스케일링)
+     *    - 9줄 초과(10줄, 11줄+) 시 연 구분 빈 줄(.stanza-gap)과 행간, 여백을 타이트하게 조율
+     *    - 11줄 이상 시 글자 포인트를 0.5pt~1pt 자연스럽게 축소
+     *    - 한 줄에 글자가 많아도 95% 표출 영역 안에서 절대 줄바꿈(꺾임)이 일어나지 않도록 자동 피팅
      * ========================================================================= */
+    function applyArtisticTypographyForPoem(poemText) {
+      const rawLines = (poemText || "").split('\n');
+      const nonEmptyLines = rawLines.map(l => l.trim()).filter(Boolean);
+      const lineCount = nonEmptyLines.length;
+      const stanzaBreaks = ((poemText || "").match(/\n\n/g) || []).length;
+      const maxChars = Math.max(...nonEmptyLines.map(l => l.length), 1);
+
+      const isMobile = window.innerWidth <= 640;
+      let targetFs = isMobile ? Math.min(CONFIG.fontSize, 20.5) : CONFIG.fontSize;
+      let lineHeight = 2.18;
+      let stanzaGapEm = 0.68;
+      let containerVPad = '1.1rem';
+
+      // 줄 수에 따른 정밀 타이포그래피 조율
+      if (lineCount >= 11) {
+        // 11줄 이상: 글자 포인트 약 0.5pt~0.8pt 축소 + 타이트한 연 간격 및 행간
+        targetFs -= (lineCount >= 12 ? 1.2 : 0.8);
+        lineHeight = 1.88;
+        stanzaGapEm = 0.34;
+        containerVPad = '0.35rem';
+      } else if (lineCount >= 9) {
+        // 9~10줄: 타이트하고 정갈한 행간과 연 구분
+        targetFs -= 0.4;
+        lineHeight = 2.00;
+        stanzaGapEm = 0.44;
+        containerVPad = '0.6rem';
+      }
+
+      // 95% 표출 영역 가로 폭 안에서 한 줄이 절대 두 줄로 줄바꿈되지 않도록 보장
+      const availWidth = Math.min(window.innerWidth * 0.90, 760);
+      const estimatedLineWidth = (maxChars + 1.6) * targetFs * 0.95;
+      if (estimatedLineWidth > availWidth) {
+        targetFs = Math.max(13.5, availWidth / ((maxChars + 1.6) * 0.95));
+      }
+
+      // 세로 뷰포트 90% 높이 안에서 상하 잘림 없이 완벽히 수납되도록 보장
+      const availHeight = window.innerHeight * 0.86;
+      const estimatedTotalHeight = (lineCount * lineHeight + stanzaBreaks * stanzaGapEm) * targetFs;
+      if (estimatedTotalHeight > availHeight && estimatedTotalHeight > 0) {
+        const scaleFactor = availHeight / estimatedTotalHeight;
+        targetFs = Math.max(13.5, targetFs * scaleFactor);
+      }
+
+      document.documentElement.style.setProperty('--font-size', `${targetFs.toFixed(2)}px`);
+      document.documentElement.style.setProperty('--poem-line-height', String(lineHeight));
+      document.documentElement.style.setProperty('--stanza-gap', `${stanzaGapEm}em`);
+      document.documentElement.style.setProperty('--container-v-pad', containerVPad);
+    }
+
     const ELITE_FONT_MAP = {
       'Gowun Dodum': "'Gowun Dodum', sans-serif",
       'Gowun Batang': "'Gowun Batang', serif",
@@ -1006,7 +1191,6 @@
       return t;
     }
 
-    // (3) 타이핑 중인 문자열에서 연 구분(\n\n)은 2/3 간격 블록(.stanza-gap)으로, 일반 줄바꿈(\n)은 <br>로 변환
     function renderPoemSliceToHtml(rawSlice) {
       const escaped = rawSlice
         .replace(/&/g, "&amp;")
@@ -1354,6 +1538,7 @@
       const popMusicText = document.getElementById('popMusicText');
       const popMusicIcon = document.getElementById('popMusicIcon');
       const popMusicBtn = document.getElementById('popMusicBtn');
+      const chkMusicOn = document.getElementById('chkMusicOn');
 
       if (elStyle) elStyle.textContent = `STYLE: ${stLabel}`;
       if (elAmb) elAmb.textContent = `AMB: ${ambLabel}(L${CONFIG.ambienceLevel})`;
@@ -1366,6 +1551,7 @@
       }
       if (elRadioLabel) elRadioLabel.textContent = `${stLabel} · SEED #${CONFIG.seed}`;
       if (inpSeed) inpSeed.value = String(CONFIG.seed);
+      if (chkMusicOn) chkMusicOn.checked = isMusicPlaying;
 
       if (popMusicText) popMusicText.textContent = isMusicPlaying ? '음악 끄기' : '음악 켜기 (Jazz)';
       if (popMusicIcon) popMusicIcon.textContent = isMusicPlaying ? '⏹' : '🎵';
@@ -1716,7 +1902,6 @@
      * 6. 조작 팝업 (Popup Toolbar Menu) 및 무결점 감상 모드
      * ========================================================================= */
     function openControlsPopupOnHover() {
-      // 마우스 환경에서 아이콘 호버 시 팝업 오픈
       if (window.matchMedia('(hover: hover)').matches) {
         const pop = document.getElementById('controls-popup');
         if (pop) pop.classList.add('open');
@@ -1755,7 +1940,7 @@
     }
 
     /* =========================================================================
-     * 7. 시 로드, 테마 및 2/3 연 간격 필사 타이핑 애니메이션
+     * 7. 시 로드, 테마 및 예술적 타이포그래피 필사 애니메이션
      * ========================================================================= */
     const LIGHT_PALETTES = [
       { background: "#FBF8F3", color: "#3C342C" },
@@ -1815,10 +2000,10 @@
       try {
         const res = await fetch('reflections.json?t=' + Date.now());
         reflections = await res.json();
-        try { localStorage.setItem('poetry_self_hosted_cache_v1', JSON.stringify(reflections)); } catch (e) {}
+        try { localStorage.setItem('poetry_self_hosted_cache_v2', JSON.stringify(reflections)); } catch (e) {}
       } catch (e) {
         try {
-          const cached = localStorage.getItem('poetry_self_hosted_cache_v1');
+          const cached = localStorage.getItem('poetry_self_hosted_cache_v2');
           reflections = cached ? JSON.parse(cached) : FALLBACK_POEMS;
         } catch (err) {
           reflections = FALLBACK_POEMS;
@@ -1867,6 +2052,10 @@
 
         const poemData = reflections[currentPoemIndex];
         const poemText = formatPoemText(poemData.text || "");
+        currentPoemRawText = poemText;
+
+        // (6) & (7) 해당 시의 줄 수 및 최대 글자 수에 맞춰 폰트 크기, 연 구분 간격, 행간을 예술적으로 조율
+        applyArtisticTypographyForPoem(poemText);
 
         const randVal = Math.random();
         const nextAlign = randVal < 0.45 ? 'left' : randVal < 0.85 ? 'center' : 'right';
@@ -1875,7 +2064,6 @@
         document.body.style.background = resolvedStyle.background;
         document.body.style.color = resolvedStyle.color;
         document.body.style.fontFamily = resolvedStyle.fontFamily;
-        // 커서도 시와 완전히 동일한 서체가 적용되도록 명시적 동기화
         cursor.style.fontFamily = resolvedStyle.fontFamily;
 
         const shiftX = Math.floor(Math.random() * 9) - 4;
@@ -1918,7 +2106,6 @@
 
             if (i < poemText.length) {
               const char = poemText.charAt(i);
-              // 연 구분(\n\n)인 경우 한 번에 2/3 높이의 빈 줄 블록(.stanza-gap)으로 넘김
               if (char === '\n' && poemText.charAt(i + 1) === '\n') {
                 i += 2;
               } else {
@@ -1979,10 +2166,11 @@
     }
 
     function changeFontSize(delta) {
-      CONFIG.fontSize = Math.max(16, Math.min(36, CONFIG.fontSize + delta));
-      const baseFs = window.innerWidth <= 640 ? Math.min(CONFIG.fontSize, 20.5) : CONFIG.fontSize;
-      document.documentElement.style.setProperty('--font-size', `${baseFs}px`);
+      CONFIG.fontSize = Math.max(15, Math.min(36, CONFIG.fontSize + delta));
       saveConfig();
+      if (currentPoemRawText) {
+        applyArtisticTypographyForPoem(currentPoemRawText);
+      }
       ensurePoemPriorityNoOverlap();
     }
 
@@ -2012,13 +2200,37 @@
     }
 
     function toggleFullscreen() {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen?.().catch(() => {});
-        showHudFeedback('⛶', '전체화면 모드');
+      const docEl = document.documentElement;
+      const isFs = document.fullscreenElement || document.webkitFullscreenElement;
+      const popFsText = document.getElementById('popFullscreenText');
+
+      if (!isFs) {
+        if (docEl.requestFullscreen) {
+          docEl.requestFullscreen().catch(() => {});
+        } else if (docEl.webkitRequestFullscreen) {
+          docEl.webkitRequestFullscreen();
+        }
+        window.scrollTo(0, 1);
+        requestWakeLock();
+        if (popFsText) popFsText.textContent = '전체 화면 종료';
+        showHudFeedback('⛶', '전체 화면 액자 모드');
       } else {
-        document.exitFullscreen?.().catch(() => {});
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+        if (popFsText) popFsText.textContent = '전체 화면 모드';
+        showHudFeedback('⛶', '전체 화면 해제');
       }
     }
+
+    document.addEventListener('fullscreenchange', () => {
+      const popFsText = document.getElementById('popFullscreenText');
+      if (popFsText) {
+        popFsText.textContent = document.fullscreenElement ? '전체 화면 종료' : '전체 화면 모드';
+      }
+    });
 
     async function requestWakeLock() {
       if ('wakeLock' in navigator) {
@@ -2033,7 +2245,9 @@
     });
 
     window.addEventListener('resize', () => {
-      applyConfigToUI();
+      if (currentPoemRawText) {
+        applyArtisticTypographyForPoem(currentPoemRawText);
+      }
       ensurePoemPriorityNoOverlap();
     });
 
