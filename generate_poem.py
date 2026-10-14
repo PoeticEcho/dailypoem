@@ -1,13 +1,20 @@
 import os
 import json
 import random
-from openai import OpenAI
+import sys
+import urllib.request
+import urllib.error
 
-# 🔐 API 키 및 모델 설정
-api_key = os.environ.get("OPENAI_API_KEY")
-model_name = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
+# 🔐 API 키 불러오기 (GEMINI_API_KEY 또는 GOOGLE_API_KEY)
+api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
 
-client = OpenAI(api_key=api_key)
+if not api_key:
+    print("❌ GEMINI_API_KEY 환경 변수가 설정되어 있지 않습니다.")
+    print("GitHub Secrets 또는 환경 변수에 GEMINI_API_KEY를 등록해주세요.")
+    sys.exit(1)
+
+# 지원 모델 목록 (1.5-flash 우선, 실패 시 2.0-flash 등으로 폴백)
+MODELS = ["gemini-1.5-flash", "gemini-2.0-flash", "gemini-1.5-pro"]
 
 # 🎨 감성 팔레트 프리셋 (가독성 높은 텍스트색과 차분한 배경, 정갈한 세리프 글꼴)
 PALETTES = [
@@ -91,34 +98,51 @@ prompt = f"""당신은 지친 하루 끝에 따뜻한 위로와 여운을 전하
 [감성 팔레트 목록]
 {palette_descriptions}
 
-반드시 아래 JSON 형식으로만 응답해주세요. 마크다운 코드블록이나 다른 설명 없이 순수 JSON만 출력하세요:
+반드시 아래 JSON 형식으로만 응답해주세요:
 {{
   "text": "시 본문 (줄바꿈은 \\n으로 표현)",
   "palette_index": 0
 }}
 """
 
-print(f"📡 OpenAI 호출 중... (모델: {model_name})")
-try:
-    response = client.chat.completions.create(
-        model=model_name,
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.85,
-        max_tokens=600,
-        response_format={"type": "json_object"}
+payload = {
+    "contents": [{"parts": [{"text": prompt}]}],
+    "generationConfig": {
+        "temperature": 0.85,
+        "responseMimeType": "application/json"
+    }
+}
+
+result_raw = None
+last_error = None
+
+for model_name in MODELS:
+    print(f"📡 Google Gemini API 호출 중... (모델: {model_name})")
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key}"
+    req = urllib.request.Request(
+        url,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+        method="POST"
     )
-    poem_content = response.choices[0].message.content.strip()
-    result_raw = json.loads(poem_content)
-except Exception as e:
-    print(f"⚠️ {model_name} 호출 오류: {e}. gpt-3.5-turbo로 재시도합니다.")
-    response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.85,
-        max_tokens=600
-    )
-    poem_content = response.choices[0].message.content.strip()
-    result_raw = json.loads(poem_content)
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            res_data = json.loads(resp.read().decode("utf-8"))
+            raw_text = res_data["candidates"][0]["content"]["parts"][0]["text"]
+            result_raw = json.loads(raw_text)
+            print(f"✅ {model_name} 호출 성공!")
+            break
+    except urllib.error.HTTPError as e:
+        err_msg = e.read().decode("utf-8")
+        last_error = f"Gemini API 오류 ({e.code}): {err_msg}"
+        print(f"⚠️ {model_name} 실패: {last_error}")
+    except Exception as e:
+        last_error = str(e)
+        print(f"⚠️ {model_name} 예외 발생: {last_error}")
+
+if not result_raw:
+    print(f"❌ 모든 Gemini 모델 호출에 실패했습니다. 마지막 오류: {last_error}")
+    sys.exit(1)
 
 # 결과 매핑
 text = result_raw.get("text", "").strip()
@@ -155,7 +179,7 @@ if len(data) > 365:
 with open(filename, "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
 
-print("✅ 오늘의 따뜻한 위로의 시가 성공적으로 추가되었습니다:")
+print("\n✅ 오늘의 따뜻한 위로의 시가 성공적으로 추가되었습니다:")
 print("---")
 print(new_poem["text"])
 print("---")
