@@ -1046,5 +1046,13 @@
       "color": "#4A3B32",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "text": "오늘 하루도\n묵묵히 견뎌낸\n당신의 두 손을\n조용히 모아 쥐어봅니다\n\n창가에 내려앉는 밤바람처럼\n수고했어요,\n다 괜찮아요",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
   }
 ]
