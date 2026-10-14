@@ -388,32 +388,36 @@
 
       cursor.style.display = "none";
 
-      const fadeOutTime = isInitial ? 0 : 800; // 여유롭고 부드러운 페이드아웃 0.8초
+      const fadeOutTime = isInitial ? 0 : 700; // 부드러운 페이드아웃 0.7초
       if (!isInitial) {
         poem.classList.add("fade-out");
       }
 
       setTimeout(() => {
+        // [절차 1] 기존 텍스트를 가장 먼저 완전히 비운다 (화면에 글자가 전혀 없음)
+        textTarget.textContent = "";
+
         const random = reflections[Math.floor(Math.random() * reflections.length)];
         const poemText = formatPoemText(random.text || "");
 
-        // 🪶 완전히 투명해진 정적의 순간에 정렬 변경 (덜컥거림 원천 차단)
+        // 다음 적용할 정렬 선정 (아직 화면 적용하지 않음!)
         const randVal = Math.random();
-        const pickedAlign = randVal < 0.45 ? 'left' : randVal < 0.85 ? 'center' : 'right';
-        setAlignment(pickedAlign);
+        const nextAlign = randVal < 0.45 ? 'left' : randVal < 0.85 ? 'center' : 'right';
 
         // 배경색, 글자색, 서체 부드럽게 전환
         document.body.style.background = random.style.background;
         document.body.style.color = random.style.color;
         document.body.style.fontFamily = random.style.fontFamily;
 
-        textTarget.textContent = "";
-
-        // 고요한 여백의 정적 (0.35초 멈춤)
+        // [절차 2] 화면이 완전히 비어있는 고요한 정적의 순간 (0.4초 멈춤)
         setTimeout(() => {
+          // [절차 3] 텍스트가 0글자인 빈 화면 상태에서, 타이핑 시작 직전에 정렬 적용!
+          setAlignment(nextAlign);
+
+          // [절차 4] 페이드인 복귀
           poem.classList.remove("fade-out");
 
-          // 서서히 페이드인되며 시인의 유기적인 잉크 타이핑 시작
+          // [절차 5] 고급지고 안정된 마음의 속도로 타이핑 시작
           isTyping = true;
           let i = 0;
 
@@ -428,15 +432,17 @@
               textTarget.textContent += char;
               i++;
 
-              // 🪶 생각과 숨이 머무는 유기적인 타이핑 딜레이
-              let delay = 42 + Math.random() * 20; // 기본 42~62ms
+              // 🪶 고급지고 안정된 마음의 타이핑 속도 (또박또박 머무는 호흡)
+              let delay = 85 + Math.random() * 35; // 기본 글자: 85~120ms
 
-              if (char === '\n') {
-                delay = 280; // 줄바꿈 시 숨 고르기
-              } else if (char === '.' || char === '!' || char === '?') {
-                delay = 380; // 문장 끝 깊은 여운
+              if (char === ' ') {
+                delay = 160; // 단어 사이 작은 쉼
               } else if (char === ',') {
-                delay = 180; // 쉼표 뒤 쉼
+                delay = 450; // 쉼표 뒤 반 박자 호흡
+              } else if (char === '\n') {
+                delay = 700; // 줄바꿈 시 깊은 숨 고르기
+              } else if (char === '.' || char === '!' || char === '?') {
+                delay = 850; // 문장 끝 깊은 여운이 스미는 시간
               }
 
               typeTimer = setTimeout(typeChar, delay);
@@ -448,7 +454,7 @@
           }
 
           typeChar();
-        }, isInitial ? 100 : 350);
+        }, isInitial ? 100 : 400);
       }, fadeOutTime);
     }
 
