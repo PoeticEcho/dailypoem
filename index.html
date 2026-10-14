@@ -6,43 +6,137 @@
   <title>감성 타이핑 시집</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Gowun+Batang&family=Gamja+Flower&family=Noto+Serif+KR&family=Song+Myung&family=Poor+Story&family=Gowun+Dodum&family=Black+Han+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Gowun+Batang&family=Noto+Serif+KR&family=Song+Myung&family=Gowun+Dodum&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --font-size: 20px;
+      --font-size: 21px;
+    }
+    * {
+      box-sizing: border-box;
     }
     body {
       margin: 0;
-      padding: 2rem;
+      padding: 2rem 1.5rem;
       font-size: var(--font-size);
-      line-height: 1.8;
       transition: background 1.2s ease, color 0.8s ease;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    #poem-container {
+      width: 100%;
+      max-width: 680px;
+      padding: 2.5rem 1rem;
+      transition: text-align 0.4s ease;
     }
     #poem {
       white-space: pre-wrap;
-      max-width: 680px;
-      line-height: 2.2;
+      line-height: 2.3;
       letter-spacing: -0.015em;
       word-break: keep-all;
+      display: inline-block;
+      text-align: inherit;
+      width: 100%;
     }
     #typed {
       opacity: 1;
-      transition: opacity 0.8s ease-in-out;
+      transition: opacity 0.6s ease-in-out;
     }
+
+    /* 🪶 정갈하고 은은한 상단 메뉴 바 (Zen Mode Floating Pill) */
     #controls {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
+      position: fixed;
+      top: 1.25rem;
+      right: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      padding: 0.35rem 0.65rem;
+      background: rgba(128, 128, 128, 0.08);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(128, 128, 128, 0.16);
+      border-radius: 9999px;
+      opacity: 0.35;
+      transition: opacity 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      z-index: 100;
+      user-select: none;
     }
-    button {
-      margin-left: 0.5rem;
-      font-size: 1rem;
+    #controls:hover, #controls:focus-within {
+      opacity: 1;
+      background: rgba(128, 128, 128, 0.14);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 0.1rem;
+    }
+    .ctrl-btn {
+      background: transparent;
+      border: none;
+      color: inherit;
+      font-family: inherit;
+      font-size: 0.85rem;
+      padding: 0.3rem 0.55rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      opacity: 0.85;
+      transition: background 0.2s ease, opacity 0.2s ease, transform 0.15s ease;
+      white-space: nowrap;
+    }
+    .ctrl-btn:hover {
+      background: rgba(128, 128, 128, 0.2);
+      opacity: 1;
+    }
+    .ctrl-btn:active {
+      transform: scale(0.96);
+    }
+    .text-size-btn {
+      font-size: 0.8rem;
+      padding: 0.25rem 0.45rem;
+      letter-spacing: -0.05em;
+    }
+    .ctrl-divider {
+      display: inline-block;
+      width: 1px;
+      height: 12px;
+      background: currentColor;
+      opacity: 0.2;
+      margin: 0 0.2rem;
+    }
+
+    @media (max-width: 640px) {
+      #controls {
+        top: auto;
+        bottom: 1.5rem;
+        right: 50%;
+        transform: translateX(50%);
+        opacity: 0.75;
+        padding: 0.3rem 0.5rem;
+        gap: 0.15rem;
+      }
+      #controls:hover {
+        transform: translateX(50%);
+        opacity: 1;
+      }
+      .ctrl-btn {
+        font-size: 0.78rem;
+        padding: 0.25rem 0.45rem;
+      }
+      #poem-container {
+        padding: 1.5rem 0.5rem 4.5rem;
+      }
+    }
+
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
@@ -53,38 +147,72 @@
       height: 1.2em;
       background: currentColor;
       margin-left: 4px;
+      vertical-align: text-bottom;
       animation: blink 1s step-end infinite;
     }
   </style>
 </head>
 <body>
-  <div id="controls">
-    <button onclick="changeFontSize(1)">+</button>
-    <button onclick="changeFontSize(-1)">-</button>
-    <button onclick="reloadPoem()" id="reloadBtn" style="display:none;">🔁 다시 보기</button>
-    <button onclick="toggleAutoPlay()" id="autoplayBtn">▶️ 자동재생</button>
-  </div>
-  <div id="poem">
-    <span id="typed"></span><span id="cursor" class="cursor" style="display:none"></span>
-  </div>
+  <nav id="controls" aria-label="감상 설정">
+    <div class="control-group">
+      <button onclick="changeFontSize(-1)" title="글자 작게" class="ctrl-btn text-size-btn">가-</button>
+      <button onclick="changeFontSize(1)" title="글자 크게" class="ctrl-btn text-size-btn">가+</button>
+    </div>
+    <span class="ctrl-divider"></span>
+    <button onclick="cycleAlign()" id="alignBtn" title="정렬 바꾸기 (좌측 / 중앙 / 우측)" class="ctrl-btn">
+      <span id="alignIcon">중앙 정렬</span>
+    </button>
+    <span class="ctrl-divider"></span>
+    <button onclick="reloadPoem()" id="reloadBtn" title="새로운 시 보기" class="ctrl-btn">
+      <span>새로운 시</span>
+    </button>
+    <button onclick="toggleAutoPlay()" id="autoplayBtn" title="자동 재생 켜기/끄기" class="ctrl-btn">
+      <span id="autoplayText">▶ 자동재생</span>
+    </button>
+  </nav>
+
+  <main id="poem-container">
+    <div id="poem">
+      <span id="typed"></span><span id="cursor" class="cursor" style="display:none"></span>
+    </div>
+  </main>
 
   <script>
-    let reflections;
+    let reflections = [];
     let autoPlayInterval = null;
     let isAutoPlaying = false;
     let isTyping = false;
     let typeTimer = null;
 
-    async function loadReflections() {
-      const res = await fetch('reflections.json');
-      reflections = await res.json();
-      showRandomPoem();
+    const ALIGNMENTS = ['left', 'center', 'right'];
+    const ALIGN_LABELS = {
+      'left': '좌측 정렬',
+      'center': '중앙 정렬',
+      'right': '우측 정렬'
+    };
+    let currentAlign = 'center';
+
+    function setAlignment(align) {
+      currentAlign = align;
+      const container = document.getElementById('poem-container');
+      if (container) {
+        container.style.textAlign = align;
+      }
+      const icon = document.getElementById('alignIcon');
+      if (icon) {
+        icon.textContent = ALIGN_LABELS[align];
+      }
+    }
+
+    function cycleAlign() {
+      const nextIdx = (ALIGNMENTS.indexOf(currentAlign) + 1) % ALIGNMENTS.length;
+      setAlignment(ALIGNMENTS[nextIdx]);
     }
 
     function formatPoemText(text) {
       if (!text) return "";
       let t = text.trim();
-      // 이미 연 구분(\n\n)이 있는 경우 연속 빈 줄만 정리해서 반환
+      // 이미 연 구분(\n\n)이 있는 경우 연속 빈 줄만 정리
       if (t.includes("\n\n")) {
         return t.replace(/\n{3,}/g, "\n\n");
       }
@@ -142,16 +270,35 @@
       return stanzas.join("\n\n");
     }
 
+    async function loadReflections() {
+      try {
+        const res = await fetch('reflections.json');
+        reflections = await res.json();
+        showRandomPoem();
+      } catch (e) {
+        console.error("시 불러오기 실패:", e);
+      }
+    }
+
     function showRandomPoem() {
-      if (isTyping) return;
+      if (!reflections || reflections.length === 0) return;
+
+      if (typeTimer) {
+        clearTimeout(typeTimer);
+        typeTimer = null;
+      }
 
       const random = reflections[Math.floor(Math.random() * reflections.length)];
       const textTarget = document.getElementById("typed");
       const cursor = document.getElementById("cursor");
-      const reloadBtn = document.getElementById("reloadBtn");
 
       textTarget.style.opacity = 0;
       isTyping = true;
+
+      // 시마다 랜덤 정렬 (좌측 45%, 중앙 40%, 우측 15%)
+      const randVal = Math.random();
+      const pickedAlign = randVal < 0.45 ? 'left' : randVal < 0.85 ? 'center' : 'right';
+      setAlignment(pickedAlign);
 
       const poemText = formatPoemText(random.text || "");
 
@@ -162,7 +309,6 @@
 
         textTarget.textContent = "";
         cursor.style.display = "none";
-        reloadBtn.style.display = "none";
 
         let i = 0;
         function typeChar() {
@@ -172,41 +318,44 @@
             typeTimer = setTimeout(typeChar, 45);
           } else {
             cursor.style.display = "inline-block";
-            reloadBtn.style.display = "inline-block";
             isTyping = false;
           }
         }
 
-        if (typeTimer) clearTimeout(typeTimer);
         typeChar();
-
         textTarget.style.opacity = 1;
       }, 500);
     }
 
     function reloadPoem() {
-      if (!isTyping) showRandomPoem();
+      if (typeTimer) {
+        clearTimeout(typeTimer);
+        typeTimer = null;
+      }
+      isTyping = false;
+      showRandomPoem();
     }
 
     function toggleAutoPlay() {
-      const btn = document.getElementById("autoplayBtn");
+      const textSpan = document.getElementById("autoplayText");
       if (!isAutoPlaying) {
         autoPlayInterval = setInterval(() => {
           if (!isTyping) showRandomPoem();
-        }, 20000);
-        btn.textContent = "⏸️ 자동정지";
+        }, 18000);
+        textSpan.textContent = "⏸ 일시정지";
         isAutoPlaying = true;
       } else {
         clearInterval(autoPlayInterval);
         autoPlayInterval = null;
-        btn.textContent = "▶️ 자동재생";
+        textSpan.textContent = "▶ 자동재생";
         isAutoPlaying = false;
       }
     }
 
     function changeFontSize(delta) {
       const current = parseInt(getComputedStyle(document.body).getPropertyValue('--font-size'));
-      document.documentElement.style.setProperty('--font-size', `${current + delta}px`);
+      const nextSize = Math.max(16, Math.min(32, current + delta));
+      document.documentElement.style.setProperty('--font-size', `${nextSize}px`);
     }
 
     loadReflections();
