@@ -19,14 +19,14 @@ TARGET_MAX_POEMS = int(os.environ.get("TARGET_MAX_POEMS", "1000"))
 POEM_COUNT = int(os.environ.get("POEM_COUNT", "1"))
 FILENAME = os.environ.get("REFLECTIONS_FILE", "reflections.json")
 
-# 지원 모델 목록 (안정적인 최신 모델 순서)
+# 지원 모델 목록 (최신 모델 및 기존 검증된 모델 폴백 체인)
 MODELS = [
     "gemini-3.5-flash-lite",
     "gemini-3.5-flash",
     "gemini-3.8-flash",
     "gemini-flash-latest",
     "gemini-2.5-flash",
-    "gemini-2.5-pro",
+    "gemini-2.5-flash-lite",
     "gemini-2.0-flash",
 ]
 
@@ -192,8 +192,8 @@ def split_poetic_line(line: str, max_chars: int = 19) -> list[str]:
     return split_poetic_line(left_str, max_chars) + split_poetic_line(right_str, max_chars)
 
 
-def polish_poem_breathing(text: str, max_chars: int = 19) -> str:
-    """시의 연(stanza)과 행(line) 호흡을 다듬고 불필요한 공백이나 어색한 끊김을 교정합니다."""
+def polish_poem_breathing(text: str, max_chars: int = 19, max_total_lines: int = 7) -> str:
+    """시의 연(stanza)과 행(line) 호흡을 다듬고, 행갈이 후 7줄을 초과하면 연 단위로 깔끔하게 갈무리합니다."""
     text = re.sub(r"\r\n?", "\n", text.strip())
     text = re.sub(r"\n{3,}", "\n\n", text)
     raw_stanzas = [s.strip() for s in text.split("\n\n") if s.strip()]
@@ -216,9 +216,54 @@ def polish_poem_breathing(text: str, max_chars: int = 19) -> str:
         wrapped = []
         for l in orig_lines:
             wrapped.extend(split_poetic_line(l, max_chars=max_chars))
-        new_stanzas.append("\n".join(wrapped))
+        if wrapped:
+            new_stanzas.append(wrapped)
 
-    return "\n\n".join(new_stanzas)
+    # 만약 자동 행갈이 후 전체 줄 수가 max_total_lines(7줄)를 초과하면,
+    # 문장이 중간에 끊기지 않도록 완결된 연(stanza) 또는 행 단위로 7줄 이내로 정돈
+    total_lines = sum(len(st) for st in new_stanzas)
+    if total_lines > max_total_lines and len(new_stanzas) >= 2:
+        trimmed_stanzas = []
+        acc = 0
+        for st in new_stanzas:
+            if acc + len(st) <= max_total_lines:
+                trimmed_stanzas.append(st)
+                acc += len(st)
+            else:
+                remain = max_total_lines - acc
+                if remain >= 2 and len(trimmed_stanzas) == 1:
+                    trimmed_stanzas.append(st[:remain])
+                break
+        if len(trimmed_stanzas) >= 2:
+            new_stanzas = trimmed_stanzas
+
+    return "\n\n".join("\n".join(st) for st in new_stanzas)
+
+
+def parse_gemini_json(raw_text: str) -> dict | None:
+    """마크다운 코드펜스(```json ... ```)나 배열 형태 응답까지 안전하게 파싱합니다."""
+    if not raw_text:
+        return None
+    cleaned = raw_text.strip()
+    cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\s*```$", "", cleaned)
+    cleaned = cleaned.strip()
+
+    try:
+        parsed = json.loads(cleaned)
+        if isinstance(parsed, list) and parsed and isinstance(parsed[0], dict):
+            return parsed[0]
+        if isinstance(parsed, dict):
+            return parsed
+    except Exception:
+        # 중괄호 블록 추출 시도
+        match = re.search(r"\{[\s\S]*\}", cleaned)
+        if match:
+            try:
+                return json.loads(match.group(0))
+            except Exception:
+                pass
+    return None
 
 
 def char_ngrams(text: str, n: int = 3) -> set[str]:
@@ -228,7 +273,7 @@ def char_ngrams(text: str, n: int = 3) -> set[str]:
     return {cleaned[i : i + n] for i in range(len(cleaned) - n + 1)}
 
 
-def is_too_similar(candidate: str, existing_poems: list[dict], threshold: float = 0.36) -> bool:
+def is_too_similar(candidate: str, existing_poems: list[dict], threshold: float = 0.38) -> bool:
     cand_ngrams = char_ngrams(candidate, 3)
     if not cand_ngrams:
         return True
@@ -245,8 +290,8 @@ def is_too_similar(candidate: str, existing_poems: list[dict], threshold: float 
 
 
 def validate_poem_quality(text: str, existing_poems: list[dict]) -> tuple[bool, str]:
-    """생성된 시가 감성 시집의 기준(4~7줄 이내의 응축된 단시 호흡, 연 구분, 독창성)을 충족하는지 검증합니다."""
-    if not text or len(text.strip()) < 28:
+    """생성된 시가 감성 시집의 기준(4~7줄 이내의 단시 호흡, 연 구분, 독창성)을 충족하는지 검증합니다."""
+    if not text or len(text.strip()) < 24:
         return False, "시 본문이 너무 짧습니다."
 
     stanzas = [s.strip() for s in text.strip().split("\n\n") if s.strip()]
@@ -285,8 +330,8 @@ def build_prompt(theme: str, recent_openings: list[str]) -> str:
 다음 엄격한 작시 기준을 반드시 지켜 한국어 힐링 감성 시 한 편을 지어주세요:
 
 1. **최대 7줄 이내의 응축된 단시 호흡 (가장 중요)**:
-   - 전체 행(줄) 수는 빈 줄을 제외하고 **반드시 4행~7행 이내(절대 7줄을 넘지 말 것)**로 간결하게 쓰세요.
-   - 한 행은 **8~17자 내외(최대 19자 이하)**로 짧게 끊어 한 줄이 화면에서 절대 두 줄로 꺾이지 않게 하세요.
+   - 전체 행(줄) 수는 빈 줄을 제외하고 **반드시 4행~6행(최대 7행 이하)**으로 간결하게 쓰세요.
+   - 한 행은 **8~16자 내외(최대 18자 이하)**로 짧게 끊어 한 줄이 화면에서 절대 두 줄로 꺾이지 않게 하세요.
    - 총 **2연 또는 3연**으로 구성하고, 연과 연 사이에는 반드시 빈 줄(\\n\\n)을 넣어주세요.
 
 2. **정서와 표현의 품격**:
@@ -308,7 +353,7 @@ def build_prompt(theme: str, recent_openings: list[str]) -> str:
 반드시 아래 JSON 형식으로만 응답하세요:
 {{
   "critique": "7줄 이하 준수 여부, 행갈이 호흡, 시적 여운에 대한 자체 점검 메모",
-  "text": "최종 완성된 시 본문 (4~7행 이내, 행 구분은 \\n, 연 구분은 \\n\\n)",
+  "text": "최종 완성된 시 본문 (4~6행 권장, 행 구분은 \\n, 연 구분은 \\n\\n)",
   "quality_score": 9,
   "palette_index": 0
 }}
@@ -326,6 +371,7 @@ def call_gemini_api(api_key: str, prompt_text: str) -> dict | None:
 
     last_error = None
     for model_name in MODELS:
+        print(f"📡 Google Gemini API 호출 시도... (모델: {model_name})")
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key}"
         req = urllib.request.Request(
             url,
@@ -338,16 +384,24 @@ def call_gemini_api(api_key: str, prompt_text: str) -> dict | None:
                 with urllib.request.urlopen(req, timeout=35) as resp:
                     res_data = json.loads(resp.read().decode("utf-8"))
                     raw_text = res_data["candidates"][0]["content"]["parts"][0]["text"]
-                    return json.loads(raw_text)
+                    parsed = parse_gemini_json(raw_text)
+                    if parsed and parsed.get("text"):
+                        print(f"✅ {model_name} 응답 수신 및 JSON 파싱 성공!")
+                        return parsed
+                    last_error = f"JSON 형식 불일치: {raw_text[:100]}"
             except urllib.error.HTTPError as e:
                 err_msg = e.read().decode("utf-8")
-                last_error = f"HTTP {e.code}: {err_msg}"
+                last_error = f"HTTP {e.code}: {err_msg[:180]}"
+                print(f"⚠️ {model_name} (시도 {attempt+1}/2) HTTP 오류: {e.code}")
                 if e.code in (429, 500, 503) and attempt == 0:
                     time.sleep(3)
+                else:
+                    break
             except Exception as e:
                 last_error = str(e)
+                print(f"⚠️ {model_name} 예외 발생: {last_error}")
                 break
-    print(f"❌ Gemini API 호출 실패: {last_error}")
+    print(f"❌ 모든 Gemini 모델 호출 실패: {last_error}")
     return None
 
 
@@ -377,14 +431,14 @@ def main():
         selected_theme = POETIC_THEMES[theme_idx]
 
         accepted_poem = None
-        for retry in range(3):
+        for retry in range(4):
             prompt_text = build_prompt(selected_theme, recent_openings)
             result_raw = call_gemini_api(api_key, prompt_text)
             if not result_raw:
                 continue
 
             raw_poem = result_raw.get("text", "").strip()
-            polished_text = polish_poem_breathing(raw_poem, max_chars=19)
+            polished_text = polish_poem_breathing(raw_poem, max_chars=19, max_total_lines=7)
             ok, reason = validate_poem_quality(polished_text, data)
 
             if ok:
@@ -404,7 +458,7 @@ def main():
                 print(f"✅ [{n+1}/{POEM_COUNT}] 품질 검증 통과 (테마: {selected_theme}, 팔레트: {selected_palette['name']})")
                 break
             else:
-                print(f"⚠️ [{n+1}/{POEM_COUNT}] 품질 검증 재시도 ({retry+1}/3): {reason}")
+                print(f"⚠️ [{n+1}/{POEM_COUNT}] 품질 검증 재시도 ({retry+1}/4): {reason}")
                 selected_theme = random.choice(POETIC_THEMES)
 
         if accepted_poem:

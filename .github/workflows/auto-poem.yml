@@ -2,8 +2,8 @@ name: Poetry Book Curator & Self-Hosted Assets (Target 1000 Poems)
 
 on:
   schedule:
-    - cron: "0 1 * * *"    # 매일 한국 시간 오전 10시 1편 생성 (일정한 호흡으로 1,000편 적립)
-    - cron: "0 2 * * 0"    # 매주 일요일 한국 시간 오전 11시 주간 큐레이션 보충 (3편 생성)
+    - cron: "0 1 * * *"    # 매일 UTC 01:00 = 한국 시간 오전 10시 1편 생성 (1,000편 적립)
+    - cron: "0 2 * * 0"    # 매주 일요일 UTC 02:00 = 한국 시간 오전 11시 주간 큐레이션 보충 (3편 생성)
   workflow_dispatch:       # 수동 실행 시 원하는 생성 편수 및 폰트 로컬화 실행 가능
     inputs:
       poem_count:
@@ -60,5 +60,6 @@ jobs:
           if [ -d "fonts" ]; then
             git add fonts/
           fi
-          git commit -m "📜 Add curated poem(s) (${TOTAL_COUNT}/1000) & sync self-hosted assets - $(date +'%Y-%m-%d')" || echo "Nothing to commit"
+          git commit -m "📜 Add curated poem(s) (${TOTAL_COUNT}/1000) & sync self-hosted assets - $(date +'%Y-%m-%d')" || exit 0
+          git pull --rebase origin ${{ github.ref_name }} || true
           git push
