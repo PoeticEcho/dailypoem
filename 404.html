@@ -5,12 +5,16 @@
   <title>감성 타이핑 시집</title>
   <script>
     const path = window.location.pathname;
-    const match = path.match(/\/dailypoem\/(\d+)\/?$/);
-    if (match && match[1]) {
-      sessionStorage.setItem('dailypoem_redirect_code', match[1]);
-      window.location.replace('/dailypoem/');
+    const match = path.match(/^(.*\/)(\d{2,})\/?$/);
+    if (match && match[1] && match[2]) {
+      sessionStorage.setItem('dailypoem_redirect_code', match[2]);
+      window.location.replace(match[1]);
     } else {
-      window.location.replace('/dailypoem/');
+      if (path.includes('/dailypoem')) {
+        window.location.replace('/dailypoem/');
+      } else {
+        window.location.replace('./');
+      }
     }
   </script>
 </head>
