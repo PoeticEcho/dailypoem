@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>감성 타이핑 시집</title>
 
   <!-- Fonts -->
@@ -31,7 +34,7 @@
     #poem-container {
       width: 100%;
       max-width: 680px;
-      padding: 2.5rem 1rem;
+      padding: 3rem 1rem;
       transition: text-align 0.4s ease;
     }
     #poem {
@@ -48,21 +51,22 @@
       transition: opacity 0.6s ease-in-out;
     }
 
-    /* 🪶 정갈하고 은은한 상단 메뉴 바 (Zen Mode Floating Pill) */
+    /* 🪶 감성적인 플로팅 메뉴 바 (Aesthetic Floating Toolbar) */
     #controls {
       position: fixed;
-      top: 1.25rem;
-      right: 1.25rem;
+      top: 1.5rem;
+      right: 1.5rem;
       display: flex;
       align-items: center;
-      gap: 0.2rem;
-      padding: 0.35rem 0.65rem;
+      gap: 0.35rem;
+      padding: 0.35rem 0.5rem;
       background: rgba(128, 128, 128, 0.08);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(128, 128, 128, 0.16);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(128, 128, 128, 0.2);
       border-radius: 9999px;
-      opacity: 0.35;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      opacity: 0.8;
       transition: opacity 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
       z-index: 100;
       user-select: none;
@@ -70,48 +74,65 @@
     #controls:hover, #controls:focus-within {
       opacity: 1;
       background: rgba(128, 128, 128, 0.14);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
     }
-    .control-group {
+
+    .ctrl-group {
       display: flex;
       align-items: center;
-      gap: 0.1rem;
+      gap: 0.2rem;
     }
+
     .ctrl-btn {
-      background: transparent;
-      border: none;
+      background: rgba(128, 128, 128, 0.06);
+      border: 1px solid rgba(128, 128, 128, 0.18);
       color: inherit;
-      font-family: inherit;
-      font-size: 0.85rem;
-      padding: 0.3rem 0.55rem;
+      font-family: 'Gowun Batang', serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.32rem 0.65rem;
       border-radius: 9999px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
-      opacity: 0.85;
-      transition: background 0.2s ease, opacity 0.2s ease, transform 0.15s ease;
+      gap: 0.35rem;
+      letter-spacing: -0.02em;
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
       white-space: nowrap;
+      text-decoration: none;
     }
     .ctrl-btn:hover {
-      background: rgba(128, 128, 128, 0.2);
-      opacity: 1;
+      background: rgba(128, 128, 128, 0.18);
+      border-color: rgba(128, 128, 128, 0.35);
+      transform: translateY(-1px);
     }
     .ctrl-btn:active {
-      transform: scale(0.96);
+      transform: translateY(0) scale(0.97);
     }
-    .text-size-btn {
+
+    .size-btn {
+      padding: 0.3rem 0.5rem;
       font-size: 0.8rem;
-      padding: 0.25rem 0.45rem;
-      letter-spacing: -0.05em;
     }
+    .sub-sign {
+      font-size: 0.7rem;
+      opacity: 0.85;
+      margin-left: 1px;
+    }
+
+    .ctrl-icon {
+      display: inline-block;
+      vertical-align: middle;
+      stroke: currentColor;
+    }
+
     .ctrl-divider {
       display: inline-block;
       width: 1px;
-      height: 12px;
+      height: 14px;
       background: currentColor;
       opacity: 0.2;
-      margin: 0 0.2rem;
+      margin: 0 0.15rem;
     }
 
     @media (max-width: 640px) {
@@ -120,17 +141,17 @@
         bottom: 1.5rem;
         right: 50%;
         transform: translateX(50%);
-        opacity: 0.75;
-        padding: 0.3rem 0.5rem;
-        gap: 0.15rem;
+        padding: 0.3rem 0.45rem;
+        gap: 0.25rem;
+        opacity: 0.92;
       }
       #controls:hover {
         transform: translateX(50%);
-        opacity: 1;
       }
       .ctrl-btn {
-        font-size: 0.78rem;
-        padding: 0.25rem 0.45rem;
+        font-size: 0.76rem;
+        padding: 0.28rem 0.48rem;
+        gap: 0.25rem;
       }
       #poem-container {
         padding: 1.5rem 0.5rem 4.5rem;
@@ -153,21 +174,39 @@
   </style>
 </head>
 <body>
-  <nav id="controls" aria-label="감상 설정">
-    <div class="control-group">
-      <button onclick="changeFontSize(-1)" title="글자 작게" class="ctrl-btn text-size-btn">가-</button>
-      <button onclick="changeFontSize(1)" title="글자 크게" class="ctrl-btn text-size-btn">가+</button>
+  <nav id="controls" aria-label="감상 메뉴">
+    <div class="ctrl-group">
+      <button onclick="changeFontSize(-1)" title="글자 작게" class="ctrl-btn size-btn">
+        가<span class="sub-sign">−</span>
+      </button>
+      <button onclick="changeFontSize(1)" title="글자 크게" class="ctrl-btn size-btn">
+        가<span class="sub-sign">+</span>
+      </button>
     </div>
+
     <span class="ctrl-divider"></span>
-    <button onclick="cycleAlign()" id="alignBtn" title="정렬 바꾸기 (좌측 / 중앙 / 우측)" class="ctrl-btn">
-      <span id="alignIcon">중앙 정렬</span>
+
+    <button onclick="cycleAlign()" id="alignBtn" title="시 정렬 바꾸기 (좌측 / 중앙 / 우측)" class="ctrl-btn">
+      <span id="alignSvgWrap"></span>
+      <span id="alignText">중앙</span>
     </button>
+
     <span class="ctrl-divider"></span>
-    <button onclick="reloadPoem()" id="reloadBtn" title="새로운 시 보기" class="ctrl-btn">
-      <span>새로운 시</span>
+
+    <button onclick="reloadPoem()" id="reloadBtn" title="새로운 시 감상하기" class="ctrl-btn">
+      <svg class="ctrl-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+      </svg>
+      <span>다른 시</span>
     </button>
-    <button onclick="toggleAutoPlay()" id="autoplayBtn" title="자동 재생 켜기/끄기" class="ctrl-btn">
-      <span id="autoplayText">▶ 자동재생</span>
+
+    <button onclick="toggleAutoPlay()" id="autoplayBtn" title="자동 넘김" class="ctrl-btn">
+      <span id="autoplaySvg">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+      </span>
+      <span id="autoplayText">자동 넘김</span>
     </button>
   </nav>
 
@@ -185,10 +224,19 @@
     let typeTimer = null;
 
     const ALIGNMENTS = ['left', 'center', 'right'];
-    const ALIGN_LABELS = {
-      'left': '좌측 정렬',
-      'center': '중앙 정렬',
-      'right': '우측 정렬'
+    const ALIGN_CONFIG = {
+      'left': {
+        label: '좌측',
+        svg: '<svg class="ctrl-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="14" y2="12"/><line x1="3" y1="18" x2="18" y2="18"/></svg>'
+      },
+      'center': {
+        label: '중앙',
+        svg: '<svg class="ctrl-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>'
+      },
+      'right': {
+        label: '우측',
+        svg: '<svg class="ctrl-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="6" y1="18" x2="21" y2="18"/></svg>'
+      }
     };
     let currentAlign = 'center';
 
@@ -198,9 +246,13 @@
       if (container) {
         container.style.textAlign = align;
       }
-      const icon = document.getElementById('alignIcon');
-      if (icon) {
-        icon.textContent = ALIGN_LABELS[align];
+      const svgWrap = document.getElementById('alignSvgWrap');
+      const textSpan = document.getElementById('alignText');
+      if (svgWrap && ALIGN_CONFIG[align]) {
+        svgWrap.innerHTML = ALIGN_CONFIG[align].svg;
+      }
+      if (textSpan && ALIGN_CONFIG[align]) {
+        textSpan.textContent = ALIGN_CONFIG[align].label;
       }
     }
 
@@ -212,11 +264,9 @@
     function formatPoemText(text) {
       if (!text) return "";
       let t = text.trim();
-      // 이미 연 구분(\n\n)이 있는 경우 연속 빈 줄만 정리
       if (t.includes("\n\n")) {
         return t.replace(/\n{3,}/g, "\n\n");
       }
-      // 줄바꿈이 2개 이상 있는 경우 2행마다 빈 줄(\n\n) 삽입하여 연 구분
       if ((t.match(/\n/g) || []).length >= 2) {
         const lines = t.split("\n").map(l => l.trim()).filter(Boolean);
         const stanzas = [];
@@ -231,7 +281,6 @@
         if (cur.length) stanzas.push(cur.join("\n"));
         return stanzas.join("\n\n");
       }
-      // 줄바꿈이 없는 긴 산문형 시: 문장 단위 및 쉼표/구문 단위로 호흡 분할
       const sents = t.replace(/\n/g, " ").split(/(?<=[.!?])\s+/).filter(Boolean);
       const lines = [];
       for (let s of sents) {
@@ -272,7 +321,7 @@
 
     async function loadReflections() {
       try {
-        const res = await fetch('reflections.json');
+        const res = await fetch('reflections.json?t=' + Date.now());
         reflections = await res.json();
         showRandomPoem();
       } catch (e) {
@@ -338,16 +387,19 @@
 
     function toggleAutoPlay() {
       const textSpan = document.getElementById("autoplayText");
+      const svgSpan = document.getElementById("autoplaySvg");
       if (!isAutoPlaying) {
         autoPlayInterval = setInterval(() => {
           if (!isTyping) showRandomPoem();
         }, 18000);
-        textSpan.textContent = "⏸ 일시정지";
+        textSpan.textContent = "멈춤";
+        svgSpan.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
         isAutoPlaying = true;
       } else {
         clearInterval(autoPlayInterval);
         autoPlayInterval = null;
-        textSpan.textContent = "▶ 자동재생";
+        textSpan.textContent = "자동 넘김";
+        svgSpan.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
         isAutoPlaying = false;
       }
     }
