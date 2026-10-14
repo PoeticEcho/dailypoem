@@ -8,20 +8,33 @@
   <meta http-equiv="Expires" content="0" />
   <title>감성 타이핑 시집</title>
 
-  <!-- Google Fonts: 최고급 감성 한글 서체 컬렉션 -->
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;600&family=Song+Myung&family=Gowun+Dodum&display=swap" rel="stylesheet">
+  <!-- 최고급 감성 한글 서체 컬렉션 (고운바탕 + 고운돋움 + 마루부리 + 본명조 + 나눔명조) -->
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Noto+Serif+KR:wght@300;400;600&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
+    @font-face {
+      font-family: 'MaruBuri';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'MaruBuri';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Bold.woff') format('woff');
+      font-weight: 700;
+      font-style: normal;
+    }
+
     :root {
-      --font-size: 21px;
+      --font-size: 23px;
     }
     * {
       box-sizing: border-box;
     }
     
     html {
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: subpixel-antialiased;
+      -moz-osx-font-smoothing: auto;
       text-rendering: optimizeLegibility;
     }
 
@@ -29,8 +42,8 @@
       margin: 0;
       padding: 2rem 1.5rem;
       font-size: var(--font-size);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: subpixel-antialiased;
+      -moz-osx-font-smoothing: auto;
       text-rendering: optimizeLegibility;
       transition: background 1.5s cubic-bezier(0.4, 0, 0.2, 1), color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
       min-height: 100vh;
@@ -51,15 +64,12 @@
     #poem {
       white-space: pre-wrap;
       line-height: 2.35;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.015em;
       word-break: keep-all;
       display: inline-block;
       width: 100%;
       text-align: inherit;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
-      text-shadow: 0 0 1px rgba(0, 0, 0, 0.04);
       opacity: 1;
       filter: blur(0px);
       transform: translateY(0);

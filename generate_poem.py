@@ -40,13 +40,13 @@ PALETTES = [
     {
         "background": "#F7F3EE",
         "color": "#4A3B32",
-        "fontFamily": "'Gowun Batang', serif",
+        "fontFamily": "'MaruBuri', serif",
         "name": "오래된 책장과 따뜻한 차"
     },
     {
         "background": "#1C2026",
         "color": "#E3E7ED",
-        "fontFamily": "'Nanum Myeongjo', serif",
+        "fontFamily": "'Noto Serif KR', serif",
         "name": "고요한 밤하늘"
     },
     {
@@ -64,7 +64,7 @@ PALETTES = [
     {
         "background": "#202523",
         "color": "#DCE3DE",
-        "fontFamily": "'Nanum Myeongjo', serif",
+        "fontFamily": "'MaruBuri', serif",
         "name": "깊은 숲의 고요"
     },
     {
