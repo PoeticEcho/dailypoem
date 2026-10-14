@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>감성 타이핑 시집</title>
+  <script>
+    const path = window.location.pathname;
+    const match = path.match(/\/dailypoem\/(\d+)\/?$/);
+    if (match && match[1]) {
+      sessionStorage.setItem('dailypoem_redirect_code', match[1]);
+      window.location.replace('/dailypoem/');
+    } else {
+      window.location.replace('/dailypoem/');
+    }
+  </script>
+</head>
+<body></body>
+</html>

@@ -1101,16 +1101,51 @@
         if (params.get('level')) CONFIG.ambienceLevel = Math.max(0, Math.min(10, parseInt(params.get('level'), 10)));
         if (params.get('seed')) CONFIG.seed = parseInt(params.get('seed'), 10) || 2494034659;
 
-        // 공유받은 시 링크(?poem=번호)로 접속한 경우: 자동 감상 OFF 상태로 해당 시 고정 표출
-        if (params.has('poem')) {
+        // 1순위: /dailypoem/2341/ 형태의 경로 파싱 (404 리다이렉트 또는 직접 경로)
+        const path = window.location.pathname;
+        const pathMatch = path.match(/\/(\d{2,})\/?$/);
+        
+        // 2순위: 세션 스토리지(404 리다이렉트 거쳐온 경우)
+        const sessionCode = sessionStorage.getItem('dailypoem_redirect_code');
+        if (sessionCode) {
+          sessionStorage.removeItem('dailypoem_redirect_code');
+        }
+        
+        const cleanCode = pathMatch ? pathMatch[1] : sessionCode;
+
+        if (cleanCode && /^\d{2,}$/.test(cleanCode)) {
+          // 마지막 1자리는 오토플레이 여부 (1: ON, 0: OFF), 앞자리는 시 번호
+          const autoplayFlag = cleanCode.slice(-1);
+          const poemIdx = parseInt(cleanCode.slice(0, -1), 10);
+
+          if (!isNaN(poemIdx)) {
+            sharedInitialPoemIndex = poemIdx;
+            isAutoPlaying = (autoplayFlag === '1');
+          }
+        } else if (params.has('poem')) {
+          // 기존 ?poem=번호 쿼리 호환성 유지
           const pIdx = parseInt(params.get('poem'), 10);
           if (!isNaN(pIdx) && pIdx >= 0) {
             sharedInitialPoemIndex = pIdx;
             isAutoPlaying = false;
           }
+        } else if (window.location.hash) {
+          // 해시(#2341) 호환성 유지
+          const hashCode = window.location.hash.replace('#', '');
+          if (/^\d{2,}$/.test(hashCode)) {
+            const autoplayFlag = hashCode.slice(-1);
+            const poemIdx = parseInt(hashCode.slice(0, -1), 10);
+            if (!isNaN(poemIdx)) {
+              sharedInitialPoemIndex = poemIdx;
+              isAutoPlaying = (autoplayFlag === '1');
+            }
+          }
         }
+
         if (params.get('autoplay') === '0') {
           isAutoPlaying = false;
+        } else if (params.get('autoplay') === '1') {
+          isAutoPlaying = true;
         }
       } catch (e) {}
     }
@@ -1312,10 +1347,15 @@
       } catch (e) {}
     }
 
-    // 현재 시 공유하기 (공유받은 링크를 열면 자동 감상이 꺼진 채로 해당 시가 열림)
+    // 현재 시 공유하기 (현재 시 번호 + 오토플레이 상태(1 또는 0) 조합 Clean URL 링크 생성)
     async function shareCurrentPoem() {
-      const baseUrl = window.location.origin + window.location.pathname;
-      const shareUrl = `${baseUrl}?poem=${currentPoemIndex}&autoplay=0`;
+      const autoplayCode = isAutoPlaying ? '1' : '0';
+      const shareCode = `${currentPoemIndex}${autoplayCode}`;
+      
+      let cleanPath = window.location.pathname.replace(/\/index\.html$/i, '').replace(/\/\d+\/?$/, '');
+      if (!cleanPath.endsWith('/')) cleanPath += '/';
+      const baseUrl = window.location.origin + cleanPath;
+      const shareUrl = `${baseUrl}${shareCode}/`;
       const firstLine = (currentPoemRawText || "").split('\n')[0] || "감성 타이핑 시집";
 
       if (navigator.share) {
