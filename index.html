@@ -8,8 +8,8 @@
   <meta http-equiv="Expires" content="0" />
   <title>감성 타이핑 시집</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Gowun+Batang&family=Noto+Serif+KR&family=Song+Myung&family=Gowun+Dodum&display=swap" rel="stylesheet">
+  <!-- Google Fonts: 최고급 감성 한글 서체 컬렉션 -->
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;600&family=Song+Myung&family=Gowun+Dodum&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -18,11 +18,21 @@
     * {
       box-sizing: border-box;
     }
+    
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
     body {
       margin: 0;
       padding: 2rem 1.5rem;
       font-size: var(--font-size);
-      transition: background 1.2s ease, color 0.8s ease;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      transition: background 1.5s cubic-bezier(0.4, 0, 0.2, 1), color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -34,21 +44,34 @@
     #poem-container {
       width: 100%;
       max-width: 680px;
-      padding: 3rem 1rem;
-      transition: text-align 0.4s ease;
+      padding: 3rem 1.5rem;
+      box-sizing: border-box;
     }
+    
     #poem {
       white-space: pre-wrap;
-      line-height: 2.3;
-      letter-spacing: -0.015em;
+      line-height: 2.35;
+      letter-spacing: -0.02em;
       word-break: keep-all;
       display: inline-block;
-      text-align: inherit;
       width: 100%;
-    }
-    #typed {
+      text-align: inherit;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      text-shadow: 0 0 1px rgba(0, 0, 0, 0.04);
       opacity: 1;
-      transition: opacity 0.6s ease-in-out;
+      filter: blur(0px);
+      transform: translateY(0);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                  filter 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                  transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #poem.fade-out {
+      opacity: 0;
+      filter: blur(6px);
+      transform: translateY(-8px);
     }
 
     /* 🪶 감성적인 플로팅 메뉴 바 (Aesthetic Floating Toolbar) */
@@ -63,7 +86,7 @@
       background: rgba(128, 128, 128, 0.08);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(128, 128, 128, 0.2);
+      border: 1px solid rgba(128, 128, 128, 0.18);
       border-radius: 9999px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
       opacity: 0.8;
@@ -97,12 +120,13 @@
       align-items: center;
       gap: 0.35rem;
       letter-spacing: -0.02em;
-      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       white-space: nowrap;
       text-decoration: none;
+      -webkit-font-smoothing: antialiased;
     }
     .ctrl-btn:hover {
-      background: rgba(128, 128, 128, 0.18);
+      background: rgba(128, 128, 128, 0.2);
       border-color: rgba(128, 128, 128, 0.35);
       transform: translateY(-1px);
     }
@@ -158,22 +182,39 @@
       }
     }
 
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
+    /* 🕯️ 숨쉬듯 깊고 부드럽게 점멸하는 잉크 커서 */
     .cursor {
       display: inline-block;
-      width: 1px;
-      height: 1.2em;
+      width: 1.5px;
+      height: 1.15em;
       background: currentColor;
-      margin-left: 4px;
-      vertical-align: text-bottom;
-      animation: blink 1s step-end infinite;
+      margin-left: 5px;
+      vertical-align: -0.1em;
+      border-radius: 1px;
+      box-shadow: 0 0 6px currentColor;
+      animation: breathe 1.4s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%, 100% { 
+        opacity: 0.85; 
+        transform: scaleY(1); 
+      }
+      50% { 
+        opacity: 0.15; 
+        transform: scaleY(0.92); 
+      }
     }
   </style>
 </head>
 <body>
+  <!-- 은은한 아날로그 종이 질감 오버레이 (한지 텍스처) -->
+  <svg id="paper-texture" aria-hidden="true" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;opacity:0.025;z-index:999;">
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noise)" />
+  </svg>
+
   <nav id="controls" aria-label="감상 메뉴">
     <div class="ctrl-group">
       <button onclick="changeFontSize(-1)" title="글자 작게" class="ctrl-btn size-btn">
@@ -221,6 +262,7 @@
     let autoPlayInterval = null;
     let isAutoPlaying = false;
     let isTyping = false;
+    let isTransitioning = false;
     let typeTimer = null;
 
     const ALIGNMENTS = ['left', 'center', 'right'];
@@ -323,66 +365,96 @@
       try {
         const res = await fetch('reflections.json?t=' + Date.now());
         reflections = await res.json();
-        showRandomPoem();
+        showRandomPoem(true); // 첫 로드는 즉시 표시
       } catch (e) {
         console.error("시 불러오기 실패:", e);
       }
     }
 
-    function showRandomPoem() {
+    function showRandomPoem(isInitial = false) {
       if (!reflections || reflections.length === 0) return;
+      if (isTransitioning) return;
 
-      if (typeTimer) {
-        clearTimeout(typeTimer);
-        typeTimer = null;
-      }
-
-      const random = reflections[Math.floor(Math.random() * reflections.length)];
-      const textTarget = document.getElementById("typed");
-      const cursor = document.getElementById("cursor");
-
-      textTarget.style.opacity = 0;
-      isTyping = true;
-
-      // 시마다 랜덤 정렬 (좌측 45%, 중앙 40%, 우측 15%)
-      const randVal = Math.random();
-      const pickedAlign = randVal < 0.45 ? 'left' : randVal < 0.85 ? 'center' : 'right';
-      setAlignment(pickedAlign);
-
-      const poemText = formatPoemText(random.text || "");
-
-      setTimeout(() => {
-        document.body.style.background = random.style.background;
-        document.body.style.color = random.style.color;
-        document.body.style.fontFamily = random.style.fontFamily;
-
-        textTarget.textContent = "";
-        cursor.style.display = "none";
-
-        let i = 0;
-        function typeChar() {
-          if (i < poemText.length) {
-            textTarget.textContent += poemText.charAt(i);
-            i++;
-            typeTimer = setTimeout(typeChar, 45);
-          } else {
-            cursor.style.display = "inline-block";
-            isTyping = false;
-          }
-        }
-
-        typeChar();
-        textTarget.style.opacity = 1;
-      }, 500);
-    }
-
-    function reloadPoem() {
+      isTransitioning = true;
       if (typeTimer) {
         clearTimeout(typeTimer);
         typeTimer = null;
       }
       isTyping = false;
-      showRandomPoem();
+
+      const poem = document.getElementById("poem");
+      const textTarget = document.getElementById("typed");
+      const cursor = document.getElementById("cursor");
+
+      cursor.style.display = "none";
+
+      const fadeOutTime = isInitial ? 0 : 800; // 여유롭고 부드러운 페이드아웃 0.8초
+      if (!isInitial) {
+        poem.classList.add("fade-out");
+      }
+
+      setTimeout(() => {
+        const random = reflections[Math.floor(Math.random() * reflections.length)];
+        const poemText = formatPoemText(random.text || "");
+
+        // 🪶 완전히 투명해진 정적의 순간에 정렬 변경 (덜컥거림 원천 차단)
+        const randVal = Math.random();
+        const pickedAlign = randVal < 0.45 ? 'left' : randVal < 0.85 ? 'center' : 'right';
+        setAlignment(pickedAlign);
+
+        // 배경색, 글자색, 서체 부드럽게 전환
+        document.body.style.background = random.style.background;
+        document.body.style.color = random.style.color;
+        document.body.style.fontFamily = random.style.fontFamily;
+
+        textTarget.textContent = "";
+
+        // 고요한 여백의 정적 (0.35초 멈춤)
+        setTimeout(() => {
+          poem.classList.remove("fade-out");
+
+          // 서서히 페이드인되며 시인의 유기적인 잉크 타이핑 시작
+          isTyping = true;
+          let i = 0;
+
+          function typeChar() {
+            if (!isTyping) {
+              isTransitioning = false;
+              return;
+            }
+
+            if (i < poemText.length) {
+              const char = poemText.charAt(i);
+              textTarget.textContent += char;
+              i++;
+
+              // 🪶 생각과 숨이 머무는 유기적인 타이핑 딜레이
+              let delay = 42 + Math.random() * 20; // 기본 42~62ms
+
+              if (char === '\n') {
+                delay = 280; // 줄바꿈 시 숨 고르기
+              } else if (char === '.' || char === '!' || char === '?') {
+                delay = 380; // 문장 끝 깊은 여운
+              } else if (char === ',') {
+                delay = 180; // 쉼표 뒤 쉼
+              }
+
+              typeTimer = setTimeout(typeChar, delay);
+            } else {
+              cursor.style.display = "inline-block";
+              isTyping = false;
+              isTransitioning = false;
+            }
+          }
+
+          typeChar();
+        }, isInitial ? 100 : 350);
+      }, fadeOutTime);
+    }
+
+    function reloadPoem() {
+      if (isTransitioning) return;
+      showRandomPoem(false);
     }
 
     function toggleAutoPlay() {
@@ -390,7 +462,7 @@
       const svgSpan = document.getElementById("autoplaySvg");
       if (!isAutoPlaying) {
         autoPlayInterval = setInterval(() => {
-          if (!isTyping) showRandomPoem();
+          if (!isTyping && !isTransitioning) showRandomPoem(false);
         }, 18000);
         textSpan.textContent = "멈춤";
         svgSpan.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
