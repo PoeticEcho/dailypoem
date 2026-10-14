@@ -16,7 +16,7 @@
   <link rel="icon" type="image/png" sizes="64x64" href="./favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
 
-  <!-- Open Graph / 카카오톡·SNS 공유 미리보기 메타 태그 (1200x630, 25KB 초경량 PNG) -->
+  <!-- Open Graph / 카카오톡·SNS 공유 미리보기 메타 태그 (1200x630, 25.3KB 초경량 PNG) -->
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="ko_KR" />
   <meta property="og:site_name" content="감성 타이핑 시집 (Daily Poem)" />
@@ -92,6 +92,8 @@
       --clock-scale: 1;
       --poem-shift-x: 0px;
       --poem-shift-y: 0px;
+      /* 상하 대칭 안전 여백 변수 */
+      --stage-v-pad: max(env(safe-area-inset-top, 0px), env(safe-area-inset-bottom, 0px), 2.4rem);
     }
 
     * {
@@ -129,9 +131,7 @@
       flex-direction: column;
     }
 
-    /* 📱 모바일/갤럭시S25 상단 잘림 방지 뷰포트 래퍼:
-     * flex 컨테이너에서 내용이 넘칠 때 상단이 잘려나가는 CSS 버그를 원천 차단하고
-     * margin: auto 0을 통해 화면 중앙 정렬 및 여유로운 안전 영역(safe-area)을 확보 */
+    /* (1) 시 표출 공간 상단·하단 여백 100% 동일 대칭 정렬 */
     #viewport-stage {
       flex: 1 0 auto;
       min-height: 100dvh;
@@ -139,33 +139,38 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: max(env(safe-area-inset-top), 2.2rem) max(env(safe-area-inset-right), 1.5rem) max(env(safe-area-inset-bottom), 2.8rem) max(env(safe-area-inset-left), 1.5rem);
+      padding-top: var(--stage-v-pad);
+      padding-bottom: var(--stage-v-pad);
+      padding-left: max(env(safe-area-inset-left, 0px), 1.5rem);
+      padding-right: max(env(safe-area-inset-right, 0px), 1.5rem);
       box-sizing: border-box;
       position: relative;
       z-index: 20;
     }
 
-    /* 📜 시 본문 컨테이너: 화면의 최우선 주인공 (z-index: 30) */
+    /* 📜 시 본문 컨테이너: 상하 패딩 역시 정확히 1.5rem으로 대칭 일치 */
     #poem-container {
       position: relative;
       z-index: 30;
       width: 100%;
       max-width: 740px;
-      padding: 1.8rem 1.4rem;
-      margin: auto 0; /* 세로 중앙 정렬 유지하되 넘칠 때 상단 잘림 절대 없음 */
+      padding: 1.5rem 1.4rem;
+      margin: auto 0;
       box-sizing: border-box;
       transform: translate(var(--poem-shift-x), var(--poem-shift-y));
       transition: transform 2s ease, text-align 0.4s ease;
-      pointer-events: none; /* 터치는 아래 3분할 터치 영역으로 부드럽게 통과 */
+      pointer-events: none;
     }
 
     #poem {
       white-space: pre-wrap;
-      line-height: 2.32;
+      line-height: 2.26;
       letter-spacing: -0.015em;
       word-break: keep-all;
-      display: inline-block;
+      display: block;
       width: 100%;
+      margin: 0;
+      padding: 0;
       text-align: inherit;
       -webkit-font-smoothing: subpixel-antialiased;
       -moz-osx-font-smoothing: auto;
@@ -185,22 +190,33 @@
       transform: translateY(-8px);
     }
 
-    /* 🕯️ 잉크 커서 */
+    /* (3) 연 구분(빈 줄) 간격을 기존 1줄 전체 높이의 2/3 수준(1.48em)으로 자연스럽게 축소 */
+    .stanza-gap {
+      display: block;
+      height: 1.48em;
+      line-height: 0;
+      font-size: 1em;
+      user-select: none;
+    }
+
+    /* (2) 시에 사용된 폰트와 동일한 서체를 상속받는 활자 커서 + 아래쪽으로 3px 자연스럽게 내림 */
     .cursor {
       display: inline-block;
-      width: 1.5px;
-      height: 1.15em;
-      background: currentColor;
-      margin-left: 5px;
-      vertical-align: -0.1em;
-      border-radius: 1px;
-      box-shadow: 0 0 6px currentColor;
+      font-family: inherit;
+      font-weight: 300;
+      font-size: 0.95em;
+      line-height: 1;
+      color: currentColor;
+      margin-left: 3px;
+      position: relative;
+      top: 3px;
+      text-shadow: 0 0 5px currentColor;
       animation: breathe 1.4s ease-in-out infinite;
     }
 
     @keyframes breathe {
-      0%, 100% { opacity: 0.85; transform: scaleY(1); }
-      50% { opacity: 0.15; transform: scaleY(0.92); }
+      0%, 100% { opacity: 0.82; }
+      50% { opacity: 0.12; }
     }
 
     /* 📖 전자책 3분할 터치 인터랙션 레이어 (좌측: 이전 시 / 중앙: 자동 시작·멈춤 / 우측: 다음 시) */
@@ -217,15 +233,9 @@
       cursor: pointer;
       position: relative;
     }
-    #zone-prev {
-      width: 28%;
-    }
-    #zone-center {
-      width: 44%;
-    }
-    #zone-next {
-      width: 28%;
-    }
+    #zone-prev { width: 28%; }
+    #zone-center { width: 44%; }
+    #zone-next { width: 28%; }
 
     /* 💬 전자책 조작 피드백 팝업 알림 (HUD) */
     #touch-hud {
@@ -324,11 +334,11 @@
       50% { opacity: 1; transform: scale(1.2); }
     }
 
-    /* 🪶 개편된 미니멀 상단 트리거 아이콘 (평소엔 100% 방해 없이 투명화) */
+    /* 🪶 상단 미니멀 트리거 아이콘 (평소엔 0% 완전 투명화) */
     #nav-trigger-wrap {
       position: fixed;
-      top: max(env(safe-area-inset-top), 1.1rem);
-      right: max(env(safe-area-inset-right), 1.2rem);
+      top: max(env(safe-area-inset-top, 0px), 1.1rem);
+      right: max(env(safe-area-inset-right, 0px), 1.2rem);
       z-index: 160;
     }
 
@@ -355,18 +365,16 @@
       background: rgba(128, 128, 128, 0.25);
     }
 
-    /* 시 감상 방해 방지: 유휴 상태 시 0%로 완전 소멸 투명화! */
     body.idle-zen #gear-trigger-btn {
       opacity: 0 !important;
       pointer-events: none;
     }
-    /* 마우스 이동이나 화면 터치 시 부드럽게 0.35로 다시 나타남 */
     body.active-touch #gear-trigger-btn {
       opacity: 0.45;
       pointer-events: auto;
     }
 
-    /* 🪟 마우스오버 / 클릭 시 열리는 플로팅 조작 팝업 (Popup Toolbar Menu) */
+    /* 🪟 마우스오버 / 클릭 시 열리는 플로팅 조작 팝업 */
     #controls-popup {
       position: absolute;
       top: calc(100% + 0.5rem);
@@ -436,8 +444,8 @@
     /* 🎷 자체 내장 Pixelmood Graphite 카세트 플레이어 위젯 */
     #pixelmood-dock {
       position: fixed;
-      bottom: max(env(safe-area-inset-bottom), 1.6rem);
-      right: max(env(safe-area-inset-right), 1.2rem);
+      bottom: max(env(safe-area-inset-bottom, 0px), 1.6rem);
+      right: max(env(safe-area-inset-right, 0px), 1.2rem);
       width: 256px;
       z-index: 150;
       background: linear-gradient(180deg, #282B30 0%, #1C1E22 100%);
@@ -522,16 +530,20 @@
     body.dark-ui input:checked + .slider-round { background-color: #8FA89B; }
     input:checked + .slider-round:before { transform: translateX(19px); }
 
-    /* 📱 갤럭시S25 및 모바일 반응형 최적화 (글자 잘림 및 상단 여백 완벽 해결) */
+    /* 📱 모바일 반응형 최적화 (상하 여백 100% 동일 대칭 유지) */
     @media (max-width: 640px) {
       :root {
-        --font-size: 20px; /* 모바일에서 20px로 적응하여 긴 시도 절대 잘리지 않음 */
+        --font-size: 20px;
+        --stage-v-pad: max(env(safe-area-inset-top, 0px), env(safe-area-inset-bottom, 0px), 2.2rem);
       }
       #viewport-stage {
-        padding: max(env(safe-area-inset-top), 2.2rem) 1.1rem max(env(safe-area-inset-bottom), 2.2rem) 1.1rem;
+        padding-top: var(--stage-v-pad);
+        padding-bottom: var(--stage-v-pad);
+        padding-left: 1.1rem;
+        padding-right: 1.1rem;
       }
       #poem-container {
-        padding: 1rem 0.4rem 2rem;
+        padding: 1.2rem 0.5rem;
       }
       #ambient-clock.pos-top-left, #ambient-clock.pos-top-right { top: 1rem; }
       #ambient-clock.pos-bottom-left, #ambient-clock.pos-bottom-right { bottom: 2rem; }
@@ -552,10 +564,7 @@
     <rect width="100%" height="100%" filter="url(#noise)" />
   </svg>
 
-  <!-- 📖 전자책 3분할 터치 인터랙션 영역:
-       • 좌측 28%: 이전 시 (Previous)
-       • 중앙 44%: 자동 넘김 시작 / 멈춤 (Pause / Resume)
-       • 우측 28%: 다음 시 (Next Random) -->
+  <!-- 📖 전자책 3분할 터치 인터랙션 영역 -->
   <div id="ereader-touch-zone" aria-label="전자책 터치 영역">
     <div id="zone-prev" class="touch-zone-col" title="좌측 탭: 이전 시 감상"></div>
     <div id="zone-center" class="touch-zone-col" title="중앙 탭: 자동 넘김 시작 / 멈춤"></div>
@@ -573,16 +582,16 @@
     <div id="clock-content"></div>
   </aside>
 
-  <!-- 🪶 상단 미니멀 설정 트리거 버튼 (평소엔 100% 투명화되어 시 감상 방해 없음) -->
-  <div id="nav-trigger-wrap">
+  <!-- 🪶 상단 미니멀 설정 트리거 버튼 (마우스오버 또는 클릭 시 팝업 오픈) -->
+  <div id="nav-trigger-wrap" onmouseenter="openControlsPopupOnHover()">
     <button id="gear-trigger-btn" onclick="toggleControlsPopup()" title="조작 및 설정 메뉴 열기" aria-label="설정 메뉴 열기">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="3"></circle>
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
       </svg>
     </button>
 
-    <!-- 팝업 메뉴: 아이콘 터치/클릭 시 부드럽게 등장 -->
+    <!-- 팝업 메뉴: 마우스오버 또는 아이콘 터치/클릭 시 부드럽게 등장 -->
     <div id="controls-popup" role="menu">
       <button class="popup-item-btn" id="popMusicBtn" onclick="toggleMusic(); closeControlsPopup();">
         <span id="popMusicIcon">🎵</span>
@@ -631,12 +640,10 @@
     </div>
   </div>
 
-  <!-- 📱 뷰포트 래퍼 (상단 잘림 원천 방지) -->
+  <!-- 📱 뷰포트 래퍼: #poem 내부 앞뒤 줄바꿈 공백을 완전 제거하여 상단 1줄 빈 공간 원천 해소 & 시 서체 동일 활자 커서(|) 적용 -->
   <div id="viewport-stage">
     <main id="poem-container">
-      <div id="poem">
-        <span id="typed"></span><span id="cursor" class="cursor" style="display:none"></span>
-      </div>
+      <div id="poem"><span id="typed"></span><span id="cursor" class="cursor" style="display:none" aria-hidden="true">|</span></div>
     </main>
   </div>
 
@@ -860,7 +867,7 @@
      * ========================================================================= */
     let reflections = [];
     let currentPoemIndex = 0;
-    let poemHistory = [];       // 감상한 시 히스토리 스택 (이전 시 완벽 지원)
+    let poemHistory = [];
     let historyPtr = -1;
     let autoPlayInterval = null;
     let isAutoPlaying = true;
@@ -915,7 +922,6 @@
     }
 
     function applyConfigToUI() {
-      // 모바일 화면 폭에 따라 23px 또는 안전 크기 산출
       const baseFs = window.innerWidth <= 640 ? Math.min(CONFIG.fontSize, 20.5) : CONFIG.fontSize;
       document.documentElement.style.setProperty('--font-size', `${baseFs}px`);
       document.documentElement.style.setProperty('--clock-opacity', CONFIG.clockOpacity);
@@ -940,7 +946,7 @@
     }
 
     /* =========================================================================
-     * 2. 서체 매핑 & 정렬
+     * 2. 서체 매핑, 정렬 & 2/3 높이 연 구분(빈 줄) 렌더러
      * ========================================================================= */
     const ELITE_FONT_MAP = {
       'Gowun Dodum': "'Gowun Dodum', sans-serif",
@@ -1000,8 +1006,19 @@
       return t;
     }
 
+    // (3) 타이핑 중인 문자열에서 연 구분(\n\n)은 2/3 간격 블록(.stanza-gap)으로, 일반 줄바꿈(\n)은 <br>로 변환
+    function renderPoemSliceToHtml(rawSlice) {
+      const escaped = rawSlice
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+      return escaped
+        .replace(/\n\n/g, '<span class="stanza-gap" aria-hidden="true"></span>')
+        .replace(/\n/g, '<br>');
+    }
+
     /* =========================================================================
-     * 3. 📖 전자책 3분할 터치 인터랙션 (좌: 이전 시 / 중: 자동 넘김 / 우: 다음 시)
+     * 3. 📖 전자책 3분할 터치 인터랙션
      * ========================================================================= */
     function showHudFeedback(icon, text) {
       const hud = document.getElementById('touch-hud');
@@ -1024,25 +1041,21 @@
       const zoneCenter = document.getElementById('zone-center');
       const zoneNext = document.getElementById('zone-next');
 
-      // 좌측 구역 클릭/탭: 이전 시 감상
-      zonePrev.addEventListener('click', (e) => {
+      zonePrev.addEventListener('click', () => {
         wakeActiveUi();
         showPrevPoem();
       });
 
-      // 중앙 구역 클릭/탭: 자동 넘김 시작 / 멈춤
-      zoneCenter.addEventListener('click', (e) => {
+      zoneCenter.addEventListener('click', () => {
         wakeActiveUi();
         toggleAutoPlay();
       });
 
-      // 우측 구역 클릭/탭: 다음 시 감상
-      zoneNext.addEventListener('click', (e) => {
+      zoneNext.addEventListener('click', () => {
         wakeActiveUi();
         showRandomPoem(false);
       });
 
-      // 모바일 스와이프 제스처 지원 (좌우 넘김)
       let touchStartX = 0;
       let touchStartY = 0;
       window.addEventListener('touchstart', (e) => {
@@ -1054,15 +1067,9 @@
       window.addEventListener('touchend', (e) => {
         const diffX = e.changedTouches[0].screenX - touchStartX;
         const diffY = e.changedTouches[0].screenY - touchStartY;
-        // 수평 스와이프 판정 (60px 이상 스와이프 시)
         if (Math.abs(diffX) > 60 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
-          if (diffX > 0) {
-            // 오른쪽으로 스와이프 ➔ 책장을 앞으로 넘김 = 이전 시
-            showPrevPoem();
-          } else {
-            // 왼쪽으로 스와이프 ➔ 책장을 다음으로 넘김 = 다음 시
-            showRandomPoem(false);
-          }
+          if (diffX > 0) showPrevPoem();
+          else showRandomPoem(false);
         }
       }, { passive: true });
     }
@@ -1708,6 +1715,14 @@
     /* =========================================================================
      * 6. 조작 팝업 (Popup Toolbar Menu) 및 무결점 감상 모드
      * ========================================================================= */
+    function openControlsPopupOnHover() {
+      // 마우스 환경에서 아이콘 호버 시 팝업 오픈
+      if (window.matchMedia('(hover: hover)').matches) {
+        const pop = document.getElementById('controls-popup');
+        if (pop) pop.classList.add('open');
+      }
+    }
+
     function toggleControlsPopup() {
       const pop = document.getElementById('controls-popup');
       pop.classList.toggle('open');
@@ -1725,7 +1740,6 @@
       }
     });
 
-    // 화면 터치/마우스 이동 시 트리거 버튼이 나타나고, 4초 동안 입력 없으면 100% 투명화
     function wakeActiveUi() {
       document.body.classList.remove('idle-zen');
       document.body.classList.add('active-touch');
@@ -1741,7 +1755,7 @@
     }
 
     /* =========================================================================
-     * 7. 시 로드, 테마 및 타이핑 애니메이션
+     * 7. 시 로드, 테마 및 2/3 연 간격 필사 타이핑 애니메이션
      * ========================================================================= */
     const LIGHT_PALETTES = [
       { background: "#FBF8F3", color: "#3C342C" },
@@ -1849,7 +1863,7 @@
       if (!isInitial) poem.classList.add("fade-out");
 
       setTimeout(() => {
-        textTarget.textContent = "";
+        textTarget.innerHTML = "";
 
         const poemData = reflections[currentPoemIndex];
         const poemText = formatPoemText(poemData.text || "");
@@ -1861,8 +1875,9 @@
         document.body.style.background = resolvedStyle.background;
         document.body.style.color = resolvedStyle.color;
         document.body.style.fontFamily = resolvedStyle.fontFamily;
+        // 커서도 시와 완전히 동일한 서체가 적용되도록 명시적 동기화
+        cursor.style.fontFamily = resolvedStyle.fontFamily;
 
-        // OLED 번인 방지 미세 이동
         const shiftX = Math.floor(Math.random() * 9) - 4;
         const shiftY = Math.floor(Math.random() * 9) - 4;
         document.documentElement.style.setProperty('--poem-shift-x', `${shiftX}px`);
@@ -1881,7 +1896,7 @@
           poem.classList.remove("fade-out");
 
           if (CONFIG.typingSpeed === 'instant') {
-            textTarget.textContent = poemText;
+            textTarget.innerHTML = renderPoemSliceToHtml(poemText);
             cursor.style.display = "inline-block";
             isTyping = false;
             isTransitioning = false;
@@ -1903,8 +1918,13 @@
 
             if (i < poemText.length) {
               const char = poemText.charAt(i);
-              textTarget.textContent += char;
-              i++;
+              // 연 구분(\n\n)인 경우 한 번에 2/3 높이의 빈 줄 블록(.stanza-gap)으로 넘김
+              if (char === '\n' && poemText.charAt(i + 1) === '\n') {
+                i += 2;
+              } else {
+                i++;
+              }
+              textTarget.innerHTML = renderPoemSliceToHtml(poemText.slice(0, i));
 
               let delay = (82 + Math.random() * 35) * speedMult;
               if (char === ' ') delay = 150 * speedMult;
