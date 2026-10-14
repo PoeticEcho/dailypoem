@@ -11,6 +11,10 @@
   <img src="https://img.shields.io/badge/Zero%20Dependency-100%25%20Pure%20Web-purple?style=for-the-badge" alt="Zero Dependency" />
 </p>
 
+<p align="center">
+  <img src="./og-image.png" alt="감성 타이핑 시집 미리보기" width="760" style="border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);" />
+</p>
+
 > **"기술은 조용히 뒤로 물러나고, 화면 위에는 오직 다정한 문장과 여백만 남는다."**
 >
 > 지친 하루의 끝에 한 글자씩 천천히 필사되듯 피어나는 한국어 서정시와 시드(Seed) 기반의 잔잔한 재즈·자연의 소리를 담은 **독립형 전자책 & 태블릿 감성 시집 액자**입니다.
@@ -132,11 +136,14 @@
 
 ### 저장소 디렉터리 구조
 ```text
-├── index.html                   # 독립형 전자책 터치 시집 & 내장 Pixelmood 재즈/픽셀 엔진
+├── index.html                   # 독립형 전자책 터치 시집 & 내장 Pixelmood 재즈/픽셀 엔진 (OG·Favicon 연동)
 ├── reflections.json             # 정밀 교정 및 5대 정예 서체가 적용된 감성 시집 (목표 1,000편)
+├── favicon.png                  # 브라우저 탭 파비콘 (64x64, 1.6KB 초경량 PNG)
+├── apple-touch-icon.png         # 모바일/태블릿 홈 화면 아이콘 (180x180, 3.7KB 초경량 PNG)
+├── og-image.png                 # 카카오톡·SNS 공유용 오픈그래프 썸네일 (1200x630, 25.9KB < 300KB)
 ├── generate_poem.py             # 24종 모티프 순환·자체 퇴고·유사도 검증 기반 시 생성 봇 (Gemini)
 ├── setup_self_hosted.py         # 5대 정예 서체(.woff2) 로컬 ./fonts/ 영구 보관 스크립트
-├── daily-poem-self-hosted.zip   # 1-Click 독립 배포용 자체 호스팅 압축 패키지
+├── daily-poem-self-hosted.zip   # 1-Click 독립 배포용 자체 호스팅 압축 패키지 (에셋 전수 포함)
 ├── fonts/                       # 로컬 보관된 5대 정예 서체 및 local-fonts.css
 ├── .github/workflows/
 │   └── auto-poem.yml            # GitHub Actions 1,000편 자동 큐레이션 워크플로
