@@ -25,7 +25,10 @@
     }
     #poem {
       white-space: pre-wrap;
-      max-width: 800px;
+      max-width: 680px;
+      line-height: 2.2;
+      letter-spacing: -0.015em;
+      word-break: keep-all;
     }
     #typed {
       opacity: 1;
@@ -78,6 +81,67 @@
       showRandomPoem();
     }
 
+    function formatPoemText(text) {
+      if (!text) return "";
+      let t = text.trim();
+      // 이미 연 구분(\n\n)이 있는 경우 연속 빈 줄만 정리해서 반환
+      if (t.includes("\n\n")) {
+        return t.replace(/\n{3,}/g, "\n\n");
+      }
+      // 줄바꿈이 2개 이상 있는 경우 2행마다 빈 줄(\n\n) 삽입하여 연 구분
+      if ((t.match(/\n/g) || []).length >= 2) {
+        const lines = t.split("\n").map(l => l.trim()).filter(Boolean);
+        const stanzas = [];
+        let cur = [];
+        for (let l of lines) {
+          cur.push(l);
+          if (cur.length >= 2) {
+            stanzas.push(cur.join("\n"));
+            cur = [];
+          }
+        }
+        if (cur.length) stanzas.push(cur.join("\n"));
+        return stanzas.join("\n\n");
+      }
+      // 줄바꿈이 없는 긴 산문형 시: 문장 단위 및 쉼표/구문 단위로 호흡 분할
+      const sents = t.replace(/\n/g, " ").split(/(?<=[.!?])\s+/).filter(Boolean);
+      const lines = [];
+      for (let s of sents) {
+        if (s.length > 20) {
+          if (s.includes(", ") && s.indexOf(", ") < s.length - 6) {
+            const parts = s.split(", ");
+            parts.forEach((p, idx) => lines.push(p + (idx < parts.length - 1 ? "," : "")));
+            continue;
+          }
+          const clauses = ["그러니 ", "그리고 ", "하지만 ", "어쩌면 ", "우리는 ", "나는 ", "너는 "];
+          let split = false;
+          for (let c of clauses) {
+            const idx = s.indexOf(c);
+            if (idx > 5 && idx < s.length - 5) {
+              lines.push(s.substring(0, idx).trim());
+              lines.push(s.substring(idx).trim());
+              split = true;
+              break;
+            }
+          }
+          if (!split) lines.push(s);
+        } else {
+          lines.push(s);
+        }
+      }
+      const stanzas = [];
+      let cur = [];
+      for (let l of lines) {
+        cur.push(l);
+        if (cur.length >= 2) {
+          stanzas.push(cur.join("\n"));
+          cur = [];
+        }
+      }
+      if (cur.length) stanzas.push(cur.join("\n"));
+      return stanzas.join("\n\n");
+    }
+
     function showRandomPoem() {
       if (isTyping) return;
 
@@ -88,6 +152,8 @@
 
       textTarget.style.opacity = 0;
       isTyping = true;
+
+      const poemText = formatPoemText(random.text || "");
 
       setTimeout(() => {
         document.body.style.background = random.style.background;
@@ -100,8 +166,8 @@
 
         let i = 0;
         function typeChar() {
-          if (i < random.text.length) {
-            textTarget.textContent += random.text.charAt(i);
+          if (i < poemText.length) {
+            textTarget.textContent += poemText.charAt(i);
             i++;
             typeTimer = setTimeout(typeChar, 45);
           } else {
