@@ -1,9 +1,15 @@
-name: Daily Poetry Bot
+name: Poetry Book Curator (Target 1000 Poems)
 
 on:
   schedule:
-    - cron: "0 1 * * *"  # 매일 UTC 기준 01:00 = 한국 시간 오전 10시
-  workflow_dispatch:  # 수동 실행 가능
+    - cron: "0 1 * * *"    # 매일 한국 시간 오전 10시 1편 생성 (일정한 호흡으로 1,000편 적립)
+    - cron: "0 2 * * 0"    # 매주 일요일 한국 시간 오전 11시 주간 큐레이션 보충 (3편 생성)
+  workflow_dispatch:       # 수동 실행 시 원하는 생성 편수 지정 가능
+    inputs:
+      poem_count:
+        description: "생성할 감성 시 편수 (기본 1편, 주간 일괄 생성 시 7편 등)"
+        required: false
+        default: "1"
 
 permissions:
   contents: write
@@ -21,15 +27,29 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Run poem generator (Google Gemini)
+      - name: Determine poem count for this run
+        id: config
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ github.event.inputs.poem_count }}" ]; then
+            echo "count=${{ github.event.inputs.poem_count }}" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.schedule }}" = "0 2 * * 0" ]; then
+            echo "count=3" >> $GITHUB_OUTPUT
+          else
+            echo "count=1" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run poem generator with quality validation (Google Gemini)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TARGET_MAX_POEMS: "1000"
+          POEM_COUNT: ${{ steps.config.outputs.count }}
         run: python generate_poem.py
 
-      - name: Commit and push
+      - name: Commit and push updated reflections.json
         run: |
           git config --global user.name "poetry-bot"
           git config --global user.email "poetry-bot@users.noreply.github.com"
+          TOTAL_COUNT=$(python -c "import json; print(len(json.load(open('reflections.json', encoding='utf-8'))))")
           git add reflections.json
-          git commit -m "📜 Add warm poem via Gemini for $(date +'%Y-%m-%d')" || echo "Nothing to commit"
+          git commit -m "📜 Add curated poem(s) via Gemini (${TOTAL_COUNT}/1000) - $(date +'%Y-%m-%d')" || echo "Nothing to commit"
           git push

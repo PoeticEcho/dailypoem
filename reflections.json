@@ -1,1030 +1,78 @@
 [
   {
-    "text": "오늘을 살았다\n내일을 걱정하지 않고\n\n어제를 후회하지 않고\n그냥 이 하루만\n\n온전히 살아냈다는 것이\n나에겐 가장 큰 안도였다",
-    "style": {
-      "background": "#fef6e8",
-      "color": "#5c4a36",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "아무것도 하지 않아도 좋은 날이었다\n손끝으로 바람을 느끼고\n눈을 감고 햇살을 마셨다\n\n세상은 변하지 않았지만\n내 마음은 조금 나아졌다",
-    "style": {
-      "background": "#f7fbe7",
-      "color": "#415d2a",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "말을 줄이기로 했다\n대신 더 오래 바라보기로 했다\n\n말보다 눈빛이\n위로보다 기다림이\n\n더 많은 걸 말해주는 날이 있다",
-    "style": {
-      "background": "#f6f7f8",
-      "color": "#3c3c3c",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "그리움은 자주 방문하지 않지만\n언제나 제 시간에 온다\n잊은 줄 알았던 이름을 불러보게 하고\n잠들었던 감정을 흔들어 놓는다\n\n그리움은, 정직하다",
-    "style": {
-      "background": "#f4eef4",
-      "color": "#4e3b58",
-      "fontFamily": "'MaruBuri', serif"
-    }
-  },
-  {
-    "text": "짧은 시 한 구절이 마음을 적셨다\n한 줄의 문장이\n하루를 구해내기도 한다\n\n언어가 가진 힘을\n나는 오늘 믿기로 했다",
-    "style": {
-      "background": "#fffdf3",
-      "color": "#3f3f2f",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "비 오는 창가에서\n텅 빈 머리로 오래 앉아 있었다\n물방울이 흘러내리는 자국을\n자꾸만 따라가게 되는 그런 날\n\n아무 말도 없는 것이\n이상하게 위로가 되는 순간",
-    "style": {
-      "background": "#e4ecf4",
-      "color": "#2c3e50",
-      "fontFamily": "'Noto Serif KR', serif"
-    }
-  },
-  {
-    "text": "하루를 다 써버리고 나면\n남는 건 조용한 마음 하나\n\n그 조용함 속에\n내가 살았다는 증거가 있다\n\n소리 없는 평온은\n가장 따뜻한 쉼이 된다",
-    "style": {
-      "background": "#f9f9f9",
-      "color": "#444444",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "햇살이 따스했던 오후\n네가 남긴 말들이 다시 떠올랐다\n\n그 말들 속에는\n아직도 온기가 있다\n\n시간이 지나도\n말은 자란다",
-    "style": {
-      "background": "#fff9e5",
-      "color": "#6c4a2f",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "오늘은 나를 쓰다듬는 날\n누구의 위로도 없이\n\n그냥 조용히\n나를 한 번 안아주는 날\n\n스스로와 가까워지는 방법을\n배우는 하루였다",
-    "style": {
-      "background": "#eefaf6",
-      "color": "#29554a",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "저녁이 가까워지면\n괜히 마음이 눅눅해진다\n\n끝이 가까운 시간은\n항상 무언가를 돌아보게 만든다\n\n남겨진 말들이\n입술 끝에 머문다",
-    "style": {
-      "background": "#f0f1f3",
-      "color": "#3d3f42",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "내가 놓치고 지나친 것들은\n어쩌면 지금보다 더 소중했을지 모른다\n\n하지만 그때 나는\n그 소중함을 몰랐다는 것조차 몰랐다",
-    "style": {
-      "background": "#fff8f0",
-      "color": "#44403c",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "무언가를 끝낸다는 건\n언제나 약간의 슬픔을 동반한다\n\n하지만 끝이 있어야\n다시 시작할 수 있으니까",
-    "style": {
-      "background": "#f6f6f6",
-      "color": "#333333",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "하루 종일 흩날린 마음을 밤이 조용히\n덮어준다 어둠은 때때로 가장 따뜻한 담요다",
-    "style": {
-      "background": "#1f1f1f",
-      "color": "#eeeeee",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "마음이 어딘가로 떠나고 싶은 날이었다\n창밖의 하늘은 텅 비어 있었고\n\n나는 그 빈 곳에\n나를 던지고 싶었다",
-    "style": {
-      "background": "#edf3f7",
-      "color": "#2f3c4e",
-      "fontFamily": "'Noto Serif KR', serif"
-    }
-  },
-  {
-    "text": "어느새 봄 냄새가 났다\n바람이 말하지 않아도\n\n나는 그 향기에서\n너를 떠올렸다",
-    "style": {
-      "background": "#f2ffe6",
-      "color": "#3b5d3f",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "말하지 않고 전해지는 감정이 있다\n그건 침묵 속에서도\n\n더 크게 울린다\n가끔은 아무 말도\n\n하지 않는 것이\n가장 큰 표현이다",
-    "style": {
-      "background": "#f5f5f5",
-      "color": "#555555",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "밤하늘을 올려다보는 이유는\n별 때문이 아니라\n\n그 속의 고요함 때문이었다\n그 고요함이\n\n나를 다시 안심하게 만든다",
-    "style": {
-      "background": "#0a0a1f",
-      "color": "#f9f9f9",
-      "fontFamily": "'MaruBuri', serif"
-    }
-  },
-  {
-    "text": "너를 처음 떠올린 날은\n햇살이 이상하게 따뜻했다\n\n마치 누군가\n나를 바라보고 있는 것처럼\n\n그 느낌이 나를 웃게 했다",
-    "style": {
-      "background": "#fff1ec",
-      "color": "#7b3f3f",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "마음속에서 무언가 녹아내렸다\n그건 미련이었고\n\n기다림이었고\n아마도 너였을 것이다",
-    "style": {
-      "background": "#eff8f5",
-      "color": "#364f4c",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "누구나의 하루는\n보이지 않는 싸움의 연속이다\n\n미소 뒤에 숨어 있는\n조용한 용기들이\n\n이 세상을 지탱하고 있다",
-    "style": {
-      "background": "#eaf1ea",
-      "color": "#1f2f1f",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "비가 오면 마음도 젖는다\n창밖을 오래 바라보게 된다\n\n젖어 있는 그 시간 속에\n조용히 나를 들여다본다",
-    "style": {
-      "background": "#dce6eb",
-      "color": "#293845",
-      "fontFamily": "'Noto Serif KR', serif"
-    }
-  },
-  {
-    "text": "아무 일도 없었던 하루\n그 자체로 고맙다고 느꼈다\n\n사건이 없던 날이\n사실은 가장 큰 선물일지도 모른다",
-    "style": {
-      "background": "#f8f9fa",
-      "color": "#555",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "마음이 고요해지는 저녁이면\n조용히 너의 이름을 떠올린다\n그 이름 하나로 가슴이 따뜻해진다\n\n오늘도 그렇게,\n너 없이 너를 생각하며 하루를 정리한다",
-    "style": {
-      "background": "#f8f8f8",
-      "color": "#444",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "달빛이 창가를 물들인다\n그 잔잔한 빛 속에\n\n나의 걱정도 조금은 녹아든다\n밤은 그렇게\n\n나를 조용히 위로한다",
-    "style": {
-      "background": "#2e2e3a",
-      "color": "#f8f8f8",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "누군가를 기다린다는 건\n매 순간 스스로를 다독이는 일이다\n\n조급함을 잠재우고\n기억을 따뜻하게 꺼내 놓는 일이다",
-    "style": {
-      "background": "#fcf7ec",
-      "color": "#5a4833",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "익숙한 골목을 돌 때마다\n내 마음도 한 바퀴 돈다\n\n늘 같은 풍경인데도\n다른 감정이 얼굴을 내민다",
-    "style": {
-      "background": "#f1f1f1",
-      "color": "#333333",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "침묵은 때로\n가장 무거운 대화다\n\n말을 삼키는 동안\n나는 네 마음을 헤아려 본다",
-    "style": {
-      "background": "#f6f6fc",
-      "color": "#4c4c63",
-      "fontFamily": "'Noto Serif KR', serif"
-    }
-  },
-  {
-    "text": "오래된 편지 한 장을 꺼냈다\n잉크는 바랬지만\n\n그 안에 담긴 마음은\n그대로였다\n\n시간을 건너도\n진심은 퇴색하지 않는다",
-    "style": {
-      "background": "#fffbe6",
-      "color": "#705e3f",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "벚꽃이 피는 계절이면\n괜히 설렌다\n\n사라질 걸 알면서도\n마음이 움직이는 건\n\n아름다움을 외면할 수 없기 때문이다",
-    "style": {
-      "background": "#fff0f5",
-      "color": "#8b5d70",
-      "fontFamily": "'MaruBuri', serif"
-    }
-  },
-  {
-    "text": "혼잣말이 늘어나는 날에는\n내 안에 있는 또 다른 내가\n\n나를 달래고 있다는 걸 알게 된다\n외로움도, 스스로 품으면\n\n다정해질 수 있다",
-    "style": {
-      "background": "#eef1f4",
-      "color": "#404e5a",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "발걸음을 늦춘 오후\n길가 풀잎들이 햇살을 먹고 있었다\n\n그 조용한 생명력에\n내 마음이 조용히 젖어들었다",
-    "style": {
-      "background": "#e8f4ec",
-      "color": "#2d4b38",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "무언가를 떠올리는 일은\n그 시절로 돌아가는 일이다\n\n기억은 멈춰 있지만\n감정은 여전히 자라나고 있었다",
-    "style": {
-      "background": "#fdfdfd",
-      "color": "#313131",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "나는 지금 조금씩 좋아지고 있다\n하루에 단 한 줄이라도\n\n나를 위한 문장을 적는다는 건\n스스로에게 말을 거는 일이다",
-    "style": {
-      "background": "#f8fff2",
-      "color": "#446633",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "하루를 마무리하며\n작은 등을 켜놓고 조용히 앉는다\n\n그 불빛 안에서\n나는 오늘의 나를 이해하게 된다",
-    "style": {
-      "background": "#fffbe9",
-      "color": "#5c503a",
-      "fontFamily": "'MaruBuri', serif"
-    }
-  },
-  {
-    "text": "기다림의 끝에 서 있으면\n때론 아무것도 오지 않는다\n\n하지만 그 자리에 선 내가\n어느새 달라져 있다는 걸 알게 된다",
-    "style": {
-      "background": "#f5f5ff",
-      "color": "#444473",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "매일 같은 길을 걷는 중에도\n다르게 보이는 것들이 있다\n\n그건 바깥 풍경이 아니라\n내 안이 달라졌다는 증거다",
-    "style": {
-      "background": "#edf2f7",
-      "color": "#3e4c59",
-      "fontFamily": "'Noto Serif KR', serif"
-    }
-  },
-  {
-    "text": "손을 씻을 때마다\n조금씩 나를 정리하는 기분이 든다\n\n작고 반복적인 행동 속에\n마음은 닦이고 비워진다",
-    "style": {
-      "background": "#e6f7ff",
-      "color": "#284b63",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "작은 식물을 물 주듯\n나도 매일 마음에 물을 주고 싶다\n\n건조해지기 전에\n나를 돌보는 연습을 해본다",
-    "style": {
-      "background": "#effcf6",
-      "color": "#365a43",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "음악은 기억을 데려온다\n멜로디 한 줄에 담긴 과거가\n\n순식간에 눈앞으로 밀려온다\n그리고 나는 다시 그때의 나를 마주한다",
-    "style": {
-      "background": "#f3f0ff",
-      "color": "#483d8b",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "글을 쓴다는 건\n나를 알아가는 과정이다\n\n어떤 단어가 튀어나올지\n나조차 모를 때가 있다\n\n그래서 나는 매일 조금씩 써본다",
-    "style": {
-      "background": "#fffef5",
-      "color": "#33331a",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "차를 마시는 시간\n그 조용한 찻물 소리에 집중한다\n\n생각이 멈추고\n감각이 깨어나는 그 순간\n\n나는 지금을 살고 있다",
-    "style": {
-      "background": "#f7f5ec",
-      "color": "#5d523f",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "눈을 감고 바람을 느낀다\n보이지 않아도\n\n그 존재를 알 수 있다는 건\n마음도 그렇다는 뜻이다",
-    "style": {
-      "background": "#e8f5f9",
-      "color": "#336666",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "나는 더 이상 예전의 내가 아니다\n하지만 여전히 나이고\n\n변해가는 모든 순간들 안에\n내가 있다",
-    "style": {
-      "background": "#fdfcf7",
-      "color": "#39392d",
-      "fontFamily": "'Noto Serif KR', serif"
-    }
-  },
-  {
-    "text": "작은 파도에도 흔들리는 마음이라면\n조용히 나를 품어주는 그늘이 되어야 한다\n\n세상의 속도에 맞추지 않아도\n나는 내 호흡으로 살아갈 수 있다",
-    "style": {
-      "background": "#eaf4f1",
-      "color": "#2b4440",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "매일의 반복 속에서도\n가끔은 새로움이 숨어 있다\n\n익숙한 일상 안에\n뜻밖의 기쁨이 자리 잡는다",
-    "style": {
-      "background": "#fffced",
-      "color": "#5c4b2c",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "모든 게 잘 보이지 않을 때는 잠시 멈추는\n것도 용기다 그 멈춤이 나를 다시 일으켜 세운다",
-    "style": {
-      "background": "#f3f3f3",
-      "color": "#2f2f2f",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "어디선가 들려오는 노랫말에\n괜히 마음이 울컥해지는 밤\n\n그 노래는\n내 이야기를 닮아 있었다",
-    "style": {
-      "background": "#fef4f4",
-      "color": "#664848",
-      "fontFamily": "'MaruBuri', serif"
-    }
-  },
-  {
-    "text": "새벽 공기는 특별하다\n차가운 숨결 속에\n\n하루의 시작과 끝이\n동시에 담겨 있다",
-    "style": {
-      "background": "#e8f0fa",
-      "color": "#3c4e6c",
-      "fontFamily": "'Noto Serif KR', serif"
-    }
-  },
-  {
-    "text": "잊었다고 생각했던 감정이\n하루의 끝에서 다시 피어난다\n\n감정은 그렇게\n언제든 되살아난다",
-    "style": {
-      "background": "#fffdf8",
-      "color": "#403e3d",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "느리게 걷는 날이면\n세상이 더 많이 보인다\n\n빨리 가는 것이\n항상 좋은 건 아니었다",
-    "style": {
-      "background": "#f4f6f4",
-      "color": "#3b4c3c",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "밤은 참 솔직하다 가려진 감정이 하나둘 드러\n나는 시간 그래서 나는 밤을 사랑한다",
-    "style": {
-      "background": "#1a1a1a",
-      "color": "#dddddd",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "혼자가 익숙해지는 건\n어쩌면 무서운 일이다\n\n그래도 혼자서도 괜찮아지는 건\n자랑할 만한 일이다",
-    "style": {
-      "background": "#f0f0f0",
-      "color": "#3c3c3c",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "하루의 끝에 남는 건\n결국 스스로에 대한 위로다\n\n그 위로가 있기에\n내일을 다시 살아낼 수 있다",
-    "style": {
-      "background": "#fdf8f5",
-      "color": "#5a4941",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "해가 지고 어둠이 내리면\n비로소 하루를 돌아보게 된다\n\n그 조용한 시간 속에서\n나는 나에게 집중하게 된다",
-    "style": {
-      "background": "#2f2f39",
-      "color": "#eeeeee",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "바람이 스치고 간 자리\n조용한 흔들림이 남았다\n\n마음도 그렇게\n누군가를 지나 보내고 있었다",
-    "style": {
-      "background": "#edf3f6",
-      "color": "#3c4b50",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "무뎌진 감정은\n익숙함 속에서 잠든다\n\n하지만 어느 순간\n작은 자극에도 다시 깨어난다",
-    "style": {
-      "background": "#f8f8f8",
-      "color": "#444444",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "누군가의 말 한마디가\n하루 전체를 환하게 만들기도 한다\n\n그래서 나는 오늘\n조금 더 다정해지고 싶었다",
-    "style": {
-      "background": "#fff6f2",
-      "color": "#5c3e3e",
-      "fontFamily": "'MaruBuri', serif"
-    }
-  },
-  {
-    "text": "모든 게 멈춘 듯한 시간 속에\n나의 생각만 흐르고 있었다\n\n그 조용한 흐름이\n마음을 정리하게 만들었다",
-    "style": {
-      "background": "#f4f5f6",
-      "color": "#2e3e50",
-      "fontFamily": "'Noto Serif KR', serif"
-    }
-  },
-  {
-    "text": "가끔은 아무 이유 없이\n마음이 무거울 때가 있다\n\n그럴 땐\n가만히 그 감정에 기대어 본다",
-    "style": {
-      "background": "#fefefe",
-      "color": "#444444",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "햇살이 유난히 따뜻한 날엔\n나도 모르게 미소가 번진다\n\n자연스레\n고마운 것들을 떠올리게 된다",
-    "style": {
-      "background": "#fffbe7",
-      "color": "#6b4e1e",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "혼란스러운 날에는\n생각이 마음을 따라가지 못한다\n\n그럴 땐\n그저 시간을 흘려보낸다",
-    "style": {
-      "background": "#f3f3f3",
-      "color": "#444444",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "커피 한 잔의 여유가\n생각보다 많은 걸 해결해 준다\n\n그 시간 안에서\n나는 나를 다시 세운다",
-    "style": {
-      "background": "#ede4da",
-      "color": "#5a4c3f",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "내가 지나온 날들이\n지금의 나를 만든다\n\n그 모든 순간이\n쌓여서 오늘이 되었다",
-    "style": {
-      "background": "#fdfcfb",
-      "color": "#3c3c3c",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "가끔은 아무 일도 일어나지 않는 하루가\n가장 많은 생각을 남긴다.\n\n멍하니 바라본 벽지의 무늬, 창밖으로 흐르는 구름,\n그 평범한 것들이 오늘은 왜 이렇게 진하게 스며드는지.\n\n무심한 하루가 주는 가장 깊은 위로는,\n내가 아직 느낄 수 있다는 증거일지도 모른다.",
-    "style": {
-      "background": "#fefbf5",
-      "color": "#5e4a3c",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "창밖에 비가 내렸다.\n소리는 조용했고, 마음은 더 조용했다.\n\n그동안 말하지 못한 것들이\n창문을 타고 흘러내리는 빗물처럼\n\n서서히, 그러나 분명하게 녹아내렸다.\n비가 오는 날이면 괜히 솔직해지고 싶다.\n\n괜히 누군가에게 마음을 건네고 싶다.",
-    "style": {
-      "background": "#e7f0f4",
-      "color": "#2c3e50",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "오래된 노래를 들었다.\n가사 하나하나가 어딘가 낯익었다.\n\n기억도 없는 순간인데,\n이상하게 마음이 반응한다.\n\n아마도 감정은 기억보다 먼저 도착하는 것 같다.\n노래 한 줄이\n\n내 안의 오래된 문을 조심스레 열었다.",
-    "style": {
-      "background": "#fff8ec",
-      "color": "#5d4238",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "길을 걷다 문득 발걸음을 멈췄다.\n익숙한 풍경인데, 오늘은 낯설다.\n\n내가 변한 걸까, 세상이 변한 걸까.\n아니면 그저 조금 더 천천히 걷고 있는 것뿐일까.\n\n느려진 발걸음만큼\n내 마음도 조금은 가라앉는다.",
-    "style": {
-      "background": "#f3f3f3",
-      "color": "#3a3a3a",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "혼자라는 말이 외롭게 들리던 때가 있었다.\n하지만 지금은 다르다.\n\n혼자 있는 시간이 익숙해지고,\n그 속에서 나를 발견하는 일이 더 소중해졌다.\n\n고요 속에서 들리는 목소리는\n언제나 진실하고, 조금은 따뜻하다.",
-    "style": {
-      "background": "#f5f5fa",
-      "color": "#4d4d6c",
-      "fontFamily": "'Noto Serif KR', serif"
-    }
-  },
-  {
-    "text": "잊었다고 믿었던 기억이\n지나가는 냄새 하나에 되살아난다.\n\n그 순간만큼은 시간도 공간도 흐트러진다.\n감정이 너무 갑작스러워서\n\n나는 그저 멈춰 서서\n조용히 그때의 나를 바라볼 뿐이다.",
-    "style": {
-      "background": "#fefdf7",
-      "color": "#3d3c39",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "밤하늘을 올려다봤다.\n별은 안 보였지만,\n\n검은 하늘이 이상하게 나를 안아주는 듯했다.\n어둠 속에 있다는 건\n\n사라진 게 아니라\n아직 빛나고 있다는 뜻이기도 하다.\n\n오늘의 나도 어둠 속에서 반짝인다.",
-    "style": {
-      "background": "#121522",
-      "color": "#dddddd",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "낮게 깔린 음악과 함께\n조용히 책장을 넘겼다.\n\n단어 하나에 머물고,\n문장 하나에 울컥했다.\n\n읽는다는 건, 단지 이해하는 것이 아니라\n그 안에서 나를 마주하는 일이다.",
-    "style": {
-      "background": "#f9f8f6",
-      "color": "#3e372c",
-      "fontFamily": "'MaruBuri', serif"
-    }
-  },
-  {
-    "text": "이야기를 하지 않아도\n서로를 이해하는 순간이 있다.\n\n그건 오랜 시간 쌓인 신뢰의 결과일까,\n아니면 우리가 본능적으로 누군가를\n\n알아보는 능력이 있을지도 모른다.\n그 침묵의 대화가\n\n가장 큰 위로였다.",
-    "style": {
-      "background": "#eef2f2",
-      "color": "#444444",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "하루를 끝내며 창밖을 바라봤다.\n도시의 불빛은 여전히 분주한데,\n\n내 마음은 이상하게 조용했다.\n혼자만의 밤, 아무도 건드리지 않는 시간 속에서\n\n나는 다시 나를 꺼내어 본다.",
-    "style": {
-      "background": "#1a1a1a",
-      "color": "#f1f1f1",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "오늘 하루, 아무 말 없이 지나갔다.\n누군가의 말이 그리웠고,\n\n내 말이 멈추기를 바랐던 순간도 있었다.\n조용한 하루가 꼭 고요했던 건 아니다.\n\n마음속에서는 계속 무언가 웅성거리고 있었다.\n하지만 나는 침묵을 택했다.\n\n그 선택이 오늘의 나를 지켰다.",
-    "style": {
-      "background": "#f6f5f3",
-      "color": "#4c453e",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "낙엽이 천천히 바닥에 내려앉는 걸 봤다.\n그 속도가 오늘의 나와 닮았다.\n\n조금 느리지만, 묵묵히 무언가를 향해 가고 있었다.\n계절은 흘러가고, 나는 그 안에 머물렀다.\n\n잠시 멈춰 있다는 건,\n나쁜 게 아니었다.",
-    "style": {
-      "background": "#f9f2e7",
-      "color": "#6e4b2c",
-      "fontFamily": "'MaruBuri', serif"
-    }
-  },
-  {
-    "text": "무언가를 좋아한다는 건,\n그 대상이 나를 위로해주기 때문일까.\n\n그게 사람이든, 노래든, 장소든\n그 속에 내가 머물 수 있어서 좋다.\n\n좋아하는 것들을 떠올릴 수 있다는 건\n지금 내가 괜찮다는 증거다.",
-    "style": {
-      "background": "#fdfdf7",
-      "color": "#3a3a3a",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "햇살이 따뜻한 날,\n나는 이유 없이 오래 걷고 싶었다.\n\n생각도 없이,\n감정도 없이,\n\n그냥 발끝이 향하는 대로 걷고 싶었다.\n그 발걸음 끝에서\n\n어쩌면 오늘의 나를 마주할 수 있을지도 몰랐다.",
-    "style": {
-      "background": "#fffef1",
-      "color": "#4f4f3f",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "마음을 말로 다 전하지 못할 때가 있다.\n오히려 가만히 곁에 있는 게\n\n더 많은 걸 전달하는 순간이 있다.\n침묵이 따뜻해지는 시간,\n\n그건 분명 누군가의 진심이 옆에 있다는 증거다.",
-    "style": {
-      "background": "#f0f4f2",
-      "color": "#3e5c4c",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "세상은 바쁘게 흘러가고 있지만,\n나는 지금 이 찻잔 하나에 집중하고 있다.\n\n따뜻한 온도, 향기, 그 속의 고요.\n잠시 세상을 멈추는 이 감각이\n\n오늘의 나를 구해준다.",
-    "style": {
-      "background": "#f8f6f0",
-      "color": "#514c3e",
-      "fontFamily": "'Noto Serif KR', serif"
-    }
-  },
-  {
-    "text": "가끔은 스스로에게 편지를 쓰고 싶어진다.\n아무도 보지 않아도,\n\n내가 나를 위한 말들을 적는다는 건\n내 존재를 다정하게 다독이는 일이다.\n\n‘괜찮아’라는 말을,\n가장 믿을 수 있는 목소리로 들려주고 싶다.",
-    "style": {
-      "background": "#fffaf0",
-      "color": "#5e3c3c",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "잠에서 깬 새벽,\n바깥은 아직 고요했다.\n\n그 적막함 속에서\n나는 나를 가장 선명하게 느꼈다.\n\n하루가 시작되기 전의 시간,\n그 어둠은 나를 숨기는 것이 아니라\n\n드러내는 일이었다.",
-    "style": {
-      "background": "#1e1e1e",
-      "color": "#eeeeee",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "예상치 못한 순간에\n누군가가 건넨 미소 하나가\n\n오늘 하루를 바꿔놓기도 한다.\n작은 친절이 큰 울림을 남긴다.\n\n그걸 알고 있는 사람이라면,\n이미 좋은 사람이 맞다.",
-    "style": {
-      "background": "#fdf6f6",
-      "color": "#4c3b3b",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "끝이라고 생각한 순간에\n다시 시작이 있었다.\n\n닫힌 문 뒤에 또 다른 길이 있었고,\n그 길 위에 또 다른 나를 만났다.\n\n이 모든 건 멈추지 않았기 때문이다.",
-    "style": {
-      "background": "#f1f3f4",
-      "color": "#2e3e4e",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "밤은 가끔\n모든 걸 들춰낸다\n지나간 일도, 못다 한 말도\n내가 무심코 지나친 표정도\n\n고요한 시간 속에\n나는 조용히 부서졌다가\n다시 조용히, 붙는다",
-    "style": {
-      "background": "#1a1a1f",
-      "color": "#dddddd",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "텅 빈 벤치에 앉아\n가만히 생각을 내려놓는다\n\n바람이 지나가고\n잎이 떨어지고\n\n아무 일도 없는데\n그게 이상하게 마음에 남는다",
-    "style": {
-      "background": "#f5f6f0",
-      "color": "#33332e",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "이름 없는 하루가 또 지나간다\n누구에게도 들키지 않고\n\n나만 알고 있는 이 평범한 시간\n그 안에서 나는\n\n가장 진짜로 살아있다",
-    "style": {
-      "background": "#f2f2f2",
-      "color": "#3e3e3e",
-      "fontFamily": "'Noto Serif KR', serif"
-    }
-  },
-  {
-    "text": "모서리에 기대어\n잠시 멈춰선 감정이 있었다\n\n쏟아지지 않고,\n숨지 않고,\n\n조용히\n나를 바라보는 감정",
-    "style": {
-      "background": "#e9eef3",
-      "color": "#2d3c48",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "기억은 이따금\n숨결처럼 가볍게 돌아온다\n\n그리고 어김없이\n마음 한쪽을\n\n묵직하게 누른다",
-    "style": {
-      "background": "#fefcf6",
-      "color": "#524c44",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "그림자 하나가 벽에 기대 있었다\n나인 것 같기도, 누군가 같기도\n\n그 그림자를 한참 바라보다가\n오늘의 나도\n\n어딘가에 남고 싶어졌다",
-    "style": {
-      "background": "#1e1e2e",
-      "color": "#cccccc",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "입을 열지 않고\n전부를 말할 수 있는 순간이 있다\n\n바라보는 것만으로도\n서로를 안다는 그 느낌\n\n그게 사랑일까",
-    "style": {
-      "background": "#fcf3f6",
-      "color": "#5a384c",
-      "fontFamily": "'MaruBuri', serif"
-    }
-  },
-  {
-    "text": "봄이 왔다고 말할 수 없을 만큼\n조용히 계절은 바뀌었다\n\n사람 마음도 그런 것 같다\n들키지 않고\n\n천천히 달라진다",
-    "style": {
-      "background": "#f7fff1",
-      "color": "#415936",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "걸음이 멈춘 그 자리\n말을 잃은 그 순간\n\n눈물이 아닌 침묵으로\n무너지는 마음이 있었다",
-    "style": {
-      "background": "#f1f1f1",
-      "color": "#333333",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "별을 세다가 잤다\n그 하나하나에\n\n마음을 실어 보냈다\n이 밤이 조금만 더\n\n조용히 흘러가기를",
-    "style": {
-      "background": "#0b0f1a",
-      "color": "#e2e8f0",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "밤이 오면 나도 모르게 더 조용해진다.\n창밖의 불빛이 하나둘 꺼지고,\n\n내 안의 소음들도 조금씩 사라진다.\n낮에는 못 들었던\n\n마음의 소리가 귀를 간질인다.\n오늘 하루를 견딘\n\n나에게 조용히 말을 건다.\n수고했어, 정말 잘 버텼어.\n\n누구도 몰라주는 이 말 한마디가,\n나를 다시 숨 쉬게 한다.",
-    "style": {
-      "background": "#1c1c1c",
-      "color": "#e0e0e0",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "텅 빈 거리에서 바람이 옷깃을 스친다.\n아무 말도 하지 않는 공기 속에서,\n\n나는 오래된 감정을 꺼내어 조용히 닦는다.\n잊은 줄 알았던 마음이 고개를 든다.\n\n그렇게 한참을 서 있다가,\n마음속 어디쯤에 쌓인 먼지를 털어낸다.\n\n다시 걸음을 떼고 나아간다.\n말없이 무너졌다, 말없이 일어난다.",
-    "style": {
-      "background": "#eaeaea",
-      "color": "#333333",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "우리는 모두 무언가를 기다린다.\n이름을 붙일 수 없는 감정,\n\n손에 잡히지 않는 미래,\n어쩌면 다시 오지 않을 누군가.\n\n기다림은 가만히 있는 게 아니라,\n그 안에서 천천히 무너지고 다시 일어나는 과정이다.\n\n그러니 오늘도 나는 기다린다.\n이 감정이 나를\n\n더 깊게 만든다고 믿으며.",
-    "style": {
-      "background": "#f7f5f2",
-      "color": "#4a3c2f",
-      "fontFamily": "'Noto Serif KR', serif"
-    }
-  },
-  {
-    "text": "가끔은 아무 말 없이\n누군가의 옆에 있고 싶다.\n\n조용히 커피를 마시고,\n창밖을 바라보며,\n\n짧은 숨을 쉬는 것만으로도 위로가 되는 시간.\n말이 없어서 불편한 게 아니라,\n\n말이 없어도 괜찮은 사람이 있다는 게 얼마나 귀한지.\n침묵이 가장 편한 사이,\n\n그게 나에겐 가족보다 더 가깝다.",
-    "style": {
-      "background": "#fdfaf6",
-      "color": "#594f45",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "햇살이 창문 너머로 들이쳤다.\n어제와 다를 것 없는 아침인데,\n\n오늘은 괜히 눈물이 맺혔다.\n따뜻해서 그랬을까,\n\n아니면 어제는 너무 추웠던 걸까.\n따뜻함이 낯설 때\n\n우리는 자신도 모르게 무너진다.\n그리고 그 순간, 다시 태어난다.\n\n한 줄기 햇살이 마음을\n녹이는 날은 그렇게 시작된다.",
-    "style": {
-      "background": "#fff9e5",
-      "color": "#3e331f",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "책을 덮고 눈을 감았다.\n머릿속은 여전히 바쁘고,\n\n마음은 그보다 더 시끄럽다.\n글자는 멈췄는데 생각은 흘러간다.\n\n그렇게 나는 종이 위에서 한참을 걸었다.\n문장 하나가 내 안에서 숨을 쉬고,\n\n기억 하나가 눈앞을 스친다.\n나는 책을 읽었지만,\n\n사실은 내 마음을 읽고 있었다.",
-    "style": {
-      "background": "#f6f6f6",
-      "color": "#1e1e1e",
-      "fontFamily": "'MaruBuri', serif"
-    }
-  },
-  {
-    "text": "비가 내린 후의 공기처럼,\n마음이 조금 맑아진 날이었다.\n\n어떤 이유도 없이 괜찮아진 느낌.\n웃을 이유는 없었지만, 울지도 않았다.\n\n그냥 가만히 숨 쉬는 일이 기분 좋았다.\n어쩌면 회복이란 건,\n\n그렇게 천천히,\n아무도 모르게 우리 안에 다가오는 것인지도 모른다.\n\n조용한 날이지만, 오늘은 꽤 소중했다.",
-    "style": {
-      "background": "#edf3f2",
-      "color": "#2f4e4a",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "친구와의 오래된 대화를 떠올렸다.\n그때는 왜 그 말을 이해하지 못했을까.\n\n시간이 흘러서야 그 말이\n나를 지켜준 거였다는 걸 안다.\n\n모든 말이 그 자리에서 피어\n나는 건 아니더라.\n\n어떤 말은 마음속에서 오래 자라,\n나중에야 꽃을 피운다.\n\n그 말이 오늘 나를 살렸다.",
-    "style": {
-      "background": "#fdf6f9",
-      "color": "#5c3a47",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "거울을 보며 묻는다.\n지금의 나는 어떤 얼굴을 하고 있는지.\n\n피곤한 건지, 슬픈 건지,\n아니면 그냥 멍하니 있는 건지.\n\n웃지 않아도 괜찮다.\n중요한 건, 오늘도\n\n이 얼굴로 살아냈다는 거니까.\n거울 속 나는 아무 말도 하지 않지만,\n\n그 침묵이 나를 조금 더 단단하게 만든다.",
-    "style": {
-      "background": "#eaeff5",
-      "color": "#2e3e55",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "문득, 별이 보이지\n않는 밤하늘을 올려다봤다.\n\n어둠뿐이었지만,\n나는 그 안에서 오히려 안정을 느꼈다.\n\n가끔은 아무것도 보이지 않기\n때문에 편안해질 때가 있다.\n\n별이 없어서 불안한 게 아니라,\n아무것도 기대하지 않아도 되는 그 상태.\n\n그게 어쩌면 지금\n나에게 가장 필요한 시간일지도.",
-    "style": {
-      "background": "#121212",
-      "color": "#eeeeee",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "아무도 없는 공원 벤치에 앉아 있었다.\n바람이 나뭇잎을 흔들고,\n\n그 속삭임이 마음을 스쳤다.\n사람들은 바쁘게 지나가지만,\n\n나는 멈춰 있었다.\n조용히 숨을 들이마시며,\n\n오늘이라는 시간을 내 안에 천천히 담는다.\n아무 일 없는 이 순간이,\n\n언젠가는 그리워질지도 모르니까.",
-    "style": {
-      "background": "#f6f9f1",
-      "color": "#2c3e2d",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "문득, 오래된 편지를 꺼냈다.\n잉크는 바랬고,\n\n종이는 구겨졌지만,\n그 안에 담긴 마음은 여전히 선명했다.\n\n'그때는 말하지 못했지만,\n네가 고마웠어.' 짧은 문장에 숨겨진 진심이,\n\n지금의 나를 눈물짓게 한다.\n시간이 지나도 진심은 닳지 않는다.",
-    "style": {
-      "background": "#fffaf0",
-      "color": "#5a463a",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "길을 걷다 문득 하늘을 봤다.\n평소 같았으면 그냥 지나쳤을 구름이,\n\n오늘은 이상하게 예뻤다.\n감정이 가득한 날은\n\n모든 풍경이 낯설게 보인다.\n똑같은 거리, 똑같은 나무,\n\n그런데 오늘은 마음이 다르게 받아들인다.\n감정이 바뀌면 세상도 바뀐다.",
-    "style": {
-      "background": "#eef4fb",
-      "color": "#2e3d52",
-      "fontFamily": "'Noto Serif KR', serif"
-    }
-  },
-  {
-    "text": "말이 필요 없는 사이가 있다.\n손을 잡지 않아도 온기를 느끼고,\n\n눈을 마주치지 않아도 안심이 되는 그런 관계.\n그저 같은 공간에 있다는\n\n사실만으로도 마음이 놓이는 사람.\n그 존재 하나만으로,\n\n오늘을 견딜 힘이 된다.",
-    "style": {
-      "background": "#f2f2f2",
-      "color": "#3f3f3f",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "무너진다는 건,\n끝이 아니라 시작일 수도 있다.\n\n모든 게 부서진 그 순간에만\n비로소 진짜 나를 마주하게 되니까.\n\n감추었던 아픔도,\n회피했던 감정도,\n\n더 이상 숨길 수 없을 때 사람은 비로소 다시 자란다.\n나는 무너지고, 다시 피어난다.",
-    "style": {
-      "background": "#fcefe7",
-      "color": "#4a2f27",
-      "fontFamily": "'MaruBuri', serif"
-    }
-  },
-  {
-    "text": "혼자 있는 시간이 길어질수록,\n나는 나에게 더 많은 말을 건넨다.\n\n너 오늘 좀 괜찮았니?\n속상하진 않았어?\n\n그렇게 마음을 쓰다듬고 나면,\n생각보다 괜찮은 하루였다는 걸 알게 된다.\n\n결국, 나를 위로할\n수 있는 사람은 나뿐이다.",
-    "style": {
-      "background": "#f7fdf7",
-      "color": "#354e3c",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "창밖의 나무가 천천히 흔들리고 있었다.\n그 잔잔한 움직임을\n\n보며 나도 숨을 고른다.\n세상이 멈춰 있는 것 같아도,\n\n모든 건 흐르고 있다.\n감정도, 계절도, 나도.\n\n조급해하지 말자.\n모든 건 다 제때에 도착한다.\n\n나의 속도대로 가면 된다.",
-    "style": {
-      "background": "#f4f9f5",
-      "color": "#294d3f",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "누군가를 떠올리며 웃는 순간이 있다.\n이미 멀어진 사람이지만,\n\n그 사람이 내게 남긴 감정은 여전히 따뜻하다.\n우리가 함께했던 그날의 하늘,\n\n그때의 향기,\n웃음소리.\n\n기억은 흐려져도, 마음은 또렷하다.\n그 사람은 사라졌지만,\n\n내 안에 살아 있다.",
-    "style": {
-      "background": "#fff5f7",
-      "color": "#5c3d45",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "조용한 새벽, 세상은 고요했고,\n나는 그 안에서 가장 진짜였다.\n\n아무도 보지 않는 시간에 나는 더 솔직해지고,\n감정은 더 짙어진다.\n\n외로움이 아니라,\n오히려 나를 만나는 시간.\n\n새벽은 어둡지만,\n내 마음은 오히려 그 빛으로 채워진다.",
-    "style": {
-      "background": "#1a1a1a",
-      "color": "#f3f3f3",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "오늘을 끝내며 한 문장을 남긴다.\n'괜찮았어, 충분했어.' 실수도 있었고, 망설임도 있었지만, 그\n\n모든 걸 견딘 나에게 이 말은 자격이 있다.\n완벽하지 않아도 된다.\n\n살아낸 것 자체가 이미 잘한 일이니까.\n오늘의 나에게, 박수를 보낸다.",
-    "style": {
-      "background": "#fefae6",
-      "color": "#5b4a2c",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "떠난다는 건 사라지는 게 아니다.\n남겨두는 것이다.\n\n흔적, 냄새, 기억, 말.\n나는 그 모든 걸 남기고 또 누군가의 안에 머문다.\n그러니 이별이\n두렵다고 말하지 말자.\n\n우리는 언제나 어디선가\n누군가의 하루에 남아 있다.",
-    "style": {
-      "background": "#f5f5f5",
-      "color": "#444444",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "누군가의 손길이 그리운 날이었다.\n꼭 안아달라는 말도 하지 못한 채,\n\n혼자서 마음을 쓰다듬었다.\n위로란 게 꼭 누군가의\n\n목소리로만 오는 건 아니다.\n오늘, 나는 나에게 따뜻한 말을 건넸다.\n\n그것으로 충분한 밤이었다.",
-    "style": {
-      "background": "#fdf9f6",
-      "color": "#5a463f",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "하루가 너무 길게 느껴질 때가 있다.\n일도 사람도 감정도\n\n모두 무겁게 다가오는 날.\n그런 날엔 조용한 음악\n\n한 곡으로 숨을 고른다.\n삶은 고요한 틈에서 다시 시작된다.\n\n짧은 멈춤이, 오늘을 살게 한다.",
-    "style": {
-      "background": "#e8eef1",
-      "color": "#2e3f4c",
-      "fontFamily": "'Noto Serif KR', serif"
-    }
-  },
-  {
-    "text": "감정이 사라지는 게 아니라,\n스며드는 거였다.\n\n언젠가 잊었다고 생각한 이름,\n장소,\n\n목소리들이 다시금 머릿속을 맴돈다.\n그건 미련이 아니라,\n\n지나온 시간에 대한 예의일지도.\n완전히 떠나는 건 없다.\n\n다만 잊은 척, 사는 것뿐.",
-    "style": {
-      "background": "#faf5ef",
-      "color": "#504239",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "햇살 좋은 날,\n내 마음도 같이 환해질 줄 알았다.\n\n그런데 그건 늘 그렇지 않았다.\n밝은 날에도 어두울 수 있다는 걸,\n\n나는 이제야 배운다.\n그래서 오늘은 어두운 마음을\n\n있는 그대로 껴안기로 했다.\n햇살처럼, 나를 비추며.",
-    "style": {
-      "background": "#fffbe0",
-      "color": "#4f4325",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "차가운 물로 손을 씻으며,\n하루의 감정도 함께 씻긴다.\n\n손끝에 남은 피로, 마음속 잔상들.\n물은 다 말 없이 흘려보낸다.\n\n세상 모든 위로는\n말보다 물에 가까울지도.\n\n조용히 닿고,\n부드럽게 머물다, 흘러간다.",
-    "style": {
-      "background": "#eef7f7",
-      "color": "#2f4f4f",
-      "fontFamily": "'MaruBuri', serif"
-    }
-  },
-  {
-    "text": "길을 걷다 문득 향기가 지나간다.\n아스라한 그 냄새에,\n\n내가 몰랐던 기억 하나가 스쳐간다.\n향기란 건 그래서 무섭다.\n\n머리보다 마음이 먼저 반응한다.\n그 한순간,\n\n나는 과거 속의 나와 다시 마주했다.\n향기가 지나간 자리에, 여운이 남았다.",
-    "style": {
-      "background": "#f9f4f1",
-      "color": "#5a3d3d",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "밤하늘은 아무 말이 없다.\n하지만 그 침묵 안에는\n\n수많은 이야기가 담겨 있다.\n소리 없는 위로, 형태 없는 공감.\n\n오늘도 나는 별을 찾지 않는다.\n그저 어둠 안에 오래 머문다.\n\n그 시간이, 나를 가장 깊이 위로한다.",
-    "style": {
-      "background": "#1b1b27",
-      "color": "#dddddd",
-      "fontFamily": "'Gowun Dodum', sans-serif"
-    }
-  },
-  {
-    "text": "삶은 질문이고,\n감정은 그에 대한 답이다.\n\n우리는 매일 이유 없는 불안과\n이유 모를 기쁨 사이를 오간다.\n\n정답은 없다.\n다만, 살아내는 하루하루가\n\n그 자체로 의미가 된다.\n나는 오늘도 완벽하지\n\n않은 답으로 살아간다.",
-    "style": {
-      "background": "#f5f5f0",
-      "color": "#2c2c2c",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "끝이라고 말하지 않겠다.\n모든 끝은 새로운 시작을 품고 있으니까.\n\n오늘의 마지막 문장 위에,\n나는 쉼표를 찍는다.\n\n그리고 내일의 첫\n문장을 조용히 기다린다.\n\n이건 끝이 아니라, 또 하나의 시작이다.\n계속 이어지는 이야기처럼.",
-    "style": {
-      "background": "#ffffff",
-      "color": "#333333",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "너무 애쓰지 않아도 괜찮다\n바람도 쉬어가며 불고\n구름도 제 길을 서두르지 않는데\n\n오늘의 너는\n그저 살아낸 것만으로도\n충분히 눈부셨다",
+    "text": "오늘 하루를 온전히 살았다\n오지 않은 내일을 근심하지 않고\n지나간 어제를 후회하지 않으며\n\n그저 내게 주어진 이 하루만을\n조용히 살아냈다는 사실이\n\n오늘 밤 나에겐\n가장 따뜻한 안도였다",
     "style": {
       "background": "#FBF8F3",
       "color": "#3C342C",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "무거운 마음은\n잠시 창가에 내려놓으렴\n\n어둠이 깊어지는 것은\n새벽이 가까워졌다는 뜻이니\n\n너의 내일은\n오늘보다 한 뼘 더 다정할 것이다",
-    "style": {
-      "background": "#F4F6F7",
-      "color": "#2D3748",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "식어가는 찻잔 속에\n가만히 손을 모으고\n\n오늘 하루 수고한 나에게\n조용히 속삭인다\n\n참 고생 많았다고,\n다 잘 지나갈 거라고.",
-    "style": {
-      "background": "#F7F3EE",
-      "color": "#4A3B32",
-      "fontFamily": "'Gowun Batang', serif"
-    }
-  },
-  {
-    "text": "세상이 다 잠든 밤,\n별 하나가 너를 내려다본다\n\n빛나지 않아도 소중하고\n보이지 않아도 늘 그 자리에 있는\n\n너라는 온기 하나로\n이 밤은 충분히 따뜻하다",
-    "style": {
-      "background": "#1C2026",
-      "color": "#E3E7ED",
-      "fontFamily": "'Nanum Myeongjo', serif"
-    }
-  },
-  {
-    "text": "길을 잃었다고 자책하지 마라\n풀잎도 바람에 흔들리며\n뿌리를 내리는 법이니까\n\n천천히 걸어도 돼\n너의 계절은\n가장 고운 때에 피어날 테니",
-    "style": {
-      "background": "#F5F3ED",
-      "color": "#3E4337",
       "fontFamily": "'Gowun Dodum', sans-serif"
     }
   },
   {
-    "text": "노을이 지는 하늘을 보며\n문득 떠오른 생각 하나\n\n상처 입은 날들도\n결국은 저렇게\n따스한 붉은빛으로 물들어간다는 것",
+    "text": "아무것도 하지 않아도\n충분히 좋은 날이었다\n\n가만히 손끝으로 바람을 만지고\n두 눈을 감은 채 햇살을 마셨다\n\n세상은 어제와 다르지 않았지만\n내 마음은 한 뼘쯤 가벼워졌다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "오늘은 말을 조금 줄이기로 했다\n대신 더 오래 바라보기로 했다\n\n서툰 말보다 고요한 눈빛이\n섣부른 위로보다 묵묵한 기다림이\n\n더 많은 마음을 건네주는 날이 있다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "그리움은 예고 없이 찾아오지 않는다\n언제나 제 시간을\n맞춰 창문을 두드린다\n\n잊은 줄 알았던 이름을\n입술 끝으로 가만히 불러보게 하고\n잠들었던 계절을 흔들어 깨운다\n\n그리움은 언제나\n마음보다 정직하다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "짧은 시 한 구절이\n메마른 마음을 조용히 적셨다\n\n다정한 한 줄의 문장이\n무너질 듯한 하루를 구해내기도 한다\n\n언어가 품은 보이지 않는 온기를\n나는 오늘 다시 믿기로 했다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "비 내리는 창가에 기대앉아\n비워낸 마음으로 오래도록 머물렀다\n\n유리창을 타고 흐르는 물방울의 길을\n눈길로 가만히 따라가 보던 오후\n\n아무런 말도 오가지 않는 고요가\n이상하리만큼 깊은 위로가 되었다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "하루를 남김없이 다 쓰고 나면\n손바닥 위에 남는\n건 조용한 마음 하나\n\n그 고요한 결을 들여다보면\n내가 오늘을 애써 살아냈다는\n증거가 있다\n\n소리 없는 평온이야말로\n하루 끝에 찾아오는\n가장 따뜻한 쉼이다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "햇살이 유난히 따스했던 오후\n네가 두고 간 말들이 다시 떠올랐다\n\n계절이 몇 번이나 바뀌었는데도\n그 말들 속에는\n아직 온기가 남아 있다\n\n시간이 흘러도\n다정한 말은 마음 안에서 자란다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "오늘은 나를 가만히 쓰다듬는 날\n누군가의 위로를 기다리지 않고\n\n그저 조용한 방 안에 앉아\n지친 나를 한 번 꼭 안아주는 날\n\n나와 가장 다정하게 가까워지는 법을\n조금씩 배워가는 하루였다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "저녁의 그림자가 길어질 무렵이면\n괜스레 마음 한구석이 촉촉해진다\n\n하루의 끝이 가까워지는 시간은\n언제나 지나온 걸음을 돌아보게 한다\n\n채 건네지 못한 말들이\n입술 끝에 잔잔히 머문다",
     "style": {
       "background": "#F8F3F4",
       "color": "#4A383E",
@@ -1032,15 +80,447 @@
     }
   },
   {
-    "text": "오늘의 마침표를 찍으며\n긴 숨 하나를 내쉰다\n\n내일이 조금 덜 버겁기를,\n너의 꿈자리에는\n따스한 달빛만 머물기를.",
+    "text": "무심히 스쳐 지나온 순간들이\n어쩌면 가장 빛나던\n조각이었을지 모른다\n\n비로소 멀어진 뒤에야\n그 시절이 꽃이었다는 걸\n조용히 깨닫곤 한다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "무언가에 마침표를 찍는 일은\n언제나 서늘한 슬픔을 데려온다\n\n하지만 한 계절이 저물어야\n새순이 돋아날 자리가 생기듯\n\n끝이 있어야\n우리는 다시 시작할 수 있다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "하루 종일 바람에 흩날린 마음을\n검은 밤이 소리 없이 덮어준다\n\n어둠은 때때로\n세상에서 가장 따뜻한 담요가 된다",
     "style": {
       "background": "#181A20",
       "color": "#EAE6DE",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "마음이 자꾸만 어딘가로\n떠나고 싶어 하던 날이었다\n\n창밖의 하늘은 시리도록\n맑게 비어 있었고\n나는 그 아득한 여백 속에\n무거운 생각들을 잠시 풀어놓고 싶었다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "어느새 바람 끝에\n봄 냄새가 실려 왔다\n계절이 소리 내어 말하지 않아도\n\n나는 그 연둣빛 향기 속에서\n가장 먼저 너를 떠올렸다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
       "fontFamily": "'Gowun Batang', serif"
     }
   },
   {
-    "text": "오늘도 무사히\n하루를 건너온 너에게\n\n따뜻한 차 한 잔을 건네듯\n조용히 마음을 적셔본다\n\n애썼다,\n참 잘 견뎌낸 오늘이다",
+    "text": "말하지 않아도 전해지는 마음이 있다\n그 온기는 깊은 침묵 속에서도\n잔잔한 파문처럼 크게 울린다\n\n가끔은 아무 말도 하지 않는 것이\n내가 건넬 수 있는\n가장 깊은 진심이다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "밤하늘을 오래 올려다보는 까닭은\n반짝이는 별 때문만은 아니었다\n\n별과 별 사이의 그 깊은 고요함이\n소란했던 나의 하루를\n다시 평온하게 안아주기 때문이었다",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "너를 처음 떠올리던 날에는\n창가의 햇살이 유난히도 따뜻했다\n\n마치 어디선가 다정한 눈빛으로\n나를 가만히 바라보고 있는 것처럼\n\n그 온기가 나를 절로 미소 짓게 했다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "마음속 얼어붙은 자리에서\n무언가 조용히 녹아내렸다\n\n그것은 해묵은 미련이었고\n긴 기다림이었고\n어쩌면 아직 떠나보내지 못한 너였다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "누구나의 평범한 하루 속에는\n보이지 않는 파도가 일렁인다\n\n잔잔한 미소 뒤에 숨어 있는\n그 조용하고 단단한 용기들이\n오늘도 이 세상을 지탱하고 있다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "창밖에 비가 내리면\n마음의 흙길도 조용히 젖어든다\n\n빗소리가 채우는 그 시간 속에서\n나는 오랜만에 내 마음을\n깊이 들여다본다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "아무 일도 일어나지 않았던 하루\n그 무사함이 유난히 고맙게 느껴졌다\n\n특별한 사건이 없던 평온한 날이야말로\n삶이 건네는 가장 큰 선물일지 모른다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "마음이 고요해지는 저녁이면\n입속으로 조용히 너의 이름을 굴려본다\n\n부르는 것만으로도\n가슴이 데워지는 이름\n\n오늘도 그렇게 너 없는 자리에서\n너를 생각하며 하루를 여민다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "창틀 위로 은은한 달빛이 내려앉는다\n그 창백하고도 다정한 빛 속에\n\n오늘의 근심도 조금씩 옅어져 간다\n밤은 그렇게 아무 말\n없이 나를 위로한다",
+    "style": {
+      "background": "#161922",
+      "color": "#D8E0EB",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "누군가를 기다린다는 건\n매 순간 내 마음을 다독이는 일이다\n\n앞서는 조급함을 가만히 잠재우고\n함께했던 기억을\n따뜻하게 데워 놓는 일이다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "익숙한 골목 모퉁이를 돌 때마다\n내 마음도 천천히 한 바퀴를 돈다\n\n매일 걷는 똑같은 풍경 속에서도\n날마다 다른 계절의 얼굴이 피어난다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "침묵은 때로\n가장 깊고 무거운 대화다\n\n차마 꺼내지 못한 말을 삼키는 동안\n나는 너의 흔들리는\n눈빛을 헤아려 본다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "서랍 깊은 곳에서\n오래된 편지를 꺼냈다\n푸른 잉크 빛은 세월에 바랬지만\n\n종이 결 사이에 눌러 담은 마음은\n어제 쓴 것처럼 선명했다\n\n긴 시간을 건너와도\n진심은 결코 빛을 잃지 않는다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "꽃잎이 부서지듯 피어나는 봄이면\n이유 없이 마음이 먼저 설렌다\n\n곧 흩날려 사라질 줄 알면서도\n시선을 거두지 못하는 것은\n\n찰나의 아름다움이 주는\n위로를 알기 때문이다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "나도 모르게 혼잣말이 늘어나는 날에는\n내 안의 또 다른 내가\n나를 달래고 있음을 알게 된다\n\n외로움도 가만히 품어 안으면\n스스로를 돌보는 다정한 온기가 된다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "발걸음을 천천히 늦춘 오후\n길가의 풀잎들이 부서지는\n햇살을 머금고 있었다\n\n소리 없이 자라나는 그 푸른 숨결에\n내 지친 마음도 가만히 물들어 갔다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "지나간 날들을 떠올리는 일은\n잠시 그 계절의 벤치에\n앉아보는 일이다\n\n풍경은 사진처럼 멈춰 있지만\n그 안의 마음은 오늘도\n자라나고 있었다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "나는 지금 조금씩 괜찮아지고 있다\n하루의 끝에 단 한 줄이라도\n\n나를 위한 문장을 적어 내려가는 건\n내 마음을 포기하지 않겠다는\n다정한 약속이다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "소란한 하루를 마무리하며\n머리맡에 작은 등불 하나를 켠다\n\n흔들리는 그 주황빛 온기 안에서\n나는 비로소 오늘의 나를\n너그럽게 이해한다",
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "기다림의 끝자락에 서 있을 때\n가끔은 아무것도 찾아오지 않는다\n\n하지만 그 시간을 견뎌낸 내가\n어느새 한 뼘 더 단단해져\n있음을 알게 된다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "매일 같은 길을 걸어가는 중에도\n문득 새롭게 눈에\n들어오는 풍경이 있다\n\n그것은 거리가 바뀐 것이 아니라\n바라보는 내 마음의 창이\n맑아졌다는 뜻이다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "미지근한 물에 손을 씻을 때마다\n엉켜 있던 생각도 함께\n헹구어 내는 기분이 든다\n\n작고 고요한 일상의 습관 속에서\n마음은 조금씩 닦이고 다시 비워진다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "창가의 작은 화분에 물을 주듯\n나도 매일 내 마음에 물을 주고 싶다\n\n바짝 메말라 끝이 바스러지기 전에\n나를 먼저 돌보는\n다정한 연습을 해본다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "우연히 흘러나온 노래 한 곡이\n잊고 있던 계절을 통째로 데려온다\n\n선율 한 줄에 접혀 있던\n그날의 공기가\n순식간에 눈앞으로 번져 오고\n나는 다시 그때의 나를\n가만히 마주한다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "백지 위에 글을 쓴다는 건\n내 안의 낯선 나를 만나는 여정이다\n\n어떤 단어가 마음을 뚫고 나올지\n나조차 알 수 없는 밤\n\n그래서 나는 오늘도\n조용히 연필을 쥔다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "따뜻한 차를 우려 마시는 시간\n찻잔에 고이는 맑은\n물소리에 귀를 기울인다\n\n복잡한 생각이 걸음을 멈추고\n잊었던 감각이 깨어나는 그 순간\n\n나는 비로소 지금 이 자리에 머문다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "두 눈을 감고 스쳐 가는\n바람을 느낀다\n눈에 보이지 않아도\n분명히 닿아오는 존재가 있듯\n\n사람의 마음도\n그렇게 소리 없이 전해지는 것이다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "나는 더 이상 어제의 내가 아니다\n하지만 여전히 나로 숨 쉬고 있으며\n\n흔들리며 변해가는 그 모든 계절 안에\n언제나 진짜 내가 머물고 있다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "작은 물결에도 쉽게\n출렁이는 마음이라면\n스스로를 숨겨줄 고요한\n그늘이 되어주자\n\n세상의 분주한 보폭에 맞추지 않아도\n나는 나의 호흡으로\n충분히 걸어갈 수 있다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "어제와 닮은 오늘의 반복 속에서도\n자세히 들여다보면 작은\n새로움이 숨어 있다\n\n익숙한 일상의 틈새마다\n이름 모를 들꽃 같은 기쁨이 피어난다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "앞길이 안개에 가려\n잘 보이지 않을 때는\n잠시 걸음을 멈추는 것도 용기다\n\n그 조용한 멈춤이\n나를 다시 일으켜 세울 숨결이 된다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "어디선가 흘러온 나지막한 노랫말에\n괜스레 코끝이 시큰해지는 밤\n\n그 노래는 마치\n차마 말하지 못한\n내 이야기를 닮아 있었다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "모두가 잠든 새벽 공기는 특별하다\n서늘하고 투명한 숨결 속에\n\n어제의 끝과 오늘의 시작이\n고요히 맞닿아 있다",
+    "style": {
+      "background": "#161922",
+      "color": "#D8E0EB",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "다 잊었다고 믿었던 감정이\n하루가 저무는 모퉁이에서\n다시 피어난다\n\n마음이란 원래 그런 것이어서\n스친 바람에도 언제든 다시 눈을 뜬다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "일부러 보폭을 늦춰 걷는 날이면\n무심히 지나쳤던\n풍경들이 말을 걸어온다\n\n앞서 걷는 것만이\n언제나 정답은 아니었다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "밤은 참 솔직한 시간이다\n낮 동안 가려두었던 감정이\n하나둘 별처럼 떠오른다\n\n꾸미지 않은 나를 만날 수 있어서\n나는 이 고요한 밤을 사랑한다",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "혼자 있는 시간이 익숙해진다는 건\n어쩌면 조금은 쓸쓸한 일이다\n\n하지만 홀로 서서도\n흔들리지 않게 된 건\n분명 대견하게 여겨줄 만한 일이다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "긴 하루의 끝에 남는 것은\n결국 내가 나에게 건네는 작은 위로다\n\n그 다정한 한마디가 있기에\n우리는 내일의 문을 다시 열 수 있다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "붉은 해가 저물고 어둠이 내려앉으면\n비로소 지나온 하루가 선명해진다\n\n세상의 소음이 잦아든 그 시간 속에서\n나는 온전히 내 마음의\n소리에 귀를 기울인다",
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "바람이 스치고 지나간 나뭇가지 끝에\n잔잔한 흔들림이 오래 남았다\n\n내 마음도 저 나뭇가지처럼\n누군가를 조용히 떠나보내는 중이었다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "무뎌진 줄 알았던 마음은\n익숙한 일상 아래\n잠시 잠들어 있을 뿐이다\n\n그러다 문득 마주친 작은 온기 하나에\n언제 그랬냐는 듯\n다시 따뜻하게 깨어난다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "누군가 무심히 건넨\n다정한 말 한마디가\n흐렸던 하루를 환하게 밝혀주기도 한다\n\n그 온기를 기억하는 오늘,\n나도 누군가에게 조금 더 다정한\n사람이 되고 싶었다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "모든 것이 멈춘 듯한 고요한 방 안\n오직 나의 생각만이\n강물처럼 흐르고 있었다\n\n그 잔잔한 흐름에 마음을 맡기자\n엉켜 있던 하루가 가지런히 정리되었다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "가끔은 아무런 이유도 알지 못한 채\n마음이 물먹은 솜처럼\n무거울 때가 있다\n\n그럴 땐 애써 털어내려 하지 않고\n가만히 그 무게에\n기대어 쉬어가기로 한다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "창가에 내려앉은 햇살이\n유난히 포근한 날엔\n나도 모르게 입가에 미소가 번진다\n\n빛을 따라 마음도 환해지며\n내 곁의 고마운 이름들을\n하나씩 떠올려 본다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "마음이 어지럽게 흔들리는 날에는\n생각이 감정의 걸음을 따라잡지 못한다\n\n그럴 때면 억지로 답을 찾기보다\n그저 시간이 흐르도록\n가만히 두어도 좋다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "따뜻한 커피 한 잔을 앞에 둔 여유가\n생각보다 많은 불안을 잠재워 준다\n\n피어오르는 향기 안에서\n나는 흔들리던 나를\n다시 일으켜 세운다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "내가 묵묵히 걸어 지나온 날들이\n차곡차곡 쌓여 지금의 나를 만든다\n\n웃던 날도, 남몰래 울던 날도\n모두 모여 오늘의 내가 되었다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "아무 일도 일어나지 않는\n고요한 하루가\n때로는 가장 깊은 여운을 남긴다\n\n멍하니 바라본 벽지의 결,\n창밖을 유영하는 흰 구름,\n그 평범한 풍경들이 오늘은\n유난히 마음에 스민다\n\n무심한 하루가 건네는 가장 큰 위로는\n내 마음이 아직 이토록\n섬세하게 살아 있다는 증거다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "창밖에 종일토록 잔잔한 비가 내렸다\n빗소리는 고요했고\n내 마음은 더 고요했다\n\n그동안 차마 꺼내지 못했던 말들이\n유리창을 타고 흐르는 빗방울처럼\n서서히, 그러나 분명하게 녹아내렸다\n\n비가 내리는 날이면\n괜스레 내 마음에게\n더 솔직해지고 싶다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "우연히 오래된 노래를 다시 들었다\n바랜 가사 한 줄 한\n줄이 어딘가 낯익었다\n\n분명 잊고 지냈던 순간인데\n머리보다 마음이 먼저\n알아채고 물기가 어린다\n\n노래 한 소절이 열쇠가 되어\n내 안의 오래된 방문을\n조심스레 열어젖혔다",
     "style": {
       "background": "#F7F3EE",
       "color": "#4A3B32",
@@ -1048,11 +528,1403 @@
     }
   },
   {
-    "text": "오늘 하루도\n묵묵히 견뎌낸\n당신의 두 손을\n조용히 모아 쥐어봅니다\n\n창가에 내려앉는 밤바람처럼\n수고했어요,\n다 괜찮아요",
+    "text": "익숙한 거리를 걷다\n문득 발걸음을 멈췄다\n늘 보던 풍경인데 오늘은\n어쩐지 낯설게 다가온다\n\n내가 달라진 걸까, 계절이 바뀐 걸까\n아니면 그저 조금 더\n천천히 걷고 있기 때문일까\n\n느려진 발걸음의 속도만큼\n들떠 있던 마음도 차분히 가라앉는다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "혼자라는 말이 시리도록\n외롭게 들리던 때가 있었다\n하지만 계절을 건너온\n지금은 조금 다르다\n\n홀로 머무는 시간이 점차 편안해지고\n그 침묵 속에서 나를\n만나는 일이 더 소중해졌다\n\n고요의 바닥에서 들려오는 내 목소리는\n언제나 진실하고, 은은하게 따뜻하다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "다 지워진 줄 알았던 기억이\n스쳐 가는 바람의 냄새\n하나에 되살아난다\n\n그 순간만큼은 시간도\n공간도 경계를 잃는다\n밀려오는 감정이 너무나 선명해서\n\n나는 그저 걸음을 멈춘 채\n그날의 나를 멀리서\n가만히 바라볼 뿐이다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "집으로 돌아오는 길,\n밤하늘을 올려다봤다\n구름에 가려 별은 보이지 않았지만\n깊고 검은 하늘이 이상하게\n나를 안아주는 듯했다\n\n어둠 속에 머물러 있다는 건\n사라진 것이 아니라\n빛나기 위해 숨을\n고르고 있다는 뜻이다\n\n오늘의 나도 보이지 않는 곳에서\n조용히 반짝이고 있다",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "나지막이 흐르는 음악을 벗 삼아\n조용히 책장을 넘기던 밤\n\n단어 하나에 시선이 오래 머물고\n문장 하나에 마음이 울컥 흔들렸다\n\n책을 읽는다는 건 활자를\n따라가는 일이 아니라\n그 행간에서 오래도록 외면했던\n나를 마주하는 일이다",
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "긴 말을 주고받지 않아도\n서로의 마음을 다 아는 순간이 있다\n\n함께 견뎌온 시간들이 빚어낸 믿음일까\n아니면 상처 입은 마음이\n서로를 알아보는 본능일까\n\n그 따뜻하고 고요한 침묵의 대화가\n오늘 내게는 가장 큰 위로였다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "하루를 다 보내고 창밖을 내다보았다\n도시의 불빛들은 여전히\n분주하게 흔들리는데\n내 방 안의 공기는\n거짓말처럼 고요했다\n\n아무도 건드리지 않는\n이 밤의 여백 속에서\n나는 접어두었던 내 마음을\n조심스레 펼쳐 본다",
+    "style": {
+      "background": "#161922",
+      "color": "#D8E0EB",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "오늘 하루는 별다른 말 없이 흘러갔다\n누군가의 다정한 안부가 그리웠다가도\n모든 소음이 멈추기만을\n바랐던 순간도 있었다\n\n겉으로 조용한 하루였다고 해서\n마음속까지 고요했던 것은 아니다\n\n수많은 말을 삼키며\n침묵을 택한 그 선택이\n오늘의 나를 무사히 지켜주었다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "마른 낙엽 하나가 천천히 땅에\n내려앉는 걸 보았다\n서두르지 않는 그 속도가\n오늘의 나와 닮아 있었다\n\n조금 느릴지라도\n묵묵히 제자리를 향해 내려앉는 일\n\n계절의 흐름 속에서\n잠시 멈춰 서 있는 것은\n결코 뒤처지는 일이 아니었다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "무언가를 마음 깊이 좋아한다는 건\n그 존재가 내게 쉼터가\n되어주기 때문일 것이다\n\n그것이 사람이든,\n노래든, 작은 골목이든\n내 마음이 안심하고\n머물 수 있어서 좋다\n\n좋아하는 것들을 떠올리며\n미소 지을 수 있다는 건\n지금 내가 잘 살아가고\n있다는 다정한 증거다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "햇살이 등 뒤로 따스하게 내려앉던 날\n나는 이유 없이 오래도록 걷고 싶었다\n\n복잡한 생각도 내려놓고\n무거운 감정도 바람에 털어내며\n그저 발끝이 이끄는\n대로 천천히 걸었다\n\n그 산책의 끝에서\n나는 한결 맑아진 오늘의\n나를 만날 수 있었다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "진심은 때로 말로 다 옮겨지지 않는다\n수백 마디의 말보다\n그저 가만히 곁을 지켜주는 것이\n더 깊은 마음을 전해주곤 한다\n\n침묵마저 포근해지는 시간,\n그것은 내 곁에 다정한\n진심이 머물고 있다는 증거다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "바깥세상은 오늘도 분주하게 흘러가지만\n나는 지금 두 손에\n감싼 찻잔 하나에 집중한다\n\n손바닥에 전해지는\n온기와 은은한 향기,\n그리고 그 안의 작은 고요\n\n잠시 세상의 속도를 멈추는 이 감각이\n지친 오늘의 나를 구해준다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "가끔은 나 자신에게\n편지를 쓰고 싶어진다\n누구에게 보여주기 위한 글이 아니라\n오직 나를 위해 고른 다정한 문장들\n\n종이 위에 나를 토닥이는\n말을 적다 보면\n움츠렸던 마음이 조금씩 펴진다\n\n괜찮다는 말을\n내 목소리로 가장 따뜻하게\n들려주고 싶은 밤이다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "문득 잠에서 깬 푸른 새벽\n창밖의 세상은 아직 깊은\n잠에 빠져 있었다\n\n아무런 소음도 없는 그 적막 속에서\n나는 나의 숨소리를\n가장 선명하게 들었다\n\n하루가 시작되기 전의 고요한 어둠은\n나를 가리는 장막이 아니라\n온전한 나를 비추는 거울이었다",
+    "style": {
+      "background": "#161922",
+      "color": "#D8E0EB",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "예상치 못한 순간에 건네받은\n누군가의 환한 미소 하나가\n무채색이던 하루를\n따뜻하게 물들이기도 한다\n\n작은 친절이 남긴 파문은\n생각보다 깊고 넓다\n\n그 온기를 소중히 간직할\n줄 아는 당신이라면\n이미 충분히 아름다운 사람이다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "모든 것이 끝났다고 생각한 자리에서\n다시 작은 시작이 움트고 있었다\n\n굳게 닫힌 문 뒤에는\n또 다른 오솔길이 있었고\n그 길 위에서 나는 한\n뼘 더 자란 나를 만났다\n\n포기하지 않고 걸어온\n발걸음이 만든 기적이었다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "깊은 밤은 가끔\n덮어두었던 기억을 조용히 들춰낸다\n\n지나간 후회도,\n차마 건네지 못한 말도\n무심코 스쳐 보낸 누군가의 표정까지도\n\n그 고요한 시간 속에서\n나는 작게 부서졌다가\n새벽빛과 함께 다시 단단하게 이어진다",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "아무도 없는 벤치에 가만히 앉아\n어깨에 얹힌 생각들을\n하나씩 내려놓는다\n\n나뭇가지 사이로 바람이 지나가고\n마른 잎사귀 하나가 발치에 내려앉는다\n\n아무 일도 일어나지 않는 이 고요가\n오래도록 마음의 밑바닥을 데워준다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "이름 붙일 수 없는\n평범한 하루가 또 저문다\n누구에게도 자랑할 것 없는\n조용한 시간이지만\n\n오직 나만이 알고 있는\n이 잔잔한 호흡 속에서\n나는 가장 나다운 모습으로\n살아 숨 쉰다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "마음의 모서리에 기대어\n잠시 걸음을 멈춘 감정이 있었다\n\n밖으로 쏟아지지도 않고\n어둠 속으로 숨지도 않은 채\n\n그저 조용히\n내가 알아봐 주기를\n기다리는 마음이었다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "기억은 이따금\n봄바람의 숨결처럼 가볍게 찾아온다\n\n그러고는 어김없이\n마음의 가장 여린 자리를\n묵직하고도 아릿하게 누르고 간다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "창백한 가로등 아래 그림자\n하나가 길게 누워 있었다\n내 모습 같기도 하고,\n그리운 누군가 같기도 했던 그림자\n\n그 고요한 실루엣을 한참 바라보다가\n오늘의 나도 누군가의 마음에\n조용한 풍경으로 남고 싶어졌다",
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "굳이 입을 열지 않아도\n마음의 전부를 건넬\n수 있는 순간이 있다\n\n가만히 눈을 맞추는 것만으로도\n서로의 안부를 다 읽어내는 그 온기\n\n우리는 그것을 사랑이라 부른다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "봄이 왔다고 미처 말하기도 전에\n계절은 소리 없이 옷을 갈아입었다\n\n사람의 마음도 계절을 닮아서\n아무에게도 들키지 않고\n조금씩, 천천히 빛깔을 바꾼다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "차마 발걸음이 떨어지지 않던 그 자리\n모든 말을 잃어버린 그 순간\n\n흐르는 눈물보다 더 깊은 침묵으로\n조용히 내려앉는 마음이 있었다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "창밖의 별을 하나씩\n세다가 잠이 들었다\n반짝이는 그 빛마다\n작은 소망을 가만히 실어 보냈다\n\n오늘 밤이 부디\n모두에게 다정하고 고요하게 흘러가기를",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "밤이 깊어질수록 내\n마음도 나지막해진다\n건너편 창가의 불빛들이 하나둘 잠들고\n내 안의 소란스러움도\n서서히 가라앉는다\n\n낮의 소음에 가려 듣지 못했던\n마음의 작은 목소리가\n비로소 귓가를 스친다\n\n오늘 하루를 버텨낸 나에게\n조용히 건네는 말,\n수고했어, 오늘도 참 잘 견뎌냈어\n\n그 다정한 혼잣말이 나를\n다시 숨 쉬게 한다",
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "텅 빈 거리 위로 늦은\n밤바람이 옷깃을 스친다\n아무도 말 걸지 않는\n서늘한 공기 속에서\n나는 마음 깊은 곳의 오래된\n감정을 꺼내어 닦는다\n\n그렇게 가로등 아래 한참을 서 있다가\n가슴에 내려앉은 먼지를\n가만히 털어낸다\n\n다시 천천히 발걸음을 떼어 걷는다\n소리 없이 흔들렸으나,\n다시 소리 없이 일어선다",
+    "style": {
+      "background": "#161922",
+      "color": "#D8E0EB",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "우리는 저마다 마음속에\n기다림 하나를 품고 산다\n아직 이름을 붙이지 못한 설렘이거나\n손에 잡히지 않는 아득한 내일이거나\n어쩌면 다시는\n돌아오지 않을 어떤 계절\n\n기다림이란 그저 멈춰 서\n있는 일이 아니라\n그 시간 안에서 흔들리며\n더 깊어지는 과정이다\n\n그러니 오늘도 나는 조용히 기다린다\n이 기다림이 나를 더 단단한\n사람으로 빚어낼 줄 알기에",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "가끔은 아무런 말도 필요 없는 채로\n누군가의 곁에 나란히 앉아 있고 싶다\n\n따뜻한 차를 한 모금씩 나누어 마시고\n같은 창밖의 풍경을 바라보며\n나지막한 숨을 고르는\n것만으로도 충분한 시간\n\n말이 비어서 어색한 사이가 아니라\n침묵마저 포근한 이불이 되는 사람,\n그런 사람 하나가 삶을 버티게 한다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "아침 햇살이 커튼 틈새로\n환하게 쏟아져 들어왔다\n어제와 다를 것 없는 평범한 아침인데\n오늘은 왠지 눈시울이 먼저 뜨거워졌다\n\n햇살이 너무 따스해서였을까,\n아니면 지난밤이\n유난히 시렸기 때문일까\n\n예고 없이 찾아온 온기에\n마음이 녹아내릴 때\n우리는 비로소 지난 추위를\n이겨내고 다시 피어난다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "읽던 책을 덮고\n가만히 두 눈을 감았다\n활자는 멈추었지만 마음의 물결은\n쉽게 잦아들지 않는다\n\n종이 위에 적힌 한 줄의 문장이\n내 안에서 긴 호흡으로 살아 움직이고\n잊고 있던 어느 날의 풍경이\n눈앞을 스쳐 간다\n\n나는 오늘 한 권의 책을 읽었지만\n사실은 내 마음의 가장 깊은\n페이지를 읽고 있었다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "비 갠 뒤의 맑은 숲 공기처럼\n마음이 한결 투명해진 날이었다\n\n특별히 웃을 일도\n없었지만 슬프지도 않았다\n그저 가만히 숨을 들이쉬고\n내쉬는 일이 편안했다\n\n어쩌면 마음의 회복이란\n그렇게 아무도 모르게,\n봄비 스미듯 천천히\n우리 안으로 찾아오는 것인지도 모른다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "오래전 친구와 나누었던\n대화를 문득 떠올렸다\n그때는 왜 그 다정한 행간을\n다 헤아리지 못했을까\n\n수많은 계절이 흐른 뒤에야\n그 서툰 위로가 나를\n지켜주었음을 비로소 안다\n\n모든 말이 건네진 그 자리에서\n바로 꽃피는 건 아니다\n어떤 말은 마음의 흙 속에서\n오래도록 잠들어 있다가\n가장 추운 날에야 비로소\n따뜻한 꽃을 피운다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "거울 앞에 서서 가만히\n내 얼굴을 들여다본다\n오늘의 나는 어떤 표정을 짓고 있는가\n\n조금 지쳐 보이는 것도 같고\n무언가를 골똘히 삼키고\n있는 것도 같다\n\n억지로 웃음 짓지 않아도 괜찮다\n중요한 건 오늘도 이 얼굴로\n하루를 성실히 건너왔다는 것,\n거울 속의 눈빛이 나를\n조용히 다독여 준다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "문득 별 하나 보이지 않는\n밤하늘을 올려다보았다\n칠흑 같은 어둠뿐이었지만\n나는 그 깊은 여백 속에서\n오히려 평온을 느꼈다\n\n가끔은 아무것도 보이지 않기에\n비로소 눈을 감고\n쉴 수 있는 순간이 있다\n\n무언가를 애써 찾지 않아도\n되는 그 고요한 어둠이\n오늘 밤 나에게 가장 필요한 위로였다",
     "style": {
       "background": "#1C2026",
       "color": "#E3E7ED",
       "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "한적한 오후의 공원 벤치에\n홀로 앉아 있었다\n바람이 나뭇잎의 등을 쓸어내리고\n그 푸른 사각거림이\n내 마음의 결을 스쳤다\n\n사람들은 저마다의 속도로\n바쁘게 스쳐 가지만\n나는 잠시 시간의 바깥에\n멈춰 서 있었다\n\n크게 숨을 들이마시며\n오늘의 공기를 마음에 담는다\n아무 일 없는 이 평화가 언젠가\n사무치게 그리워질 테니까",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "서랍을 정리하다 빛바랜\n편지 한 통을 꺼냈다\n잉크는 옅어지고 모서리는 해졌지만\n그 안에 눌러 담은\n마음은 여전히 따뜻했다\n\n그때는 미처 말하지 못했지만\n참 고마웠다는 한 줄,\n짧은 문장 뒤에 숨은 오랜 진심이\n오늘의 나를 가만히 미소 짓게 한다\n\n세월이 흘러도 진심은\n결코 닳아 없어지지 않는다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "집으로 걷던 길에 문득 고개를\n들어 하늘을 보았다\n평소 같으면 무심히\n지나쳤을 저녁 구름이\n오늘은 유난히 고운 빛깔로\n물들어 있었다\n\n마음에 여백이 생기는 날이면\n익숙하던 세상의 풍경들이\n처음처럼 말을 걸어온다\n\n같은 거리, 같은 가로수 아래에서\n내 마음이 달라지니 세상의\n빛깔도 함께 달라진다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "구태여 말을 꾸미지 않아도\n편안한 사이가 있다\n손을 맞잡지 않아도\n따스한 온기가 건너오고\n눈을 마주치지 않아도\n마음이 놓이는 관계\n\n그저 같은 공간의 공기를\n나누어 마신다는 사실만으로\n모든 긴장이 스르르 풀리는 사람\n\n그런 사람 하나가\n곁에 있다는 것만으로\n오늘을 살아낼 힘은 충분하다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "마음이 무너져 내린다는 건\n끝이 아니라 새로운\n시작의 자리일지도 모른다\n\n단단하게 쌓아 올린 껍질이\n부서진 뒤에야\n비로소 가장 여리고 진실한\n나를 마주하게 되니까\n\n애써 감추었던 아픔도\n더 이상 숨길 수 없을 때\n사람은 그 자리에서\n다시 새순을 틔운다\n\n나는 오늘 조용히 무너지고,\n내일 다시 피어난다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "홀로 보내는 시간이 길어질수록\n나는 내 안의 나에게\n더 자주 안부를 묻는다\n\n오늘 하루는 조금 괜찮았니,\n남몰래 속상한 일은 없었니\n\n그렇게 내 마음을\n가만히 쓸어내리고 나면\n생각보다 잘 견뎌낸\n하루였음을 알게 된다\n\n결국 마지막까지\n내 편이 되어줄 사람은\n언제나 나 자신이다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "창밖의 나뭇가지가 바람결에\n천천히 흔들리고 있었다\n그 느긋한 움직임을 바라보며\n나도 호흡을 가다듬는다\n\n세상이 잠시 멈춰 있는 것처럼 보여도\n계절도, 바람도, 내 마음도\n쉬지 않고 흐르고 있다\n\n그러니 조급해하지 말자\n모든 꽃은 저마다의 계절에\n가장 곱게 피어난다\n나는 나의 보폭으로 걸어가면 된다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "문득 누군가를 떠올리며\n잔잔히 미소 짓는 순간이 있다\n이제는 아득히 멀어진 인연이지만\n그 사람이 내게 남긴 계절은\n여전히 따뜻하다\n\n우리가 나란히 걷던 그날의 하늘빛과\n바람에 실리던 웃음소리\n\n시간이 흘러 기억의 윤곽은 옅어져도\n따스했던 마음의 온도는\n오래도록 사라지지 않는다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "모두가 잠든 조용한 새벽,\n세상은 고요했고 나는\n그 안에서 가장 솔직했다\n\n아무의 시선도 닿지 않는 시간 속에서\n내 마음의 결은 한층 더 선명해진다\n\n외로움이 아니라 오롯이\n나를 만나는 시간,\n새벽의 창가는 어둡지만\n내 마음은 오히려 그 고요한\n빛으로 채워진다",
+    "style": {
+      "background": "#161922",
+      "color": "#D8E0EB",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "하루의 마지막 페이지를\n덮으며 짧은 문장을 남긴다\n괜찮았어, 오늘도 그만하면 충분했어\n\n작은 실수도 있었고\n서툰 망설임도 있었지만\n그 모든 시간을 묵묵히 건너온 나에게\n이 다정한 말 한마디를 건네주고 싶다\n\n완벽하지 않아도 괜찮다\n오늘을 살아낸 것만으로도\n이미 충분하니까",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "떠난다는 건 흔적도 없이\n사라지는 게 아니다\n보이지 않는 자리에\n온기를 남겨두는 일이다\n\n스치던 바람의 결,\n나지막한 말투, 다정한 눈빛,\n그 모든 조각을 남기고\n누군가의 마음에 머무는 일이다\n\n그러니 이별이 두렵다고만 말하지 말자\n우리는 언제나 어디선가\n서로의 하루 속에 조용히 살아 있다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "누군가의 따뜻한 손길이\n사무치게 그리운 날이었다\n안아달라는 말 한마디 꺼내지 못한 채\n혼자서 시린 어깨를\n가만히 감싸 안았다\n\n위로가 꼭 타인의 목소리로만\n찾아오는 건 아니다\n오늘 밤,\n나는 나에게 가장 다정한 말을 건넸고\n그 온기만으로도\n충분히 따뜻한 밤이었다",
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "하루가 유난히 길고\n버겁게 느껴지는 날이 있다\n해야 할 일도,\n스치는 사람도, 내 마음의 무게도\n모두 감당하기 벅차게 다가오는 날\n\n그런 날엔 익숙한\n선율 한 곡에 기대어\n가만히 눈을 감고 숨을 고른다\n\n삶은 언제나 그 고요한 쉼표의 틈에서\n다시 걸어갈 힘을 얻는다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "지나간 감정은 사라지는 것이 아니라\n마음의 나이테로\n조용히 스며드는 것이었다\n\n다 잊었다고 생각했던\n이름과 골목과 목소리가\n문득 안개처럼 피어오르는 저녁\n\n그것은 미련이라기보다\n내가 진심으로 건너온\n시간에 대한 예의일 것이다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "창밖에 눈부신 햇살이 쏟아지는 날이면\n내 마음도 덩달아 환해져야만\n할 것 같았다\n\n하지만 날씨가 좋다고 해서\n마음까지 늘 맑을 수는\n없다는 걸 이제는 안다\n\n그래서 오늘은 그늘진 내 마음을\n억지로 햇볕으로 끌어내지 않고\n있는 그대로 조용히 안아주기로 했다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "흐르는 물에 두 손을 씻으며\n하루 동안 묻은 마음의\n피로도 함께 씻어낸다\n\n손끝에 남았던 긴장과\n어지러운 잔상들을\n맑은 물결이 소리 없이 데려간다\n\n세상의 가장 깊은 위로는\n말보다 물에 가까워서\n조용히 닿았다가 부드럽게 흘러간다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "거리를 걷다 바람에 실려 온\n낯익은 향기와 마주쳤다\n아스라한 그 내음 하나에\n잊고 있던 계절의 한\n장면이 선명하게 피어난다\n\n향기란 늘 이성보다\n마음에 먼저 도착해서\n나를 순식간에 그날의\n골목에 세워 둔다\n\n바람이 지나간 자리에\n오래도록 다정한 여운이 머물렀다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "깊은 밤하늘은 아무런\n말도 하지 않는다\n하지만 그 거대한 침묵 안에는\n세상의 모든 한숨을\n받아주는 너른 품이 있다\n\n소리 없는 위로, 모양 없는 다정함\n\n오늘도 나는 애써 별을 찾지 않고\n그저 고요한 어둠의 품에\n오래도록 머문다",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "삶은 끝없는 질문이고\n우리의 하루는 그에\n대한 조용한 대답이다\n\n우리는 날마다 이유 모를 불안과\n뜻밖의 작은 기쁨 사이를\n진자처럼 오간다\n\n정해진 정답은 어디에도 없다\n다만 서툴게 살아내는 오늘 하루가\n그 자체로 가장 아름다운\n답이 될 뿐이다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "오늘의 끝을 마침표라\n부르지 않기로 한다\n모든 끝은 언제나 새로운\n시작을 품고 있으니까\n\n하루의 마지막 줄 위에\n나는 작은 쉼표 하나를\n가만히 찍어 둔다\n\n그리고 다가올 내일의 첫 문장을\n설레는 마음으로 조용히 기다린다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "너무 애쓰지 않아도 괜찮다\n바람도 나뭇가지에서 쉬어가며 불고\n구름도 제 길을 결코 서두르지 않는데\n\n오늘의 너는\n그저 묵묵히 살아낸 것만으로도\n충분히 눈부셨다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "무거운 마음은\n잠시 창가에 내려놓으렴\n\n어둠이 이토록 깊어지는 것은\n새벽이 그만큼 가까워졌다는 뜻이니\n\n너의 내일은\n오늘보다 한 뼘 더 다정할 것이다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "식어가는 찻잔을\n가만히 두 손으로 감싸 쥐고\n\n오늘 하루도 애쓴 나에게\n조용히 속삭인다\n\n참 고생 많았다고,\n다 잘 지나갈 거라고",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "세상이 모두 잠든 깊은 밤,\n작은 별 하나가\n너의 창가를 내려다본다\n\n유난히 빛나지 않아도 소중하고\n눈에 띄지 않아도 늘 그 자리에 있는\n\n너라는 온기 하나로\n이 밤은 충분히 따뜻하다",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "잠시 길을 잃었다고 자책하지 마라\n여린 풀잎도 바람에 흔들리며\n땅속 깊이 뿌리를 내리는 법이니까\n\n조금 천천히 걸어도 괜찮다\n너의 계절은\n가장 고운 때에 반드시 피어날 테니",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "노을이 번져가는 저녁 하늘을 보며\n문득 마음에 스민 생각 하나\n\n상처 입고 흔들리던 날들도\n결국은 저 하늘처럼\n따스하고 고운 빛으로 물들어간다는 것",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "오늘의 마지막 장을 덮으며\n길고 나지막한 숨 하나를 내쉰다\n\n다가오는 내일이 조금 덜 버겁기를,\n너의 고요한 꿈자리에는\n따스한 달빛만이 머물기를",
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "오늘도 무사히\n긴 하루를 건너온 너에게\n\n따뜻한 차 한 잔을 건네듯\n조용히 마음을 적셔본다\n\n참 애썼다,\n잘 견뎌낸 고마운 오늘이다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "오늘 하루도\n묵묵히 제자리를 지켜낸\n당신의 지친 두 손을\n조용히 모아 쥐어봅니다\n\n창가에 내려앉는 밤바람처럼\n수고했어요,\n이제 다 괜찮아요",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "창문을 조금 열어두었다\n밤공기가 커튼 자락을 살짝 흔들고\n방 안의 묵은 생각들을 데려간다\n\n시린 공기가 뺨에 닿을 때\n비로소 오늘이 끝났음을 실감한다\n\n잘 가라, 나의 분주했던 오늘아\n남은 밤은 온전히 나의 것이다",
+    "style": {
+      "background": "#161922",
+      "color": "#D8E0EB",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "오래 삶은 스웨터처럼\n보풀이 인 마음을 가만히 매만진다\n\n버리기엔 아깝고\n그대로 입기엔 조금 쓸쓸한 기억들\n\n그래도 가장 추운 날엔\n그 해진 온기가 나를 지켜주곤 했다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "비 오는 날의 버스 창가엔\n누군가 손끝으로 그어놓은\n작은 길이 있다\n\n흐려진 유리창 너머로\n번져가는 주황색 가로등 불빛들\n\n선명하지 않아서\n오히려 더 아름다워 보이는 밤이 있다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "아침에 우려낸 둥굴레차 한 잔이\n빈속을 따뜻하게 데우며 내려간다\n\n거창한 행복을 바라는 게 아니다\n입안에 감도는 이 구수한 온기처럼\n\n오늘 하루도 그저\n데이지 않을 만큼만 따뜻하기를",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "책갈피를 꽂아두고\n오래 잊고 있던 책을\n우연히 다시 펼친 오후\n\n접힌 모서리 사이에서\n몇 해 전 나의 한숨과\n밑줄이 쏟아진다\n\n그때의 내가 지금의 나에게\n잘 지내고 있느냐고\n조용히 안부를 묻는다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "강물 위로 윤슬이 부서진다\n수만 개의 작은 별이\n낮의 물결 위에서 춤춘다\n\n바람이 불 때마다 흔들리기에\n물결은 저토록 눈부시게\n반짝이는 것이다\n\n그러니 흔들리는 내 마음도\n지금 빛나고 있는 중이라 믿기로 하자",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "늦은 밤 귀갓길,\n모퉁이 작은 빵집에서\n새어 나오는 노란 불빛\n\n고소하게 구워진 냄새가\n시린 골목의 공기를 둥글게 감싼다\n\n세상 어딘가에 아직 따뜻한\n온기가 남아 있다는 것,\n그 사실 하나로 발걸음이 가벼워진다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "연필심을 사각사각 깎아내며\n어지러운 마음의 모서리도\n함께 다듬는다\n\n나무 향기가 손끝에 배어들 무렵\n뭉툭했던 생각이 뾰족이 깨어난다\n\n오늘 밤에는 너에게\n가장 정갈한 안부 한 줄을 쓰고 싶다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "베란다에 널어둔 흰 수건들이\n오후의 햇살을 머금고 바스락거린다\n\n얼굴을 묻으면 전해지는\n그 보송하고도 따스한 햇볕의 냄새\n\n삶의 구겨진 자리들도\n이처럼 햇살 아래 깨끗이 말라가기를",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "아무도 밟지 않은 새벽의 눈길 위에\n조심스레 첫 발자국을 남긴다\n\n뽀드득, 소리 내어\n대답하는 겨울 아침\n\n지나간 잘못도, 얼룩진 후회도\n하얀 눈 아래 잠시 덮어두고\n오늘을 처음처럼 걸어가고 싶다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "다정한 사람들의 특징은\n말의 속도가 조금 느리다는 것이다\n\n내 말을 끝까지 다 들어준 뒤에야\n조심스레 건네는 따뜻한 맞장구 하나\n\n나도 누군가의 계절에\n그토록 느리고 편안한\n그늘이 되고 싶다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "오래된 라디오에서\n지지직거리는 소리와 함께\n잊고 있던 옛 노래가 흘러나온다\n\n완벽하게 깨끗한 소리보다\n약간의 잡음이 섞인\n목소리가 더 정겹다\n\n우리의 삶도 조금 서툴고 투박할 때\n가장 사람다운 온기를 품는다",
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "가을의 끝자락,\n은행잎들이 노란 편지처럼\n보도블록 위에 쌓인다\n\n누군가에게 부치지 못한 마음들이\n발걸음마다 바스락거리며 소리를 낸다\n\n계절이 깊어진다는 건\n그리워할 줄 아는 마음이\n깊어진다는 뜻이다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "잠들기 전 안경을 벗어 머리맡에 두면\n세상의 날카로운 윤곽들이\n일제히 흐려진다\n\n너무 또렷해서 아팠던\n낮의 풍경들로부터\n비로소 멀어지는 시간\n\n가끔은 흐릿하게 바라보아야\n마음이 다치지 않는 밤이 있다",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "작은 찻집 구석 자리에 앉아\n얼음이 천천히 녹아내리는\n소리를 듣는다\n\n달그락, 유리잔에\n부딪히는 투명한 여운\n\n조급하게 삼키지 않아도\n시간은 알아서 가장 알맞은\n농도로 흘러간다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "어머니가 싸주신 반찬 통을 열면\n집 안 가득 그리운\n계절의 냄새가 번진다\n\n말로는 다 표현하지 못해\n꾹꾹 눌러 담은 그 무거운 사랑\n\n따뜻한 밥 한 술에\n나는 오늘도 다시 살아갈 힘을 삼킨다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "비에 젖은 아스팔트 위로\n초록색 신호등 불빛이 길게 번진다\n\n건너가야 할 길과 멈춰\n서야 할 길 사이에서\n잠시 우산을 고쳐 쥐는 저녁\n\n한 박자 늦게 건넌다고 해서\n내 삶의 목적지가\n사라지는 것은 아니다",
+    "style": {
+      "background": "#202523",
+      "color": "#DCE3DE",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "오래 보아야 예쁘다는 말을\n나는 오늘 길가의 작은\n제비꽃에서 배웠다\n\n바쁜 걸음에는 보이지\n않던 보랏빛 얼굴이\n무릎을 굽혀 눈을\n맞추자 비로소 웃어준다\n\n내 곁의 소중한 것들도\n다 그렇게 몸을 낮추어야만 보인다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "창문 너머로 풀벌레\n소리가 차오르는 밤\n가을이 문턱까지 와\n있음을 귀로 먼저 안다\n\n더위에 지쳐 잠 못 이루던 밤들도\n어느새 서늘한 바람 속에 아득해졌다\n\n지나가지 않을 것 같던 아픔도\n결국은 이 계절처럼\n조용히 물러갈 것이다",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "새로 산 노트의 첫 장을 펼칠 때처럼\n마음이 괜스레 경건해지는 아침이 있다\n\n어제까지의 얼룩진\n페이지들은 뒤로 넘기고\n오늘이라는 하얀 여백 앞에 선다\n\n삐뚤빼뚤해도 좋으니\n오직 나만의 진심으로 채워갈 하루다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "누군가의 뒷모습을\n오래 바라본 적이 있는가\n말하는 얼굴보다 멀어지는 등 뒤에\n그 사람의 진짜 쓸쓸함이\n묻어나곤 한다\n\n차마 불러 세우지 못하고\n그저 그림자가 사라질\n때까지 서 있던 저녁\n\n그 뒷모습이 오랫동안 내\n마음의 창가에 머물렀다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "따뜻한 물로 샤워를 마치고 나오면\n욕실 거울에 뿌연 김이 서려 있다\n\n손바닥으로 거울을 스윽 닦아내듯\n내 마음의 흐린 물기도\n그렇게 닦아낼 수 있다면\n\n그래도 한결 가벼워진 어깨로\n오늘 밤의 이불 속으로 들어간다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "기차역 플랫폼에 서서\n스쳐 지나가는 바람의 결을 느낀다\n\n떠나는 사람과 돌아오는\n사람이 교차하는 자리\n\n우리의 인생도 어쩌면\n수많은 간이역을 지나며\n서로의 창가에 잠시 손을\n흔드는 여행일지 모른다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "밤새 내린 봄비가\n목련 꽃봉오리를\n조심스레 두드려 깨웠다\n\n아직 시린 공기가 가시지 않았는데도\n하얀 등불처럼 환하게 피어난 꽃잎\n\n추위를 견뎌낸 자리마다\n가장 눈부신 봄이 찾아온다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "서늘한 도서관 창가에 앉아\n오래된 종이 냄새를 깊이 들이마신다\n\n수많은 사람들의 생각과 세월이\n고요하게 잠들어 있는 숲\n\n그 정적 속에 파묻혀 있으면\n내 안의 조급함도 어느새 작은\n먼지처럼 가라앉는다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "괜찮은 척 웃어 보이다가도\n집으로 돌아와 현관문을 닫는 순간\n한꺼번에 밀려오는 피로가 있다\n\n신발을 벗어 가지런히 놓듯\n바깥세상의 무거운 역할들도\n문밖에 벗어두자\n\n이 방 안에서만큼은\n가장 약하고 편안한 나여도 괜찮다",
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "여름날 소나기가\n한바탕 쏟아지고 간 뒤\n나뭇잎 끝마다 맑은\n물방울이 매달려 있다\n\n한껏 울고 난 사람의 눈망울처럼\n시원하고도 투명해진 저녁 풍경\n\n마음도 가끔은 그렇게\n소나기처럼 시원하게\n쏟아낼 날이 필요하다",
+    "style": {
+      "background": "#202523",
+      "color": "#DCE3DE",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "오래된 사진첩을 넘기다가\n지금보다 훨씬 젊은 날의\n부모님과 눈이 마주쳤다\n\n나보다 더 어렸던\n그 시절의 두 사람이\n내 손을 잡고 환하게 웃고 있었다\n\n그 푸르던 청춘을 다 바쳐\n오늘의 나를 키워내셨음을\n가슴 시리게 배운다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "잠이 오지 않는 밤에는\n억지로 눈을 감기보다\n가만히 천장을 바라본다\n\n창문 블라인드 틈새로 스며든 달빛이\n벽지 위에 고요한 악보를 그려놓았다\n\n잠들지 못하는 밤도\n그 나름의 아름다운 풍경을 품고 있다",
+    "style": {
+      "background": "#161922",
+      "color": "#D8E0EB",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "누군가에게 줄 작은 꽃다발을 고르며\n내 마음의 정원도 함께 환해졌다\n\n받아서 기뻐할 그 사람의\n표정을 상상하는 동안\n이미 행복은 내 손안에서\n먼저 피어났다\n\n다정한 마음은 언제나\n건네는 사람의 손을\n가장 먼저 물들인다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "산책길에 마주친 길고양이 한 마리가\n나를 보더니 가만히 눈을 깜빡인다\n\n고양이의 언어로 건네는\n가장 다정한 인사\n\n나도 걸음을 멈추고\n천천히 눈을 깜빡여 주었다\n말이 통하지 않아도 평화는\n그렇게 쉽게 찾아온다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "비워진 찻잔 바닥에\n작은 찻잎 하나가 가라앉아 있다\n\n뜨거운 물을 견뎌내며\n자신의 향기를 남김없이 내어준 자리\n\n오늘 나의 하루도\n누군가에게 그런 은은한\n잔향으로 남았기를",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "해 질 녘 다리 위를 건너며\n붉게 타오르는 강물을 내려다보았다\n\n하루 종일 세상을 비추던 태양이\n가장 장엄하고도 부드러운 빛으로\n작별을 고하는 시간\n\n지나가는 모든 것들이 저 노을처럼\n아름다운 뒷모습을 가졌으면 좋겠다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "서툰 바느질로 떨어진\n단추를 다시 달았다\n실밥은 조금 엉성하지만\n내 손으로 매만진\n자리가 은근히 든든하다\n\n삶의 해어진 모서리들도\n이렇게 서툰 손길로나마\n하나씩 기워가며 살아가는 것이리라",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "새벽 안개가 자욱한 호숫가를 걸었다\n건너편 숲의 윤곽이\n수묵화처럼 번져 있었다\n\n보이지 않는다고 해서\n그 자리에 숲이 없는 것은 아니다\n\n내일이 아직 안개 속에 가려져 있어도\n나의 길은 분명 그\n너머에 이어져 있다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "오랜만에 만년필에 푸른 잉크를 채웠다\n촉 끝에서 번져 나오는\n깊고 맑은 바다빛\n\n빠르게 타이핑하는 글자들 사이에서\n가끔은 잉크가 마르기를\n기다리는 시간이 그립다\n\n마음도 마르는 데에는\n그만한 시간이 필요한 법이니까",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "창밖에 첫눈이 내린다는 소식에\n하던 일을 멈추고\n유리창 가까이 다가섰다\n\n어린 날의 설렘만큼은 아닐지라도\n하얗게 내려앉는 눈송이에\n마음의 각이 둥글어진다\n\n세상이 잠시 소리를 줄이고\n하얀 숨을 내쉬는 시간이다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "아무 말 없이 건네받은\n따뜻한 캔커피 하나\n시린 손바닥에 전해지는\n그 묵직한 온기\n\n힘내라는 백 마디의 말보다\n주머니에서 꺼내 쥐여준\n그 마음이 더 깊었다\n\n나는 그 온기로\n그해 겨울의 가장 추운 날을 건넜다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "바람이 불 때마다\n대나무 숲이 서걱거린다\n속을 텅 비워냈기에\n바람이 부는 대로\n휘어질지언정 부러지지 않는다\n\n내 마음도 욕심을 조금 덜어내고\n바람이 지나갈 자리를 비워두어야겠다",
+    "style": {
+      "background": "#202523",
+      "color": "#DCE3DE",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "밤기차의 유리창에는\n바깥 풍경 대신 내 얼굴이\n희미하게 비친다\n\n어둠을 달리는 동안\n우리는 모두 자기 자신의\n눈빛과 마주 앉는다\n\n덜컹거리는 선로의 리듬이\n자장가처럼 지친 어깨를 토닥여 준다",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "작은 동네 서점의 나무 문을 열면\n딸랑, 하고 맑은\n풍경 소리가 나를 맞는다\n\n가지런히 누운 책들의 등을\n손끝으로 쓸어보며\n오늘 내 마음에 데려갈\n문장 하나를 고른다\n\n세상의 소란으로부터\n가장 우아하게 숨는 나만의 피난처다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "물이 끓는 주전자의\n하얀 김을 바라보며\n잠시 아무 생각도 하지 않기로 했다\n\n보글보글 피어오르는 물방울의 소리\n\n삶의 자잘한 근심들도\n저 하얀 수증기처럼\n허공으로 흩어져 사라지기를",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "오래 신은 운동화의 끈을\n단단히 고쳐 매었다\n발 모양을 따라\n부드럽게 길들여진 신발\n\n화려한 새 신발보다\n나와 함께 수많은 길을\n걸어온 이 편안함이 좋다\n\n시간이 만들어낸 깊이란\n언제나 그렇게 소박한 자리에 있다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "달력이 한 장밖에 남지 않은 저녁\n지나간 열한 장의 계절들을\n가만히 떠올려 본다\n\n이루지 못한 계획들보다\n무사히 견뎌낸 날들의\n무게가 더 소중하다\n\n남은 한 장의 시간도\n조급함 없이 다정하게 채워가고 싶다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "비 오는 날 처마 밑에서\n떨어지는 낙숫물 소리를\n가만히 듣고 있었다\n\n일정한 간격으로 땅을\n두드리는 물방울의 박자\n\n그 고요한 자연의 메트로놈에 맞춰\n내 불규칙하던 호흡도\n조금씩 평온을 되찾는다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "누군가의 이름을 연락처에서\n지우지 못하는 건\n다시 전화를 걸고 싶어서가 아니다\n\n그 이름 석 자에\n담긴 한 시절의 나를\n아직은 다 떠나보내지 못했기 때문이다\n\n그리움은 가끔\n가장 조용한 형태로\n목록 한구석에 머문다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "모닥불 앞에 앉아 타닥거리는\n장작 소리를 듣는다\n붉은 불꽃이 피어오르며\n시린 밤공기를 둥글게 데워준다\n\n재가 되어 내려앉는\n나무의 마지막 온기처럼\n내 마음의 모난 기억들도\n따뜻한 빛으로 타오르다 사라지기를",
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "아침 창문을 열자\n간밤에 피어난 아카시아 향기가\n방 안으로 밀려들었다\n\n보이지 않는 꽃들이\n향기로 먼저 계절의 안부를\n전해오는 아침\n\n오늘 나의 하루도\n누군가에게 이토록 향기로운\n시작으로 기억되기를",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "서툴게 깎아 놓은 사과 한 접시\n삐뚤빼뚤한 모양새가 오히려 정겹다\n\n완벽하게 깎이지 않았다고 해서\n그 안의 달콤함까지\n줄어드는 건 아니니까\n\n우리의 서툰 오늘도\n분명 그 자체로 충분히 달콤할 것이다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "가로등 불빛 아래로\n함박눈이 소리 없이 내린다\n세상의 모든 날카로운 모서리들이\n하얀 곡선으로 부드럽게 덮여가는 밤\n\n내 마음속 미움과 서운함 위에도\n저 하얀 눈이 소복이\n내려앉았으면 좋겠다",
+    "style": {
+      "background": "#161922",
+      "color": "#D8E0EB",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "오래된 나무 벤치의 갈라진\n결을 손끝으로 따라가 본다\n비바람과 햇살이\n새겨 넣은 시간의 무늬\n\n상처 없는 나무가 없듯\n흔들리지 않고 자라난 마음도 없다\n\n그 모든 결이 모여\n오늘의 단단한 자리를 만든다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "초여름 저녁의 미지근한 바람이\n반소매 끝을 간지럽히며 지나간다\n\n낮의 열기가 식어가는 골목길에서\n풀벌레 소리와 아이들의\n웃음소리가 섞여든다\n\n살아 있다는 것이 문득\n고맙고도 애틋해지는 저녁이다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "다 읽은 편지를 봉투에 다시 넣으며\n보낸 이의 다정한 손끝을 생각해 본다\n\n나를 생각하며 종이를 고르고\n한 글자씩 마음을\n눌러 적었을 그 시간\n\n누군가의 시간을 선물 받는다는 건\n세상에서 가장 귀한 기적이다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "안개가 걷히고 난 뒤의 산등성이가\n비로소 푸른 민낯을 드러낸다\n\n가려져 있던 시간 동안\n산은 조금도 흔들리지 않고\n제자리를 지켰다\n\n불안의 안개가 자욱한 날에도\n내 안의 산은 늘 그\n자리에 있음을 믿는다",
+    "style": {
+      "background": "#202523",
+      "color": "#DCE3DE",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "작은 오르골의 태엽을 감아 놓았다\n맑고 투명한 금속성의 자장가가\n방 안의 어둠을 별빛처럼 수놓는다\n\n태엽이 다 풀려 소리가 멈출 때쯤이면\n나의 고단했던 하루도\n깊고 달콤한 잠 속으로 스며들 것이다",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "누군가와 보폭을 맞추어 걷는다는 건\n내 걸음을 반쯤 양보하는\n다정한 배려다\n\n더 빨리 갈 수 있음에도\n네 곁에 머물기 위해\n속도를 줄이는 마음\n\n사랑은 언제나\n서로의 걸음걸이를\n닮아가는 일에서 시작된다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "창가에 둔 유리컵을 통과한 햇살이\n책상 위에 작은\n무지개를 만들어 놓았다\n\n투명한 물 한 잔과 빛이 만나 빚어낸\n오후 세 시의 작은 기적\n\n행복은 늘 이렇게\n예고도 없이 책상 한구석에 내려앉는다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "바닷가에 서서 밀려왔다\n빠져나가는 파도를 보았다\n모래사장 위에 적힌 발자국들이\n하얀 거품 속으로 소리 없이 지워진다\n\n마음에 새겨진 아픈 기억들도\n시간이라는 파도에 씻겨\n언젠가는 저 고운 모래처럼\n평평해질 것이다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "오랜만에 휴대폰을 꺼두고\n창밖의 바람 소리만으로 저녁을 채웠다\n\n끊임없이 쏟아지던\n세상의 소식들에서 벗어나\n오롯이 나의 고요와 마주 앉는 시간\n\n연결되지 않음으로써\n비로소 나 자신과 가장\n깊이 연결되는 밤이다",
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "가을 햇살 아래 잘 말린\n무화과 한 조각처럼\n시간이 지날수록 깊고\n달콤해지는 마음이 있다\n\n젊은 날의 설익은 열정은 지나갔어도\n그 자리에 남은 은은하고 깊은 이해\n\n나이 들어간다는 건\n마음의 당도가 깊어지는\n일인지도 모른다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "비 갠 뒤 돌담길 틈새로\n작은 이끼들이 한층 더 푸르게 빛난다\n\n그늘지고 축축한 자리에서도\n기어이 자신의 초록을 피워내는 생명\n\n빛이 잘 들지 않는 하루였더라도\n나는 내 자리에서 조용히 푸르렀다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "서랍 속에서 짝 잃은\n장갑 한 짝을 발견했다\n지난겨울 어느 길목에 두고 왔을까\n\n완전하지 못한 채로 남겨진 것들에는\n언제나 아릿한 이야기가 깃들어 있다\n\n잃어버린 것들을 가만히 애도하며\n새 겨울을 맞이할 채비를 한다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "잠든 아이의 작고\n고른 숨소리를 들으며\n세상의 모든 평화가 이\n방 안에 모여 있음을 느낀다\n\n아무런 의심도 없이 밤에 몸을 맡긴\n저 무구한 호흡\n\n그 작은 어깨 위로\n다정한 꿈만이 내려앉기를\n기도하는 밤이다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "오래된 시집의 갈피마다\n말라비틀어진 네잎클로버\n하나가 끼워져 있었다\n\n누군가 행운을 빌며\n건넸을 그 푸른 잎사귀가\n세월을 건너 바랜 갈색이 되었어도\n\n행운을 빌어주던 그 마음만큼은\n여전히 시 구절 사이에서 향기를 낸다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "저녁밥을 짓는 구수한 밥냄새가\n열린 창문을 타고\n골목으로 퍼져 나간다\n\n누군가에게는 돌아갈 집이 있고\n기다리는 따뜻한 식탁이 있다는 안도감\n\n오늘 하루도 무사히 저물어 간다는\n가장 평화로운 신호다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "안개비가 내리는 새벽 숲길을 걸으면\n거미줄마다 작은 진주알 같은\n물방울이 맺혀 있다\n\n보이지 않던 그물망이\n이슬을 머금고서야 보석처럼\n드러나는 아침\n\n우리의 보이지 않던 수고도\n언젠가 저 이슬처럼\n영롱하게 빛날 것이다",
+    "style": {
+      "background": "#202523",
+      "color": "#DCE3DE",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "마음이 소란스러울 때는\n하얀 종이 위에 좋아하는\n시를 천천히 옮겨 적는다\n\n시인의 호흡을 따라 한\n글자씩 꾹꾹 눌러 쓰다 보면\n그 문장의 평온이\n내 손끝으로 건너온다\n\n빌려온 문장으로\n내 마음을 가만히 다독이는 밤이다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "겨울 창가에 놓아둔 작은\n시클라멘 화분이\n추운 계절 한복판에서\n붉은 꽃을 피워 올렸다\n\n모두가 움츠러드는 계절에도\n제 몫의 봄을 잊지 않은 기특한 생명\n\n그 작은 붉은빛 하나가\n방 안 전체의 온도를 높여준다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "오래도록 연락하지 못했던 친구에게서\n문득 계절의 안부를 묻는\n짧은 메시지가 왔다\n\n찬 바람이 불어 네 생각이\n났다는 그 한 줄에\n얼어붙었던 마음이 봄눈처럼 녹아내린다\n\n기억되고 있다는 사실 하나가\n사람을 이토록 따뜻하게 살린다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "밤바다의 검은 물결 위로\n등대의 불빛이 긴 길을 내어준다\n\n어둠이 짙을수록\n그 한 줄기 빛은 더욱\n선명하게 길을 가리킨다\n\n삶의 바다에서 방향을 잃은 밤에도\n어딘가엔 나를 비추는\n등불 하나가 깨어 있다",
+    "style": {
+      "background": "#161922",
+      "color": "#D8E0EB",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "찻주전자에서 우려낸 캐모마일 향기가\n방 안의 모난 공기를\n둥글게 감싸 안는다\n\n사과 향을 닮은\n그 노란 꽃차 한 모금에\n어깨에 들어갔던 힘이 스르르 풀린다\n\n오늘 밤은 아무런 꿈도 꾸지 않고\n꽃잎처럼 가볍게 잠들\n수 있을 것 같다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "오래된 한옥 마루에 걸터앉아\n기와지붕 너머로 흘러가는\n구름을 바라본다\n\n백 년 전에도 누군가 이 마루에 앉아\n저 무심한 구름을 올려다보았겠지\n\n긴 세월의 흐름 속에 나를 놓아두면\n오늘의 작은 근심쯤은\n바람처럼 가벼워진다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "비 오는 날 우산을 함께 쓰면\n한쪽 어깨가 젖는 줄도\n모르고 걸어가게 된다\n\n나보다 너에게로 조금 더\n기울어진 우산의 각도,\n그것이 마음의 기울기였다는 걸\n비가 그친 뒤에야 젖은\n어깨를 보며 알았다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "이른 아침 공원을 걸으면\n밤새 내려앉은 이슬이\n풀잎 끝에서 빛난다\n\n해가 뜨면 곧 사라질\n작은 물방울이지만\n머무는 동안만큼은 아침 해를\n통째로 품고 있다\n\n우리의 짧은 순간들도\n그처럼 온전한 빛을 품을 수 있기를",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "책상 서랍을 정리하다가\n어린 시절 모았던 작은\n조개껍데기들을 만났다\n\n귀에 대어보면 아직도\n그날의 파도 소리가\n아득하게 들려오는 듯하다\n\n내 안에도 언제든 귀 기울이면 들리는\n푸른 바다 하나가 살고 있다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "가을밤, 열린 창문 틈으로\n어디선가 피아노 연습곡 소리가\n나지막이 들려온다\n\n같은 마디에서 자꾸만\n멈칫거리는 서툰 손길,\n그러다 마침내 매끄럽게\n넘어가던 그 한 소절\n\n얼굴 모를 누군가의 작은 성공에\n나도 모르게 마음속으로 박수를 보냈다",
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "하얀 도화지 위에 수채화 물감을\n한 방울 떨어뜨렸다\n맑은 물기를 따라 번져가는\n예측할 수 없는 무늬\n\n계획대로 되지 않아도\n번짐은 번짐대로\n또 하나의 풍경이 된다\n\n내 삶의 예상치 못한 번짐들도\n결국은 아름다운 그림이 될 줄 믿는다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "저녁 산책길,\n강아지와 함께 발맞추어 걷는\n노부부의 뒷모습을 보았다\n\n서두를 것도, 앞지를 것도 없는\n그 평화롭고 나지막한 보폭\n\n오랜 세월을 함께 건너온\n사람들만이 지닐 수 있는\n가장 고요한 풍경이었다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "창밖에 소복이 쌓인 눈이\n도시의 밤소리를\n폭신하게 흡수해 버렸다\n\n유난히 고요해진 자정의 방 안,\n시계 초침 소리마저\n조심스럽게 걸음을 옮긴다\n\n세상이 이토록 고요해지는 밤이면\n내 마음의 소리도 한결 맑아진다",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "따뜻하게 데운 우유 한\n잔을 두 손으로 쥐고\n창가의 흔들의자에 깊숙이 몸을 기댄다\n\n오늘 하루 누구에게도\n하지 못한 말들을\n하얀 온기 속에 조용히 녹여 마신다\n\n말하지 않아도 다 아는 내 마음이\n나를 가장 포근하게 재워준다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "봄바람에 흩날리는 벚꽃잎들이\n마치 계절이 보내는 분홍빛 축복 같다\n\n어깨 위에 내려앉은 꽃잎 하나를\n차마 털어내지 못하고 걸어가는 오후\n\n지는 꽃조차 이토록 다정할\n수 있다는 걸\n봄은 해마다 우리에게 가르쳐 준다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "오래된 나무 시계의 추 소리가\n방 안의 시간을 천천히 썰어낸다\n\n재깍, 재깍, 흔들리면서도\n결코 중심을 잃지 않는\n저 침착한 걸음\n\n나도 흔들리는 날들 속에서\n나만의 중심을 지키며 걸어가고 싶다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "비 갠 뒤 하늘에 걸린\n옅은 무지개를 보았다\n잠시 머물다 이내 구름\n속으로 사라졌지만\n\n그 짧은 빛깔을 본 것만으로도\n오후 내내 마음이 설레었다\n\n기쁨이란 오래 소유하는 것이 아니라\n마주친 순간 온 마음으로\n반가워하는 일이다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "새벽녘에 잠이 깨어 물 한\n모금을 마셨다\n식도를 타고 내려가는\n서늘하고 맑은 감각\n\n어둠 속에서 홀로\n깨어 있는 이 시간,\n나는 세상의 누구도\n아닌 오직 나 자신이다\n\n다시 이불을 끌어당기며\n남은 새벽의 잠을 다정하게 청한다",
+    "style": {
+      "background": "#161922",
+      "color": "#D8E0EB",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "가을 들판의 억새들이\n은빛 물결을 이루며 바람에\n일제히 고개를 숙인다\n\n맞서 싸우는 대신\n부드럽게 몸을 눕혀 바람을\n건네보내는 지혜\n\n강한 것이 살아남는 게 아니라\n부드러운 것이 끝내\n부러지지 않고 남는다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "손바닥만 한 수첩에\n오늘 고마웠던 일 세\n가지를 적어 본다\n\n따스했던 햇살,\n맛있었던 점심, 다정했던 인사,\n적고 보니 나의 하루는\n온통 선물투성이였다\n\n행복은 멀리 있는 것이 아니라\n발견하는 눈길 속에 숨어 있었다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "저녁 어스름이 내려앉는 호숫가,\n물결 위로 가로등 불빛이\n길게 꼬리를 늘어뜨린다\n\n낮의 풍경이 물속으로 가라앉고\n밤의 풍경이 수면 위로 떠오르는 시간\n\n내 마음의 수면도\n저 호수처럼 잔잔히 저녁을 맞이한다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "오래 입은 코트의 주머니 속에서\n작년 겨울의 영화표 한 장이 나왔다\n\n그날 함께 웃고 울던 시간들이\n작은 종이 조각에\n고스란히 접혀 있었다\n\n기억은 늘 이렇게\n생각지도 못한 주머니 속에서\n우리를 기다린다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "창문을 두드리는 빗소리가\n마치 먼 곳에서 찾아온\n친구의 노크 소리 같다\n\n읽던 책을 잠시 내려놓고\n스탠드 불빛을 한 단 낮추어 놓는 밤\n\n빗소리와 어둠이 만나\n세상에서 가장 아늑한\n방을 만들어 준다",
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "길가의 민들레 홀씨가\n작은 바람에도 기꺼이\n몸을 실어 날아오른다\n\n정든 자리를 떠나는\n일이 두려울 법도 한데\n어디든 닿는 곳에서 다시\n꽃피울 믿음이 있기 때문이리라\n\n나의 새로운 출발에도\n저 가벼운 용기가 함께하기를",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "따뜻한 둥굴레차 김이\n안경알을 하얗게 적신다\n잠시 시야가 가려진 그 짧은 순간,\n고소한 향기가 더욱\n짙게 코끝을 감싼다\n\n눈을 잠시 쉬게 할 때\n다른 감각들이 더 따뜻하게 깨어난다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "석양이 지는 해변을 따라\n느린 걸음으로 길게\n그림자를 끌고 걸었다\n\n파도가 발끝을 적시고 물러갈 때마다\n마음속 해묵은 고집도\n조금씩 씻겨 내려간다\n\n바다는 언제나\n아무것도 묻지 않고\n내 모든 것을 받아준다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "고요한 밤,\n만년필로 일기장을 채우는 사각거림\n하루 동안 흩어졌던 마음의 조각들을\n한 줄씩 불러 모아\n제자리에 앉히는 시간\n\n기록한다는 것은\n지나가는 오늘을\n영원히 안아주는 일이다",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "봄볕이 드는 마루에 누워\n고양이가 나른하게 하품을 한다\n\n아무런 걱정도 없이 햇살에 몸을 맡긴\n저 평화로운 오후의 풍경\n\n그 모습을 바라보는 것만으로도\n내 마음의 시계태엽이\n천천히 느슨해진다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "비 갠 뒤의 하늘은\n언제나 비 오기 전보다\n더 깊고 푸르다\n\n구름이 다 쏟아내고 간 자리에\n투명한 햇살이 가득 차오르기 때문이다\n\n눈물 흘린 뒤의 마음도\n분명 저 하늘처럼 더 맑아질 것이다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "오래된 LP판 위로 바늘을\n조심스레 올려놓는다\n지직거리는 작은 먼지 소리 뒤에\n따스하고 깊은 현악기의\n선율이 방 안을 채운다\n\n기다림과 정성이 있어야만\n들을 수 있는 음악처럼\n좋은 마음도 그렇게\n천천히 우려내야 한다",
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "산등성이 너머로 달이 차오르는 밤\n은은한 달빛이 나뭇가지마다\n은빛 윤곽을 입힌다\n\n태양처럼 눈부시게 드러내지 않아도\n어둠 속에서 길을 밝히기엔 충분한 빛\n\n나도 누군가의 어두운 밤에\n저 달빛처럼 부담 없는\n위로가 되고 싶다",
+    "style": {
+      "background": "#202523",
+      "color": "#DCE3DE",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "하루의 일과를 모두 마치고\n책상 위를 깨끗이 정돈해 놓는 밤\n\n가지런히 놓인 연필과 닫힌 노트 위로\n조용한 성취감이 내려앉는다\n\n내일의 나를 위해\n가장 정갈한 자리를 미리 선물해 둔다",
+    "style": {
+      "background": "#F9F9F8",
+      "color": "#333333",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "바람이 나뭇잎을 스치는\n소리에 귀를 기울이면\n자연이 건네는 오래된\n자장가처럼 들린다\n\n수만 장의 잎사귀가\n서로 부딪히며 내는\n그 초록빛 합창\n\n세상은 늘 우리 곁에서\n다정한 목소리로 노래하고 있었다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "밤하늘의 별빛은 수만\n년 전의 시간을 건너\n오늘 밤 나의 눈동자에 닿았다\n\n아득한 시간을 여행해 온 그 빛처럼\n내가 오늘 품은 따뜻한 마음도\n언젠가 누군가의 마음에\n별빛으로 닿을 것이다",
+    "style": {
+      "background": "#161922",
+      "color": "#D8E0EB",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "비 오는 오후, 창문을 조금 열어\n젖은 흙내음과 풀 향기를\n방 안으로 들인다\n\n대지가 갈증을 축이며 내쉬는\n그 깊고 평화로운 숨결\n\n내 메마른 마음도\n그 향기를 따라 촉촉이 젖어든다",
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "누군가 다정하게 내 이름을\n불러주었을 때\n비로소 내가 이 세상에\n또렷이 존재함을 느낀다\n\n음성 속에 담긴 그\n따뜻한 억양 하나가\n하루 종일 귓가에 맴돌며 나를 지킨다\n\n이름을 부른다는 건\n그 사람의 영혼을\n가만히 안아주는 일이다",
+    "style": {
+      "background": "#F8F3F4",
+      "color": "#4A383E",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "text": "새벽녘 유리창에 맺힌 성에를\n손가락 온기로 살며시\n녹여 작은 창을 냈다\n\n그 동그란 틈새로 내다본\n하얗고 고요한 겨울 아침의 풍경\n\n작은 온기 하나만으로도\n세상을 내다보는 창은 언제든 열린다",
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "text": "오후 네 시의 비스듬한 햇살이\n마루 위에 긴 그림자를 드리운다\n\n가장 뜨겁던 시간을 지나\n가장 부드럽고 깊은\n빛깔로 무르익은 햇볕\n\n하루 중 내가 가장 사랑하는\n평화롭고 나른한 페이지다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "가끔은 목적지를 정하지 않은 채\n낯선 동네의 골목길을 천천히 걸어본다\n\n모퉁이를 돌 때마다 마주치는\n작은 화분들과 담장 너머의 감나무\n\n길을 잃어보아야만\n비로소 만날 수 있는\n다정한 풍경들이 있다",
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#524135",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "잠들기 전, 오늘 하루 나를 스쳐 간\n고마운 얼굴들을 하나씩 떠올려 본다\n\n미처 다 갚지 못한 다정함들이\n마음속에 별자리처럼 환하게 떠 있다\n\n그 따뜻한 빛들을 이불 삼아\n오늘도 평안한 밤의 품으로 들어간다",
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
+  },
+  {
+    "text": "계절이 바뀌는 길목마다\n바람의 냄새가 가장 먼저 달라진다\n\n어제보다 조금 더 서늘해진\n아침 공기에\n옷깃을 여미며 계절의 인사를 받는다\n\n변화란 늘 두려운 것이 아니라\n새로운 풍경을 만나는 설렘이다",
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "text": "이 시집의 어느 페이지에\n머물고 있을 당신에게\n조용한 안부를 건넵니다\n\n오늘 당신의 하루가 어떠했든\n이 짧은 문장들이 머무는 시간만큼은\n당신의 마음이 가장 평온하기를,\n\n당신은 언제나\n따뜻한 위로를 받을\n자격이 있는 사람입니다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "text": "조용한 아침 햇살이 스며드는\n작은 화분 앞에 쪼그리고 앉아\n마른 흙을 다정하게 들여다본다\n\n한 모금 시원한 물을 머금고\n고개를 꼿꼿이 세우는 초록 잎사귀처럼\n\n나의 바짝 마른 마음속에도\n오늘 아침엔 맑은 물 한 컵 적셔본다",
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
     }
   }
 ]

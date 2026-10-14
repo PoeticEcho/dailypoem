@@ -2,80 +2,105 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <title>감성 타이핑 시집</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>감성 타이핑 시집 · 태블릿 시집 액자</title>
 
-  <!-- 최고급 감성 한글 서체 컬렉션 (고운바탕 + 고운돋움 + 마루부리 + 본명조 + 나눔명조) -->
-  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Noto+Serif+KR:wght@300;400;600&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+  <!-- 1. 네이버 마루부리(MaruBuri) 공식 화면용 웹폰트 CDN 탑재 -->
+  <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css">
+
+  <!-- 2. Google Fonts: 5대 정예 감성 한글 서체 컬렉션 (고운돋움, 고운바탕, 본명조, 나눔명조) -->
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;600&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
 
   <style>
+    /* 네이버 마루부리 보조 @font-face 폴백 보장 */
     @font-face {
       font-family: 'MaruBuri';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
       font-weight: 400;
       font-style: normal;
-    }
-    @font-face {
-      font-family: 'MaruBuri';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Bold.woff') format('woff');
-      font-weight: 700;
-      font-style: normal;
+      src: local('MaruBuri'),
+           url('https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2') format('woff2');
+      font-display: swap;
     }
 
     :root {
+      /* 3. 기본 글자 크기 상향 (21px ➔ 23px): 획의 곡선이 매끄럽게 표현될 충분한 픽셀 공간 확보 */
       --font-size: 23px;
+      --clock-opacity: 0.52;
+      --clock-scale: 1;
+      --poem-shift-x: 0px;
+      --poem-shift-y: 0px;
     }
+
     * {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
-    
+
+    /* 2. Windows ClearType 서브픽셀 렌더링(subpixel-antialiased) 복원
+     * 강제 그레이스케일 안티앨리어싱(antialiased / grayscale)을 해제하여
+     * 윈도우 모니터에서도 얇은 명조·돋움 획이 깎이지 않고 매끄럽고 풍성하게 표현됨 */
     html {
       -webkit-font-smoothing: subpixel-antialiased;
       -moz-osx-font-smoothing: auto;
+      font-smooth: always;
       text-rendering: optimizeLegibility;
+      font-kerning: normal;
     }
 
     body {
       margin: 0;
-      padding: 2rem 1.5rem;
+      padding: 4.5rem 2.5rem 4rem;
       font-size: var(--font-size);
       -webkit-font-smoothing: subpixel-antialiased;
       -moz-osx-font-smoothing: auto;
+      font-smooth: always;
       text-rendering: optimizeLegibility;
-      transition: background 1.5s cubic-bezier(0.4, 0, 0.2, 1), color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: background 1.8s cubic-bezier(0.4, 0, 0.2, 1), color 1.4s cubic-bezier(0.4, 0, 0.2, 1);
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow-x: hidden;
+      overflow: hidden;
       position: relative;
+      user-select: none;
     }
-    
+
+    /* 📜 시 본문 컨테이너: 언제나 화면의 최우선 주인공 (z-index: 30) */
     #poem-container {
+      position: relative;
+      z-index: 30;
       width: 100%;
-      max-width: 680px;
-      padding: 3rem 1.5rem;
+      max-width: 740px;
+      padding: 2.5rem 2rem;
       box-sizing: border-box;
+      transform: translate(var(--poem-shift-x), var(--poem-shift-y));
+      transition: transform 2s ease, text-align 0.4s ease;
     }
-    
+
     #poem {
       white-space: pre-wrap;
-      line-height: 2.35;
+      line-height: 2.38;
       letter-spacing: -0.015em;
       word-break: keep-all;
       display: inline-block;
       width: 100%;
       text-align: inherit;
+      -webkit-font-smoothing: subpixel-antialiased;
+      -moz-osx-font-smoothing: auto;
+      font-smooth: always;
       text-rendering: optimizeLegibility;
       opacity: 1;
       filter: blur(0px);
       transform: translateY(0);
-      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-                  filter 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-                  transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+                  filter 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     #poem.fade-out {
@@ -84,30 +109,195 @@
       transform: translateY(-8px);
     }
 
-    /* 🪶 감성적인 플로팅 메뉴 바 (Aesthetic Floating Toolbar) */
+    /* 🕯️ 숨쉬듯 깊고 부드럽게 점멸하는 잉크 커서 */
+    .cursor {
+      display: inline-block;
+      width: 1.5px;
+      height: 1.15em;
+      background: currentColor;
+      margin-left: 5px;
+      vertical-align: -0.1em;
+      border-radius: 1px;
+      box-shadow: 0 0 6px currentColor;
+      animation: breathe 1.4s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% {
+        opacity: 0.85;
+        transform: scaleY(1);
+      }
+      50% {
+        opacity: 0.15;
+        transform: scaleY(0.92);
+      }
+    }
+
+    /* 🕰️ 다이나믹 감성 시계: 시 본문보다 낮은 위계(z-index: 10)로 여백에 은은하게 자리함 */
+    #ambient-clock {
+      position: fixed;
+      z-index: 10;
+      pointer-events: none;
+      opacity: var(--clock-opacity);
+      transform: scale(var(--clock-scale));
+      transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+                  top 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+                  bottom 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+                  left 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+                  right 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 0.28rem;
+      max-width: 340px;
+    }
+
+    #ambient-clock.clock-fade {
+      opacity: 0 !important;
+    }
+
+    #ambient-clock.clock-hidden {
+      display: none !important;
+    }
+
+    /* 시계 다이나믹 위치 프리셋 (안전 여백 확보) */
+    #ambient-clock.pos-top-left {
+      top: 2.2rem;
+      left: 2.4rem;
+      text-align: left;
+      align-items: flex-start;
+      transform-origin: top left;
+    }
+    #ambient-clock.pos-bottom-left {
+      bottom: 2.2rem;
+      left: 2.4rem;
+      text-align: left;
+      align-items: flex-start;
+      transform-origin: bottom left;
+    }
+    #ambient-clock.pos-bottom-right {
+      bottom: 2.2rem;
+      right: 2.4rem;
+      text-align: right;
+      align-items: flex-end;
+      transform-origin: bottom right;
+    }
+    #ambient-clock.pos-top-right {
+      top: 4.8rem;
+      right: 2.4rem;
+      text-align: right;
+      align-items: flex-end;
+      transform-origin: top right;
+    }
+    #ambient-clock.pos-bottom-center {
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) scale(var(--clock-scale));
+      text-align: center;
+      align-items: center;
+      transform-origin: bottom center;
+    }
+
+    .clock-poetic-main {
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.5;
+    }
+    .clock-poetic-sub {
+      font-size: 0.75rem;
+      opacity: 0.72;
+      letter-spacing: 0.04em;
+    }
+    .clock-digital-large {
+      font-size: 2.15rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
+    .clock-vertical-wrap {
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      font-size: 0.88rem;
+      letter-spacing: 0.16em;
+      line-height: 1.8;
+      max-height: 220px;
+      border-right: 1px solid currentColor;
+      padding-right: 0.55rem;
+    }
+    .clock-analog-row {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    /* 📻 라디오 방송 온에어 / 북마크 상태 표시줄 (하단 미니멀 캡션) */
+    #status-caption {
+      position: fixed;
+      bottom: 1.35rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 15;
+      font-size: 0.72rem;
+      letter-spacing: 0.03em;
+      opacity: 0.38;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      white-space: nowrap;
+    }
+    .radio-wave-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: radioPulse 2s ease-in-out infinite;
+    }
+    @keyframes radioPulse {
+      0%, 100% { opacity: 0.3; transform: scale(0.85); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* 🪶 감성적인 상단 플로팅 메뉴 바 (Aesthetic Floating Toolbar) */
     #controls {
       position: fixed;
-      top: 1.5rem;
+      top: 1.35rem;
       right: 1.5rem;
       display: flex;
       align-items: center;
-      gap: 0.35rem;
-      padding: 0.35rem 0.5rem;
+      flex-wrap: wrap;
+      gap: 0.32rem;
+      padding: 0.36rem 0.55rem;
       background: rgba(128, 128, 128, 0.08);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(128, 128, 128, 0.18);
       border-radius: 9999px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-      opacity: 0.8;
-      transition: opacity 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0.86;
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                  background 0.3s ease,
+                  box-shadow 0.3s ease,
+                  transform 0.4s ease;
       z-index: 100;
       user-select: none;
     }
+
+    /* 태블릿 액자 모드: 유휴 상태 시 메뉴바가 은은하게 숨음 */
+    body.idle-zen #controls {
+      opacity: 0.08;
+    }
+    body.idle-zen.hide-controls-completely #controls {
+      opacity: 0;
+      pointer-events: none;
+    }
     #controls:hover, #controls:focus-within {
-      opacity: 1;
-      background: rgba(128, 128, 128, 0.14);
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+      opacity: 1 !important;
+      background: rgba(128, 128, 128, 0.15);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.09);
     }
 
     .ctrl-group {
@@ -121,7 +311,7 @@
       border: 1px solid rgba(128, 128, 128, 0.18);
       color: inherit;
       font-family: 'Gowun Batang', serif;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 500;
       padding: 0.32rem 0.65rem;
       border-radius: 9999px;
@@ -133,7 +323,7 @@
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       white-space: nowrap;
       text-decoration: none;
-      -webkit-font-smoothing: antialiased;
+      -webkit-font-smoothing: subpixel-antialiased;
     }
     .ctrl-btn:hover {
       background: rgba(128, 128, 128, 0.2);
@@ -143,13 +333,41 @@
     .ctrl-btn:active {
       transform: translateY(0) scale(0.97);
     }
+    .ctrl-btn.active-toggle {
+      background: rgba(128, 128, 128, 0.24);
+      border-color: currentColor;
+      font-weight: 700;
+    }
+
+    /* 음악 이퀄라이저 미니 바 애니메이션 */
+    .eq-bars {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 11px;
+      width: 12px;
+    }
+    .eq-bar {
+      width: 2px;
+      background: currentColor;
+      border-radius: 1px;
+      height: 3px;
+      transition: height 0.2s ease;
+    }
+    .playing .eq-bar:nth-child(1) { animation: eqAnim 0.9s ease-in-out infinite; }
+    .playing .eq-bar:nth-child(2) { animation: eqAnim 0.7s ease-in-out 0.2s infinite; }
+    .playing .eq-bar:nth-child(3) { animation: eqAnim 1.1s ease-in-out 0.4s infinite; }
+    @keyframes eqAnim {
+      0%, 100% { height: 3px; }
+      50% { height: 11px; }
+    }
 
     .size-btn {
       padding: 0.3rem 0.5rem;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
     }
     .sub-sign {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       opacity: 0.85;
       margin-left: 1px;
     }
@@ -166,66 +384,312 @@
       height: 14px;
       background: currentColor;
       opacity: 0.2;
-      margin: 0 0.15rem;
+      margin: 0 0.12rem;
     }
 
-    @media (max-width: 640px) {
+    /* ⚙️ 감성 설정 드로어 / 모달 (Settings Panel) */
+    #settings-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    #settings-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #settings-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -48%) scale(0.96);
+      width: min(92vw, 520px);
+      max-height: 86vh;
+      overflow-y: auto;
+      z-index: 210;
+      background: rgba(250, 247, 242, 0.96);
+      color: #2E2925;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(128, 128, 128, 0.25);
+      border-radius: 22px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
+      padding: 1.5rem 1.65rem;
+      font-family: 'Gowun Dodum', sans-serif;
+      font-size: 0.88rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    body.dark-ui #settings-modal {
+      background: rgba(26, 29, 36, 0.96);
+      color: #E6E9EF;
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+    #settings-modal.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .settings-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+      padding-bottom: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .settings-title {
+      font-family: 'Gowun Batang', serif;
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .close-btn {
+      background: transparent;
+      border: 1px solid rgba(128, 128, 128, 0.25);
+      color: inherit;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .settings-section {
+      margin-bottom: 1.15rem;
+      padding-bottom: 0.95rem;
+      border-bottom: 1px dashed rgba(128, 128, 128, 0.2);
+    }
+    .settings-section:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .sec-label {
+      font-family: 'Gowun Batang', serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0.95;
+    }
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.55rem;
+      font-size: 0.82rem;
+    }
+    .setting-row:last-child {
+      margin-bottom: 0;
+    }
+    .setting-select, .setting-range {
+      font-family: inherit;
+      font-size: 0.79rem;
+      padding: 0.34rem 0.58rem;
+      border-radius: 10px;
+      border: 1px solid rgba(128, 128, 128, 0.3);
+      background: rgba(128, 128, 128, 0.08);
+      color: inherit;
+      outline: none;
+    }
+    .setting-select option {
+      background: #FAF7F2;
+      color: #2E2925;
+    }
+    body.dark-ui .setting-select option {
+      background: #1C2026;
+      color: #E6E9EF;
+    }
+    .setting-range {
+      padding: 0;
+      width: 130px;
+      accent-color: #6B5B4D;
+    }
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 23px;
+    }
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider-round {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: rgba(128, 128, 128, 0.3);
+      transition: 0.25s;
+      border-radius: 24px;
+    }
+    .slider-round:before {
+      position: absolute;
+      content: "";
+      height: 17px;
+      width: 17px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #fff;
+      transition: 0.25s;
+      border-radius: 50%;
+    }
+    input:checked + .slider-round {
+      background-color: #5C4B3B;
+    }
+    body.dark-ui input:checked + .slider-round {
+      background-color: #8FA89B;
+    }
+    input:checked + .slider-round:before {
+      transform: translateX(19px);
+    }
+
+    /* 📻 Pixelmood.world 공식 컴팩트 위젯 플로팅 독 (style=jazz & skin=graphite & size=s 최적화) */
+    #pixelmood-dock {
+      position: fixed;
+      bottom: 3.4rem;
+      right: 1.5rem;
+      width: 276px;
+      height: 196px;
+      z-index: 150;
+      background: #1B1D21;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 14px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+      opacity: 0.94;
+      transition: opacity 0.3s ease;
+    }
+    #pixelmood-dock:hover {
+      opacity: 1;
+    }
+    #pixelmood-dock.open {
+      display: flex;
+    }
+    .dock-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.3rem 0.6rem;
+      background: #23262B;
+      color: #DCE3EA;
+      font-size: 0.71rem;
+      font-family: 'Gowun Dodum', sans-serif;
+    }
+    .dock-bar a {
+      color: #B4C8D8;
+      text-decoration: none;
+    }
+    .dock-close {
+      background: none;
+      border: none;
+      color: #DCE3EA;
+      cursor: pointer;
+      font-size: 0.82rem;
+      padding: 0 0.25rem;
+    }
+    #pixelmood-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #141619;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 4rem 1.2rem 4.8rem;
+      }
       #controls {
         top: auto;
-        bottom: 1.5rem;
+        bottom: 1.1rem;
         right: 50%;
         transform: translateX(50%);
-        padding: 0.3rem 0.45rem;
-        gap: 0.25rem;
-        opacity: 0.92;
+        padding: 0.3rem 0.48rem;
+        gap: 0.22rem;
+        max-width: 96vw;
+        justify-content: center;
       }
       #controls:hover {
         transform: translateX(50%);
       }
       .ctrl-btn {
-        font-size: 0.76rem;
+        font-size: 0.74rem;
         padding: 0.28rem 0.48rem;
-        gap: 0.25rem;
+        gap: 0.24rem;
       }
       #poem-container {
-        padding: 1.5rem 0.5rem 4.5rem;
+        padding: 1.5rem 0.8rem 3.5rem;
       }
-    }
-
-    /* 🕯️ 숨쉬듯 깊고 부드럽게 점멸하는 잉크 커서 */
-    .cursor {
-      display: inline-block;
-      width: 1.5px;
-      height: 1.15em;
-      background: currentColor;
-      margin-left: 5px;
-      vertical-align: -0.1em;
-      border-radius: 1px;
-      box-shadow: 0 0 6px currentColor;
-      animation: breathe 1.4s ease-in-out infinite;
-    }
-    @keyframes breathe {
-      0%, 100% { 
-        opacity: 0.85; 
-        transform: scaleY(1); 
+      #ambient-clock.pos-top-left,
+      #ambient-clock.pos-top-right {
+        top: 1.3rem;
       }
-      50% { 
-        opacity: 0.15; 
-        transform: scaleY(0.92); 
+      #ambient-clock.pos-bottom-left,
+      #ambient-clock.pos-bottom-right {
+        bottom: 4.5rem;
+      }
+      #status-caption {
+        top: 0.6rem;
+        bottom: auto;
       }
     }
   </style>
 </head>
 <body>
   <!-- 은은한 아날로그 종이 질감 오버레이 (한지 텍스처) -->
-  <svg id="paper-texture" aria-hidden="true" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;opacity:0.025;z-index:999;">
+  <svg id="paper-texture" aria-hidden="true" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;opacity:0.028;z-index:999;">
     <filter id="noise">
       <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
     </filter>
     <rect width="100%" height="100%" filter="url(#noise)" />
   </svg>
 
+  <!-- 🕰️ 다이나믹 감성 시계 (언제나 시 본문보다 낮은 레이어에서 여백을 지킴) -->
+  <aside id="ambient-clock" class="pos-bottom-right" aria-label="현재 시간">
+    <div id="clock-content"></div>
+  </aside>
+
+  <!-- 🪶 상단 플로팅 감상 & 음악 & 설정 메뉴바 -->
   <nav id="controls" aria-label="감상 메뉴">
+    <!-- 1. Pixelmood Jazz & Ambience 음악 ON/OFF 토글 버튼 (잔잔한 소리) -->
+    <button onclick="toggleMusic()" id="musicBtn" title="잔잔한 Jazz & Random Ambience 음악 ON/OFF (pixelmood.world 감성)" class="ctrl-btn">
+      <span class="eq-bars" id="musicEq">
+        <span class="eq-bar"></span>
+        <span class="eq-bar"></span>
+        <span class="eq-bar"></span>
+      </span>
+      <span id="musicBtnText">음악 OFF</span>
+    </button>
+
+    <!-- Pixelmood.world 공식 컴팩트 위젯(style=jazz&skin=graphite&size=s) 빠른 토글 -->
+    <button onclick="togglePixelmoodDock()" id="widgetQuickBtn" title="pixelmood.world 공식 미니 플레이어 (Jazz / Graphite / Small) 열기·닫기" class="ctrl-btn">
+      <span>📻 픽셀라디오</span>
+    </button>
+
+    <span class="ctrl-divider"></span>
+
+    <!-- 2. 글자 크기 조절 (기본 23px) -->
     <div class="ctrl-group">
       <button onclick="changeFontSize(-1)" title="글자 작게" class="ctrl-btn size-btn">
         가<span class="sub-sign">−</span>
@@ -237,13 +701,13 @@
 
     <span class="ctrl-divider"></span>
 
+    <!-- 3. 시 정렬 바꾸기 -->
     <button onclick="cycleAlign()" id="alignBtn" title="시 정렬 바꾸기 (좌측 / 중앙 / 우측)" class="ctrl-btn">
       <span id="alignSvgWrap"></span>
       <span id="alignText">중앙</span>
     </button>
 
-    <span class="ctrl-divider"></span>
-
+    <!-- 4. 새로운 시 보기 -->
     <button onclick="reloadPoem()" id="reloadBtn" title="새로운 시 감상하기" class="ctrl-btn">
       <svg class="ctrl-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
@@ -251,7 +715,8 @@
       <span>다른 시</span>
     </button>
 
-    <button onclick="toggleAutoPlay()" id="autoplayBtn" title="자동 넘김" class="ctrl-btn">
+    <!-- 5. 자동 넘김 토글 -->
+    <button onclick="toggleAutoPlay()" id="autoplayBtn" title="자동 넘김 (태블릿 액자 모드)" class="ctrl-btn">
       <span id="autoplaySvg">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
           <polygon points="5 3 19 12 5 21 5 3"/>
@@ -259,21 +724,308 @@
       </span>
       <span id="autoplayText">자동 넘김</span>
     </button>
+
+    <span class="ctrl-divider"></span>
+
+    <!-- 6. 태블릿 전체화면 버튼 -->
+    <button onclick="toggleFullscreen()" id="fullscreenBtn" title="태블릿 전체화면 액자 모드" class="ctrl-btn">
+      <svg class="ctrl-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+      </svg>
+    </button>
+
+    <!-- 7. 시계·라디오·액자 상세 설정 버튼 -->
+    <button onclick="toggleSettings(true)" id="settingsBtn" title="시계 · 라디오 · 태블릿 액자 설정" class="ctrl-btn">
+      <svg class="ctrl-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+      </svg>
+      <span>설정</span>
+    </button>
   </nav>
 
+  <!-- 📜 시 본문 영역 (최우선 레이어) -->
   <main id="poem-container">
     <div id="poem">
       <span id="typed"></span><span id="cursor" class="cursor" style="display:none"></span>
     </div>
   </main>
 
+  <!-- 📻 하단 은은한 상태 캡션 (라디오 주파수 / 시 번호) -->
+  <div id="status-caption">
+    <span id="radio-status-badge" style="display:none;">
+      <span class="radio-wave-dot"></span>
+      <span id="radio-channel-label">Pixelmood Jazz · Ambience Random</span>
+    </span>
+    <span id="poem-index-badge"></span>
+  </div>
+
+  <!-- 📻 Pixelmood.world 공식 웹 플레이어 컴팩트 독 (?style=jazz&skin=graphite&size=s&ambience=random&level=5&seed=2494034659) -->
+  <div id="pixelmood-dock" aria-label="pixelmood.world 공식 플레이어">
+    <div class="dock-bar">
+      <span>🎷 <a href="https://pixelmood.world/?style=jazz&skin=graphite&size=s&ambience=random&level=5&seed=2494034659" target="_blank" rel="noopener">pixelmood.world</a> (Jazz · Graphite · S)</span>
+      <button class="dock-close" onclick="togglePixelmoodDock(false)" title="창 닫기">✕</button>
+    </div>
+    <iframe id="pixelmood-iframe" title="Pixelmood Jazz Player" allow="autoplay"></iframe>
+  </div>
+
+  <!-- ⚙️ 상세 설정 모달 -->
+  <div id="settings-backdrop" onclick="toggleSettings(false)"></div>
+  <section id="settings-modal" role="dialog" aria-labelledby="settingsModalTitle">
+    <div class="settings-header">
+      <h2 class="settings-title" id="settingsModalTitle">✨ 감성 시집 · 액자 설정</h2>
+      <button class="close-btn" onclick="toggleSettings(false)" title="닫기">✕</button>
+    </div>
+
+    <!-- 섹션 1: 음악 & Pixelmood Jazz 라디오 설정 -->
+    <div class="settings-section">
+      <div class="sec-label">
+        <span>🎷 Pixelmood Jazz & 감성 라디오 방송</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="chkMusicOn" onchange="setMusicState(this.checked)">
+          <span class="slider-round"></span>
+        </label>
+      </div>
+
+      <div class="setting-row">
+        <span>사운드 / 라디오 스타일</span>
+        <select id="selAudioChannel" class="setting-select" onchange="changeAudioChannel(this.value)">
+          <option value="jazz_random">Pixelmood Jazz + Random Ambience (추천 기본)</option>
+          <option value="pixelmood">Pixelmood Lo-Fi (Rhodes & Piano)</option>
+          <option value="late_fm">심야 FM 93.1 시인의 라디오 (재즈 & 시보)</option>
+          <option value="nocturne">클래식 녹턴 & 오르골 라디오</option>
+          <option value="rain_cafe">비 내리는 창가와 찻집 (빗소리 + 피아노)</option>
+          <option value="forest_dawn">깊은 숲과 새벽 산새 (자연 명상)</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <span>배경 자연음 (Ambience & Level 5)</span>
+        <select id="selAmbientLayer" class="setting-select" onchange="changeAmbientLayer(this.value)">
+          <option value="random">Random (빗소리·새소리·바이닐 자연 순환 · Lv.5)</option>
+          <option value="rain">Calm Rain (촉촉한 창가 빗소리 고정)</option>
+          <option value="vinyl">Warm Vinyl (아날로그 LP & 라디오 온기)</option>
+          <option value="none">선율만 깨끗하게 듣기</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <span>음악 볼륨 (기본: 잔잔하게)</span>
+        <input type="range" id="rngVolume" class="setting-range" min="0.05" max="0.7" step="0.02" value="0.22" oninput="updateVolume(this.value)">
+      </div>
+
+      <div class="setting-row">
+        <span>pixelmood.world 위젯 시드(Seed)</span>
+        <select id="selPixelSeed" class="setting-select" onchange="updatePixelmoodUrl()">
+          <option value="2494034659">추천 시드 고정 (seed=2494034659)</option>
+          <option value="random">열 때마다 새로운 시드 생성</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <span>공식 픽셀라디오 (Jazz · Graphite · S)</span>
+        <button class="ctrl-btn" onclick="togglePixelmoodDock()" id="btnPixelmoodDock">
+          <span>미니 플레이어 열기</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 섹션 2: 다이나믹 시계 설정 (5대 정예 서체 탑재) -->
+    <div class="settings-section">
+      <div class="sec-label">
+        <span>🕰️ 다이나믹 감성 시계 (시 본문 우선)</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="chkClockShow" checked onchange="updateClockConfig()">
+          <span class="slider-round"></span>
+        </label>
+      </div>
+
+      <div class="setting-row">
+        <span>시계 위치 방식</span>
+        <select id="selClockPos" class="setting-select" onchange="updateClockConfig()">
+          <option value="dynamic">다이나믹 (시 여백에 맞춰 자동 이동)</option>
+          <option value="pos-bottom-right">우측 하단 고정</option>
+          <option value="pos-bottom-left">좌측 하단 고정</option>
+          <option value="pos-top-left">좌측 상단 고정</option>
+          <option value="pos-top-right">우측 상단 고정</option>
+          <option value="pos-bottom-center">하단 중앙 고정</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <span>시계 표시 형태</span>
+        <select id="selClockFormat" class="setting-select" onchange="updateClockConfig()">
+          <option value="poetic">감성 한글 시계 (문학적 시간 표현)</option>
+          <option value="digital24">미니멀 디지털 (24시간 + 날짜)</option>
+          <option value="digital12">클래식 디지털 (AM/PM + 요일)</option>
+          <option value="vertical">세로형 시집 책갈피 시계</option>
+          <option value="analog">미니멀 아날로그 바늘 + 시각</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <span>시계 서체 (5대 정예 폰트)</span>
+        <select id="selClockFont" class="setting-select" onchange="updateClockConfig()">
+          <option value="sync">현재 시 서체와 자동 동기화</option>
+          <option value="'Gowun Dodum', sans-serif">고운돋움 (둥글고 정돈된 가독성)</option>
+          <option value="'Gowun Batang', serif">고운바탕 (부드러운 감성 명조)</option>
+          <option value="'MaruBuri', serif">마루부리 (네이버 디지털 화면용 명조)</option>
+          <option value="'Noto Serif KR', serif">본명조 (다크 배경에 또렷한 세리프)</option>
+          <option value="'Nanum Myeongjo', serif">나눔명조 (단아한 고전 시집 명조)</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <span>시계 농도 (시 본문 방해 금지)</span>
+        <input type="range" id="rngClockOpacity" class="setting-range" min="0.2" max="0.85" step="0.05" value="0.52" oninput="updateClockConfig()">
+      </div>
+    </div>
+
+    <!-- 섹션 3: 태블릿 액자 & 감상 호흡 설정 -->
+    <div class="settings-section">
+      <div class="sec-label">
+        <span>🖼️ 태블릿 시집 액자 & 감상 호흡</span>
+      </div>
+
+      <div class="setting-row">
+        <span>자동 넘김 주기</span>
+        <select id="selAutoInterval" class="setting-select" onchange="updateFrameConfig()">
+          <option value="18000">18초마다 (기본 호흡)</option>
+          <option value="35000">35초마다 (여유로운 감상)</option>
+          <option value="60000">1분마다 (차분한 액자)</option>
+          <option value="180000">3분마다 (독서/명상 모드)</option>
+          <option value="300000">5분마다 (인테리어 액자)</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <span>타이핑 속도</span>
+        <select id="selTypingSpeed" class="setting-select" onchange="updateFrameConfig()">
+          <option value="normal">서정적인 필사 호흡 (기본)</option>
+          <option value="slow">느리고 깊은 새벽 호흡</option>
+          <option value="fast">경쾌한 산책 호흡</option>
+          <option value="instant">타이핑 없이 한 페이지씩 펼치기</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <span>배경 색감 모드</span>
+        <select id="selThemeMode" class="setting-select" onchange="updateFrameConfig()">
+          <option value="poem">시 고유의 감성 팔레트 (기본)</option>
+          <option value="time_auto">시간대 연동 (낮엔 한지 · 밤엔 다크)</option>
+          <option value="always_light">항상 따스한 한지 톤 (Day)</option>
+          <option value="always_dark">항상 고요한 밤하늘 톤 (Night)</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <span>감상 중 상단 메뉴바 자동 숨김</span>
+        <select id="selMenuHide" class="setting-select" onchange="updateFrameConfig()">
+          <option value="dim">은은하게 투명해짐 (기본)</option>
+          <option value="hide">완전히 숨김 (터치 시 표시)</option>
+          <option value="always">항상 선명하게 표시</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <span>하단 시 번호 책갈피 표시</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="chkShowBadge" checked onchange="updateFrameConfig()">
+          <span class="slider-round"></span>
+        </label>
+      </div>
+    </div>
+  </section>
+
   <script>
+    /* =========================================================================
+     * 1. 상태 관리 및 로컬 설정 불러오기 (기본 글자 크기 23px & Jazz/Random 프리셋)
+     * ========================================================================= */
     let reflections = [];
+    let currentPoemIndex = 0;
     let autoPlayInterval = null;
-    let isAutoPlaying = false;
+    let isAutoPlaying = true;
     let isTyping = false;
     let isTransitioning = false;
     let typeTimer = null;
+    let idleTimer = null;
+    let wakeLockSentinel = null;
+
+    const CONFIG = {
+      fontSize: 23,               // 21px -> 23px 기본 글자 크기 상향
+      clockShow: true,
+      clockPos: 'dynamic',
+      clockFormat: 'poetic',
+      clockFont: 'sync',
+      clockOpacity: 0.52,
+      autoIntervalMs: 35000,
+      typingSpeed: 'normal',
+      themeMode: 'poem',
+      menuHide: 'dim',
+      showBadge: true,
+      audioChannel: 'jazz_random', // style=jazz & ambience=random 기본 탑재
+      ambientLayer: 'random',
+      pixelSeed: '2494034659',     // 검증된 감성 재즈 시드 기본값
+      volume: 0.22
+    };
+
+    function loadSavedConfig() {
+      try {
+        const saved = localStorage.getItem('poetry_frame_config_v3');
+        if (saved) {
+          Object.assign(CONFIG, JSON.parse(saved));
+        }
+      } catch (e) {}
+      applyConfigToUI();
+    }
+
+    function saveConfig() {
+      try {
+        localStorage.setItem('poetry_frame_config_v3', JSON.stringify(CONFIG));
+      } catch (e) {}
+    }
+
+    function applyConfigToUI() {
+      document.documentElement.style.setProperty('--font-size', `${CONFIG.fontSize}px`);
+      document.documentElement.style.setProperty('--clock-opacity', CONFIG.clockOpacity);
+
+      document.getElementById('chkClockShow').checked = CONFIG.clockShow;
+      document.getElementById('selClockPos').value = CONFIG.clockPos;
+      document.getElementById('selClockFormat').value = CONFIG.clockFormat;
+      document.getElementById('selClockFont').value = CONFIG.clockFont;
+      document.getElementById('rngClockOpacity').value = CONFIG.clockOpacity;
+
+      document.getElementById('selAutoInterval').value = String(CONFIG.autoIntervalMs);
+      document.getElementById('selTypingSpeed').value = CONFIG.typingSpeed;
+      document.getElementById('selThemeMode').value = CONFIG.themeMode;
+      document.getElementById('selMenuHide').value = CONFIG.menuHide;
+      document.getElementById('chkShowBadge').checked = CONFIG.showBadge;
+
+      document.getElementById('selAudioChannel').value = CONFIG.audioChannel;
+      document.getElementById('selAmbientLayer').value = CONFIG.ambientLayer;
+      document.getElementById('selPixelSeed').value = CONFIG.pixelSeed;
+      document.getElementById('rngVolume').value = CONFIG.volume;
+    }
+
+    /* =========================================================================
+     * 2. 정렬 & 5대 정예 서체 표준화 보정기
+     * ========================================================================= */
+    const ELITE_FONT_MAP = {
+      'Gowun Dodum': "'Gowun Dodum', sans-serif",
+      'Gowun Batang': "'Gowun Batang', serif",
+      'MaruBuri': "'MaruBuri', serif",
+      'Noto Serif KR': "'Noto Serif KR', serif",
+      'Nanum Myeongjo': "'Nanum Myeongjo', serif"
+    };
+
+    function normalizeEliteFont(rawFont, isDarkBg) {
+      if (!rawFont) return isDarkBg ? "'Noto Serif KR', serif" : "'Gowun Batang', serif";
+      for (const [key, val] of Object.entries(ELITE_FONT_MAP)) {
+        if (rawFont.includes(key)) return val;
+      }
+      // 만약 구형 폰트가 들어오더라도 5대 정예 서체로 100% 자동 매핑
+      return isDarkBg ? "'Noto Serif KR', serif" : "'Gowun Dodum', sans-serif";
+    }
 
     const ALIGNMENTS = ['left', 'center', 'right'];
     const ALIGN_CONFIG = {
@@ -311,21 +1063,24 @@
     function cycleAlign() {
       const nextIdx = (ALIGNMENTS.indexOf(currentAlign) + 1) % ALIGNMENTS.length;
       setAlignment(ALIGNMENTS[nextIdx]);
+      if (CONFIG.clockPos === 'dynamic') {
+        relocateDynamicClock(ALIGNMENTS[nextIdx]);
+      }
     }
 
     function formatPoemText(text) {
       if (!text) return "";
-      let t = text.trim();
+      let t = text.trim().replace(/\r\n?/g, "\n");
       if (t.includes("\n\n")) {
         return t.replace(/\n{3,}/g, "\n\n");
       }
-      if ((t.match(/\n/g) || []).length >= 2) {
-        const lines = t.split("\n").map(l => l.trim()).filter(Boolean);
+      const lines = t.split("\n").map(l => l.trim()).filter(Boolean);
+      if (lines.length >= 2) {
         const stanzas = [];
         let cur = [];
         for (let l of lines) {
           cur.push(l);
-          if (cur.length >= 2) {
+          if (cur.length >= 3) {
             stanzas.push(cur.join("\n"));
             cur = [];
           }
@@ -333,49 +1088,587 @@
         if (cur.length) stanzas.push(cur.join("\n"));
         return stanzas.join("\n\n");
       }
-      const sents = t.replace(/\n/g, " ").split(/(?<=[.!?])\s+/).filter(Boolean);
-      const lines = [];
-      for (let s of sents) {
-        if (s.length > 20) {
-          if (s.includes(", ") && s.indexOf(", ") < s.length - 6) {
-            const parts = s.split(", ");
-            parts.forEach((p, idx) => lines.push(p + (idx < parts.length - 1 ? "," : "")));
-            continue;
-          }
-          const clauses = ["그러니 ", "그리고 ", "하지만 ", "어쩌면 ", "우리는 ", "나는 ", "너는 "];
-          let split = false;
-          for (let c of clauses) {
-            const idx = s.indexOf(c);
-            if (idx > 5 && idx < s.length - 5) {
-              lines.push(s.substring(0, idx).trim());
-              lines.push(s.substring(idx).trim());
-              split = true;
-              break;
-            }
-          }
-          if (!split) lines.push(s);
-        } else {
-          lines.push(s);
+      return t;
+    }
+
+    /* =========================================================================
+     * 3. 다이나믹 감성 시계 엔진 (글자 우선 원칙 & 여백 조화 배치)
+     * ========================================================================= */
+    const DYNAMIC_POSITIONS_BY_ALIGN = {
+      'left': ['pos-bottom-right', 'pos-top-right', 'pos-bottom-center'],
+      'right': ['pos-bottom-left', 'pos-top-left', 'pos-bottom-center'],
+      'center': ['pos-bottom-right', 'pos-bottom-left', 'pos-top-left', 'pos-top-right']
+    };
+    let currentClockPosClass = 'pos-bottom-right';
+
+    function numberToKoreanHour(h) {
+      const hours = ["열두", "한", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉", "열", "열한", "열두"];
+      return hours[h % 12 === 0 ? 12 : h % 12] + " 시";
+    }
+
+    function numberToKoreanMinute(m) {
+      if (m === 0) return "정각";
+      const tens = ["", "십", "이십", "삼십", "사십", "오십"];
+      const ones = ["", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구"];
+      const t = Math.floor(m / 10);
+      const o = m % 10;
+      return (tens[t] + ones[o]) + " 분";
+    }
+
+    function getPoeticTimeMood(h) {
+      if (h >= 4 && h < 7) return "새벽 안개가 조용히 깨어나는 시간";
+      if (h >= 7 && h < 11) return "맑은 아침 햇살이 창가에 스미는 시간";
+      if (h >= 11 && h < 14) return "한낮의 따스한 온기가 머무는 시간";
+      if (h >= 14 && h < 17) return "오후의 나른한 바람이 책장을 넘기는 시간";
+      if (h >= 17 && h < 20) return "붉은 노을이 하루의 끝을 물들이는 시간";
+      if (h >= 20 && h < 23) return "고단한 마음을 내려놓고 숨을 고르는 밤";
+      return "세상이 잠들고 별빛만 깨어 있는 깊은 밤";
+    }
+
+    function renderClock() {
+      const clockEl = document.getElementById('ambient-clock');
+      const contentEl = document.getElementById('clock-content');
+      if (!clockEl || !contentEl) return;
+
+      if (!CONFIG.clockShow) {
+        clockEl.classList.add('clock-hidden');
+        return;
+      }
+      clockEl.classList.remove('clock-hidden');
+
+      if (CONFIG.clockFont === 'sync') {
+        clockEl.style.fontFamily = document.body.style.fontFamily || "'Gowun Batang', serif";
+      } else {
+        clockEl.style.fontFamily = CONFIG.clockFont;
+      }
+
+      const now = new Date();
+      const h24 = now.getHours();
+      const m = now.getMinutes();
+      const pad = n => String(n).padStart(2, '0');
+      const periodKo = h24 < 12 ? "오전" : "오후";
+      const periodEn = h24 < 12 ? "AM" : "PM";
+      const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+      const weekdaysKo = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+      const dateStrKo = `${now.getMonth() + 1}월 ${now.getDate()}일 ${weekdaysKo[now.getDay()]}`;
+
+      if (CONFIG.clockFormat === 'poetic') {
+        const koTime = `${periodKo} ${numberToKoreanHour(h12)} ${numberToKoreanMinute(m)}`;
+        const mood = getPoeticTimeMood(h24);
+        contentEl.innerHTML = `
+          <div class="clock-poetic-main">${koTime}</div>
+          <div class="clock-poetic-sub">${mood} · ${pad(h24)}:${pad(m)}</div>
+        `;
+      } else if (CONFIG.clockFormat === 'digital24') {
+        contentEl.innerHTML = `
+          <div class="clock-digital-large">${pad(h24)}:${pad(m)}</div>
+          <div class="clock-poetic-sub">${dateStrKo}</div>
+        `;
+      } else if (CONFIG.clockFormat === 'digital12') {
+        contentEl.innerHTML = `
+          <div class="clock-digital-large"><span style="font-size:0.9rem;margin-right:6px;">${periodEn}</span>${pad(h12)}:${pad(m)}</div>
+          <div class="clock-poetic-sub">${dateStrKo}</div>
+        `;
+      } else if (CONFIG.clockFormat === 'vertical') {
+        const koTime = `${periodKo} ${numberToKoreanHour(h12)} ${numberToKoreanMinute(m)}`;
+        contentEl.innerHTML = `
+          <div class="clock-vertical-wrap">${dateStrKo} · ${koTime}</div>
+        `;
+      } else if (CONFIG.clockFormat === 'analog') {
+        const hourDeg = ((h12 % 12) + m / 60) * 30;
+        const minDeg = m * 6;
+        contentEl.innerHTML = `
+          <div class="clock-analog-row">
+            <svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4">
+              <circle cx="20" cy="20" r="17" stroke-opacity="0.55"/>
+              <line x1="20" y1="20" x2="20" y2="10" stroke-width="1.8" stroke-linecap="round" transform="rotate(${hourDeg} 20 20)"/>
+              <line x1="20" y1="20" x2="20" y2="6" stroke-width="1.2" stroke-linecap="round" transform="rotate(${minDeg} 20 20)"/>
+              <circle cx="20" cy="20" r="1.5" fill="currentColor"/>
+            </svg>
+            <div>
+              <div class="clock-poetic-main" style="font-size:1.15rem;">${pad(h24)}:${pad(m)}</div>
+              <div class="clock-poetic-sub">${dateStrKo}</div>
+            </div>
+          </div>
+        `;
+      }
+
+      ensurePoemPriorityNoOverlap();
+    }
+
+    function relocateDynamicClock(poemAlign) {
+      const clockEl = document.getElementById('ambient-clock');
+      if (!clockEl) return;
+
+      const allPos = ['pos-top-left', 'pos-bottom-left', 'pos-bottom-right', 'pos-top-right', 'pos-bottom-center'];
+      let nextPos = CONFIG.clockPos;
+
+      if (CONFIG.clockPos === 'dynamic') {
+        const candidates = DYNAMIC_POSITIONS_BY_ALIGN[poemAlign] || DYNAMIC_POSITIONS_BY_ALIGN['center'];
+        nextPos = candidates[Math.floor(Math.random() * candidates.length)];
+      }
+
+      if (nextPos !== currentClockPosClass) {
+        clockEl.classList.add('clock-fade');
+        setTimeout(() => {
+          allPos.forEach(p => clockEl.classList.remove(p));
+          clockEl.classList.add(nextPos);
+          currentClockPosClass = nextPos;
+          renderClock();
+          clockEl.classList.remove('clock-fade');
+        }, 350);
+      } else {
+        allPos.forEach(p => clockEl.classList.remove(p));
+        clockEl.classList.add(nextPos);
+        renderClock();
+      }
+    }
+
+    function ensurePoemPriorityNoOverlap() {
+      const clockEl = document.getElementById('ambient-clock');
+      const poemEl = document.getElementById('poem');
+      if (!clockEl || !poemEl || !CONFIG.clockShow) return;
+
+      const cRect = clockEl.getBoundingClientRect();
+      const pRect = poemEl.getBoundingClientRect();
+      const margin = 18;
+
+      const overlaps = !(
+        cRect.right < pRect.left - margin ||
+        cRect.left > pRect.right + margin ||
+        cRect.bottom < pRect.top - margin ||
+        cRect.top > pRect.bottom + margin
+      );
+
+      if (overlaps) {
+        clockEl.style.opacity = String(Math.min(CONFIG.clockOpacity, 0.22));
+      } else {
+        clockEl.style.opacity = String(CONFIG.clockOpacity);
+      }
+    }
+
+    function updateClockConfig() {
+      CONFIG.clockShow = document.getElementById('chkClockShow').checked;
+      CONFIG.clockPos = document.getElementById('selClockPos').value;
+      CONFIG.clockFormat = document.getElementById('selClockFormat').value;
+      CONFIG.clockFont = document.getElementById('selClockFont').value;
+      CONFIG.clockOpacity = parseFloat(document.getElementById('rngClockOpacity').value);
+      document.documentElement.style.setProperty('--clock-opacity', CONFIG.clockOpacity);
+      saveConfig();
+      relocateDynamicClock(currentAlign);
+    }
+
+    /* =========================================================================
+     * 4. Pixelmood Jazz & Random Ambience 사운드 엔진 + 공식 위젯 연동
+     *    (style=jazz&skin=graphite&size=s&ambience=random&level=5&seed=2494034659)
+     * ========================================================================= */
+    let audioCtx = null;
+    let masterGain = null;
+    let noiseNode = null;
+    let noiseGain = null;
+    let isMusicPlaying = false;
+    let musicLoopTimer = null;
+
+    const CHANNEL_NAMES = {
+      'jazz_random': 'Pixelmood Jazz · Ambience Random (Lv.5)',
+      'pixelmood': 'Pixelmood Lo-Fi (Rhodes & Piano)',
+      'late_fm': '심야 FM 93.1 · 시인의 라디오',
+      'nocturne': 'Nocturne & Music Box FM',
+      'rain_cafe': 'Rainy Window & Warm Tea',
+      'forest_dawn': 'Forest Dawn & Singing Bowl'
+    };
+
+    // Jazz (ii9 - V13 - Imaj9 - VI7b13) & Lo-Fi 코드 보이싱
+    const CHORD_PROGRESSIONS = {
+      'jazz_random': [
+        [73.42, 146.83, 220.00, 261.63, 329.63, 440.00],  // Dm9 (Finger Bass + Upright/Jazz Guitar)
+        [98.00, 196.00, 246.94, 293.66, 349.23, 493.88],  // G13
+        [65.41, 130.81, 196.00, 246.94, 293.66, 392.00],  // Cmaj9
+        [110.00, 220.00, 277.18, 329.63, 392.00, 440.00], // A7alt / Am9
+        [87.31, 174.61, 220.00, 261.63, 329.63, 392.00],  // Fmaj9
+        [82.41, 164.81, 246.94, 293.66, 349.23, 440.00]   // Em7add11
+      ],
+      'pixelmood': [
+        [174.61, 220.00, 261.63, 329.63, 392.00],
+        [164.81, 196.00, 246.94, 293.66, 392.00],
+        [146.83, 220.00, 261.63, 329.63, 349.23],
+        [130.81, 196.00, 246.94, 329.63, 392.00]
+      ],
+      'late_fm': [
+        [146.83, 220.00, 261.63, 329.63, 440.00],
+        [196.00, 246.94, 293.66, 349.23, 440.00],
+        [130.81, 196.00, 246.94, 293.66, 329.63],
+        [220.00, 261.63, 329.63, 392.00, 493.88]
+      ],
+      'nocturne': [
+        [220.00, 261.63, 329.63, 440.00, 523.25],
+        [146.83, 220.00, 293.66, 349.23, 587.33],
+        [196.00, 246.94, 293.66, 392.00, 493.88],
+        [130.81, 196.00, 246.94, 329.63, 523.25]
+      ],
+      'rain_cafe': [
+        [174.61, 220.00, 261.63, 329.63],
+        [196.00, 246.94, 293.66, 392.00],
+        [164.81, 246.94, 329.63, 392.00],
+        [220.00, 261.63, 329.63, 392.00]
+      ],
+      'forest_dawn': [
+        [130.81, 196.00, 293.66, 392.00],
+        [174.61, 261.63, 329.63, 440.00],
+        [146.83, 220.00, 293.66, 392.00]
+      ]
+    };
+    let chordStep = 0;
+
+    function initAudioEngine() {
+      if (audioCtx) return;
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContextClass();
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      masterGain.connect(audioCtx.destination);
+      setupAmbientNoiseLayer();
+    }
+
+    function setupAmbientNoiseLayer() {
+      if (!audioCtx) return;
+      if (noiseNode) {
+        try { noiseNode.stop(); noiseNode.disconnect(); } catch (e) {}
+      }
+      const bufferSize = audioCtx.sampleRate * 3;
+      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+      let lastOut = 0.0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        data[i] = (lastOut + (0.025 * white)) / 1.025;
+        lastOut = data[i];
+        data[i] *= 0.45;
+      }
+
+      noiseNode = audioCtx.createBufferSource();
+      noiseNode.buffer = buffer;
+      noiseNode.loop = true;
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 920;
+
+      noiseGain = audioCtx.createGain();
+      noiseGain.gain.value = getTargetNoiseGain();
+
+      noiseNode.connect(filter);
+      filter.connect(noiseGain);
+      noiseGain.connect(masterGain);
+      noiseNode.start();
+    }
+
+    // level=5 감성에 맞춘 은은한 배경 앰비언스 농도
+    function getTargetNoiseGain() {
+      if (CONFIG.ambientLayer === 'none') return 0.0;
+      if (CONFIG.ambientLayer === 'rain') return 0.15;
+      if (CONFIG.ambientLayer === 'vinyl') return 0.065;
+      // random / level=5 밸런스
+      if (CONFIG.audioChannel === 'rain_cafe') return 0.16;
+      return 0.085;
+    }
+
+    function playWarmNote(freq, startTime, duration, type = 'jazz_rhodes', velocity = 0.13) {
+      if (!audioCtx || !isMusicPlaying) return;
+      const osc = audioCtx.createOscillator();
+      const subOsc = audioCtx.createOscillator();
+      const noteGain = audioCtx.createGain();
+      const filter = audioCtx.createBiquadFilter();
+
+      if (type === 'jazz_rhodes') {
+        osc.type = 'sine';
+        subOsc.type = 'triangle';
+        subOsc.frequency.setValueAtTime(freq * 2, startTime);
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(980, startTime);
+      } else if (type === 'musicbox') {
+        osc.type = 'sine';
+        subOsc.type = 'sine';
+        subOsc.frequency.setValueAtTime(freq * 3, startTime);
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(2100, startTime);
+      } else {
+        osc.type = 'triangle';
+        subOsc.type = 'sine';
+        subOsc.frequency.setValueAtTime(freq * 0.5, startTime);
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(820, startTime);
+      }
+
+      osc.frequency.setValueAtTime(freq, startTime);
+
+      const subGain = audioCtx.createGain();
+      subGain.gain.setValueAtTime(velocity * 0.16, startTime);
+
+      noteGain.gain.setValueAtTime(0.0001, startTime);
+      noteGain.gain.linearRampToValueAtTime(velocity, startTime + 0.16);
+      noteGain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+      osc.connect(filter);
+      subOsc.connect(subGain);
+      subGain.connect(filter);
+      filter.connect(noteGain);
+      noteGain.connect(masterGain);
+
+      osc.start(startTime);
+      subOsc.start(startTime);
+      osc.stop(startTime + duration + 0.05);
+      subOsc.stop(startTime + duration + 0.05);
+    }
+
+    // Random Ambience (숲의 새소리 / 비방울 하모닉스) 간헐적 연출
+    function maybePlayRandomNatureChirp(now) {
+      if (CONFIG.ambientLayer === 'none') return;
+      if (Math.random() < 0.35) {
+        const baseBird = 1350 + Math.random() * 450;
+        playWarmNote(baseBird, now + 1.8, 0.35, 'musicbox', 0.018);
+        playWarmNote(baseBird * 1.18, now + 2.05, 0.45, 'musicbox', 0.015);
+      }
+    }
+
+    function scheduleGenerativeBar() {
+      if (!isMusicPlaying || !audioCtx) return;
+
+      const prog = CHORD_PROGRESSIONS[CONFIG.audioChannel] || CHORD_PROGRESSIONS['jazz_random'];
+      const chord = prog[chordStep % prog.length];
+      chordStep++;
+
+      const now = audioCtx.currentTime;
+      const isJazz = CONFIG.audioChannel === 'jazz_random' || CONFIG.audioChannel === 'late_fm';
+      const toneType = CONFIG.audioChannel === 'nocturne' ? 'musicbox'
+                     : CONFIG.audioChannel === 'forest_dawn' ? 'pad'
+                     : 'jazz_rhodes';
+
+      // 1. 워킹 어쿠스틱 베이스 & 재즈 코드 보이싱 아르페지오 (스윙 호흡)
+      chord.forEach((freq, idx) => {
+        const swingJitter = isJazz ? (idx * 0.16 + (idx % 2 === 1 ? 0.06 : 0.0)) : (idx * 0.14);
+        const vel = idx === 0 ? 0.14 : 0.078;
+        playWarmNote(freq, now + swingJitter, 4.3, toneType, vel);
+      });
+
+      // 2. 재즈 기타 / 비브라폰 스타일의 부드러운 즉흥 선율
+      const melodyCount = CONFIG.audioChannel === 'forest_dawn' ? 1 : 3;
+      for (let m = 0; m < melodyCount; m++) {
+        const pickFreq = chord[1 + Math.floor(Math.random() * (chord.length - 1))] * (isJazz && m === 1 ? 1.5 : 2);
+        const swingOffset = isJazz ? (1.05 + m * 1.18 + (m % 2 === 1 ? 0.18 : 0.05)) : (1.1 + m * 1.15);
+        playWarmNote(pickFreq, now + swingOffset, 2.5, toneType, 0.07);
+      }
+
+      if (CONFIG.ambientLayer === 'random' || CONFIG.audioChannel === 'forest_dawn') {
+        maybePlayRandomNatureChirp(now);
+      }
+
+      const nextBarMs = CONFIG.audioChannel === 'forest_dawn' ? 5400 : 4350;
+      musicLoopTimer = setTimeout(scheduleGenerativeBar, nextBarMs);
+    }
+
+    function playGentleRadioChime() {
+      if (!isMusicPlaying || !audioCtx || CONFIG.audioChannel !== 'late_fm') return;
+      const now = audioCtx.currentTime;
+      playWarmNote(523.25, now, 1.5, 'musicbox', 0.04);
+      playWarmNote(659.25, now + 0.25, 1.8, 'musicbox', 0.045);
+    }
+
+    function toggleMusic() {
+      setMusicState(!isMusicPlaying);
+    }
+
+    function setMusicState(turnOn) {
+      initAudioEngine();
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      isMusicPlaying = turnOn;
+      const btn = document.getElementById('musicBtn');
+      const btnText = document.getElementById('musicBtnText');
+      const chk = document.getElementById('chkMusicOn');
+      const radioBadge = document.getElementById('radio-status-badge');
+      const radioLabel = document.getElementById('radio-channel-label');
+
+      if (chk) chk.checked = isMusicPlaying;
+
+      if (isMusicPlaying) {
+        btn.classList.add('active-toggle', 'playing');
+        btnText.textContent = '음악 ON';
+        if (radioBadge) radioBadge.style.display = 'inline-flex';
+        if (radioLabel) radioLabel.textContent = CHANNEL_NAMES[CONFIG.audioChannel] || 'Pixelmood Jazz';
+
+        if (noiseGain && audioCtx) {
+          noiseGain.gain.setTargetAtTime(getTargetNoiseGain(), audioCtx.currentTime, 0.5);
+        }
+        if (masterGain && audioCtx) {
+          masterGain.gain.setTargetAtTime(CONFIG.volume, audioCtx.currentTime, 0.8);
+        }
+        if (musicLoopTimer) clearTimeout(musicLoopTimer);
+        scheduleGenerativeBar();
+      } else {
+        btn.classList.remove('active-toggle', 'playing');
+        btnText.textContent = '음악 OFF';
+        if (radioBadge) radioBadge.style.display = 'none';
+
+        if (masterGain && audioCtx) {
+          masterGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.4);
+        }
+        if (musicLoopTimer) {
+          clearTimeout(musicLoopTimer);
+          musicLoopTimer = null;
         }
       }
-      const stanzas = [];
-      let cur = [];
-      for (let l of lines) {
-        cur.push(l);
-        if (cur.length >= 2) {
-          stanzas.push(cur.join("\n"));
-          cur = [];
+    }
+
+    function updateVolume(val) {
+      CONFIG.volume = parseFloat(val);
+      if (masterGain && audioCtx && isMusicPlaying) {
+        masterGain.gain.setTargetAtTime(CONFIG.volume, audioCtx.currentTime, 0.2);
+      }
+      saveConfig();
+    }
+
+    function changeAudioChannel(ch) {
+      CONFIG.audioChannel = ch;
+      const radioLabel = document.getElementById('radio-channel-label');
+      if (radioLabel) radioLabel.textContent = CHANNEL_NAMES[ch] || 'Pixelmood Jazz';
+      if (noiseGain && audioCtx) {
+        noiseGain.gain.setTargetAtTime(getTargetNoiseGain(), audioCtx.currentTime, 0.4);
+      }
+      saveConfig();
+      if (!isMusicPlaying) {
+        setMusicState(true);
+      }
+    }
+
+    function changeAmbientLayer(layer) {
+      CONFIG.ambientLayer = layer;
+      if (noiseGain && audioCtx) {
+        noiseGain.gain.setTargetAtTime(getTargetNoiseGain(), audioCtx.currentTime, 0.4);
+      }
+      saveConfig();
+    }
+
+    function getPixelmoodTargetUrl() {
+      const seedVal = CONFIG.pixelSeed === 'random'
+        ? Math.floor(1000000000 + Math.random() * 3000000000)
+        : '2494034659';
+      return `https://pixelmood.world/?style=jazz&skin=graphite&size=s&ambience=random&level=5&seed=${seedVal}`;
+    }
+
+    function updatePixelmoodUrl() {
+      CONFIG.pixelSeed = document.getElementById('selPixelSeed').value;
+      saveConfig();
+      const iframe = document.getElementById('pixelmood-iframe');
+      const dock = document.getElementById('pixelmood-dock');
+      if (iframe && dock && dock.classList.contains('open')) {
+        iframe.src = getPixelmoodTargetUrl();
+      }
+    }
+
+    function togglePixelmoodDock(forceState) {
+      const dock = document.getElementById('pixelmood-dock');
+      const iframe = document.getElementById('pixelmood-iframe');
+      const btn = document.getElementById('btnPixelmoodDock');
+      const quickBtn = document.getElementById('widgetQuickBtn');
+      const shouldOpen = typeof forceState === 'boolean' ? forceState : !dock.classList.contains('open');
+
+      if (shouldOpen) {
+        // 공식 위젯 열 때 내장 신디사이저와 소리가 겹치지 않도록 내장 사운드는 자동 일시정지
+        if (isMusicPlaying) {
+          setMusicState(false);
+        }
+        if (!iframe.src) {
+          iframe.src = getPixelmoodTargetUrl();
+        }
+        dock.classList.add('open');
+        if (btn) btn.innerHTML = '<span>미니 플레이어 닫기</span>';
+        if (quickBtn) quickBtn.classList.add('active-toggle');
+      } else {
+        dock.classList.remove('open');
+        if (btn) btn.innerHTML = '<span>미니 플레이어 열기</span>';
+        if (quickBtn) quickBtn.classList.remove('active-toggle');
+      }
+    }
+
+    /* =========================================================================
+     * 5. 시 로드, 5대 정예 서체 매핑 및 서정적 타이핑 애니메이션
+     * ========================================================================= */
+    const LIGHT_PALETTES = [
+      { background: "#FBF8F3", color: "#3C342C" },
+      { background: "#F4F6F7", color: "#2D3748" },
+      { background: "#F7F3EE", color: "#4A3B32" },
+      { background: "#F5F3ED", color: "#3E4337" },
+      { background: "#F8F3F4", color: "#4A383E" },
+      { background: "#F9F9F8", color: "#333333" }
+    ];
+    const DARK_PALETTES = [
+      { background: "#1C2026", color: "#E3E7ED" },
+      { background: "#202523", color: "#DCE3DE" },
+      { background: "#181A20", color: "#EAE6DE" },
+      { background: "#161922", color: "#D8E0EB" }
+    ];
+
+    function isDarkHex(hex) {
+      if (!hex || !hex.startsWith('#')) return false;
+      const c = hex.substring(1);
+      const rgb = parseInt(c.length === 3 ? c.split('').map(x => x + x).join('') : c, 16);
+      const r = (rgb >> 16) & 0xff;
+      const g = (rgb >> 8) & 0xff;
+      const b = (rgb >> 0) & 0xff;
+      const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+      return luma < 90;
+    }
+
+    function resolveThemeColors(poemStyle) {
+      let bg = poemStyle.background || "#FBF8F3";
+      let col = poemStyle.color || "#3C342C";
+
+      if (CONFIG.themeMode === 'always_light') {
+        if (isDarkHex(bg)) {
+          const p = LIGHT_PALETTES[Math.floor(Math.random() * LIGHT_PALETTES.length)];
+          bg = p.background;
+          col = p.color;
+        }
+      } else if (CONFIG.themeMode === 'always_dark') {
+        if (!isDarkHex(bg)) {
+          const p = DARK_PALETTES[Math.floor(Math.random() * DARK_PALETTES.length)];
+          bg = p.background;
+          col = p.color;
+        }
+      } else if (CONFIG.themeMode === 'time_auto') {
+        const hour = new Date().getHours();
+        const isNight = hour >= 20 || hour < 6;
+        if (isNight && !isDarkHex(bg)) {
+          const p = DARK_PALETTES[Math.floor(Math.random() * DARK_PALETTES.length)];
+          bg = p.background;
+          col = p.color;
+        } else if (!isNight && isDarkHex(bg)) {
+          const p = LIGHT_PALETTES[Math.floor(Math.random() * LIGHT_PALETTES.length)];
+          bg = p.background;
+          col = p.color;
         }
       }
-      if (cur.length) stanzas.push(cur.join("\n"));
-      return stanzas.join("\n\n");
+
+      const darkFlag = isDarkHex(bg);
+      if (darkFlag) {
+        document.body.classList.add('dark-ui');
+      } else {
+        document.body.classList.remove('dark-ui');
+      }
+
+      const eliteFont = normalizeEliteFont(poemStyle.fontFamily, darkFlag);
+      return { background: bg, color: col, fontFamily: eliteFont };
     }
 
     async function loadReflections() {
       try {
         const res = await fetch('reflections.json?t=' + Date.now());
         reflections = await res.json();
-        showRandomPoem(true); // 첫 로드는 즉시 표시
+        showRandomPoem(true);
+        startAutoPlayIfEnabled();
       } catch (e) {
         console.error("시 불러오기 실패:", e);
       }
@@ -395,41 +1688,64 @@
       const poem = document.getElementById("poem");
       const textTarget = document.getElementById("typed");
       const cursor = document.getElementById("cursor");
+      const badge = document.getElementById("poem-index-badge");
 
       cursor.style.display = "none";
 
-      const fadeOutTime = isInitial ? 0 : 700; // 부드러운 페이드아웃 0.7초
+      const fadeOutTime = isInitial ? 0 : 750;
       if (!isInitial) {
         poem.classList.add("fade-out");
       }
 
       setTimeout(() => {
-        // [절차 1] 기존 텍스트를 가장 먼저 완전히 비운다 (화면에 글자가 전혀 없음)
         textTarget.textContent = "";
 
-        const random = reflections[Math.floor(Math.random() * reflections.length)];
+        currentPoemIndex = Math.floor(Math.random() * reflections.length);
+        const random = reflections[currentPoemIndex];
         const poemText = formatPoemText(random.text || "");
 
-        // 다음 적용할 정렬 선정 (아직 화면 적용하지 않음!)
         const randVal = Math.random();
         const nextAlign = randVal < 0.45 ? 'left' : randVal < 0.85 ? 'center' : 'right';
 
-        // 배경색, 글자색, 서체 부드럽게 전환
-        document.body.style.background = random.style.background;
-        document.body.style.color = random.style.color;
-        document.body.style.fontFamily = random.style.fontFamily;
+        const resolvedStyle = resolveThemeColors(random.style || {});
+        document.body.style.background = resolvedStyle.background;
+        document.body.style.color = resolvedStyle.color;
+        document.body.style.fontFamily = resolvedStyle.fontFamily;
 
-        // [절차 2] 화면이 완전히 비어있는 고요한 정적의 순간 (0.4초 멈춤)
+        // OLED 번인 방지를 위한 미세 픽셀 이동 (-4px ~ +4px)
+        const shiftX = Math.floor(Math.random() * 9) - 4;
+        const shiftY = Math.floor(Math.random() * 9) - 4;
+        document.documentElement.style.setProperty('--poem-shift-x', `${shiftX}px`);
+        document.documentElement.style.setProperty('--poem-shift-y', `${shiftY}px`);
+
+        if (badge) {
+          badge.style.display = CONFIG.showBadge ? 'inline' : 'none';
+          badge.textContent = `시집 #${currentPoemIndex + 1} / ${reflections.length}`;
+        }
+
+        relocateDynamicClock(nextAlign);
+        if (!isInitial) {
+          playGentleRadioChime();
+        }
+
         setTimeout(() => {
-          // [절차 3] 텍스트가 0글자인 빈 화면 상태에서, 타이핑 시작 직전에 정렬 적용!
           setAlignment(nextAlign);
-
-          // [절차 4] 페이드인 복귀
           poem.classList.remove("fade-out");
 
-          // [절차 5] 고급지고 안정된 마음의 속도로 타이핑 시작
+          if (CONFIG.typingSpeed === 'instant') {
+            textTarget.textContent = poemText;
+            cursor.style.display = "inline-block";
+            isTyping = false;
+            isTransitioning = false;
+            ensurePoemPriorityNoOverlap();
+            return;
+          }
+
           isTyping = true;
           let i = 0;
+          const speedMult = CONFIG.typingSpeed === 'slow' ? 1.38
+                          : CONFIG.typingSpeed === 'fast' ? 0.58
+                          : 1.0;
 
           function typeChar() {
             if (!isTyping) {
@@ -442,17 +1758,15 @@
               textTarget.textContent += char;
               i++;
 
-              // 🪶 고급지고 안정된 마음의 타이핑 속도 (또박또박 머무는 호흡)
-              let delay = 85 + Math.random() * 35; // 기본 글자: 85~120ms
-
+              let delay = (82 + Math.random() * 35) * speedMult;
               if (char === ' ') {
-                delay = 160; // 단어 사이 작은 쉼
+                delay = 150 * speedMult;
               } else if (char === ',') {
-                delay = 450; // 쉼표 뒤 반 박자 호흡
+                delay = 420 * speedMult;
               } else if (char === '\n') {
-                delay = 700; // 줄바꿈 시 깊은 숨 고르기
+                delay = 650 * speedMult;
               } else if (char === '.' || char === '!' || char === '?') {
-                delay = 850; // 문장 끝 깊은 여운이 스미는 시간
+                delay = 800 * speedMult;
               }
 
               typeTimer = setTimeout(typeChar, delay);
@@ -460,6 +1774,7 @@
               cursor.style.display = "inline-block";
               isTyping = false;
               isTransitioning = false;
+              ensurePoemPriorityNoOverlap();
             }
           }
 
@@ -473,31 +1788,120 @@
       showRandomPoem(false);
     }
 
-    function toggleAutoPlay() {
+    /* =========================================================================
+     * 6. 태블릿 액자 UX (자동 넘김, 전체화면, Wake Lock, 메뉴 자동 숨김)
+     * ========================================================================= */
+    function updateAutoPlayUI() {
       const textSpan = document.getElementById("autoplayText");
       const svgSpan = document.getElementById("autoplaySvg");
-      if (!isAutoPlaying) {
-        autoPlayInterval = setInterval(() => {
-          if (!isTyping && !isTransitioning) showRandomPoem(false);
-        }, 18000);
-        textSpan.textContent = "멈춤";
+      const btn = document.getElementById("autoplayBtn");
+      if (isAutoPlaying) {
+        btn.classList.add('active-toggle');
+        textSpan.textContent = "자동 감상 중";
         svgSpan.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-        isAutoPlaying = true;
       } else {
-        clearInterval(autoPlayInterval);
-        autoPlayInterval = null;
+        btn.classList.remove('active-toggle');
         textSpan.textContent = "자동 넘김";
         svgSpan.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
-        isAutoPlaying = false;
       }
     }
 
-    function changeFontSize(delta) {
-      const current = parseInt(getComputedStyle(document.body).getPropertyValue('--font-size'));
-      const nextSize = Math.max(16, Math.min(32, current + delta));
-      document.documentElement.style.setProperty('--font-size', `${nextSize}px`);
+    function startAutoPlayIfEnabled() {
+      if (autoPlayInterval) clearInterval(autoPlayInterval);
+      if (isAutoPlaying) {
+        autoPlayInterval = setInterval(() => {
+          if (!isTyping && !isTransitioning) showRandomPoem(false);
+        }, CONFIG.autoIntervalMs);
+      }
+      updateAutoPlayUI();
     }
 
+    function toggleAutoPlay() {
+      isAutoPlaying = !isAutoPlaying;
+      startAutoPlayIfEnabled();
+    }
+
+    function changeFontSize(delta) {
+      CONFIG.fontSize = Math.max(16, Math.min(36, CONFIG.fontSize + delta));
+      document.documentElement.style.setProperty('--font-size', `${CONFIG.fontSize}px`);
+      saveConfig();
+      ensurePoemPriorityNoOverlap();
+    }
+
+    function updateFrameConfig() {
+      CONFIG.autoIntervalMs = parseInt(document.getElementById('selAutoInterval').value, 10);
+      CONFIG.typingSpeed = document.getElementById('selTypingSpeed').value;
+      CONFIG.themeMode = document.getElementById('selThemeMode').value;
+      CONFIG.menuHide = document.getElementById('selMenuHide').value;
+      CONFIG.showBadge = document.getElementById('chkShowBadge').checked;
+
+      const badge = document.getElementById("poem-index-badge");
+      if (badge) badge.style.display = CONFIG.showBadge ? 'inline' : 'none';
+
+      saveConfig();
+      startAutoPlayIfEnabled();
+      resetIdleTimer();
+    }
+
+    function toggleSettings(open) {
+      const modal = document.getElementById('settings-modal');
+      const backdrop = document.getElementById('settings-backdrop');
+      if (open) {
+        modal.classList.add('open');
+        backdrop.classList.add('open');
+      } else {
+        modal.classList.remove('open');
+        backdrop.classList.remove('open');
+      }
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen?.().catch(() => {});
+      } else {
+        document.exitFullscreen?.().catch(() => {});
+      }
+    }
+
+    async function requestWakeLock() {
+      if ('wakeLock' in navigator) {
+        try {
+          wakeLockSentinel = await navigator.wakeLock.request('screen');
+        } catch (e) {}
+      }
+    }
+
+    function resetIdleTimer() {
+      document.body.classList.remove('idle-zen', 'hide-controls-completely');
+      if (idleTimer) clearTimeout(idleTimer);
+      if (CONFIG.menuHide === 'always') return;
+
+      idleTimer = setTimeout(() => {
+        const modalOpen = document.getElementById('settings-modal')?.classList.contains('open');
+        if (!modalOpen) {
+          document.body.classList.add('idle-zen');
+          if (CONFIG.menuHide === 'hide') {
+            document.body.classList.add('hide-controls-completely');
+          }
+        }
+      }, 5500);
+    }
+
+    ['mousemove', 'touchstart', 'keydown', 'click'].forEach(evt => {
+      window.addEventListener(evt, resetIdleTimer, { passive: true });
+    });
+
+    window.addEventListener('resize', ensurePoemPriorityNoOverlap);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') requestWakeLock();
+    });
+
+    // 초기화 실행
+    loadSavedConfig();
+    renderClock();
+    setInterval(renderClock, 10000);
+    resetIdleTimer();
+    requestWakeLock();
     loadReflections();
   </script>
 </body>
