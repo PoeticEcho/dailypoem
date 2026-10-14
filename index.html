@@ -874,6 +874,14 @@
         </div>
 
         <div class="setting-row">
+          <span>풍부한 사운드 (Lush Jazz)</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chkRichAudio" checked onchange="toggleRichAudio(this.checked)">
+            <span class="slider-round"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
           <span>배경 자연음</span>
           <select id="selAmbientLayer" class="setting-select" onchange="changeAmbientLayer(this.value)">
             <option value="random">자동 블렌딩 (Random)</option>
@@ -1090,7 +1098,8 @@
       ambientLayer: 'random',
       ambienceLevel: 5,
       seed: 2494034659,
-      volume: 0.22
+      volume: 0.22,
+      richAudio: true
     };
 
     function parseUrlParamsIntoConfig() {
@@ -1100,6 +1109,8 @@
         if (params.get('ambience')) CONFIG.ambientLayer = params.get('ambience');
         if (params.get('level')) CONFIG.ambienceLevel = Math.max(0, Math.min(10, parseInt(params.get('level'), 10)));
         if (params.get('seed')) CONFIG.seed = parseInt(params.get('seed'), 10) || 2494034659;
+        if (params.get('rich') === '0') CONFIG.richAudio = false;
+        else if (params.get('rich') === '1') CONFIG.richAudio = true;
 
         // 1순위: /dailypoem/2341/ 형태의 경로 파싱 (404 리다이렉트 또는 직접 경로)
         const path = window.location.pathname;
@@ -1183,6 +1194,8 @@
       if (badge) badge.style.display = CONFIG.showBadge ? 'inline' : 'none';
 
       document.getElementById('selAudioChannel').value = CONFIG.audioChannel;
+      const chkRich = document.getElementById('chkRichAudio');
+      if (chkRich) chkRich.checked = !!CONFIG.richAudio;
       document.getElementById('selAmbientLayer').value = CONFIG.ambientLayer;
       document.getElementById('rngAmbLevel').value = CONFIG.ambienceLevel;
       document.getElementById('lblAmbLevel').textContent = CONFIG.ambienceLevel;
@@ -1647,6 +1660,10 @@
     let noiseNode = null;
     let noiseFilter = null;
     let noiseGain = null;
+    let reverbDelay = null;
+    let reverbFeedback = null;
+    let reverbFilter = null;
+    let reverbGain = null;
     let isMusicPlaying = false;
     let musicLoopTimer = null;
 
@@ -1664,6 +1681,7 @@
       };
     }
 
+    // 1) 기본 클래식 화성 루프
     const CHORD_LIBRARIES = {
       'jazz': [
         [
@@ -1695,6 +1713,70 @@
           [73.42, 146.83, 220.00, 293.66, 349.23, 587.33],
           [98.00, 196.00, 246.94, 293.66, 392.00, 493.88],
           [65.41, 130.81, 196.00, 246.94, 329.63, 523.25]
+        ]
+      ],
+      'ambient': [
+        [
+          [65.41, 130.81, 196.00, 293.66, 392.00],
+          [87.31, 174.61, 261.63, 329.63, 440.00],
+          [73.42, 146.83, 220.00, 293.66, 392.00]
+        ]
+      ]
+    };
+
+    // 2) [풍부하게] 모드: Altered Dominant 턴어라운드, 트라이톤 대리코드 하강, 패싱 디미니쉬 등 고급 재즈 화성 풀
+    const CHORD_LIBRARIES_LUSH = {
+      'jazz': [
+        // 1-1. 빌 에반스 스타일 2-5-1-6 with A7(b9, b13) 강력한 반음 해결
+        [
+          [73.42, 146.83, 220.00, 261.63, 329.63, 440.00], // Dm9
+          [98.00, 196.00, 246.94, 293.66, 349.23, 440.00], // G13
+          [65.41, 130.81, 196.00, 246.94, 293.66, 392.00], // Cmaj9
+          [110.00, 220.00, 277.18, 349.23, 392.00, 466.16]  // A7(b9, b13) -> 다음 Dm9으로 반음 스무스 해결!
+        ],
+        // 1-2. 트라이톤 대리코드 반음 하강 진행 (D -> Db -> C -> B)
+        [
+          [73.42, 146.83, 220.00, 261.63, 329.63, 440.00], // Dm9
+          [69.30, 138.59, 174.61, 246.94, 277.18, 369.99], // Db7(#11) (G7의 트라이톤 대리)
+          [65.41, 130.81, 196.00, 246.94, 293.66, 392.00], // Cmaj9
+          [61.74, 123.47, 185.00, 246.94, 311.13, 392.00]  // B7(alt) (하강 텐션)
+        ],
+        // 1-3. 서정적 패싱 디미니쉬 발라드 진행 (Cmaj9 -> C#dim7 -> Dm9 -> G7b13)
+        [
+          [65.41, 130.81, 196.00, 246.94, 293.66, 392.00], // Cmaj9
+          [69.30, 138.59, 174.61, 233.08, 277.18, 329.63], // C#dim7
+          [73.42, 146.83, 220.00, 261.63, 329.63, 440.00], // Dm9
+          [98.00, 196.00, 246.94, 311.13, 349.23, 440.00]  // G7(b13)
+        ]
+      ],
+      'lofi': [
+        [
+          [87.31, 174.61, 220.00, 261.63, 329.63, 392.00], // Fmaj9
+          [82.41, 164.81, 196.00, 246.94, 293.66, 392.00], // Em7
+          [73.42, 146.83, 220.00, 261.63, 329.63, 349.23], // Dm9
+          [65.41, 130.81, 196.00, 246.94, 329.63, 392.00]  // Cmaj9
+        ],
+        [
+          [73.42, 146.83, 220.00, 261.63, 329.63, 440.00], // Dm9
+          [98.00, 196.00, 261.63, 293.66, 349.23, 440.00], // G13sus4
+          [65.41, 130.81, 196.00, 246.94, 293.66, 392.00], // Cmaj9
+          [110.00, 220.00, 261.63, 329.63, 392.00, 440.00] // Am9
+        ]
+      ],
+      'late_fm': [
+        [
+          [73.42, 146.83, 220.00, 261.63, 329.63, 440.00], // Dm9
+          [98.00, 196.00, 246.94, 311.13, 349.23, 440.00], // G13(b9)
+          [65.41, 130.81, 196.00, 246.94, 293.66, 392.00], // Cmaj9
+          [110.00, 220.00, 277.18, 349.23, 392.00, 466.16] // A7(b13)
+        ]
+      ],
+      'nocturne': [
+        [
+          [110.00, 220.00, 261.63, 329.63, 440.00, 523.25], // Am9
+          [73.42, 146.83, 220.00, 293.66, 349.23, 587.33],  // Dm11
+          [98.00, 196.00, 246.94, 311.13, 349.23, 493.88],  // G7(b9)
+          [65.41, 130.81, 196.00, 246.94, 329.63, 523.25]   // Cmaj9(add13)
         ]
       ],
       'ambient': [
@@ -1749,7 +1831,7 @@
       const popMusicBtn = document.getElementById('popMusicBtn');
       const chkMusicOn = document.getElementById('chkMusicOn');
 
-      if (elStyle) elStyle.textContent = `STYLE: ${stLabel}`;
+      if (elStyle) elStyle.textContent = `STYLE: ${stLabel}${CONFIG.richAudio ? '✦' : ''}`;
       if (elAmb) elAmb.textContent = `AMB: ${ambLabel}(L${CONFIG.ambienceLevel})`;
       if (elSeed) elSeed.textContent = `SEED ${CONFIG.seed}`;
       if (elBpm) elBpm.textContent = `${currentTrackMeta.bpm} BPM`;
@@ -1758,9 +1840,11 @@
         elPlayBtn.textContent = isMusicPlaying ? '|| PAUSE' : '▶ PLAY';
         elPlayBtn.classList.toggle('pm-active', isMusicPlaying);
       }
-      if (elRadioLabel) elRadioLabel.textContent = `${stLabel} · SEED #${CONFIG.seed}`;
+      if (elRadioLabel) elRadioLabel.textContent = `${stLabel}${CONFIG.richAudio ? ' (LUSH)' : ''} · SEED #${CONFIG.seed}`;
       if (inpSeed) inpSeed.value = String(CONFIG.seed);
       if (chkMusicOn) chkMusicOn.checked = isMusicPlaying;
+      const chkRich = document.getElementById('chkRichAudio');
+      if (chkRich) chkRich.checked = !!CONFIG.richAudio;
 
       if (popMusicText) popMusicText.textContent = isMusicPlaying ? '음악 끄기' : '음악 켜기 (Jazz)';
       if (popMusicIcon) popMusicIcon.textContent = isMusicPlaying ? '⏹' : '🎵';
@@ -1774,6 +1858,32 @@
       masterGain = audioCtx.createGain();
       masterGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
       masterGain.connect(audioCtx.destination);
+
+      // 공간감 에코/리버브 버스 생성 (Stereo/Room Delay & Warm Damping)
+      try {
+        reverbDelay = audioCtx.createDelay(1.0);
+        reverbDelay.delayTime.setValueAtTime(0.32, audioCtx.currentTime);
+
+        reverbFeedback = audioCtx.createGain();
+        reverbFeedback.gain.setValueAtTime(0.24, audioCtx.currentTime);
+
+        reverbFilter = audioCtx.createBiquadFilter();
+        reverbFilter.type = 'lowpass';
+        reverbFilter.frequency.setValueAtTime(1600, audioCtx.currentTime);
+
+        reverbGain = audioCtx.createGain();
+        reverbGain.gain.setValueAtTime(CONFIG.richAudio ? 0.16 : 0.0, audioCtx.currentTime);
+
+        // 루프: Delay -> Filter -> Feedback -> Delay
+        reverbDelay.connect(reverbFilter);
+        reverbFilter.connect(reverbFeedback);
+        reverbFeedback.connect(reverbDelay);
+
+        // 출력: Filter -> ReverbGain -> MasterGain
+        reverbFilter.connect(reverbGain);
+        reverbGain.connect(masterGain);
+      } catch (e) {}
+
       setupAmbientNoiseLayer();
     }
 
@@ -1819,6 +1929,32 @@
       return 0.065 * levelScale;
     }
 
+    function playVinylDustTick(time) {
+      if (!audioCtx || !isMusicPlaying || !CONFIG.richAudio) return;
+      try {
+        const tickOsc = audioCtx.createOscillator();
+        const tickGain = audioCtx.createGain();
+        const tickFilter = audioCtx.createBiquadFilter();
+
+        tickOsc.type = 'triangle';
+        tickOsc.frequency.setValueAtTime(2600 + Math.random() * 2000, time);
+
+        tickFilter.type = 'highpass';
+        tickFilter.frequency.setValueAtTime(1800, time);
+
+        tickGain.gain.setValueAtTime(0.0001, time);
+        tickGain.gain.linearRampToValueAtTime(0.012 + Math.random() * 0.016, time + 0.002);
+        tickGain.gain.exponentialRampToValueAtTime(0.0001, time + 0.012);
+
+        tickOsc.connect(tickFilter);
+        tickFilter.connect(tickGain);
+        tickGain.connect(masterGain);
+
+        tickOsc.start(time);
+        tickOsc.stop(time + 0.015);
+      } catch (e) {}
+    }
+
     function playInstrumentNote(freq, startTime, duration, inst = 'rhodes', velocity = 0.12) {
       if (!audioCtx || !isMusicPlaying) return;
       const osc = audioCtx.createOscillator();
@@ -1826,18 +1962,29 @@
       const noteGain = audioCtx.createGain();
       const filter = audioCtx.createBiquadFilter();
 
+      let tineOsc = null;
+      let tineGain = null;
+
       if (inst === 'bass') {
         osc.type = 'triangle';
         subOsc.type = 'sine';
         subOsc.frequency.setValueAtTime(freq, startTime);
         filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(340, startTime);
+
+        if (CONFIG.richAudio) {
+          // 어쿠스틱 콘트라베이스 우디(Woody) 핑거 어택 & 바디 공명
+          filter.Q.setValueAtTime(1.8, startTime);
+          filter.frequency.setValueAtTime(520, startTime);
+          filter.frequency.exponentialRampToValueAtTime(190, startTime + 0.12);
+        } else {
+          filter.frequency.setValueAtTime(340, startTime);
+        }
       } else if (inst === 'jazz_guitar') {
         osc.type = 'triangle';
         subOsc.type = 'sine';
         subOsc.frequency.setValueAtTime(freq * 2, startTime);
         filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(1250, startTime);
+        filter.frequency.setValueAtTime(CONFIG.richAudio ? 980 : 1250, startTime);
       } else if (inst === 'vibes') {
         osc.type = 'sine';
         subOsc.type = 'sine';
@@ -1845,20 +1992,43 @@
         filter.type = 'lowpass';
         filter.frequency.setValueAtTime(2200, startTime);
       } else {
+        // rhodes
         osc.type = 'sine';
         subOsc.type = 'triangle';
         subOsc.frequency.setValueAtTime(freq * 2, startTime);
         filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(1020, startTime);
+        filter.frequency.setValueAtTime(CONFIG.richAudio ? 1200 : 1020, startTime);
+
+        if (CONFIG.richAudio) {
+          // 빈티지 Fender Rhodes 특유의 맑은 Tine(금속 타현) 어택 배음
+          try {
+            tineOsc = audioCtx.createOscillator();
+            tineGain = audioCtx.createGain();
+            tineOsc.type = 'sine';
+            tineOsc.frequency.setValueAtTime(freq * 4.25, startTime);
+            tineGain.gain.setValueAtTime(velocity * 0.24, startTime);
+            tineGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.055);
+            tineOsc.connect(tineGain);
+            tineGain.connect(masterGain);
+            if (reverbDelay) tineGain.connect(reverbDelay);
+            tineOsc.start(startTime);
+            tineOsc.stop(startTime + 0.06);
+          } catch (e) {}
+        }
       }
 
       osc.frequency.setValueAtTime(freq, startTime);
       const subGain = audioCtx.createGain();
-      subGain.gain.setValueAtTime(velocity * 0.16, startTime);
+      subGain.gain.setValueAtTime(velocity * (CONFIG.richAudio && inst === 'rhodes' ? 0.22 : 0.16), startTime);
 
-      const attack = inst === 'bass' ? 0.06 : 0.14;
+      const attack = inst === 'bass' ? 0.05 : (CONFIG.richAudio ? 0.07 : 0.14);
       noteGain.gain.setValueAtTime(0.0001, startTime);
       noteGain.gain.linearRampToValueAtTime(velocity, startTime + attack);
+
+      // Tremolo 효과 (풍부하게 모드일 때 은은한 감성 비브라토/트레몰로 감쇠)
+      if (CONFIG.richAudio && inst === 'rhodes' && duration > 0.8) {
+        noteGain.gain.setTargetAtTime(velocity * 0.68, startTime + attack + 0.12, 0.22);
+      }
       noteGain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
 
       osc.connect(filter);
@@ -1866,6 +2036,11 @@
       subGain.connect(filter);
       filter.connect(noteGain);
       noteGain.connect(masterGain);
+
+      // 리버브 버스로 여운 전달
+      if (reverbDelay && CONFIG.richAudio && inst !== 'bass') {
+        noteGain.connect(reverbDelay);
+      }
 
       osc.start(startTime);
       subOsc.start(startTime);
@@ -1898,6 +2073,14 @@
       const levelScale = CONFIG.ambienceLevel / 5.0;
       const r = prng ? prng() : Math.random();
 
+      // 풍부하게 모드일 때: LP 바이닐 미세 먼지 틱 노이즈 발생
+      if (CONFIG.richAudio && (activeAmb === 'vinyl' || activeAmb === 'random' || activeAmb === 'rain')) {
+        const popCount = 1 + Math.floor(Math.random() * 3);
+        for (let p = 0; p < popCount; p++) {
+          playVinylDustTick(now + 0.4 + Math.random() * 3.2);
+        }
+      }
+
       if (activeAmb === 'birds' && r < 0.55) {
         const baseBird = 1400 + (prng ? prng() : Math.random()) * 520;
         playInstrumentNote(baseBird, now + 1.4, 0.28, 'vibes', 0.016 * levelScale);
@@ -1912,8 +2095,15 @@
       if (!isMusicPlaying || !audioCtx) return;
       if (!prng) initializeSeedTrack(CONFIG.seed);
 
-      const libGroup = CHORD_LIBRARIES[CONFIG.audioChannel] || CHORD_LIBRARIES['jazz'];
-      const prog = libGroup[CONFIG.seed % libGroup.length];
+      const libGroup = (CONFIG.richAudio && CHORD_LIBRARIES_LUSH[CONFIG.audioChannel]) 
+        ? CHORD_LIBRARIES_LUSH[CONFIG.audioChannel] 
+        : (CHORD_LIBRARIES[CONFIG.audioChannel] || CHORD_LIBRARIES['jazz']);
+
+      // 풍부하게 모드에서는 4마디마다 다채로운 진행 풀(Progression Pool) 순환
+      const progIndex = CONFIG.richAudio 
+        ? (Math.floor(chordStep / 4) + CONFIG.seed) % libGroup.length 
+        : (CONFIG.seed % libGroup.length);
+      const prog = libGroup[progIndex];
       const rawChord = prog[chordStep % prog.length];
       const chord = rawChord.map(f => f * (currentTrackMeta.pitchFactor || 1.0));
       chordStep++;
@@ -1929,8 +2119,11 @@
 
       const chordInst = CONFIG.audioChannel === 'nocturne' ? 'vibes' : 'rhodes';
       chord.slice(1).forEach((freq, idx) => {
-        const swingDelay = isJazz ? (idx * 0.15 + (idx % 2 === 1 ? 0.05 : 0.0)) : (idx * 0.13);
-        playInstrumentNote(freq, now + swingDelay, barDurSec * 0.92, chordInst, 0.075);
+        const swingDelay = isJazz ? (idx * 0.14 + (idx % 2 === 1 ? 0.04 : 0.0)) : (idx * 0.12);
+        // 탑 노트는 조금 더 또렷하게, 내성음은 부드럽게
+        const isTopNote = idx === chord.length - 2;
+        const vel = CONFIG.richAudio ? (isTopNote ? 0.088 : 0.065) : 0.075;
+        playInstrumentNote(freq, now + swingDelay, barDurSec * 0.92, chordInst, vel);
       });
 
       const soloCount = CONFIG.audioChannel === 'ambient' ? 1 : 3;
@@ -1959,6 +2152,16 @@
       setMusicState(!isMusicPlaying);
     }
 
+    function toggleRichAudio(turnOn) {
+      CONFIG.richAudio = turnOn;
+      saveConfig();
+      if (reverbGain && audioCtx) {
+        reverbGain.gain.setTargetAtTime(CONFIG.richAudio ? 0.16 : 0.0, audioCtx.currentTime, 0.25);
+      }
+      showHudFeedback(CONFIG.richAudio ? '✨' : '🔈', `풍부한 사운드: ${CONFIG.richAudio ? 'ON (Altered 턴어라운드 & 룸 에코)' : 'OFF (클래식 모드)'}`);
+      updateWalkmanLcdUI();
+    }
+
     function setMusicState(turnOn) {
       initAudioEngine();
       if (audioCtx && audioCtx.state === 'suspended') {
@@ -1974,6 +2177,9 @@
         if (noiseGain && audioCtx) {
           noiseGain.gain.setTargetAtTime(getTargetNoiseGain(), audioCtx.currentTime, 0.5);
         }
+        if (reverbGain && audioCtx) {
+          reverbGain.gain.setTargetAtTime(CONFIG.richAudio ? 0.16 : 0.0, audioCtx.currentTime, 0.5);
+        }
         if (masterGain && audioCtx) {
           masterGain.gain.setTargetAtTime(CONFIG.volume, audioCtx.currentTime, 0.8);
         }
@@ -1984,6 +2190,9 @@
         showHudFeedback('⏹', '음악 멈춤');
         if (masterGain && audioCtx) {
           masterGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.4);
+        }
+        if (reverbGain && audioCtx) {
+          reverbGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.4);
         }
         if (musicLoopTimer) {
           clearTimeout(musicLoopTimer);
