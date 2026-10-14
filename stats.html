@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>시집 서재 & 통계 · 지난 7일 신작 및 공감 TOP 10</title>
+  <meta name="description" content="감성 타이핑 시집의 지난 7일 동안 올라온 최신 시와 가장 많은 공감을 받은 인기 시 TOP 10 아카이브" />
+  <link rel="icon" type="image/png" sizes="64x64" href="./favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:url" content="https://poeticecho.github.io/dailypoem/stats.html" />
+  <meta property="og:title" content="감성 타이핑 시집 · 인기 시 TOP 10 & 주간 신작 서재" />
+  <meta property="og:description" content="지난 7일 동안 올라온 최신 시와 독자들이 두 번 탭해 마음을 남긴 공감 TOP 10" />
+  <meta property="og:image" content="https://poeticecho.github.io/dailypoem/og-image.png" />
+
+  <!-- 자체 호스팅 로컬 서체 번들 최우선 로드 -->
+  <link rel="stylesheet" href="./fonts/local-fonts.css" onerror="this.remove()">
+  <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css">
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;600&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    @font-face {
+      font-family: 'Gowun Dodum';
+      font-weight: 400;
+      src: local('Gowun Dodum'), url('./fonts/GowunDodum-Regular.woff2') format('woff2');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Gowun Batang';
+      font-weight: 400;
+      src: local('Gowun Batang'), url('./fonts/GowunBatang-Regular.woff2') format('woff2');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'MaruBuri';
+      font-weight: 400;
+      src: local('MaruBuri'), url('./fonts/MaruBuri-Regular.woff2') format('woff2'),
+           url('https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2') format('woff2');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Noto Serif KR';
+      font-weight: 400;
+      src: local('Noto Serif KR'), url('./fonts/NotoSerifKR-Regular.woff2') format('woff2');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Nanum Myeongjo';
+      font-weight: 400;
+      src: local('Nanum Myeongjo'), url('./fonts/NanumMyeongjo-Regular.woff2') format('woff2');
+      font-display: swap;
+    }
+
+    :root {
+      --bg-main: #FBF8F3;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #F4EFE6;
+      --text-main: #3C342C;
+      --text-muted: #7A6E62;
+      --border-col: rgba(140, 120, 100, 0.2);
+      --accent-col: #8C6D53;
+      --heart-col: #D46565;
+    }
+
+    body.dark-mode {
+      --bg-main: #181A20;
+      --bg-card: #21252E;
+      --bg-subtle: #282D38;
+      --text-main: #E6E9EF;
+      --text-muted: #9AA3B2;
+      --border-col: rgba(255, 255, 255, 0.12);
+      --accent-col: #B8A48E;
+      --heart-col: #E07A7A;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Gowun Dodum', sans-serif;
+      -webkit-font-smoothing: subpixel-antialiased;
+      -moz-osx-font-smoothing: auto;
+      font-smooth: always;
+      text-rendering: optimizeLegibility;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    .page-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: max(env(safe-area-inset-top, 0px), 2.2rem) 1.4rem 4rem;
+    }
+
+    /* 상단 네비게이션 & 헤더 */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.8rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-col);
+    }
+
+    .brand-group h1 {
+      font-family: 'Gowun Batang', serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin: 0 0 0.25rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-group p {
+      margin: 0;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+
+    .pill-btn {
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      border: 1px solid var(--border-col);
+      padding: 0.45rem 0.85rem;
+      border-radius: 9999px;
+      font-family: 'Gowun Dodum', sans-serif;
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.38rem;
+      transition: all 0.2s ease;
+    }
+    .pill-btn:hover {
+      border-color: var(--accent-col);
+      transform: translateY(-1px);
+    }
+    .pill-btn.primary {
+      background: var(--text-main);
+      color: var(--bg-main);
+      border-color: var(--text-main);
+    }
+
+    /* 요약 지표 대시보드 카드 */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-col);
+      border-radius: 16px;
+      padding: 1.1rem 1.25rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+    .stat-value {
+      font-family: 'Gowun Batang', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .stat-sub {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: var(--bg-subtle);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--accent-col);
+      border-radius: 999px;
+      transition: width 0.8s ease;
+    }
+
+    /* 탭 전환 바 */
+    .section-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.3rem;
+      border-bottom: 1px solid var(--border-col);
+      padding-bottom: 0.75rem;
+    }
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'Gowun Batang', serif;
+      font-size: 0.96rem;
+      font-weight: 700;
+      padding: 0.45rem 1rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      border-color: var(--border-col);
+    }
+
+    /* 시 카드 그리드 */
+    .poems-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.1rem;
+    }
+
+    .poem-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-col);
+      border-radius: 18px;
+      padding: 1.35rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.1rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .poem-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      border-bottom: 1px dashed var(--border-col);
+      padding-bottom: 0.6rem;
+    }
+
+    .rank-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: 'Gowun Batang', serif;
+      font-weight: 700;
+      font-size: 0.84rem;
+      color: var(--text-main);
+      background: var(--bg-subtle);
+      padding: 0.2rem 0.62rem;
+      border-radius: 999px;
+    }
+    .rank-1 { background: #F5E6C4; color: #5C4318; }
+    .rank-2 { background: #E8ECEF; color: #3A434D; }
+    .rank-3 { background: #F0DFD1; color: #5E3B24; }
+    body.dark-mode .rank-1 { background: #4A3B1C; color: #F5DFAD; }
+    body.dark-mode .rank-2 { background: #323842; color: #DCE3EC; }
+    body.dark-mode .rank-3 { background: #473124; color: #EED2BE; }
+
+    .heart-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28rem;
+      color: var(--heart-col);
+      font-weight: 700;
+      font-size: 0.82rem;
+      background: rgba(212, 101, 101, 0.1);
+      padding: 0.2rem 0.58rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .heart-pill:hover {
+      background: rgba(212, 101, 101, 0.2);
+    }
+
+    .card-poem-body {
+      white-space: pre-wrap;
+      line-height: 2.05;
+      font-size: 1.02rem;
+      letter-spacing: -0.015em;
+      padding: 0.3rem 0;
+      word-break: keep-all;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding-top: 0.65rem;
+      border-top: 1px solid var(--border-col);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .card-links {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .mini-link-btn {
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      border: 1px solid var(--border-col);
+      padding: 0.28rem 0.62rem;
+      border-radius: 8px;
+      font-size: 0.74rem;
+      text-decoration: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .mini-link-btn:hover {
+      border-color: var(--accent-col);
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 1.6rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(12px);
+      background: rgba(28, 32, 38, 0.9);
+      color: #F4F6F8;
+      padding: 0.65rem 1.25rem;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s ease;
+      z-index: 300;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 720px) {
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+      .poems-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 은은한 아날로그 종이 질감 오버레이 (시집 본 화면과 통일감 유지) -->
+  <svg aria-hidden="true" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;opacity:0.025;z-index:999;">
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noise)" />
+  </svg>
+
+  <div class="page-wrap">
+    <header class="top-bar">
+      <div class="brand-group">
+        <h1>📜 감성 타이핑 시집 · 서재 & 통계</h1>
+        <p>독자들이 두 번 탭해 마음을 남긴 공감 TOP 10과 지난 7일 동안 새로 피어난 시</p>
+      </div>
+
+      <div class="top-actions">
+        <button class="pill-btn" onclick="toggleDarkMode()" id="btnThemeToggle">🌙 밤하늘 모드</button>
+        <button class="pill-btn" onclick="exportUpdatedJson()" title="누적된 공감(♥)이 반영된 reflections.json 파일 내려받기">💾 통계 JSON 저장</button>
+        <a class="pill-btn primary" href="./index.html">← 시집 액자로 돌아가기</a>
+      </div>
+    </header>
+
+    <!-- 요약 지표 3종 -->
+    <section class="summary-grid" aria-label="시집 통계 요약">
+      <div class="stat-card">
+        <div class="stat-label">시집 아카이브 수록 현황 (목표 1,000편)</div>
+        <div class="stat-value" id="statTotalCount">340 / 1,000편</div>
+        <div class="progress-track">
+          <div class="progress-fill" id="statProgressBar" style="width: 34%;"></div>
+        </div>
+        <div class="stat-sub" id="statProgressText">목표의 34.0% 달성 · 매일 오전 10시 자동 적립</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">지난 7일 동안 올라온 신작 시</div>
+        <div class="stat-value" id="statRecentCount">14편</div>
+        <div class="stat-sub" id="statRecentRange">최근 7일간의 따뜻한 위로</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">독자 누적 공감 (중앙 두 번 탭 ♥)</div>
+        <div class="stat-value" id="statTotalHearts">0 ♥</div>
+        <div class="stat-sub">가장 많은 위로를 건넨 시 TOP 10 집계</div>
+      </div>
+    </section>
+
+    <!-- 탭 전환 -->
+    <nav class="section-tabs" aria-label="통계 보기 전환">
+      <button class="tab-btn active" id="tabBtnTop10" onclick="switchView('top10')">💖 공감 하트 1위 ~ 10위 (TOP 10)</button>
+      <button class="tab-btn" id="tabBtnRecent7" onclick="switchView('recent7')">🌿 지난 7일 동안 올라온 최신 시</button>
+    </nav>
+
+    <!-- 시 목록 컨테이너 -->
+    <main id="poemsGrid" class="poems-grid"></main>
+  </div>
+
+  <div id="toast"></div>
+
+  <script>
+    let allPoems = [];
+    let currentView = 'top10';
+    let localHeartMap = {};
+
+    function loadLocalHearts() {
+      try {
+        localHeartMap = JSON.parse(localStorage.getItem('poetry_hearts_v1') || '{}');
+      } catch (e) {
+        localHeartMap = {};
+      }
+    }
+
+    function getEffectiveHearts(poem, idx) {
+      const base = typeof poem.hearts === 'number' ? poem.hearts : 0;
+      const added = localHeartMap[String(idx)] || 0;
+      return base + added;
+    }
+
+    function addHeartFromStats(idx) {
+      localHeartMap[String(idx)] = (localHeartMap[String(idx)] || 0) + 1;
+      try {
+        localStorage.setItem('poetry_hearts_v1', JSON.stringify(localHeartMap));
+      } catch (e) {}
+      renderDashboard();
+      showToast('♥ 이 시에 공감을 남겼습니다');
+    }
+
+    async function copyPoemShareLink(idx) {
+      const basePath = window.location.origin + window.location.pathname.replace(/stats\.html$/, 'index.html');
+      const shareUrl = `${basePath}?poem=${idx}&autoplay=0`;
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+      } catch (e) {
+        const inp = document.createElement('input');
+        inp.value = shareUrl;
+        document.body.appendChild(inp);
+        inp.select();
+        document.execCommand('copy');
+        document.body.removeChild(inp);
+      }
+      showToast('🔗 공유 링크가 복사되었습니다 (자동 감상 꺼짐 상태로 열림)');
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 2000);
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      document.getElementById('btnThemeToggle').textContent = isDark ? '☀️ 한지 모드' : '🌙 밤하늘 모드';
+    }
+
+    function switchView(viewName) {
+      currentView = viewName;
+      document.getElementById('tabBtnTop10').classList.toggle('active', viewName === 'top10');
+      document.getElementById('tabBtnRecent7').classList.toggle('active', viewName === 'recent7');
+      renderDashboard();
+    }
+
+    function getRecent7DaysPoems() {
+      // 가장 최신 시의 날짜(또는 오늘 날짜)를 기준으로 최근 7일 이내에 올라온 시 필터링
+      const dates = allPoems.map(p => p.createdAt).filter(Boolean).sort();
+      const latestDateStr = dates.length ? dates[dates.length - 1] : new Date().toISOString().slice(0, 10);
+      const latestDate = new Date(latestDateStr + 'T00:00:00');
+      const cutoffDate = new Date(latestDate.getTime() - 6 * 24 * 60 * 60 * 1000);
+      const cutoffStr = cutoffDate.toISOString().slice(0, 10);
+
+      const recent = allPoems
+        .map((p, idx) => ({ ...p, _idx: idx, _hearts: getEffectiveHearts(p, idx) }))
+        .filter(p => p.createdAt && p.createdAt >= cutoffStr)
+        .sort((a, b) => (b.createdAt.localeCompare(a.createdAt)) || (b._idx - a._idx));
+
+      // 만약 날짜 메타데이터가 없는 구버전 JSON이면 마지막 14편을 최신 7일 시로 표시
+      if (recent.length === 0) {
+        return allPoems
+          .map((p, idx) => ({ ...p, _idx: idx, _hearts: getEffectiveHearts(p, idx) }))
+          .slice(-14)
+          .reverse();
+      }
+      return { list: recent, cutoffStr, latestDateStr };
+    }
+
+    function renderDashboard() {
+      const total = allPoems.length;
+      const pct = Math.min(100, (total / 1000) * 100).toFixed(1);
+      document.getElementById('statTotalCount').textContent = `${total} / 1,000편`;
+      document.getElementById('statProgressBar').style.width = `${pct}%`;
+      document.getElementById('statProgressText').textContent = `목표의 ${pct}% 달성 · 매일 오전 10시 자동 적립`;
+
+      const totalHearts = allPoems.reduce((acc, p, idx) => acc + getEffectiveHearts(p, idx), 0);
+      document.getElementById('statTotalHearts').textContent = `${totalHearts.toLocaleString()} ♥`;
+
+      const recentInfo = getRecent7DaysPoems();
+      const recentList = Array.isArray(recentInfo) ? recentInfo : recentInfo.list;
+      document.getElementById('statRecentCount').textContent = `${recentList.length}편`;
+      if (recentInfo.cutoffStr) {
+        document.getElementById('statRecentRange').textContent = `${recentInfo.cutoffStr} ~ ${recentInfo.latestDateStr} 등록 신작`;
+      }
+
+      const grid = document.getElementById('poemsGrid');
+      grid.innerHTML = '';
+
+      if (currentView === 'top10') {
+        const ranked = allPoems
+          .map((p, idx) => ({ ...p, _idx: idx, _hearts: getEffectiveHearts(p, idx) }))
+          .sort((a, b) => (b._hearts - a._hearts) || (b._idx - a._idx))
+          .slice(0, 10);
+
+        ranked.forEach((item, rankIdx) => {
+          const rankNum = rankIdx + 1;
+          const rankClass = rankNum <= 3 ? `rank-${rankNum}` : '';
+          const medal = rankNum === 1 ? '🥇 ' : rankNum === 2 ? '🥈 ' : rankNum === 3 ? '🥉 ' : '';
+          const card = document.createElement('article');
+          card.className = 'poem-card';
+          card.innerHTML = `
+            <div>
+              <div class="card-top">
+                <span class="rank-badge ${rankClass}">${medal}공감 ${rankNum}위 · 시집 #${item._idx + 1}</span>
+                <button class="heart-pill" onclick="addHeartFromStats(${item._idx})" title="공감 하트 더하기">
+                  ♥ ${item._hearts}
+                </button>
+              </div>
+              <div class="card-poem-body" style="font-family: ${item.style?.fontFamily || "'Gowun Batang', serif"};">${escapeHtml(item.text)}</div>
+            </div>
+            <div class="card-footer">
+              <span>등록일 · ${item.createdAt || '아카이브'}</span>
+              <div class="card-links">
+                <button class="mini-link-btn" onclick="copyPoemShareLink(${item._idx})">🔗 공유</button>
+                <a class="mini-link-btn" href="./index.html?poem=${item._idx}&autoplay=0">액자로 감상 →</a>
+              </div>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      } else {
+        recentList.forEach((item) => {
+          const card = document.createElement('article');
+          card.className = 'poem-card';
+          card.innerHTML = `
+            <div>
+              <div class="card-top">
+                <span class="rank-badge">🌿 ${item.createdAt || '최근 신작'} · 시집 #${item._idx + 1}</span>
+                <button class="heart-pill" onclick="addHeartFromStats(${item._idx})" title="공감 하트 더하기">
+                  ♥ ${item._hearts}
+                </button>
+              </div>
+              <div class="card-poem-body" style="font-family: ${item.style?.fontFamily || "'Gowun Batang', serif"};">${escapeHtml(item.text)}</div>
+            </div>
+            <div class="card-footer">
+              <span>서체 · ${(item.style?.fontFamily || 'Gowun Batang').split(',')[0].replace(/'/g, '')}</span>
+              <div class="card-links">
+                <button class="mini-link-btn" onclick="copyPoemShareLink(${item._idx})">🔗 공유</button>
+                <a class="mini-link-btn" href="./index.html?poem=${item._idx}&autoplay=0">액자로 감상 →</a>
+              </div>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      }
+    }
+
+    function escapeHtml(str) {
+      return (str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function exportUpdatedJson() {
+      const merged = allPoems.map((p, idx) => ({
+        ...p,
+        hearts: getEffectiveHearts(p, idx)
+      }));
+      const blob = new Blob([JSON.stringify(merged, null, 2)], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'reflections.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('💾 공감 수가 반영된 reflections.json을 내려받았습니다');
+    }
+
+    async function initStatsPage() {
+      loadLocalHearts();
+      try {
+        const res = await fetch('reflections.json?t=' + Date.now());
+        allPoems = await res.json();
+      } catch (e) {
+        try {
+          const cached = localStorage.getItem('poetry_self_hosted_cache_v2');
+          allPoems = cached ? JSON.parse(cached) : [];
+        } catch (err) {
+          allPoems = [];
+        }
+      }
+      renderDashboard();
+    }
+
+    initStatsPage();
+  </script>
+</body>
+</html>

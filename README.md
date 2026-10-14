@@ -4,6 +4,9 @@
   <a href="https://poeticecho.github.io/dailypoem/">
     <img src="https://img.shields.io/badge/GitHub%20Pages-Live%20Demo%20%E2%96%B6-brightgreen?style=for-the-badge&logo=github" alt="Live Demo" />
   </a>
+  <a href="https://poeticecho.github.io/dailypoem/stats.html">
+    <img src="https://img.shields.io/badge/Library%20%26%20Stats-TOP%2010%20%E2%99%A5-pink?style=for-the-badge" alt="Library Stats" />
+  </a>
   <a href="https://github.com/PoeticEcho/dailypoem/raw/main/daily-poem-self-hosted.zip">
     <img src="https://img.shields.io/badge/Self--Hosted%20Package-ZIP%20Download-blue?style=for-the-badge&logo=archive" alt="Download ZIP" />
   </a>
@@ -20,6 +23,7 @@
 > 지친 하루의 끝에 한 글자씩 천천히 필사되듯 피어나는 한국어 서정시와 시드(Seed) 기반의 잔잔한 재즈·자연의 소리를 담은 **독립형 전자책 & 태블릿 감성 시집 액자**입니다.
 
 👉 **[실시간 웹 시집 감상하기 (Live Demo)](https://poeticecho.github.io/dailypoem/)**  
+📊 **[인기 시 TOP 10 & 주간 신작 서재 (stats.html)](https://poeticecho.github.io/dailypoem/stats.html)**  
 📦 **[독립형 자체 호스팅 패키지 다운로드 (daily-poem-self-hosted.zip)](https://github.com/PoeticEcho/dailypoem/raw/main/daily-poem-self-hosted.zip)**
 
 ---
@@ -44,26 +48,24 @@
 
 ---
 
-## 2. 조작 방식 및 UI/UX 구조
+## 2. 조작 방식 · 공유 · 공감(♥) · 서재 통계 (`index.html`, `stats.html`)
 
-### ① 전자책(E-Reader) 3분할 터치 & 스와이프
+### ① 전자책(E-Reader) 3분할 터치 & 1회성 안내 & 더블탭 공감(♥)
 ```
 ┌─────────────────┬───────────────────────────┬─────────────────┐
 │   좌측 (28%)    │        중앙 (44%)         │   우측 (28%)    │
-│    ⏮ 이전 시    │   ⏸ / ▶ 자동 넘김 토글   │    ⏭ 다음 시    │
-│  (히스토리 복원)│   (시 음미하며 머물기)    │   (랜덤 신규 시)│
+│    ⏮ 이전 시    │  1회 탭: ⏸/▶ 자동 넘김   │    ⏭ 다음 시    │
+│  (1회 안내 표출)│  2회 탭: 💖 하트 공감 저장│  (1회 안내 표출)│
 └─────────────────┴───────────────────────────┴─────────────────┘
 ```
+- **구역별 최초 1회 가이드 표출**: 좌측 탭, 중앙부, 우측 탭 각각의 안내 메시지는 사용자가 처음 인식할 때 **딱 1회만 표출**된 뒤 영구적으로 숨겨져 시 감상을 방해하지 않습니다.
+- **인스타그램 스타일 중앙 더블탭 하트(`♥`)**: 마음에 와닿는 시에서 화면 중앙을 두 번 클릭(더블탭)하면 본 화면에는 숫자 노출 없이 따뜻한 하트 애니메이션만 피어나며, 데이터는 서재 통계용으로 조용히 누적됩니다.
+- **현재 시 공유하기 (`?poem=번호&autoplay=0`)**: 우상단 설정 메뉴 최상단의 **‘현재 시 공유하기’**를 누르면 현재 시의 전용 링크가 공유·복사됩니다. 공유받은 사람이 링크를 열면 **자동 감상 기능이 꺼진 상태**로 해당 시가 고정되어 여유롭게 읽고 스스로 조작할 수 있습니다.
 
-### ② 2단계 미니멀 설정 구조
-1. **일반 설정 팝업 (우상단 ⚙️ 아이콘 호버/터치)**:
-   - `🎵 음악 켜기 / 끄기`
-   - `⏮ 이전 시` · `⏭ 다음 시` · `⏸ 자동 감상` · `↔ 정렬 변경`
-   - `⛶ 전체 화면 모드` (웹킷 크로스브라우징 원클릭 전체화면 전환)
-   - `가− / 가+` 글자 크기 조절 및 `⚙️ 상세 액자 설정` 진입
-2. **상세 액자 설정 모달 (상단 고정 헤더 & 1페이지 컴팩트 뷰)**:
-   - 상단 `✕` 닫기 버튼이 고정 헤더로 분리되어 작은 화면에서도 절대 잘리지 않으며, 모든 옵션 문구를 간결하게 다듬어 한 페이지 안에 한눈에 들어옵니다.
-   - `📻 픽셀 라디오 미니 플레이어 열기/닫기`, 연주 스타일, 배경 자연음, 다이나믹 시계(위치·형태·서체·농도), 하단 번호 책갈피 표시(기본 OFF)를 세밀하게 제어할 수 있습니다.
+### ② 서재 & 통계 페이지 (`stats.html`)
+- 전체 시집과 동일한 한지(`#FBF8F3`)·밤하늘(`#181A20`) 감성 디자인과 5대 정예 서체로 통일된 공개 통계 페이지입니다.
+- **💖 공감 하트 1위 ~ 10위 (TOP 10)**: 독자들의 더블탭 공감 수가 가장 높은 인기 시 1위부터 10위까지를 순위별로 감상하고 바로 액자로 열거나 공유할 수 있습니다.
+- **🌿 지난 7일 동안 올라온 최신 시**: 최근 7일 동안 새로 생성·수록된 따끈따끈한 신작 시들을 등록일과 함께 모아 볼 수 있습니다.
 
 ---
 
@@ -82,18 +84,19 @@ GEMINI_API_KEY="your_api_key" POEM_COUNT=1 python generate_poem.py
 
 ### 폴더 구조
 ```text
-├── index.html                   # 독립형 전자책 터치 시집 & 다이내믹 조판 엔진 & 내장 Pixelmood
-├── reflections.json             # 5대 정예 서체가 적용된 감성 시 340편 (7줄 이하 힐링 단시 221편 포함, 목표 1,000편)
+├── index.html                   # 독립형 전자책 터치 시집 & 더블탭 공감 & 공유 & 내장 Pixelmood
+├── stats.html                   # 누구나 볼 수 있는 서재 통계 (공감 하트 TOP 10 & 지난 7일 신작 시)
+├── reflections.json             # 5대 정예 서체·등록일·공감 수가 포함된 감성 시 340편 (목표 1,000편)
 ├── favicon.png                  # 브라우저 탭 파비콘 (64x64, 1.6KB 초경량 PNG)
 ├── apple-touch-icon.png         # 모바일/태블릿 홈 화면 아이콘 (180x180, 3.7KB 초경량 PNG)
 ├── og-image.png                 # 카카오톡·SNS 공유용 오픈그래프 썸네일 (1200x630, 25.9KB < 300KB)
 ├── generate_poem.py             # 4~7줄 힐링 단시 기준·24종 모티프 순환·유사도 검증 시 생성 봇
 ├── setup_self_hosted.py         # 5대 정예 서체(.woff2) 로컬 ./fonts/ 영구 보관 스크립트
-├── daily-poem-self-hosted.zip   # 1-Click 독립 배포용 자체 호스팅 압축 패키지 (340편 및 에셋 전수 포함)
+├── daily-poem-self-hosted.zip   # 1-Click 독립 배포용 자체 호스팅 압축 패키지 (에셋 전수 포함)
 ├── fonts/                       # 로컬 보관된 5대 정예 서체 및 local-fonts.css
 ├── .github/workflows/
 │   └── auto-poem.yml            # GitHub Actions 1,000편 자동 큐레이션 워크플로
-└── README.md                    # 철학, 아키텍처 및 운용 가이드 문서
+└── README.md                    # 철학, 구현 아키텍처 및 운용 가이드 문서
 ```
 
 ---

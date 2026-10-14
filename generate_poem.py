@@ -7,6 +7,7 @@ import sys
 import time
 import urllib.request
 import urllib.error
+from datetime import datetime, timezone, timedelta
 
 # 콘솔 UTF-8 출력 보장
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
@@ -219,8 +220,6 @@ def polish_poem_breathing(text: str, max_chars: int = 19, max_total_lines: int =
         if wrapped:
             new_stanzas.append(wrapped)
 
-    # 만약 자동 행갈이 후 전체 줄 수가 max_total_lines(7줄)를 초과하면,
-    # 문장이 중간에 끊기지 않도록 완결된 연(stanza) 또는 행 단위로 7줄 이내로 정돈
     total_lines = sum(len(st) for st in new_stanzas)
     if total_lines > max_total_lines and len(new_stanzas) >= 2:
         trimmed_stanzas = []
@@ -256,7 +255,6 @@ def parse_gemini_json(raw_text: str) -> dict | None:
         if isinstance(parsed, dict):
             return parsed
     except Exception:
-        # 중괄호 블록 추출 시도
         match = re.search(r"\{[\s\S]*\}", cleaned)
         if match:
             try:
@@ -420,6 +418,9 @@ def main():
 
     print(f"📚 현재 수록된 시: {len(data)}편 / 목표: {TARGET_MAX_POEMS}편")
 
+    kst_tz = timezone(timedelta(hours=9))
+    today_str = datetime.now(kst_tz).strftime("%Y-%m-%d")
+
     added_count = 0
     for n in range(POEM_COUNT):
         recent_openings = [
@@ -448,7 +449,10 @@ def main():
                 selected_palette = PALETTES[palette_idx]
                 assert selected_palette["fontFamily"] in ALLOWED_ELITE_FONTS
                 accepted_poem = {
+                    "id": len(data) + 1,
                     "text": polished_text,
+                    "createdAt": today_str,
+                    "hearts": 0,
                     "style": {
                         "background": selected_palette["background"],
                         "color": selected_palette["color"],
