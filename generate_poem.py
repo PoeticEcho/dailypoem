@@ -2,8 +2,15 @@ import os
 import json
 import random
 import sys
+import time
 import urllib.request
 import urllib.error
+
+# 콘솔 UTF-8 출력 보장
+if sys.stdout and hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+if sys.stderr and hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8')
 
 # 🔐 API 키 불러오기 (GEMINI_API_KEY 또는 GOOGLE_API_KEY)
 api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
@@ -13,8 +20,8 @@ if not api_key:
     print("GitHub Secrets 또는 환경 변수에 GEMINI_API_KEY를 등록해주세요.")
     sys.exit(1)
 
-# 지원 모델 목록 (1.5-flash 우선, 실패 시 2.0-flash 등으로 폴백)
-MODELS = ["gemini-1.5-flash", "gemini-2.0-flash", "gemini-1.5-pro"]
+# 지원 모델 목록 (가장 안정적인 모델 순서)
+MODELS = ["gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-3.8-flash", "gemini-flash-latest"]
 
 # 🎨 감성 팔레트 프리셋 (가독성 높은 텍스트색과 차분한 배경, 정갈한 세리프 글꼴)
 PALETTES = [
@@ -125,20 +132,29 @@ for model_name in MODELS:
         headers={"Content-Type": "application/json"},
         method="POST"
     )
-    try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            res_data = json.loads(resp.read().decode("utf-8"))
-            raw_text = res_data["candidates"][0]["content"]["parts"][0]["text"]
-            result_raw = json.loads(raw_text)
-            print(f"✅ {model_name} 호출 성공!")
+    
+    # 모델별 최대 2회 시도
+    for attempt in range(2):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                res_data = json.loads(resp.read().decode("utf-8"))
+                raw_text = res_data["candidates"][0]["content"]["parts"][0]["text"]
+                result_raw = json.loads(raw_text)
+                print(f"✅ {model_name} 호출 성공!")
+                break
+        except urllib.error.HTTPError as e:
+            err_msg = e.read().decode("utf-8")
+            last_error = f"Gemini API 오류 ({e.code}): {err_msg}"
+            print(f"⚠️ {model_name} (시도 {attempt+1}/2) 실패: {e.code}")
+            if e.code == 503 and attempt == 0:
+                time.sleep(2)
+        except Exception as e:
+            last_error = str(e)
+            print(f"⚠️ {model_name} 예외 발생: {last_error}")
             break
-    except urllib.error.HTTPError as e:
-        err_msg = e.read().decode("utf-8")
-        last_error = f"Gemini API 오류 ({e.code}): {err_msg}"
-        print(f"⚠️ {model_name} 실패: {last_error}")
-    except Exception as e:
-        last_error = str(e)
-        print(f"⚠️ {model_name} 예외 발생: {last_error}")
+            
+    if result_raw:
+        break
 
 if not result_raw:
     print(f"❌ 모든 Gemini 모델 호출에 실패했습니다. 마지막 오류: {last_error}")

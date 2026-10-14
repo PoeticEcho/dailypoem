@@ -1038,5 +1038,13 @@
       "color": "#EAE6DE",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "text": "오늘도 무사히\n하루를 건너온 너에게\n\n따뜻한 차 한 잔을 건네듯\n조용히 마음을 적셔본다\n\n애썼다,\n참 잘 견뎌낸 오늘이다",
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Batang', serif"
+    }
   }
 ]
