@@ -260,9 +260,16 @@
     </div>
     <div class="grid-2" id="recentContainer"></div>
 
-    <div class="section-title">
-      <span>🖼️ 스마트 액자 사진 갤러리 (세로 블러 여백 · 인물 초점 검출 완료)</span>
+    <div class="section-title" id="photo-manager">
+      <span>🗂️ 스마트 액자 사진 순서 · 상영 제외 관리 스튜디오</span>
+      <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
+        <button class="btn" onclick="resetStatsPhotoExclusions()">✅ 전체 상영 포함</button>
+        <a class="btn btn-primary" href="./index.html?mode=photo_poem&sort=custom">▶ 설정한 순서로 액자 상영</a>
+      </div>
     </div>
+    <p style="margin-top:-0.5rem;margin-bottom:1rem;font-size:0.84rem;color:var(--muted);font-family:'Gowun Dodum',sans-serif;">
+      💡 여기서 <b>◀ / ▶</b> 버튼으로 상영 순서를 바꾸거나 <b>🚫 상영 제외</b>를 누르면 액자(`index.html`)에 즉시 동기화됩니다.
+    </p>
     <div class="photo-grid" id="photoGalleryContainer"></div>
   </div>
 
@@ -347,30 +354,110 @@
             "https://picsum.photos/id/1039/800/540",
             "https://picsum.photos/id/338/600/800"
           ];
-          let photoHearts = {};
-          try { photoHearts = JSON.parse(localStorage.getItem('dailypoem_photo_hearts_v2') || '{}'); } catch (e) {}
-          const pgEl = document.getElementById('photoGalleryContainer');
-          pgEl.innerHTML = items.map((it, idx) => {
-            const fb = webFallbacks[idx % webFallbacks.length];
-            const hCount = (it.hearts || 0) + (photoHearts[it.id || it.filename] || 0);
-            return `
-            <div class="photo-card">
-              <div class="photo-thumb-wrap">
-                <img class="photo-thumb-blur" src="${it.src}" onerror="if(this.src!=='${fb}')this.src='${fb}'" alt="" />
-                <img class="photo-thumb-fg" src="${it.src}" onerror="if(this.src!=='${fb}')this.src='${fb}'" alt="${it.title}" />
-              </div>
-              <div class="photo-meta">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                  <span style="font-weight:600;color:var(--ink);">${it.title}</span>
-                  <span style="color:var(--accent);font-weight:600;">♥ ${hCount}</span>
-                </div>
-                <div style="color:var(--muted);margin-top:0.15rem;">${it.orientation === 'portrait' ? '📱 세로 비율' : '🖼️ 가로 비율'} · ${it.hasPerson ? `👤 인물 초점(${it.focalX}%, ${it.focalY}%)` : '🌿 풍경 중심'}</div>
-              </div>
-            </div>
-          `}).join('');
+          window._statsMediaItems = items;
+          renderStatsPhotoManager(webFallbacks);
         }
       } catch (e) {}
     }
+
+    const CURATION_KEY = 'dailypoem_photo_curation_v2';
+    function getCuration() {
+      try {
+        return JSON.parse(localStorage.getItem(CURATION_KEY) || '{"excludedMap":{},"customOrder":[],"focalMap":{},"titleMap":{}}');
+      } catch (e) {
+        return { excludedMap: {}, customOrder: [], focalMap: {}, titleMap: {} };
+      }
+    }
+    function saveCuration(c) {
+      localStorage.setItem(CURATION_KEY, JSON.stringify(c));
+      fetch('./api/media/curation', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(c) }).catch(() => {});
+    }
+    function toggleStatsPhotoExclude(key) {
+      const c = getCuration();
+      c.excludedMap = c.excludedMap || {};
+      c.excludedMap[key] = !c.excludedMap[key];
+      saveCuration(c);
+      renderStatsPhotoManager();
+    }
+    function moveStatsPhotoOrder(key, delta) {
+      const c = getCuration();
+      const items = window._statsMediaItems || [];
+      let order = Array.isArray(c.customOrder) && c.customOrder.length ? [...c.customOrder] : items.map(it => it.id || it.filename);
+      items.forEach(it => { const k = it.id || it.filename; if (!order.includes(k)) order.push(k); });
+      const idx = order.indexOf(key);
+      const target = idx + delta;
+      if (idx === -1 || target < 0 || target >= order.length) return;
+      [order[idx], order[target]] = [order[target], order[idx]];
+      c.customOrder = order;
+      saveCuration(c);
+      renderStatsPhotoManager();
+    }
+    function resetStatsPhotoExclusions() {
+      const c = getCuration();
+      c.excludedMap = {};
+      saveCuration(c);
+      renderStatsPhotoManager();
+    }
+    function renderStatsPhotoManager(webFallbacks) {
+      const fbList = webFallbacks || [
+        "https://picsum.photos/id/64/600/800",
+        "https://picsum.photos/id/65/600/900",
+        "https://picsum.photos/id/177/600/800",
+        "https://picsum.photos/id/28/600/900",
+        "https://picsum.photos/id/1015/800/600",
+        "https://picsum.photos/id/1018/800/600",
+        "https://picsum.photos/id/1039/800/540",
+        "https://picsum.photos/id/338/600/800"
+      ];
+      let photoHearts = {};
+      try { photoHearts = JSON.parse(localStorage.getItem('dailypoem_photo_hearts_v2') || '{}'); } catch (e) {}
+      const c = getCuration();
+      const rawItems = window._statsMediaItems || [];
+      const order = Array.isArray(c.customOrder) ? c.customOrder : [];
+      const orderMap = {};
+      order.forEach((k, i) => { orderMap[k] = i; });
+      const sorted = [...rawItems].sort((a, b) => (orderMap[a.id || a.filename] ?? 999) - (orderMap[b.id || b.filename] ?? 999));
+
+      let playSeq = 0;
+      const pgEl = document.getElementById('photoGalleryContainer');
+      if (!pgEl) return;
+      pgEl.innerHTML = sorted.map((it, idx) => {
+        const key = it.id || it.filename;
+        const isExc = Boolean(c.excludedMap && c.excludedMap[key]);
+        if (!isExc) playSeq++;
+        const fb = fbList[idx % fbList.length];
+        const hCount = (it.hearts || 0) + (photoHearts[key] || 0);
+        const title = (c.titleMap && c.titleMap[key]) || it.title;
+        return `
+          <div class="photo-card" style="${isExc ? 'opacity:0.45;filter:grayscale(0.8);border-style:dashed;' : ''}">
+            <div class="photo-thumb-wrap">
+              <img class="photo-thumb-blur" src="${it.src}" onerror="if(this.src!=='${fb}')this.src='${fb}'" alt="" />
+              <img class="photo-thumb-fg" src="${it.src}" onerror="if(this.src!=='${fb}')this.src='${fb}'" alt="${title}" />
+              <span style="position:absolute;top:8px;left:8px;z-index:5;background:rgba(18,20,26,0.78);color:#fff;font-size:0.7rem;padding:0.15rem 0.5rem;border-radius:999px;">
+                ${isExc ? '🚫 상영 제외됨' : `#${playSeq}번째 상영`}
+              </span>
+            </div>
+            <div class="photo-meta">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-weight:600;color:var(--ink);">${title}</span>
+                <span style="color:var(--accent);font-weight:600;">♥ ${hCount}</span>
+              </div>
+              <div style="color:var(--muted);margin-top:0.15rem;">${it.orientation === 'portrait' ? '📱 세로 비율' : '🖼️ 가로 비율'} · ${it.hasPerson ? `👤 인물 초점(${it.focalX}%, ${it.focalY}%)` : '🌿 풍경 중심'}</div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.55rem;padding-top:0.45rem;border-top:1px dashed var(--border);">
+                <button class="btn" style="padding:0.2rem 0.55rem;font-size:0.72rem;" onclick="toggleStatsPhotoExclude('${key}')">
+                  ${isExc ? '🚫 제외됨 (복원)' : '✅ 상영 포함'}
+                </button>
+                <div style="display:flex;gap:0.2rem;">
+                  <button class="btn" style="padding:0.2rem 0.45rem;font-size:0.72rem;" onclick="moveStatsPhotoOrder('${key}', -1)">◀ 앞으로</button>
+                  <button class="btn" style="padding:0.2rem 0.45rem;font-size:0.72rem;" onclick="moveStatsPhotoOrder('${key}', 1)">뒤로 ▶</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
     initStats();
   </script>
 </body>

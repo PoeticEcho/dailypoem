@@ -1148,6 +1148,340 @@
       cursor: none !important;
     }
 
+  
+    /* === PHOTO CURATION & MANAGEMENT STUDIO (v2.7) === */
+    #photo-manager-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 220;
+      background: rgba(8, 10, 14, 0.58);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+    #photo-manager-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #photo-manager-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -48%) scale(0.96);
+      width: min(95vw, 920px);
+      height: min(90dvh, 780px);
+      z-index: 230;
+      background: rgba(251, 248, 243, 0.98);
+      color: #2B2623;
+      border: 1px solid rgba(120, 104, 90, 0.25);
+      border-radius: 22px;
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.38);
+      font-family: 'Gowun Dodum', sans-serif;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body.dark-ui #photo-manager-modal {
+      background: rgba(24, 27, 34, 0.98);
+      color: #EAECEF;
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+    #photo-manager-modal.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .pmgr-header {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.9rem 1.25rem;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.18);
+    }
+    .pmgr-title-wrap h3 {
+      margin: 0;
+      font-family: 'Gowun Batang', serif;
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+    .pmgr-sub {
+      font-size: 0.75rem;
+      opacity: 0.76;
+      margin-top: 0.15rem;
+    }
+
+    .pmgr-toolbar {
+      flex: 0 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      background: rgba(128, 128, 128, 0.06);
+      border-bottom: 1px solid rgba(128, 128, 128, 0.14);
+      font-size: 0.76rem;
+    }
+    .pmgr-filter-group, .pmgr-action-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.32rem;
+    }
+    .pmgr-chip-btn {
+      font-family: inherit;
+      font-size: 0.74rem;
+      padding: 0.3rem 0.62rem;
+      border-radius: 999px;
+      border: 1px solid rgba(128, 128, 128, 0.28);
+      background: rgba(255, 255, 255, 0.5);
+      color: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28rem;
+      transition: all 0.18s ease;
+    }
+    body.dark-ui .pmgr-chip-btn {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .pmgr-chip-btn:hover {
+      border-color: #B85D52;
+    }
+    .pmgr-chip-btn.active {
+      background: #5C4B3B;
+      color: #FBF8F3;
+      border-color: #5C4B3B;
+      font-weight: 600;
+    }
+    body.dark-ui .pmgr-chip-btn.active {
+      background: #8FA89B;
+      color: #161920;
+      border-color: #8FA89B;
+    }
+
+    .pmgr-body {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding: 1rem 1.25rem;
+      overscroll-behavior: contain;
+    }
+    .pmgr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .pmgr-card {
+      border: 1px solid rgba(128, 128, 128, 0.24);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.68);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.2s ease;
+      position: relative;
+    }
+    body.dark-ui .pmgr-card {
+      background: rgba(34, 38, 48, 0.85);
+    }
+    .pmgr-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    }
+    .pmgr-card.is-excluded {
+      opacity: 0.48;
+      filter: grayscale(0.75);
+      border-style: dashed;
+    }
+    .pmgr-card.drag-over {
+      outline: 2px dashed #B85D52;
+      transform: scale(0.98);
+    }
+
+    .pmgr-thumb-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: #121418;
+      overflow: hidden;
+      cursor: crosshair;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pmgr-thumb-blur {
+      position: absolute;
+      inset: -10%;
+      width: 120%;
+      height: 120%;
+      object-fit: cover;
+      filter: blur(14px) brightness(0.72);
+      pointer-events: none;
+    }
+    .pmgr-thumb-fg {
+      position: relative;
+      z-index: 2;
+      max-width: 94%;
+      max-height: 94%;
+      object-fit: contain;
+      pointer-events: none;
+    }
+    /* 인물 초점(focalX, focalY) 표시 타겟 마커 */
+    .pmgr-focal-dot {
+      position: absolute;
+      z-index: 4;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid #FFD166;
+      background: rgba(217, 93, 82, 0.78);
+      box-shadow: 0 0 8px rgba(0,0,0,0.65);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      transition: left 0.2s ease, top 0.2s ease;
+    }
+    .pmgr-focal-dot::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      background: #FFF;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .pmgr-seq-badge {
+      position: absolute;
+      top: 7px;
+      left: 7px;
+      z-index: 5;
+      background: rgba(18, 20, 26, 0.78);
+      color: #FBF8F3;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.16rem 0.5rem;
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+    }
+    .pmgr-card.is-excluded .pmgr-seq-badge {
+      background: rgba(184, 70, 62, 0.9);
+    }
+
+    .pmgr-orient-badge {
+      position: absolute;
+      bottom: 6px;
+      right: 7px;
+      z-index: 5;
+      background: rgba(18, 20, 26, 0.68);
+      color: #E2E6EC;
+      font-size: 0.65rem;
+      padding: 0.12rem 0.42rem;
+      border-radius: 6px;
+      pointer-events: none;
+    }
+
+    .pmgr-card-info {
+      padding: 0.55rem 0.65rem 0.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.42rem;
+      flex: 1 1 auto;
+    }
+    .pmgr-title-input {
+      width: 100%;
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.22rem 0.4rem;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      background: rgba(128, 128, 128, 0.08);
+      color: inherit;
+    }
+    .pmgr-title-input:focus {
+      outline: none;
+      border-color: #B85D52;
+      background: rgba(255, 255, 255, 0.9);
+      color: #222;
+    }
+    .pmgr-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.68rem;
+      opacity: 0.75;
+    }
+
+    .pmgr-btn-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.22rem;
+      margin-top: auto;
+      padding-top: 0.35rem;
+      border-top: 1px dashed rgba(128, 128, 128, 0.2);
+    }
+    .pmgr-mini-btn {
+      font-family: inherit;
+      font-size: 0.7rem;
+      padding: 0.24rem 0.42rem;
+      border-radius: 7px;
+      border: 1px solid rgba(128, 128, 128, 0.26);
+      background: rgba(128, 128, 128, 0.08);
+      color: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.15rem;
+    }
+    .pmgr-mini-btn:hover {
+      background: rgba(128, 128, 128, 0.22);
+    }
+    .pmgr-mini-btn.btn-include-on {
+      background: rgba(72, 138, 98, 0.16);
+      border-color: rgba(72, 138, 98, 0.45);
+      color: #2D6A4F;
+      font-weight: 600;
+    }
+    body.dark-ui .pmgr-mini-btn.btn-include-on {
+      color: #8CE0B0;
+    }
+    .pmgr-mini-btn.btn-include-off {
+      background: rgba(196, 78, 70, 0.16);
+      border-color: rgba(196, 78, 70, 0.45);
+      color: #B8463E;
+      font-weight: 600;
+    }
+    body.dark-ui .pmgr-mini-btn.btn-include-off {
+      color: #FF9B94;
+    }
+
+    .pmgr-footer {
+      flex: 0 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.7rem 1.25rem;
+      border-top: 1px solid rgba(128, 128, 128, 0.18);
+      font-size: 0.74rem;
+      background: inherit;
+    }
+
   </style>
 </head>
 <body>
@@ -1229,6 +1563,11 @@
       <button class="popup-item-btn" onclick="document.getElementById('inpLocalPhotos').click(); closeControlsPopup();">
         <span>📁</span>
         <span id="popLocalPhotoText">내 사진 넣어보기 (웹 테스트)</span>
+      </button>
+
+      <button class="popup-item-btn" onclick="openPhotoManagerModal(); closeControlsPopup();">
+        <span>🗂️</span>
+        <span id="popPhotoMgrText">사진 순서 · 제외 관리</span>
       </button>
 
       <div class="popup-divider"></div>
@@ -1366,7 +1705,10 @@
       <div class="settings-section">
         <div class="sec-label">
           <span>🖼️ 전자액자 & 세로 여백 (2.0)</span>
-          <button class="setting-action-btn" onclick="document.getElementById('inpLocalPhotos').click()">📁 내 사진 테스트</button>
+          <div style="display:flex;gap:0.25rem;">
+            <button class="setting-action-btn" onclick="toggleSettings(false); openPhotoManagerModal();">🗂️ 순서·제외 관리</button>
+            <button class="setting-action-btn" onclick="document.getElementById('inpLocalPhotos').click()">📁 사진 추가</button>
+          </div>
         </div>
 
         <div class="setting-row">
@@ -1394,6 +1736,7 @@
         <div class="setting-row">
           <span>사진 정렬 순서</span>
           <select id="selPhotoSortMode" class="setting-select" onchange="updateV2FrameConfig()">
+            <option value="custom">✋ 내가 정한 순서 (수동 관리)</option>
             <option value="people">인물 중심 쇼 (얼굴 우선)</option>
             <option value="date_desc">시간 순서 (최신 추억순)</option>
             <option value="date_asc">시간 순서 (오래된 연대기순)</option>
@@ -1675,6 +2018,47 @@
           <span>인기 시 TOP 10 & 주간 신작</span>
           <a class="setting-action-btn" id="linkModalStats" href="./stats.html">📊 통계 페이지 열기</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🗂️ 스마트 사진 순서 · 상영 제외 · 초점 관리 스튜디오 모달 -->
+  <div id="photo-manager-backdrop" onclick="closePhotoManagerModal()"></div>
+  <section id="photo-manager-modal" role="dialog" aria-labelledby="pmgrTitle">
+    <div class="pmgr-header">
+      <div class="pmgr-title-wrap">
+        <h3 id="pmgrTitle">🗂️ 사진 순서 · 제외 · 인물 초점 관리 스튜디오</h3>
+        <div class="pmgr-sub" id="pmgrSummaryText">불러온 폴더의 사진 순서를 바꾸거나 빼고 싶은 사진을 제외하고, 썸네일을 클릭해 인물 중심점을 맞출 수 있습니다.</div>
+      </div>
+      <button class="close-btn" onclick="closePhotoManagerModal()" aria-label="닫기">✕</button>
+    </div>
+
+    <div class="pmgr-toolbar">
+      <div class="pmgr-filter-group">
+        <button class="pmgr-chip-btn active" id="pmgrTabAll" onclick="setPhotoManagerFilter('all')">전체 (<span id="pmgrCntAll">0</span>)</button>
+        <button class="pmgr-chip-btn" id="pmgrTabIncluded" onclick="setPhotoManagerFilter('included')">✅ 상영 포함 (<span id="pmgrCntInc">0</span>)</button>
+        <button class="pmgr-chip-btn" id="pmgrTabExcluded" onclick="setPhotoManagerFilter('excluded')">🚫 제외됨 (<span id="pmgrCntExc">0</span>)</button>
+        <button class="pmgr-chip-btn" id="pmgrTabHearts" onclick="setPhotoManagerFilter('hearts')">♥ 베스트컷 (<span id="pmgrCntHeart">0</span>)</button>
+      </div>
+
+      <div class="pmgr-action-group">
+        <button class="pmgr-chip-btn" onclick="document.getElementById('inpLocalPhotos').click()">📷 내 사진 추가</button>
+        <button class="pmgr-chip-btn" onclick="document.getElementById('inpLocalFolder').click()">🗂️ 폴더 통째로 열기</button>
+        <button class="pmgr-chip-btn" onclick="applyPresetSortToCustomOrder('people')">👤 인물순 정렬</button>
+        <button class="pmgr-chip-btn" onclick="applyPresetSortToCustomOrder('date_desc')">🕒 최신순 정렬</button>
+        <button class="pmgr-chip-btn" onclick="includeAllPhotosInManager()">✅ 전체 포함</button>
+      </div>
+    </div>
+
+    <div class="pmgr-body">
+      <div class="pmgr-grid" id="pmgrGrid"></div>
+    </div>
+
+    <div class="pmgr-footer">
+      <span>💡 팁: 카드를 드래그하거나 <b>◀ / ▶ / ⏫ 맨앞</b>으로 순서를 바꾸고, <b>썸네일 위 얼굴을 클릭</b>하면 크롭·줌 중심점(⊕)이 지정됩니다.</span>
+      <div style="display:flex;gap:0.4rem;">
+        <button class="pmgr-chip-btn" onclick="exportCuratedMediaIndexJson()">💾 설정 JSON 내보내기 (GitHub용)</button>
+        <button class="pmgr-chip-btn active" onclick="closePhotoManagerModal()">✓ 액자에 즉시 반영 · 닫기</button>
       </div>
     </div>
   </section>
@@ -2677,7 +3061,7 @@
         if (params.get('fit') && ['blur', 'white', 'black', 'hanji', 'crop_face', 'diptych'].includes(params.get('fit'))) {
           CONFIG.photoFitMode = params.get('fit');
         }
-        if (params.get('sort') && ['people', 'date_desc', 'date_asc', 'random'].includes(params.get('sort'))) {
+        if (params.get('sort') && ['custom', 'people', 'date_desc', 'date_asc', 'random'].includes(params.get('sort'))) {
           CONFIG.photoSortMode = params.get('sort');
         }
 
@@ -4540,25 +4924,109 @@
       }
     }
 
+    // 사진 큐레이션 영구 저장소 (제외 목록 excludedMap, 사용자 지정 순서 customOrder, 초점 focalMap, 제목 titleMap)
+    const PHOTO_CURATION_STORAGE_KEY = 'dailypoem_photo_curation_v2';
+    let photoCurationState = {
+      excludedMap: {}, // { [id_or_filename]: true }
+      customOrder: [], // [ id_or_filename, ... ]
+      focalMap: {},    // { [id_or_filename]: { focalX, focalY } }
+      titleMap: {}     // { [id_or_filename]: "커스텀 제목" }
+    };
+    let currentPmgrFilter = 'all';
+    let pmgrDragSrcKey = null;
+
+    function getPhotoKey(item) {
+      return String(item?.id || item?.filename || '');
+    }
+
+    function loadPhotoCurationState() {
+      try {
+        const raw = localStorage.getItem(PHOTO_CURATION_STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          photoCurationState.excludedMap = parsed.excludedMap || {};
+          photoCurationState.customOrder = Array.isArray(parsed.customOrder) ? parsed.customOrder : [];
+          photoCurationState.focalMap = parsed.focalMap || {};
+          photoCurationState.titleMap = parsed.titleMap || {};
+        }
+      } catch (e) {}
+    }
+
+    function savePhotoCurationState() {
+      try {
+        localStorage.setItem(PHOTO_CURATION_STORAGE_KEY, JSON.stringify(photoCurationState));
+      } catch (e) {}
+      // 시놀로지 NAS 백엔드가 켜져 있을 경우 서버의 media_index.json에도 비동기 동기화
+      try {
+        fetch(`${window.APP_ROOT || './'}api/media/curation`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(photoCurationState)
+        }).catch(() => {});
+      } catch (e) {}
+    }
+
+    loadPhotoCurationState();
+
+    function applyCurationOverridesToCatalog() {
+      mediaCatalog.forEach(it => {
+        const k = getPhotoKey(it);
+        if (photoCurationState.excludedMap[k] !== undefined) {
+          it.excluded = Boolean(photoCurationState.excludedMap[k]);
+        } else {
+          it.excluded = Boolean(it.excluded);
+        }
+        if (photoCurationState.focalMap[k]) {
+          it.focalX = photoCurationState.focalMap[k].focalX;
+          it.focalY = photoCurationState.focalMap[k].focalY;
+        }
+        if (photoCurationState.titleMap[k]) {
+          it.title = photoCurationState.titleMap[k];
+        }
+      });
+
+      // customOrder에 아직 없는 신규 사진들을 뒤에 자연스럽게 등록
+      const existingOrder = photoCurationState.customOrder.filter(k => mediaCatalog.some(it => getPhotoKey(it) === k));
+      for (const it of mediaCatalog) {
+        const k = getPhotoKey(it);
+        if (!existingOrder.includes(k)) existingOrder.push(k);
+      }
+      photoCurationState.customOrder = existingOrder;
+    }
+
     function rebuildPhotoQueue() {
+      applyCurationOverridesToCatalog();
+
       let photoHeartsMap = {};
       try { photoHeartsMap = JSON.parse(localStorage.getItem('dailypoem_photo_hearts_v2') || '{}'); } catch (e) {}
-      let list = mediaCatalog.map(it => ({
+
+      // 1) 상영 제외(excluded === true)된 사진은 슬라이드쇼 큐에서 제외! (단, 모두 제외된 경우 최소 1장은 유지)
+      let allEnriched = mediaCatalog.map(it => ({
         ...it,
-        totalHearts: (it.hearts || 0) + (photoHeartsMap[it.id || it.filename] || 0)
+        totalHearts: (it.hearts || 0) + (photoHeartsMap[getPhotoKey(it)] || 0)
       }));
+      let list = allEnriched.filter(it => !it.excluded);
+      if (list.length === 0 && allEnriched.length > 0) {
+        list = [allEnriched[0]];
+      }
+
+      // 2) 앨범 · 베스트컷 필터
       const af = CONFIG.albumFilter || 'all';
       if (af === 'hearts_only') {
-        const liked = list.filter(it => it.totalHearts >= 20 || photoHeartsMap[it.id || it.filename] > 0);
+        const liked = list.filter(it => it.totalHearts >= 20 || photoHeartsMap[getPhotoKey(it)] > 0);
         if (liked.length > 0) list = liked;
       } else if (af !== 'all') {
         const filtered = list.filter(it => it.album === af);
         if (filtered.length > 0) list = filtered;
       }
-      const sortMode = CONFIG.photoSortMode || 'people';
 
-      if (sortMode === 'people') {
-        // 인물(얼굴) 포함 사진 최우선 + 하트 순 + 최신순
+      // 3) 정렬 모드 (custom: 내가 정한 순서 / people: 인물 우선 / date_desc / date_asc / random)
+      const sortMode = CONFIG.photoSortMode || 'people';
+      if (sortMode === 'custom') {
+        const orderMap = {};
+        photoCurationState.customOrder.forEach((k, idx) => { orderMap[k] = idx; });
+        list.sort((a, b) => (orderMap[getPhotoKey(a)] ?? 9999) - (orderMap[getPhotoKey(b)] ?? 9999));
+      } else if (sortMode === 'people') {
         list.sort((a, b) => {
           const pa = a.hasPerson ? 1 : 0;
           const pb = b.hasPerson ? 1 : 0;
@@ -4575,8 +5043,323 @@
           [list[i], list[j]] = [list[j], list[i]];
         }
       }
+
       sortedPhotoQueue = list;
       if (currentPhotoCursor >= sortedPhotoQueue.length) currentPhotoCursor = 0;
+      updatePhotoManagerMenuCounts();
+    }
+
+    function updatePhotoManagerMenuCounts() {
+      const total = mediaCatalog.length;
+      const inc = mediaCatalog.filter(it => !it.excluded).length;
+      const exc = total - inc;
+      const popMgr = document.getElementById('popPhotoMgrText');
+      if (popMgr) {
+        popMgr.textContent = exc > 0
+          ? `사진 관리 (상영 ${inc} / 제외 ${exc})`
+          : `사진 순서 · 제외 관리 (${inc}장)`;
+      }
+    }
+
+    function openPhotoManagerModal() {
+      applyCurationOverridesToCatalog();
+      renderPhotoManagerGrid();
+      const modal = document.getElementById('photo-manager-modal');
+      const backdrop = document.getElementById('photo-manager-backdrop');
+      if (modal) modal.classList.add('open');
+      if (backdrop) backdrop.classList.add('open');
+    }
+
+    function closePhotoManagerModal() {
+      const modal = document.getElementById('photo-manager-modal');
+      const backdrop = document.getElementById('photo-manager-backdrop');
+      if (modal) modal.classList.remove('open');
+      if (backdrop) backdrop.classList.remove('open');
+      rebuildPhotoQueue();
+      if (CONFIG.frameMode !== 'poem_only') {
+        showNextPhotoSlide(0);
+      }
+    }
+
+    function setPhotoManagerFilter(filterKey) {
+      currentPmgrFilter = filterKey || 'all';
+      ['All', 'Included', 'Excluded', 'Hearts'].forEach(name => {
+        const el = document.getElementById('pmgrTab' + name);
+        if (el) el.classList.toggle('active', name.toLowerCase() === currentPmgrFilter);
+      });
+      renderPhotoManagerGrid();
+    }
+
+    function getOrderedCatalogForManager() {
+      applyCurationOverridesToCatalog();
+      const orderMap = {};
+      photoCurationState.customOrder.forEach((k, idx) => { orderMap[k] = idx; });
+      return [...mediaCatalog].sort((a, b) => (orderMap[getPhotoKey(a)] ?? 9999) - (orderMap[getPhotoKey(b)] ?? 9999));
+    }
+
+    function togglePhotoExclude(photoKey) {
+      const target = mediaCatalog.find(it => getPhotoKey(it) === photoKey);
+      if (!target) return;
+      const nextExcluded = !target.excluded;
+      target.excluded = nextExcluded;
+      photoCurationState.excludedMap[photoKey] = nextExcluded;
+      savePhotoCurationState();
+      rebuildPhotoQueue();
+      renderPhotoManagerGrid();
+      showHudFeedback(nextExcluded ? '🚫' : '✅', nextExcluded ? `"${target.title}" 사진을 상영에서 제외했습니다` : `"${target.title}" 사진을 다시 상영에 포함했습니다`);
+    }
+
+    function includeAllPhotosInManager() {
+      photoCurationState.excludedMap = {};
+      mediaCatalog.forEach(it => { it.excluded = false; });
+      savePhotoCurationState();
+      rebuildPhotoQueue();
+      renderPhotoManagerGrid();
+      showHudFeedback('✅', `전체 ${mediaCatalog.length}장 사진을 모두 상영에 포함했습니다`);
+    }
+
+    function movePhotoInCustomOrder(photoKey, deltaOrTop) {
+      const order = [...photoCurationState.customOrder];
+      const idx = order.indexOf(photoKey);
+      if (idx === -1) return;
+
+      if (deltaOrTop === 'top') {
+        order.splice(idx, 1);
+        order.unshift(photoKey);
+      } else {
+        const targetIdx = idx + Number(deltaOrTop);
+        if (targetIdx < 0 || targetIdx >= order.length) return;
+        [order[idx], order[targetIdx]] = [order[targetIdx], order[idx]];
+      }
+
+      photoCurationState.customOrder = order;
+      CONFIG.photoSortMode = 'custom';
+      saveConfig();
+      savePhotoCurationState();
+      syncV2ConfigToUI();
+      rebuildPhotoQueue();
+      renderPhotoManagerGrid();
+    }
+
+    function applyPresetSortToCustomOrder(presetMode) {
+      const items = [...mediaCatalog];
+      if (presetMode === 'people') {
+        items.sort((a, b) => (b.hasPerson ? 1 : 0) - (a.hasPerson ? 1 : 0) || String(b.takenAt || '').localeCompare(String(a.takenAt || '')));
+      } else if (presetMode === 'date_desc') {
+        items.sort((a, b) => String(b.takenAt || '').localeCompare(String(a.takenAt || '')));
+      }
+      photoCurationState.customOrder = items.map(it => getPhotoKey(it));
+      CONFIG.photoSortMode = 'custom';
+      saveConfig();
+      savePhotoCurationState();
+      syncV2ConfigToUI();
+      rebuildPhotoQueue();
+      renderPhotoManagerGrid();
+      showHudFeedback('🗂️', '정렬 순서를 기준으로 수동 순서가 갱신되었습니다');
+    }
+
+    function updatePhotoTitleInline(photoKey, newTitle) {
+      const clean = String(newTitle || '').trim();
+      if (!clean) return;
+      photoCurationState.titleMap[photoKey] = clean;
+      const target = mediaCatalog.find(it => getPhotoKey(it) === photoKey);
+      if (target) target.title = clean;
+      savePhotoCurationState();
+      rebuildPhotoQueue();
+    }
+
+    function setPhotoFocalPointByClick(event, photoKey) {
+      const box = event.currentTarget;
+      if (!box) return;
+      const rect = box.getBoundingClientRect();
+      const fx = Math.max(5, Math.min(95, Math.round(((event.clientX - rect.left) / rect.width) * 1000) / 10));
+      const fy = Math.max(5, Math.min(95, Math.round(((event.clientY - rect.top) / rect.height) * 1000) / 10));
+
+      photoCurationState.focalMap[photoKey] = { focalX: fx, focalY: fy };
+      const target = mediaCatalog.find(it => getPhotoKey(it) === photoKey);
+      if (target) {
+        target.focalX = fx;
+        target.focalY = fy;
+        target.hasPerson = true;
+      }
+      savePhotoCurationState();
+      rebuildPhotoQueue();
+      renderPhotoManagerGrid();
+      showHudFeedback('🎯', `인물·크롭 중심점 지정 완료 (${fx}%, ${fy}%)`);
+    }
+
+    function previewPhotoFromManager(photoKey) {
+      const target = mediaCatalog.find(it => getPhotoKey(it) === photoKey);
+      if (!target) return;
+      if (target.excluded) {
+        target.excluded = false;
+        photoCurationState.excludedMap[photoKey] = false;
+        savePhotoCurationState();
+      }
+      if (CONFIG.frameMode === 'poem_only') {
+        CONFIG.frameMode = 'photo_poem';
+        saveConfig();
+        syncV2ConfigToUI();
+      }
+      rebuildPhotoQueue();
+      const qIdx = sortedPhotoQueue.findIndex(it => getPhotoKey(it) === photoKey);
+      if (qIdx !== -1) {
+        currentPhotoCursor = qIdx - 1;
+        showNextPhotoSlide(1);
+      }
+      closePhotoManagerModal();
+    }
+
+    function exportCuratedMediaIndexJson() {
+      const ordered = getOrderedCatalogForManager();
+      const payload = {
+        version: "2.0",
+        generatedAt: new Date().toISOString().slice(0, 19),
+        sortMode: CONFIG.photoSortMode,
+        items: ordered.map((it, idx) => ({
+          id: it.id,
+          filename: it.filename,
+          src: it.src || `./photos/${it.filename}`,
+          album: it.album || '기본_갤러리',
+          title: it.title,
+          takenAt: it.takenAt,
+          dateLabel: it.dateLabel,
+          width: it.width || 1080,
+          height: it.height || 1440,
+          orientation: it.orientation || 'portrait',
+          hasPerson: Boolean(it.hasPerson),
+          faceCount: it.faceCount || (it.hasPerson ? 1 : 0),
+          focalX: it.focalX ?? 50,
+          focalY: it.focalY ?? 34,
+          dominantHex: it.dominantHex || '#8a7968',
+          isDarkPhoto: Boolean(it.isDarkPhoto),
+          hearts: it.hearts || 0,
+          excluded: Boolean(it.excluded),
+          orderIndex: idx + 1
+        }))
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'media_index.json';
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      showHudFeedback('💾', '순서·제외 설정이 담긴 media_index.json을 내려받았습니다');
+    }
+
+    function renderPhotoManagerGrid() {
+      const grid = document.getElementById('pmgrGrid');
+      if (!grid) return;
+
+      let photoHeartsMap = {};
+      try { photoHeartsMap = JSON.parse(localStorage.getItem('dailypoem_photo_hearts_v2') || '{}'); } catch (e) {}
+
+      const ordered = getOrderedCatalogForManager();
+      const incList = ordered.filter(it => !it.excluded);
+      const excList = ordered.filter(it => it.excluded);
+      const heartList = ordered.filter(it => ((it.hearts || 0) + (photoHeartsMap[getPhotoKey(it)] || 0)) >= 20 || photoHeartsMap[getPhotoKey(it)] > 0);
+
+      const elAll = document.getElementById('pmgrCntAll');
+      const elInc = document.getElementById('pmgrCntInc');
+      const elExc = document.getElementById('pmgrCntExc');
+      const elHrt = document.getElementById('pmgrCntHeart');
+      if (elAll) elAll.textContent = ordered.length;
+      if (elInc) elInc.textContent = incList.length;
+      if (elExc) elExc.textContent = excList.length;
+      if (elHrt) elHrt.textContent = heartList.length;
+
+      let displayItems = ordered;
+      if (currentPmgrFilter === 'included') displayItems = incList;
+      else if (currentPmgrFilter === 'excluded') displayItems = excList;
+      else if (currentPmgrFilter === 'hearts') displayItems = heartList;
+
+      let activePlaySeq = 0;
+      const playSeqMap = {};
+      ordered.forEach(it => {
+        if (!it.excluded) {
+          activePlaySeq++;
+          playSeqMap[getPhotoKey(it)] = activePlaySeq;
+        }
+      });
+
+      grid.innerHTML = displayItems.map((it) => {
+        const key = getPhotoKey(it);
+        const imgUrl = it.resolvedUrl || it.src || `./photos/${it.filename}`;
+        const fbUrl = it.webFallbackUrl || CURATED_WEB_SAMPLE_ITEMS[0].src;
+        const seqNum = playSeqMap[key];
+        const fx = it.focalX ?? 50;
+        const fy = it.focalY ?? 34;
+        const hCount = (it.hearts || 0) + (photoHeartsMap[key] || 0);
+        const safeTitle = String(it.title || it.filename || '').replace(/"/g, '&quot;');
+
+        return `
+          <div class="pmgr-card ${it.excluded ? 'is-excluded' : ''}"
+               draggable="true"
+               data-photo-key="${key}"
+               ondragstart="handlePmgrDragStart(event, '${key}')"
+               ondragover="handlePmgrDragOver(event)"
+               ondragleave="handlePmgrDragLeave(event)"
+               ondrop="handlePmgrDrop(event, '${key}')">
+            <div class="pmgr-thumb-box" onclick="setPhotoFocalPointByClick(event, '${key}')" title="클릭하면 해당 위치로 인물·크롭 중심점(⊕)이 지정됩니다">
+              <img class="pmgr-thumb-blur" src="${imgUrl}" onerror="if(this.src!=='${fbUrl}')this.src='${fbUrl}'" alt="" />
+              <img class="pmgr-thumb-fg" src="${imgUrl}" onerror="if(this.src!=='${fbUrl}')this.src='${fbUrl}'" alt="${safeTitle}" />
+              <div class="pmgr-focal-dot" style="left:${fx}%;top:${fy}%;" title="초점 (${fx}%, ${fy}%)"></div>
+              <span class="pmgr-seq-badge">${it.excluded ? '🚫 제외됨' : `#${seqNum}번째 상영`}</span>
+              <span class="pmgr-orient-badge">${it.orientation === 'portrait' ? '📱 세로' : '🖼️ 가로'} · 🎯(${Math.round(fx)}%,${Math.round(fy)}%)</span>
+            </div>
+            <div class="pmgr-card-info">
+              <input type="text" class="pmgr-title-input" value="${safeTitle}" onchange="updatePhotoTitleInline('${key}', this.value)" aria-label="사진 제목 수정" />
+              <div class="pmgr-meta-row">
+                <span>📁 ${it.album || '기본'}</span>
+                <span>♥ ${hCount}</span>
+              </div>
+              <div class="pmgr-btn-bar">
+                <button class="pmgr-mini-btn ${it.excluded ? 'btn-include-off' : 'btn-include-on'}" onclick="togglePhotoExclude('${key}')">
+                  ${it.excluded ? '🚫 제외됨 (클릭시 복원)' : '✅ 상영 포함'}
+                </button>
+                <div style="display:flex;gap:0.18rem;">
+                  <button class="pmgr-mini-btn" onclick="movePhotoInCustomOrder('${key}', 'top')" title="맨 첫 순서로 이동">⏫</button>
+                  <button class="pmgr-mini-btn" onclick="movePhotoInCustomOrder('${key}', -1)" title="순서 앞으로 이동">◀</button>
+                  <button class="pmgr-mini-btn" onclick="movePhotoInCustomOrder('${key}', 1)" title="순서 뒤로 이동">▶</button>
+                  <button class="pmgr-mini-btn" onclick="previewPhotoFromManager('${key}')" title="이 사진 지금 액자에 띄우기">👁️</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function handlePmgrDragStart(e, key) {
+      pmgrDragSrcKey = key;
+      if (e.dataTransfer) e.dataTransfer.effectAllowed = 'move';
+    }
+    function handlePmgrDragOver(e) {
+      e.preventDefault();
+      e.currentTarget.classList.add('drag-over');
+    }
+    function handlePmgrDragLeave(e) {
+      e.currentTarget.classList.remove('drag-over');
+    }
+    function handlePmgrDrop(e, targetKey) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('drag-over');
+      if (!pmgrDragSrcKey || pmgrDragSrcKey === targetKey) return;
+      const order = [...photoCurationState.customOrder];
+      const fromIdx = order.indexOf(pmgrDragSrcKey);
+      const toIdx = order.indexOf(targetKey);
+      if (fromIdx === -1 || toIdx === -1) return;
+      order.splice(fromIdx, 1);
+      order.splice(toIdx, 0, pmgrDragSrcKey);
+      photoCurationState.customOrder = order;
+      CONFIG.photoSortMode = 'custom';
+      saveConfig();
+      savePhotoCurationState();
+      syncV2ConfigToUI();
+      rebuildPhotoQueue();
+      renderPhotoManagerGrid();
+      showHudFeedback('✋', '드래그한 순서로 상영 순서가 변경되었습니다');
     }
 
     // 오프라인 또는 경로 누락 시에도 절대 엑스박스(깨진 이미지)가 뜨지 않도록 보장하는 즉석 캔버스 풍경 생성기
@@ -4840,7 +5623,8 @@
             syncV2ConfigToUI();
             const popLocalTxt = document.getElementById('popLocalPhotoText');
             if (popLocalTxt) popLocalTxt.textContent = `내 사진 (${loadedItems.length}장 테스트 중)`;
-            showHudFeedback('📸', `내 사진 ${loadedItems.length}장 로드 완료 (${PHOTO_FIT_LABELS[CONFIG.photoFitMode]})`);
+            renderPhotoManagerGrid();
+            showHudFeedback('📸', `내 사진 ${loadedItems.length}장 로드 완료 (🗂️ 사진 관리에서 순서·제외 가능)`);
             showNextPhotoSlide(1);
           }
         };

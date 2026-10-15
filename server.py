@@ -164,4 +164,42 @@ async def record_heart(payload: dict):
     hearts_file.write_text(json.dumps(store, ensure_ascii=False, indent=2), encoding="utf-8")
     return {"status": "ok", "targetType": target_type, "id": item_id, "hearts": bucket[item_id]}
 
+
+
+@app.post("/api/media/curation")
+async def save_media_curation(payload: dict):
+    """
+    Persists photo exclusions (excludedMap), custom ordering (customOrder),
+    custom focal points (focalMap), and edited titles (titleMap) directly into media_index.json on Synology NAS.
+    """
+    if not INDEX_FILE.exists():
+        await asyncio.to_thread(run_sync_batch, False)
+    try:
+        data = json.loads(INDEX_FILE.read_text(encoding="utf-8"))
+        items = data.get("items", [])
+        exc_map = payload.get("excludedMap", {})
+        focal_map = payload.get("focalMap", {})
+        title_map = payload.get("titleMap", {})
+        custom_order = payload.get("customOrder", [])
+
+        for it in items:
+            key = str(it.get("id") or it.get("filename") or "")
+            if key in exc_map:
+                it["excluded"] = bool(exc_map[key])
+            if key in focal_map and isinstance(focal_map[key], dict):
+                it["focalX"] = float(focal_map[key].get("focalX", it.get("focalX", 50.0)))
+                it["focalY"] = float(focal_map[key].get("focalY", it.get("focalY", 34.0)))
+            if key in title_map and title_map[key]:
+                it["title"] = str(title_map[key])
+
+        if isinstance(custom_order, list) and custom_order:
+            order_lookup = {str(k): i for i, k in enumerate(custom_order)}
+            items.sort(key=lambda x: order_lookup.get(str(x.get("id") or x.get("filename")), 9999))
+
+        data["items"] = items
+        INDEX_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        return {"status": "ok", "total": len(items)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 app.mount("/", StaticFiles(directory=str(APP_DIR), html=True), name="static")
