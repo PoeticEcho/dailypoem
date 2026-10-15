@@ -12,6 +12,25 @@
   <meta name="description" content="지친 하루 끝에 한 글자씩 천천히 필사되듯 피어나는 1,000편의 한국어 위로시와 시드 기반 재즈·자연의 소리를 담은 독립형 전자책 감성 시집" />
   <meta name="theme-color" content="#FBF8F3" />
 
+  <script>
+    /* =========================================================================
+     * 0-A. 앱 루트 경로(APP_ROOT) 자동 감지 (GitHub Pages 서브폴더 /dailypoem/ 완벽 호환)
+     *      예: https://poeticecho.github.io/dailypoem/234/0 또는 /dailypoem/poem/234/0
+     * ========================================================================= */
+    window.APP_ROOT = (function () {
+      var p = window.location.pathname;
+      // 만약 경로 끝에 /poem/234/0 또는 /234/0 형태가 붙어 있다면 제거하여 실제 앱 루트 추출
+      var m = p.match(/^(.*?)\/(?:poem\/)?\d+(?:\/(?:[01]|on|off))?\/?$/i);
+      if (m) {
+        return (m[1] || '') + '/';
+      }
+      if (p.endsWith('/index.html')) {
+        return p.slice(0, -'index.html'.length);
+      }
+      return p.endsWith('/') ? p : p.substring(0, p.lastIndexOf('/') + 1);
+    })();
+  </script>
+
   <!-- Favicon & Apple Touch Icon (300KB 미만 초경량 자체 호스팅 PNG) -->
   <link rel="icon" type="image/png" sizes="64x64" href="./favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
@@ -20,10 +39,9 @@
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="ko_KR" />
   <meta property="og:site_name" content="감성 타이핑 시집 (Daily Poem)" />
-  <meta property="og:url" content="https://poeticecho.github.io/dailypoem/" />
   <meta property="og:title" content="감성 타이핑 시집 · 시와 여백이 머무는 시간" />
   <meta property="og:description" content="1,000편의 다정한 한국어 위로시 · 5대 정예 서체 · 자체 내장 재즈 & 앰비언스 라디오" />
-  <meta property="og:image" content="https://poeticecho.github.io/dailypoem/og-image.png" />
+  <meta property="og:image" content="./og-image.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -33,14 +51,14 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="감성 타이핑 시집 · 시와 여백이 머무는 시간" />
   <meta name="twitter:description" content="1,000편의 다정한 한국어 위로시 · 5대 정예 서체 · 자체 내장 재즈 & 앰비언스 라디오" />
-  <meta name="twitter:image" content="https://poeticecho.github.io/dailypoem/og-image.png" />
+  <meta name="twitter:image" content="./og-image.png" />
 
   <!-- 1. 자체 호스팅 로컬 서체 번들 최우선 로드 -->
   <link rel="stylesheet" href="./fonts/local-fonts.css" onerror="this.remove()">
 
   <!-- 2. 로컬 ./fonts/ 미구축 환경을 위한 하이브리드 폴백 -->
-  <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css">
-  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;600&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css" media="print" onload="this.media='all'">
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;600&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
   <style>
     /* 5대 정예 서체 로컬 파일(./fonts/) 최우선 @font-face 정의 */
@@ -217,7 +235,7 @@
       50% { opacity: 0.12; }
     }
 
-    /* 📖 전자책 3분할 터치 인터랙션 레이어 (좌측 / 중앙 / 우측 각각 최초 1회만 가이드 표출) */
+    /* 📖 전자책 3분할 터치 인터랙션 레이어 */
     #ereader-touch-zone {
       position: fixed;
       inset: 0;
@@ -235,7 +253,7 @@
     #zone-center { width: 44%; }
     #zone-next { width: 28%; }
 
-    /* 💖 인스타그램 스타일 중앙 더블탭 하트 블룸 애니메이션 (숫자 노출 없이 감성 하트만 피어남) */
+    /* 💖 인스타그램 스타일 중앙 더블탭 하트 블룸 애니메이션 */
     #heart-burst {
       position: fixed;
       top: 50%;
@@ -355,7 +373,7 @@
       50% { opacity: 1; transform: scale(1.2); }
     }
 
-    /* 🪶 상단 미니멀 트리거 아이콘 (평소엔 0% 완전 투명화) */
+    /* 🪶 상단 미니멀 트리거 아이콘 */
     #nav-trigger-wrap {
       position: fixed;
       top: max(env(safe-area-inset-top, 0px), 1.1rem);
@@ -395,7 +413,7 @@
       pointer-events: auto;
     }
 
-    /* 일반 설정 팝업 메뉴: 최상단 '현재 시 공유하기' + '음악 켜기' + 탐색/전체화면/상세설정 */
+    /* 일반 설정 팝업 메뉴 */
     #controls-popup {
       position: absolute;
       top: calc(100% + 0.5rem);
@@ -689,6 +707,447 @@
         bottom: 2rem;
       }
     }
+  
+    /* === DAILYPOEM 2.0 PHOTO & MARGIN ENGINE === */
+    #photo-stage {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      z-index: 2;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+                  background-color 0.8s ease,
+                  visibility 0.95s;
+      background-color: #0E0F12;
+    }
+
+    #photo-stage.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* 단색 여백 모드별 배경색 (InShot 화이트 / 블랙 / 한지) */
+    #photo-stage.fit-white {
+      background-color: #FFFFFF !important;
+    }
+    #photo-stage.fit-black {
+      background-color: #0D0E11 !important;
+    }
+    #photo-stage.fit-hanji {
+      background-color: #FBF8F3 !important;
+    }
+    #photo-stage.fit-blur,
+    #photo-stage.fit-crop_face {
+      background-color: #101216 !important;
+    }
+
+    /* 이중 버퍼(Double-Buffered) 슬라이드 슬롯 (아이패드 6세대 RAM 보호) */
+    .photo-slot {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      will-change: opacity, transform;
+      transition: opacity 1.45s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
+      overflow: hidden;
+    }
+
+    .photo-slot.visible {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    /* 전환 효과별 애니메이션 클래스 */
+    .photo-slot.trans-slide-enter {
+      transform: translateX(6%);
+    }
+    .photo-slot.visible.trans-slide-enter {
+      transform: translateX(0%);
+    }
+    .photo-slot.trans-polaroid {
+      transform: scale(0.94) rotate(-0.8deg);
+    }
+    .photo-slot.visible.trans-polaroid {
+      transform: scale(1) rotate(0deg);
+    }
+
+    /* [기법 2] 가우시안 블러 배경 채우기 레이어 (원본 사진 복제 -> 확대 -> 가우시안 블러) */
+    .photo-backdrop-blur {
+      position: absolute;
+      inset: -8%;
+      width: 116%;
+      height: 116%;
+      object-fit: cover;
+      object-position: 50% 50%;
+      filter: blur(38px) brightness(0.78) saturate(1.18);
+      transform: scale(1.08);
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* 부드러운 비네팅 오버레이로 블러 배경의 깊이감 향상 */
+    .photo-backdrop-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(0,0,0,0.02) 40%, rgba(0,0,0,0.32) 100%);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 2;
+      transition: opacity 0.8s ease;
+    }
+
+    #photo-stage.fit-blur .photo-backdrop-blur,
+    #photo-stage.fit-blur .photo-backdrop-vignette {
+      opacity: 1;
+    }
+
+    /* 상단 원본 사진 래퍼 */
+    .photo-fg-frame {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      transition: padding 0.5s ease;
+    }
+
+    .photo-fg-img {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      transition: transform 11s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 0.5s ease,
+                  border-radius 0.5s ease;
+      will-change: transform;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    /* 1) 가우시안 블러 모드: 원본 100% 보존 + 은은한 입체 그림자 */
+    #photo-stage.fit-blur .photo-fg-frame {
+      padding: 2.2vh 2.8vw;
+    }
+    #photo-stage.fit-blur .photo-fg-img {
+      max-width: 94.4vw;
+      max-height: 95.6vh;
+      border-radius: 6px;
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.42);
+    }
+
+    /* 2) 깔끔한 흰색 단색 여백 (InShot / Instagram 화이트 카드 스타일) */
+    #photo-stage.fit-white .photo-fg-frame {
+      padding: 4.2vh 4.8vw;
+    }
+    #photo-stage.fit-white .photo-fg-img {
+      max-width: 90.4vw;
+      max-height: 91.6vh;
+      border-radius: 4px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+    }
+
+    /* 3) 깔끔한 검은색 단색 여백 (InShot / 시네마틱 블랙 스타일) */
+    #photo-stage.fit-black .photo-fg-frame {
+      padding: 3.2vh 3.8vw;
+    }
+    #photo-stage.fit-black .photo-fg-img {
+      max-width: 92.4vw;
+      max-height: 93.6vh;
+      border-radius: 4px;
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.65);
+    }
+
+    /* 4) 따뜻한 한지 매트 액자 (DailyPoem 갤러리 매트) */
+    #photo-stage.fit-hanji .photo-fg-frame {
+      padding: 4.8vh 5.4vw;
+    }
+    #photo-stage.fit-hanji .photo-fg-img {
+      max-width: 88vw;
+      max-height: 88vh;
+      padding: 14px;
+      background: #FFFFFF;
+      border: 1px solid rgba(120, 100, 80, 0.14);
+      border-radius: 4px;
+      box-shadow: 0 18px 46px rgba(45, 35, 25, 0.11);
+    }
+
+    /* 5) 인물 중심 꽉 채우기 (Face-Centered Smart Crop) */
+    #photo-stage.fit-crop_face .photo-fg-frame {
+      padding: 0;
+    }
+    #photo-stage.fit-crop_face .photo-fg-img {
+      width: 100vw;
+      height: 100vh;
+      max-width: 100vw;
+      max-height: 100vh;
+      object-fit: cover;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    /* 켄 번즈(Ken Burns) 소프트 줌 효과 */
+    .photo-slot.visible.kb-active .photo-fg-img {
+      transform: scale(1.065);
+    }
+
+    /* 포토 포엠 (Photo + Poem 오버레이 시화전 카드) */
+    #photo-poem-overlay {
+      position: fixed;
+      z-index: 6;
+      max-width: min(86vw, 560px);
+      padding: 1.15rem 1.55rem;
+      border-radius: 16px;
+      background: rgba(18, 20, 26, 0.54);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #F7F4EE;
+      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.28);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.85s ease, transform 0.85s ease, top 0.6s ease, bottom 0.6s ease, left 0.6s ease, right 0.6s ease;
+    }
+
+    #photo-poem-overlay.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #photo-poem-overlay.light-card {
+      background: rgba(251, 248, 243, 0.84);
+      border: 1px solid rgba(60, 50, 40, 0.12);
+      color: #262320;
+      box-shadow: 0 14px 36px rgba(30, 24, 18, 0.10);
+    }
+
+    #photo-poem-overlay .ppo-text {
+      font-size: clamp(0.95rem, 1.8vw, 1.16rem);
+      line-height: 1.82;
+      white-space: pre-line;
+      letter-spacing: 0.01em;
+      word-break: keep-all;
+    }
+
+    #photo-poem-overlay .ppo-meta {
+      margin-top: 0.55rem;
+      font-size: 0.74rem;
+      opacity: 0.72;
+      letter-spacing: 0.04em;
+    }
+
+    #photo-poem-overlay.pos-bottom-left { bottom: 2.4rem; left: 2.4rem; text-align: left; }
+    #photo-poem-overlay.pos-bottom-right { bottom: 2.4rem; right: 2.4rem; text-align: right; }
+    #photo-poem-overlay.pos-bottom-center { bottom: 2.3rem; left: 50%; transform: translateX(-50%); text-align: center; }
+    #photo-poem-overlay.pos-top-left { top: 2.4rem; left: 2.4rem; text-align: left; }
+
+    /* 사진 전용 촬영일·앨범 미니 캡션 */
+    #photo-date-caption {
+      position: fixed;
+      bottom: 1.35rem;
+      left: 2.2rem;
+      z-index: 6;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      padding: 0.28rem 0.72rem;
+      border-radius: 999px;
+      background: rgba(18, 20, 26, 0.42);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: rgba(255, 255, 255, 0.86);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+    #photo-date-caption.visible {
+      opacity: 1;
+    }
+    #photo-date-caption.light-pill {
+      background: rgba(245, 242, 236, 0.82);
+      color: rgba(34, 34, 38, 0.82);
+      border: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    /* 사진 모드 시 다이나믹 시계·날씨 가독성 보정 */
+    body.photo-mode-active #ambient-clock {
+      padding: 0.45rem 0.85rem;
+      border-radius: 14px;
+      background: rgba(18, 20, 26, 0.38);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #F7F4EE !important;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.45);
+    }
+    body.photo-mode-active.photo-light-margin #ambient-clock {
+      background: rgba(251, 248, 243, 0.78);
+      color: #222428 !important;
+      text-shadow: none;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .clock-weather-line {
+      margin-top: 0.18rem;
+      font-size: 0.76rem;
+      opacity: 0.88;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 0.28rem;
+      justify-content: inherit;
+    }
+
+  
+    /* === FLAGSHIP DIGITAL FRAME EXTENSIONS (v2.2) === */
+    /* 1) Aura Carver Mat 스타일: 세로 사진 2장 나란히 페어링 (Dual Portrait Diptych) */
+    .photo-fg-img-pair {
+      display: none;
+      max-width: 44vw;
+      max-height: 88vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 20px 52px rgba(0, 0, 0, 0.38);
+      transition: transform 11s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    #photo-stage.fit-diptych .photo-backdrop-blur,
+    #photo-stage.fit-diptych .photo-backdrop-vignette {
+      opacity: 1;
+    }
+    #photo-stage.fit-diptych .photo-fg-frame {
+      gap: 2.2vw;
+      padding: 3.5vh 3.5vw;
+    }
+    #photo-stage.fit-diptych .photo-slot.has-pair .photo-fg-img {
+      max-width: 44vw;
+      max-height: 88vh;
+      border-radius: 6px;
+      box-shadow: 0 20px 52px rgba(0, 0, 0, 0.38);
+    }
+    #photo-stage.fit-diptych .photo-slot.has-pair .photo-fg-img-pair {
+      display: block;
+    }
+
+    /* 2) Samsung The Frame 스타일: 아트 모드 인화지 색온도 & 베벨 매트 음영 */
+    body.art-tone-warm #photo-stage {
+      filter: sepia(0.07) saturate(0.96) contrast(0.98) brightness(0.96);
+    }
+    body.art-tone-paper #photo-stage {
+      filter: sepia(0.12) saturate(0.92) contrast(0.95) brightness(0.94);
+    }
+    /* 매트 보드 내부 베벨 입체 테두리 */
+    #photo-stage.fit-white .photo-fg-img,
+    #photo-stage.fit-hanji .photo-fg-img {
+      outline: 1px solid rgba(110, 95, 80, 0.16);
+      outline-offset: -1px;
+    }
+
+    /* 3) 심야 취침 자동 디밍 오버레이 (23:00 ~ 06:00 나이트 스탠바이) */
+    #night-dim-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 8;
+      background: #000000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.5s ease;
+    }
+    body.night-dim-active #night-dim-overlay {
+      opacity: 0.48;
+    }
+    body.night-sleep-active #night-dim-overlay {
+      opacity: 0.86;
+    }
+
+  
+    /* === 4-TIER AMBIENT LIGHT & NIGHT MODE ENGINE (v2.3) === */
+    :root {
+      --dynamic-dim-opacity: 0;
+    }
+
+    #night-dim-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 8;
+      background: #060709;
+      opacity: var(--dynamic-dim-opacity, 0);
+      pointer-events: none;
+      transition: opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* 야간 감광 모드 작동 시: 눈부신 순백색(fit-white) 및 한지(fit-hanji) 여백을 다크 갤러리 매트로 자동 보호 */
+    body.ambient-night-active #photo-stage.fit-white,
+    body.ambient-night-active #photo-stage.fit-hanji {
+      background-color: #121418 !important;
+    }
+    body.ambient-night-active #photo-stage.fit-hanji .photo-fg-img {
+      background: #1E2026;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    body.ambient-night-active.photo-mode-active.photo-light-margin #ambient-clock {
+      background: rgba(18, 20, 26, 0.65);
+      color: #E8E4DC !important;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    body.ambient-night-active #photo-poem-overlay.light-card {
+      background: rgba(20, 22, 28, 0.78);
+      color: #EAE6DF;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    body.ambient-night-active #photo-date-caption.light-pill {
+      background: rgba(20, 22, 28, 0.72);
+      color: rgba(240, 236, 228, 0.85);
+    }
+
+    /* 올블랙 달빛 시계 슬립 모드일 때 사진·시 숨김 및 시계 중앙 달빛화 */
+    body.night-sleep-clock-mode #photo-stage,
+    body.night-sleep-clock-mode #poem-container,
+    body.night-sleep-clock-mode #photo-poem-overlay,
+    body.night-sleep-clock-mode #photo-date-caption {
+      opacity: 0.08 !important;
+      filter: brightness(0.3);
+    }
+
+  
+    /* === UI/UX POLISH v2.6 === */
+    /* 1) 퀵 팝업(#controls-popup) 가로모드/소형 화면 세로 넘침 방지 */
+    #controls-popup {
+      max-height: calc(100vh - 4.2rem);
+      max-height: calc(100dvh - 4.2rem);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+    }
+    #controls-popup .popup-item-btn {
+      padding: 0.42rem 0.68rem;
+    }
+
+    /* 2) 감상 몰입 중(4초 무입력 후 UI 소멸 시) 마우스 커서까지 완전히 숨김 */
+    body.cursor-idle-hidden,
+    body.cursor-idle-hidden #e-reader-touch-layer,
+    body.cursor-idle-hidden .touch-zone {
+      cursor: none !important;
+    }
+
   </style>
 </head>
 <body>
@@ -700,7 +1159,7 @@
     <rect width="100%" height="100%" filter="url(#noise)" />
   </svg>
 
-  <!-- 📖 전자책 3분할 터치 인터랙션 영역 (기본 브라우저 title 툴팁 제거 & 구역별 최초 1회만 소프트 안내 표출) -->
+  <!-- 📖 전자책 3분할 터치 인터랙션 영역 -->
   <div id="ereader-touch-zone" aria-label="전자책 터치 영역">
     <div id="zone-prev" class="touch-zone-col"></div>
     <div id="zone-center" class="touch-zone-col"></div>
@@ -734,7 +1193,7 @@
       </svg>
     </button>
 
-    <!-- 일반 설정 팝업 메뉴: 최상단 '현재 시 공유하기' + '음악 켜기' + 탐색/전체화면/통계/상세설정 -->
+    <!-- 일반 설정 팝업 메뉴 -->
     <div id="controls-popup" role="menu">
       <button class="popup-item-btn" id="popShareBtn" onclick="shareCurrentPoem(); closeControlsPopup();">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -750,6 +1209,26 @@
       <button class="popup-item-btn" id="popMusicBtn" onclick="toggleMusic(); closeControlsPopup();">
         <span id="popMusicIcon">🎵</span>
         <span id="popMusicText">음악 켜기 (Jazz)</span>
+      </button>
+
+      <button class="popup-item-btn" id="popFrameModeBtn" onclick="cycleFrameMode();">
+        <span>🖼️</span>
+        <span id="popFrameModeText">모드: 시집 전용 (1.0)</span>
+      </button>
+
+      <button class="popup-item-btn" id="popPhotoFitBtn" onclick="cyclePhotoFitMode();">
+        <span>✨</span>
+        <span id="popPhotoFitText">여백: 가우시안 블러</span>
+      </button>
+
+      <button class="popup-item-btn" id="popNightModeBtn" onclick="cycleNightModeQuick();">
+        <span id="popNightModeIcon">🌙</span>
+        <span id="popNightModeText">야간 조도: 자동(일몰)</span>
+      </button>
+
+      <button class="popup-item-btn" onclick="document.getElementById('inpLocalPhotos').click(); closeControlsPopup();">
+        <span>📁</span>
+        <span id="popLocalPhotoText">내 사진 넣어보기 (웹 테스트)</span>
       </button>
 
       <div class="popup-divider"></div>
@@ -786,7 +1265,7 @@
         <button class="popup-item-btn" style="justify-content:center;padding:0.32rem 0;" onclick="changeFontSize(1)">가+</button>
       </div>
 
-      <a class="popup-item-btn" href="./stats.html">
+      <a class="popup-item-btn" id="linkPopupStats" href="./stats.html">
         <span>📊</span>
         <span>인기 시 · 신작 통계</span>
       </a>
@@ -798,14 +1277,46 @@
     </div>
   </div>
 
-  <!-- 📱 뷰포트 래퍼: 95% 폭 활용 & 상하 대칭 정렬 & 동일 서체 활자 커서(|) -->
+  <!-- 🖼️ DailyPoem 2.0 스마트 사진 & 여백 스테이지 (이중 버퍼) -->
+  <div id="photo-stage" class="fit-blur" aria-hidden="true">
+    <div class="photo-slot" id="photo-slot-a">
+      <img class="photo-backdrop-blur" id="blur-img-a" alt="" decoding="async" />
+      <div class="photo-backdrop-vignette"></div>
+      <div class="photo-fg-frame">
+        <img class="photo-fg-img" id="fg-img-a" alt="" decoding="async" />
+        <img class="photo-fg-img-pair" id="fg-pair-a" alt="" decoding="async" />
+      </div>
+    </div>
+    <div class="photo-slot" id="photo-slot-b">
+      <img class="photo-backdrop-blur" id="blur-img-b" alt="" decoding="async" />
+      <div class="photo-backdrop-vignette"></div>
+      <div class="photo-fg-frame">
+        <img class="photo-fg-img" id="fg-img-b" alt="" decoding="async" />
+        <img class="photo-fg-img-pair" id="fg-pair-b" alt="" decoding="async" />
+      </div>
+    </div>
+  </div>
+
+  <!-- 📜 포토 포엠 오버레이 카드 & 촬영일 캡션 -->
+  <div id="photo-poem-overlay" class="pos-bottom-left">
+    <div class="ppo-text" id="ppo-text"></div>
+    <div class="ppo-meta" id="ppo-meta"></div>
+  </div>
+  <div id="photo-date-caption"></div>
+  <div id="night-dim-overlay" aria-hidden="true"></div>
+
+  <!-- 📁 GitHub Pages 웹 미리보기용 로컬 사진/폴더 피커 (서버 업로드 없음, 100% 브라우저 로컬 동작) -->
+  <input type="file" id="inpLocalPhotos" accept="image/*" multiple style="display:none" onchange="handleLocalPhotoFiles(this.files)" />
+  <input type="file" id="inpLocalFolder" accept="image/*" webkitdirectory directory multiple style="display:none" onchange="handleLocalPhotoFiles(this.files)" />
+
+  <!-- 📱 뷰포트 래퍼 -->
   <div id="viewport-stage">
     <main id="poem-container">
       <div id="poem"><span id="typed"></span><span id="cursor" class="cursor" style="display:none" aria-hidden="true">|</span></div>
     </main>
   </div>
 
-  <!-- 📻 하단 상태 캡션 (기본: 시 번호 책갈피 OFF) -->
+  <!-- 📻 하단 상태 캡션 -->
   <div id="status-caption">
     <span id="radio-status-badge" style="display:none;">
       <span class="radio-wave-dot"></span>
@@ -837,9 +1348,9 @@
     </div>
 
     <div class="pm-controls-row">
-      <button class="pm-hw-btn" onclick="prevPixelSeed()">|&lt;</button>
+      <button class="pm-hw-btn" onclick="nextPixelSeed()" title="새로운 시드 여정">🎲 NEW</button>
       <button class="pm-hw-btn" id="pm-play-btn" onclick="toggleMusic()">▶ PLAY</button>
-      <button class="pm-hw-btn" onclick="nextPixelSeed()">&gt;|</button>
+      <button class="pm-hw-btn" onclick="nextMusicTheme()" title="다음 마디에서 새 주제로 전환">NEXT &gt;|</button>
     </div>
   </aside>
 
@@ -852,10 +1363,142 @@
     </div>
 
     <div class="settings-body">
-      <!-- 섹션 1: 자체 내장 Pixelmood 엔진 & 라디오 방송 설정 -->
       <div class="settings-section">
         <div class="sec-label">
-          <span>🎷 배경 음악 & 픽셀 라디오</span>
+          <span>🖼️ 전자액자 & 세로 여백 (2.0)</span>
+          <button class="setting-action-btn" onclick="document.getElementById('inpLocalPhotos').click()">📁 내 사진 테스트</button>
+        </div>
+
+        <div class="setting-row">
+          <span>액자 표시 모드</span>
+          <select id="selFrameMode" class="setting-select" onchange="updateV2FrameConfig()">
+            <option value="poem_only">시집 전용 (DailyPoem 1.0)</option>
+            <option value="hybrid">하이브리드 (시+사진 교차)</option>
+            <option value="photo_poem">포토 포엠 (사진 위 짧은 시)</option>
+            <option value="photo_only">사진 액자 전용 (슬라이드쇼)</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <span>세로·비율 여백 처리</span>
+          <select id="selPhotoFitMode" class="setting-select" onchange="updateV2FrameConfig()">
+            <option value="blur">가우시안 블러 배경 (기본)</option>
+            <option value="white">깔끔한 흰색 여백 (인샷 화이트)</option>
+            <option value="black">깔끔한 검은색 여백 (인샷 블랙)</option>
+            <option value="hanji">따뜻한 한지 여백 (갤러리 매트)</option>
+            <option value="crop_face">인물 중심 꽉 채움 (스마트 크롭)</option>
+            <option value="diptych">세로 2장 스마트 페어링 (Aura 화보)</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <span>사진 정렬 순서</span>
+          <select id="selPhotoSortMode" class="setting-select" onchange="updateV2FrameConfig()">
+            <option value="people">인물 중심 쇼 (얼굴 우선)</option>
+            <option value="date_desc">시간 순서 (최신 추억순)</option>
+            <option value="date_asc">시간 순서 (오래된 연대기순)</option>
+            <option value="random">스마트 랜덤 (중복 방지)</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <span>사진 전환 효과</span>
+          <select id="selPhotoTransition" class="setting-select" onchange="updateV2FrameConfig()">
+            <option value="kenburns">켄 번즈 (인물 중심 소프트 줌)</option>
+            <option value="dissolve">크로스 디졸브 (부드러운 겹침)</option>
+            <option value="paper">한지 페이드 (여백 호흡)</option>
+            <option value="slide">갤러리 슬라이드</option>
+            <option value="polaroid">폴라로이드 플로트</option>
+            <option value="random">전환 효과 자동 순환</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <span>시계에 대구 날씨 병기</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chkShowWeather" checked onchange="updateV2FrameConfig()">
+            <span class="slider-round"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <span>앨범 · 베스트컷 필터</span>
+          <select id="selAlbumFilter" class="setting-select" onchange="updateV2FrameConfig()">
+            <option value="all">전체 앨범 상영 (All)</option>
+            <option value="hearts_only">♥ 하트 베스트컷만 상영</option>
+            <option value="인물_스냅">인물_스냅 폴더만</option>
+            <option value="가족_일상">가족_일상 폴더만</option>
+            <option value="계절_풍경">계절_풍경 폴더만</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <span>더 프레임 색온도 보정</span>
+          <select id="selArtToneMode" class="setting-select" onchange="updateV2FrameConfig()">
+            <option value="auto_warm">주야간 자동 온기 보정 (기본)</option>
+            <option value="paper_matte">미술관 인화지 매트 톤</option>
+            <option value="original">원본 색감 그대로</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <span>야간 · 주변 조도 모드</span>
+          <select id="selNightMode" class="setting-select" onchange="updateV2FrameConfig()">
+            <option value="auto_solar">대구 일몰·날씨 자동 감광</option>
+            <option value="auto_camera">💡 카메라 실시간 조도 센서</option>
+            <option value="always_night">🌙 야간 모드 항상 켜기</option>
+            <option value="sleep_clock">🌑 심야 올블랙 달빛 시계</option>
+            <option value="off">☀️ 항상 주간 100% 밝기</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <span>액자 밝기 (<span id="lblScreenBrightness">100</span>%)</span>
+          <input type="range" id="rngScreenBrightness" class="setting-range" min="25" max="100" step="5" value="100" oninput="updateScreenBrightness(this.value)">
+        </div>
+
+        <div class="setting-row">
+          <span>주변 밝기 상태</span>
+          <span id="lblAmbientLuxStatus" style="font-size:0.74rem;opacity:0.82;">일몰·시간대 자동 연동 중</span>
+        </div>
+
+        <div class="setting-row">
+          <span>날씨-배경음 자동 연동</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chkWeatherAudioSync" checked onchange="updateV2FrameConfig()">
+            <span class="slider-round"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <span>사진 가져오는 곳</span>
+          <select id="selPhotoSource" class="setting-select" onchange="changePhotoSourceMode(this.value)">
+            <option value="auto">자동 (NAS·GitHub폴더·웹샘플)</option>
+            <option value="web_sample">🌐 오픈소스 감성 샘플 앨범</option>
+            <option value="repo_folder">📦 내 저장소 ./photos 폴더</option>
+            <option value="github_api">🔗 GitHub 공개 저장소 스캔</option>
+          </select>
+        </div>
+
+        <div class="setting-row" id="rowGithubRepoInput" style="display:none;">
+          <span>GitHub 경로 (계정/저장소/폴더)</span>
+          <div style="display:flex;gap:0.25rem;align-items:center;">
+            <input type="text" id="inpGithubRepoPath" class="setting-input" style="width:128px;" placeholder="poeticecho/dailypoem/photos" value="poeticecho/dailypoem/photos">
+            <button class="setting-action-btn" onclick="loadPhotosFromCustomGithubRepo()">불러오기</button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <span>내 기기 사진 바로 열기</span>
+          <div style="display:flex;gap:0.28rem;">
+            <button class="setting-action-btn" onclick="document.getElementById('inpLocalPhotos').click()">📷 사진 선택</button>
+            <button class="setting-action-btn" onclick="document.getElementById('inpLocalFolder').click()">🗂️ 폴더 열기</button>
+          </div>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="sec-label">
+          <span>🎷 배경 음악 · Peommood 2.1</span>
           <label class="toggle-switch">
             <input type="checkbox" id="chkMusicOn" onchange="setMusicState(this.checked)">
             <span class="slider-round"></span>
@@ -863,51 +1506,66 @@
         </div>
 
         <div class="setting-row">
-          <span>연주 스타일</span>
-          <select id="selAudioChannel" class="setting-select" onchange="changeAudioChannel(this.value)">
-            <option value="jazz">Jazz (피아노·재즈기타)</option>
-            <option value="lofi">Lo-Fi (일렉피아노·브러시)</option>
-            <option value="late_fm">심야 FM 93.1 라디오</option>
-            <option value="nocturne">녹턴 & 오르골</option>
-            <option value="ambient">새벽 숲 싱잉볼 명상</option>
-          </select>
+          <span>현재 연주 주제</span>
+          <span id="lblPeommoodThemeInfo" style="font-size:0.75rem;opacity:0.88;text-align:right;">재생을 눌러 여정을 시작하세요</span>
         </div>
 
         <div class="setting-row">
-          <span>풍부한 사운드 (Lush Jazz)</span>
-          <label class="toggle-switch">
-            <input type="checkbox" id="chkRichAudio" checked onchange="toggleRichAudio(this.checked)">
-            <span class="slider-round"></span>
-          </label>
+          <span>감성 독서 프리셋</span>
+          <div style="display:flex;gap:0.25rem;flex-wrap:wrap;justify-content:flex-end;">
+            <button class="setting-action-btn" onclick="applyPeommoodPreset('reading')">📖 고요한 독서</button>
+            <button class="setting-action-btn" onclick="applyPeommoodPreset('rain')">🌧️ 비 오는 오후</button>
+            <button class="setting-action-btn" onclick="applyPeommoodPreset('night')">🌙 심야의 시</button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <span>연주 채널 (결)</span>
+          <select id="selAudioChannel" class="setting-select" onchange="changeAudioChannel(this.value)">
+            <option value="jazz">Jazz (재즈 · 브러시 스윙)</option>
+            <option value="lofi">Lo-Fi (로파이 · Rhodes)</option>
+            <option value="late_fm">심야 FM 라디오 (단조·대리화음)</option>
+            <option value="nocturne">녹턴 (비브라폰 · 무타악)</option>
+            <option value="ambient">앰비언트 (느린 화성 · 여백)</option>
+          </select>
         </div>
 
         <div class="setting-row">
           <span>배경 자연음</span>
           <select id="selAmbientLayer" class="setting-select" onchange="changeAmbientLayer(this.value)">
-            <option value="random">자동 블렌딩 (Random)</option>
-            <option value="rain">창가 빗소리 (Rain)</option>
-            <option value="birds">숲속 산새 (Birds)</option>
-            <option value="vinyl">LP 레코드 온기 (Vinyl)</option>
-            <option value="none">선율만 듣기 (Off)</option>
+            <option value="rain">부드러운 비 (1400Hz 로우패스)</option>
+            <option value="random">주제마다 자동 선택 (Random)</option>
+            <option value="vinyl">LP 바이닐 온기 (Vinyl)</option>
+            <option value="birds">작은 새소리 (Birds)</option>
+            <option value="none">음악만 듣기 (Off)</option>
           </select>
         </div>
 
         <div class="setting-row">
-          <span>자연음 농도 (Lv.<span id="lblAmbLevel">5</span>)</span>
-          <input type="range" id="rngAmbLevel" class="setting-range" min="0" max="10" step="1" value="5" oninput="updateAmbienceLevel(this.value)">
+          <span>자연음 크기 (Lv.<span id="lblAmbLevel">2</span>)</span>
+          <input type="range" id="rngAmbLevel" class="setting-range" min="0" max="10" step="1" value="2" oninput="updateAmbienceLevel(this.value)">
         </div>
 
         <div class="setting-row">
-          <span>음악 볼륨</span>
-          <input type="range" id="rngVolume" class="setting-range" min="0.05" max="0.7" step="0.02" value="0.22" oninput="updateVolume(this.value)">
+          <span>마스터 음량</span>
+          <input type="range" id="rngVolume" class="setting-range" min="0.05" max="0.85" step="0.02" value="0.32" oninput="updateVolume(this.value)">
         </div>
 
         <div class="setting-row">
-          <span>작곡 시드 (Seed)</span>
+          <span>주제 전환 · 시드</span>
           <div style="display:flex;gap:0.25rem;align-items:center;">
-            <input type="text" id="inpSeed" class="setting-input" value="2494034659" onchange="applyCustomSeed(this.value)">
-            <button class="setting-action-btn" onclick="applyCustomSeed('2494034659')">기본</button>
-            <button class="setting-action-btn" onclick="nextPixelSeed()">🎲</button>
+            <input type="text" id="inpSeed" class="setting-input" style="width:92px;" value="2494034659" onchange="applyCustomSeed(this.value)" title="숫자 시드 또는 PM1 코드 입력">
+            <button class="setting-action-btn" onclick="nextMusicTheme()" title="다음 마디 경계에서 새 주제로 전환">⏭ 다음 주제</button>
+            <button class="setting-action-btn" onclick="nextPixelSeed()" title="새로운 랜덤 시드 여정">🎲 새 여정</button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <span>PM1 재현 코드</span>
+          <div style="display:flex;gap:0.25rem;align-items:center;">
+            <input type="text" id="inpPm1Code" class="setting-input" style="width:96px;" placeholder="PM1 코드 붙여넣기">
+            <button class="setting-action-btn" onclick="exportAndCopyPm1Code()" title="지금 들리는 주제의 PM1 코드 복사">📋 코드 복사</button>
+            <button class="setting-action-btn" onclick="loadPm1CodeFromInput()" title="입력한 PM1 코드로 주제·설정 복원">▶ 복원</button>
           </div>
         </div>
 
@@ -919,7 +1577,6 @@
         </div>
       </div>
 
-      <!-- 섹션 2: 다이나믹 시계 설정 -->
       <div class="settings-section">
         <div class="sec-label">
           <span>🕰️ 다이나믹 감성 시계</span>
@@ -970,7 +1627,6 @@
         </div>
       </div>
 
-      <!-- 섹션 3: 태블릿 액자 & 감상 호흡 설정 -->
       <div class="settings-section">
         <div class="sec-label">
           <span>🖼️ 태블릿 시집 액자 & 통계</span>
@@ -1017,15 +1673,905 @@
 
         <div class="setting-row">
           <span>인기 시 TOP 10 & 주간 신작</span>
-          <a class="setting-action-btn" href="./stats.html">📊 통계 페이지 열기</a>
+          <a class="setting-action-btn" id="linkModalStats" href="./stats.html">📊 통계 페이지 열기</a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- 🎷 Peommood Audio Engine 2.1 (외부 스크립트 로드 + 단독 HTML 실행용 인라인 폴백 내장) -->
+  <script src="./peommood-audio-engine.js"></script>
+  <script>
+    if (typeof window.PeommoodAudioEngine === 'undefined') {
+/**
+ * Peommood Audio Engine 2.1.0 — procedural jazz for reading.
+ * No samples, network requests, dependencies or build step. MIT License.
+ * Refactored from Pixelmood (PoeticEcho & Antigravity, MIT).
+ *
+ * Browser: new PeommoodAudioEngine(); await engine.start() in a user gesture.
+ * CommonJS: const Engine = require('./peommood-audio-engine.js');
+ * Pure composition: new Engine.Composer(config).nextBar().
+ * Audio synthesis is stylized additive/subtractive synthesis, not a physical model.
+ */
+(function (root, factory) {
+  'use strict';
+  const Engine = factory(root);
+  if (typeof module === 'object' && module.exports) module.exports = Engine;
+  else {
+    root.PeommoodAudioEngine = Engine;
+    root.PoemmoodAudioEngine = Engine; // Earlier project spelling.
+    // Compatibility for existing Pixelmood integrations.
+    if (!root.PixelmoodAudioEngine) root.PixelmoodAudioEngine = Engine;
+  }
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (root) {
+  'use strict';
+  const VERSION = '2.1.0';
+  const DEFAULT_SEED = 2494034659;
+  const TAU = Math.PI * 2;
+  const EPS = 0.00001;
+  const CHANNELS = ['jazz', 'lofi', 'late_fm', 'nocturne', 'ambient'];
+  const AMBIENCES = ['random', 'rain', 'birds', 'vinyl', 'none'];
+  const NAMES = ['C', 'D♭', 'D', 'E♭', 'E', 'F', 'G♭', 'G', 'A♭', 'A', 'B♭', 'B'];
+  const DEFAULTS = Object.freeze({
+    seed: DEFAULT_SEED, audioChannel: 'jazz', ambientLayer: 'rain',
+    ambienceLevel: 2, volume: 0.32, richAudio: true,
+    themeMinSeconds: 120, themeMaxSeconds: 240, maxVoices: 48,
+    lookAheadSeconds: 0.20, schedulerIntervalMs: 25,
+    warmth: 0.68, space: 0.48, density: 0.42, tension: 0.35
+  });
+  const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+  const num = (v, fallback, a, b) => clamp(Number.isFinite(Number(v)) ? Number(v) : fallback, a, b);
+  const pc = n => ((n % 12) + 12) % 12;
+  const hz = midi => 440 * Math.pow(2, (midi - 69) / 12);
+  const pick = (r, a) => a[Math.floor(r() * a.length)];
+  function hash(seed, salt) {
+    let x = (seed ^ Math.imul((salt + 1) >>> 0, 0x9e3779b9)) >>> 0;
+    x = Math.imul(x ^ (x >>> 16), 0x85ebca6b);
+    x = Math.imul(x ^ (x >>> 13), 0xc2b2ae35);
+    return (x ^ (x >>> 16)) >>> 0;
+  }
+  function mulberry32(seed) {
+    let a = seed >>> 0;
+    return function () {
+      a = (a + 0x6D2B79F5) >>> 0;
+      let t = Math.imul(a ^ (a >>> 15), a | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function settings(input = {}) {
+    const c = { ...DEFAULTS, ...input };
+    c.seed = num(c.seed, DEFAULT_SEED, 0, 0xffffffff) >>> 0;
+    if (!CHANNELS.includes(c.audioChannel)) c.audioChannel = 'jazz';
+    if (!AMBIENCES.includes(c.ambientLayer)) c.ambientLayer = 'rain';
+    c.volume = num(c.volume, DEFAULTS.volume, 0, 1);
+    c.ambienceLevel = num(c.ambienceLevel, 2, 0, 10);
+    c.richAudio = Boolean(c.richAudio);
+    c.themeMinSeconds = num(c.themeMinSeconds, 120, 60, 540);
+    c.themeMaxSeconds = num(c.themeMaxSeconds, 240, c.themeMinSeconds + 20, 600);
+    c.maxVoices = Math.round(num(c.maxVoices, 48, 16, 128));
+    c.lookAheadSeconds = num(c.lookAheadSeconds, .20, .08, .5);
+    c.schedulerIntervalMs = num(c.schedulerIntervalMs, 25, 10, 50);
+    for (const k of ['warmth', 'space', 'density', 'tension']) c[k] = num(c[k], DEFAULTS[k], 0, 1);
+    return c;
+  }
+
+  // chord tones, followed by four essential upper-voice intervals.
+  // Major/minor thirds, sevenths and named extensions are explicit.
+  const QUALITIES = Object.freeze({
+    maj9: { tones: [0, 4, 7, 11, 14], upper: [4, 7, 11, 14] },
+    '6/9': { tones: [0, 4, 7, 9, 14], upper: [4, 7, 9, 14] },
+    m9: { tones: [0, 3, 7, 10, 14], upper: [3, 7, 10, 14] },
+    m11: { tones: [0, 3, 7, 10, 14, 17], upper: [3, 10, 14, 17] },
+    'm6/9': { tones: [0, 3, 7, 9, 14], upper: [3, 7, 9, 14] },
+    '13': { tones: [0, 4, 7, 10, 14, 21], upper: [4, 10, 14, 21] },
+    '13sus4': { tones: [0, 5, 7, 10, 14, 21], upper: [5, 10, 14, 21] },
+    '7(♭9,♭13)': { tones: [0, 4, 10, 13, 20], upper: [4, 10, 13, 20] },
+    '7(♯11)': { tones: [0, 4, 7, 10, 14, 18], upper: [4, 10, 14, 18] },
+    dim7: { tones: [0, 3, 6, 9], upper: [0, 3, 6, 9] },
+    m7b5: { tones: [0, 3, 6, 10, 17], upper: [3, 6, 10, 17] }
+  });
+  // All themes begin on their tonic. The last bar is explicitly resolved.
+  const PROGRESSIONS = {
+    letter: [[0,'maj9'],[9,'m9'],[2,'m9'],[7,'13'],[0,'6/9'],[5,'maj9'],[7,'13sus4'],[0,'maj9']],
+    cafe: [[0,'maj9'],[9,'7(♭9,♭13)'],[2,'m9'],[7,'13'],[4,'m9'],[9,'m9'],[2,'m9'],[7,'13']],
+    falling: [[0,'maj9'],[0,'6/9'],[2,'m9'],[1,'7(♯11)'],[0,'maj9'],[8,'maj9'],[5,'m9'],[0,'6/9']],
+    candle: [[0,'6/9'],[1,'dim7'],[2,'m9'],[7,'13'],[0,'maj9'],[5,'maj9'],[5,'m9'],[0,'6/9']],
+    blue: [[0,'m9'],[5,'m9'],[2,'m7b5'],[7,'7(♭9,♭13)'],[0,'m6/9'],[8,'maj9'],[2,'m7b5'],[7,'7(♭9,♭13)']],
+    moon: [[0,'m9'],[3,'maj9'],[8,'maj9'],[7,'7(♭9,♭13)'],[0,'m9'],[5,'m11'],[7,'7(♭9,♭13)'],[0,'m6/9']],
+    window: [[0,'m9'],[5,'13'],[0,'m11'],[0,'m6/9'],[10,'maj9'],[5,'13sus4'],[0,'m11'],[0,'m9']],
+    water: [[0,'maj9'],[0,'6/9'],[5,'maj9'],[5,'maj9'],[0,'maj9'],[9,'m9'],[7,'13sus4'],[0,'6/9']]
+  };
+  const PROFILES = [
+    { id:'letter', name:'종이 위의 햇살', mode:'major', lead:'jazz_guitar' },
+    { id:'cafe', name:'오래된 찻잔', mode:'major', lead:'rhodes' },
+    { id:'falling', name:'비가 지나간 자리', mode:'major', lead:'jazz_guitar' },
+    { id:'candle', name:'촛불의 문장', mode:'major', lead:'vibes' },
+    { id:'blue', name:'푸른 저녁', mode:'minor', lead:'rhodes' },
+    { id:'moon', name:'달빛의 여백', mode:'minor', lead:'vibes' },
+    { id:'window', name:'열린 창가', mode:'dorian', lead:'jazz_guitar' },
+    { id:'water', name:'고요한 물결', mode:'major', lead:'vibes' }
+  ];
+  const SCALES = { major:[0,2,4,5,7,9,11], minor:[0,2,3,5,7,8,10], dorian:[0,2,3,5,7,9,10] };
+  const RHYTHMS = [[.5,1.5,3],[0,1.5,2.5],[.5,2,3.5],[0,2.5],[1,2,3],[.5,2.5]];
+  const LEADS = ['rhodes','jazz_guitar','vibes'];
+  const CODE_KEYS = ['seed','audioChannel','ambientLayer','ambienceLevel','volume','richAudio',
+    'themeMinSeconds','themeMaxSeconds','warmth','space','density','tension',
+    'maxVoices','lookAheadSeconds','schedulerIntervalMs'];
+  const clone = value => JSON.parse(JSON.stringify(value));
+  let randomNonce = 0;
+  function randomSeed() {
+    const a = new Uint32Array(1);
+    if (root.crypto?.getRandomValues) root.crypto.getRandomValues(a);
+    else a[0] = hash(Date.now() >>> 0, ++randomNonce + Math.floor((root.performance?.now() || 0)*1000));
+    return a[0];
+  }
+  function checksum(s) {
+    let h=0x811c9dc5;
+    for(let i=0;i<s.length;i++) h=Math.imul(h^s.charCodeAt(i),0x01000193);
+    return (h>>>0).toString(16).padStart(8,'0');
+  }
+  // PM1 is a versioned composition recipe, not a secret or an audio recording.
+  // Numeric arrays keep the payload ASCII and portable without dependencies.
+  function encodeCode(config, snapshot) {
+    let s=null;
+    if(snapshot){
+      const t=snapshot.theme;
+      s=[[t.index,PROFILES.findIndex(p=>p.id===t.profileId),t.key,t.bpm,t.bars,t.motif,
+        t.rhythmIndex,t.home,LEADS.indexOf(t.lead),t.pan,t.swing,AMBIENCES.indexOf(t.resolvedAmbience)],
+        [snapshot.globalBar,snapshot.elapsedSeconds,snapshot.previousVoicing,snapshot.previousMelody,snapshot.previousBass]];
+    }
+    const raw=JSON.stringify([CODE_KEYS.map(k=>config[k]),s]);
+    const body=(typeof root.btoa==='function'?root.btoa(raw):Buffer.from(raw,'ascii').toString('base64'))
+      .replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+    return 'PM1.'+body+'.'+checksum(body);
+  }
+  function decodeCode(code) {
+    const fail=()=>{throw new RangeError('재현 코드가 손상되었거나 지원하지 않는 형식입니다.');};
+    if(typeof code!=='string'||code.length>4096) return fail();
+    const parts=code.trim().split('.');
+    if(parts.length!==3||parts[0]!=='PM1'||!/^[-_A-Za-z0-9]+$/.test(parts[1])||checksum(parts[1])!==parts[2])return fail();
+    let payload;
+    try{
+      const b=parts[1].replace(/-/g,'+').replace(/_/g,'/');
+      payload=JSON.parse(typeof root.atob==='function'?root.atob(b):Buffer.from(b,'base64').toString('ascii'));
+    }catch(_){return fail();}
+    const range=(n,lo,hi,integer=false)=>typeof n==='number'&&Number.isFinite(n)&&n>=lo&&n<=hi&&(!integer||Number.isInteger(n));
+    if(!Array.isArray(payload)||payload.length!==2||!Array.isArray(payload[0])||payload[0].length!==CODE_KEYS.length)return fail();
+    const config=Object.fromEntries(CODE_KEYS.map((k,i)=>[k,payload[0][i]]));
+    const normalized=settings(config);
+    if(CODE_KEYS.some(k=>config[k]!==normalized[k])||!range(config.seed,0,0xffffffff,true))return fail();
+    let snapshot=null;
+    if(payload[1]!==null){
+      const s=payload[1];
+      if(!Array.isArray(s)||s.length!==2||!Array.isArray(s[0])||s[0].length!==12||!Array.isArray(s[1])||s[1].length!==5)return fail();
+      const [t,state]=s;
+      if(!range(t[0],0,1e9,true)||!range(t[1],0,PROFILES.length-1,true)||!range(t[2],0,11,true)||
+        !range(t[3],56,78,true)||!range(t[4],4,200,true)||t[4]%4||
+        !Array.isArray(t[5])||t[5].length!==8||t[5].some(n=>!range(n,-6,8,true))||
+        !range(t[6],0,RHYTHMS.length-1,true)||!range(t[7],7,9,true)||!range(t[8],0,2,true)||
+        !range(t[9],-.14,.14)||!range(t[10],0,.2)||!range(t[11],1,4,true)||
+        !range(state[0],0,1e12,true)||!range(state[1],0,1e12)||
+        !(state[2]===null||(Array.isArray(state[2])&&state[2].length===4&&state[2].every(n=>range(n,48,76,true))))||
+        !(state[3]===null||range(state[3],64,83,true))||!range(state[4],24,60,true))return fail();
+      const p=PROFILES[t[1]],barSeconds=240/t[3];
+      snapshot={theme:{index:t[0],profileId:p.id,name:p.name,mode:p.mode,key:t[2],
+        keyName:NAMES[t[2]]+(p.mode==='major'?' major':p.mode==='minor'?' minor':' dorian'),
+        bpm:t[3],barSeconds,bars:t[4],durationSeconds:t[4]*barSeconds,motif:t[5],rhythmIndex:t[6],
+        home:t[7],lead:LEADS[t[8]],pan:t[9],swing:t[10],resolvedAmbience:AMBIENCES[t[11]]},
+        globalBar:state[0],elapsedSeconds:state[1],previousVoicing:state[2],previousMelody:state[3],previousBass:state[4]};
+    }
+    return {config,snapshot};
+  }
+  function recipe(input) {
+    if(typeof input==='string'){
+      const value=input.trim();
+      if(value.startsWith('PM'))return decodeCode(value);
+      if(value==='')return {config:settings({seed:randomSeed()}),snapshot:null};
+      if(!/^\d{1,10}$/.test(value)||Number(value)>0xffffffff)throw new RangeError('숫자 시드 또는 PM1 재현 코드를 입력하세요.');
+      input={seed:Number(value)};
+    }else if(typeof input==='number')input={seed:input};
+    if(input&&Object.prototype.hasOwnProperty.call(input,'code'))return recipe(input.code==null?'':input.code);
+    const c={...(input||{})};
+    if(c.seed==null||c.seed==='')c.seed=randomSeed();
+    return {config:settings(c),snapshot:null};
+  }
+  const VOICING_CACHE = new Map(); // At most 12 × quality-count entries.
+  function candidates(rootPc, quality) {
+    const key = rootPc + ':' + quality;
+    if (VOICING_CACHE.has(key)) return VOICING_CACHE.get(key);
+    const tones = QUALITIES[quality].upper.map(n => pc(rootPc + n));
+    const result = [], seen = new Set();
+    function visit(i, notes) {
+      if (i < tones.length) {
+        for (let n = 48 + tones[i]; n <= 76; n += 12) visit(i + 1, notes.concat(n));
+        return;
+      }
+      const v = notes.slice().sort((a,b) => a-b);
+      if (v[3]-v[0] > 21 || v.some((n,j) => j && n-v[j-1] < (n < 55 ? 3 : 1))) return;
+      const id = v.join(',');
+      if (!seen.has(id)) { seen.add(id); result.push(v); }
+    }
+    visit(0, []);
+    VOICING_CACHE.set(key, result);
+    return result;
+  }
+  function voiceLead(rootPc, quality, previous) {
+    let best, score = Infinity;
+    for (const v of candidates(rootPc, quality)) {
+      let cost = Math.abs(v.reduce((a,b)=>a+b,0)/4 - 61) * .35;
+      if (previous) for (let j=0;j<4;j++) {
+        const d = Math.abs(v[j]-previous[j]);
+        cost += d + Math.max(0,d-4)*1.7;
+      }
+      cost += Math.max(0,v[3]-v[0]-16)*.3;
+      if (cost < score) { score=cost; best=v; }
+    }
+    if (!best) throw new Error('No voicing for ' + quality);
+    return best.slice();
+  }
+  function nearPitch(target, allowed, previous, lo=64, hi=83) {
+    let best=lo, cost=Infinity;
+    for (let n=lo;n<=hi;n++) {
+      if (!allowed.includes(pc(n))) continue;
+      const movement = previous == null ? 0 : Math.abs(n-previous);
+      const c = Math.abs(n-target) + movement*.24 + Math.max(0,movement-5)*1.4;
+      if (c < cost) { best=n; cost=c; }
+    }
+    return best;
+  }
+
+  /** Pure, bounded-state score generator; does not access Web Audio or timers. */
+  class Composer {
+    constructor(config = {}) {
+      this.config = settings(config);
+      this.theme = this._makeTheme(0, null);
+      this.barInTheme = 0;
+      this.globalBar = 0;
+      this.elapsedSeconds = 0;
+      this.previousVoicing = null;
+      this.previousMelody = null;
+      this.previousBass = 36 + this.theme.key;
+      this._nextTheme = null;
+      this._captureThemeStart();
+    }
+    _captureThemeStart(){
+      this._themeStart=clone({theme:this.theme,globalBar:this.globalBar,elapsedSeconds:this.elapsedSeconds,
+        previousVoicing:this.previousVoicing,previousMelody:this.previousMelody,previousBass:this.previousBass});
+    }
+    getThemeStart(){return clone(this._themeStart);}
+    restoreTheme(snapshot){
+      const s=clone(snapshot);
+      for(const key of ['theme','globalBar','elapsedSeconds','previousVoicing','previousMelody','previousBass'])this[key]=s[key];
+      this.barInTheme=0;this._nextTheme=null;this._captureThemeStart();
+    }
+    _makeTheme(index, previous) {
+      const c = this.config, r = mulberry32(hash(c.seed, index + 1000));
+      let pool = PROFILES;
+      if (c.audioChannel === 'lofi') pool = PROFILES.filter(p=>['letter','falling','water','cafe'].includes(p.id));
+      if (c.audioChannel === 'late_fm') pool = PROFILES.filter(p=>['cafe','blue','moon','falling'].includes(p.id));
+      if (c.audioChannel === 'nocturne') pool = PROFILES.filter(p=>['moon','blue','candle','water'].includes(p.id));
+      if (c.audioChannel === 'ambient') pool = PROFILES.filter(p=>['window','water','moon','letter'].includes(p.id));
+      if (previous) pool = pool.filter(p=>p.id !== previous.profileId);
+      const profile = pick(r,pool);
+      let key = pick(r,[0,2,5,7,9]);
+      if (previous) {
+        const relative = previous.mode==='major' && profile.mode==='minor' ? 9 :
+          previous.mode==='minor' && profile.mode==='major' ? 3 : 0;
+        key = pc(previous.key + pick(r,[relative,relative,0,5,7]));
+      }
+      const bpm = ({ambient:56,nocturne:60,lofi:62,late_fm:64,jazz:66}[c.audioChannel]) + Math.floor(r()*13);
+      const barSeconds = 240/bpm;
+      const minPhrases = Math.ceil(c.themeMinSeconds/(4*barSeconds));
+      const maxPhrases = Math.floor(c.themeMaxSeconds/(4*barSeconds));
+      const bars = 4*(minPhrases + Math.floor(r()*(maxPhrases-minPhrases+1)));
+      const motif = [0];
+      for (let i=1;i<8;i++) {
+        const step=pick(r,[-2,-1,1,1,2,3]);
+        const next=motif[i-1]+step;
+        motif.push(next>5||next< -3 ? motif[i-1]-step : next);
+      }
+      motif[7] = pick(r,[0,1,2]);
+      return {
+        index, profileId:profile.id, name:profile.name, mode:profile.mode, key,
+        keyName:NAMES[key] + (profile.mode==='major'?' major':profile.mode==='minor'?' minor':' dorian'),
+        bpm, barSeconds, bars, durationSeconds:bars*barSeconds, motif,
+        rhythmIndex:Math.floor(r()*RHYTHMS.length), home:pick(r,[7,8,9]),
+        lead:c.audioChannel==='nocturne'?'vibes':c.audioChannel==='lofi'?'rhodes':profile.lead,
+        pan:(r()-.5)*.28, swing: c.audioChannel==='jazz'||c.audioChannel==='late_fm' ? .10+r()*.07 : .035,
+        resolvedAmbience:c.ambientLayer==='random'?pick(r,['rain','vinyl','birds']):c.ambientLayer
+      };
+    }
+    _chord(theme, bar) {
+      const p = PROGRESSIONS[theme.profileId];
+      const harmonicBar=this.config.audioChannel==='ambient'?Math.floor(bar/2):bar;
+      let [degree,quality] = p[harmonicBar % p.length];
+      // A complete four-bar cadence, then a breath before the new theme.
+      if (bar >= theme.bars-4) {
+        const ending=theme.mode==='major'?[[2,'m9'],[7,'13'],[0,'6/9'],[0,'6/9']]:
+          theme.mode==='minor'?[[2,'m7b5'],[7,'7(♭9,♭13)'],[0,'m9'],[0,'m9']]:
+          [[5,'13sus4'],[0,'m11'],[0,'m9'],[0,'m9']];
+        [degree,quality]=ending[bar-(theme.bars-4)];
+      }
+      // The secondary dominant always leads to ii; no random altered chord swaps.
+      if (bar<theme.bars-4 && theme.profileId==='cafe' && harmonicBar%8===1 && this.config.tension < .25) quality='m9';
+      const rootPc = pc(theme.key+degree);
+      return { root:rootPc, quality, name:NAMES[rootPc]+quality,
+        pitchClasses:QUALITIES[quality].tones.map(n=>pc(n+rootPc)) };
+    }
+    requestNextTheme() { this.barInTheme = this.theme.bars; }
+    nextBar() {
+      if (this.barInTheme >= this.theme.bars) {
+        this.theme = this._nextTheme || this._makeTheme(this.theme.index+1,this.theme);
+        this._nextTheme = null; this.barInTheme=0;
+        this._captureThemeStart();
+      }
+      const t=this.theme, b=this.barInTheme, c=this.config;
+      const r=mulberry32(hash(c.seed, this.globalBar+20000));
+      const fraction=b/t.bars;
+      const section=b<4?'intro':b>=t.bars-4?'coda':fraction<.35?'theme':fraction<.63?'development':fraction<.76?'breathing':'reprise';
+      const chord=this._chord(t,b);
+      let nextChord;
+      if (b===t.bars-1) {
+        this._nextTheme=this._makeTheme(t.index+1,t);
+        nextChord=this._chord(this._nextTheme,0);
+      } else nextChord=this._chord(t,b+1);
+      const voicing=voiceLead(chord.root,chord.quality,this.previousVoicing);
+      this.previousVoicing=voicing;
+      const beat=60/t.bpm, events=[];
+      const add=(inst,midi,at,length,velocity,pan=0)=>events.push({
+        kind:'note',inst,midi,offset:at*beat,duration:Math.max(.05,length*beat),velocity,pan
+      });
+      const quiet=section==='breathing'||section==='intro'||section==='coda';
+      const restingBar=b===t.bars-1 || (b%8===7 && section==='breathing');
+      const dynamic=(quiet?.76:1)*(0.92+0.08*Math.sin((b%8)/8*TAU));
+      // Root in a playable upright register, then chord fifth or a short approach.
+      const roots=[];
+      for(let n=28;n<=45;n++) if(pc(n)===chord.root) roots.push(n);
+      roots.sort((a,z)=>Math.abs(a-this.previousBass)-Math.abs(z-this.previousBass));
+      const bass=roots[0]; this.previousBass=bass;
+      if (!restingBar) {
+        add('bass',bass,0,quiet?2.6:1.8,.12*dynamic);
+        if (!quiet && c.audioChannel!=='ambient' && r()<.76) {
+          const fifth=QUALITIES[chord.quality].tones.includes(7)?7:QUALITIES[chord.quality].tones.includes(6)?6:12;
+          add('bass',bass+fifth,2,1.3,.082*dynamic);
+          if (b%4===3 && b<t.bars-2 && r()<.5) {
+            let target=36+nextChord.root;
+            while(target-bass>7) target-=12;
+            while(target-bass< -7) target+=12;
+            add('bass',target+(r()<.6?-1:1),3.5,.38,.062*dynamic);
+          }
+        }
+      }
+      const compAt=(b%4===2 && !quiet)?.45:0;
+      if (!restingBar) voicing.forEach((n,i)=>{
+        add('rhodes',n,compAt+i*.028,
+          Math.min(quiet?3.4:2.8,3.8-compAt-i*.028),(.043+(i===3?.006:0))*dynamic,
+          (i-1.5)*.035);
+      });
+      // A two-bar motif is restated, answered and developed rather than discarded.
+      let rhythm=RHYTHMS[(t.rhythmIndex+(section==='development'?Math.floor(b/4)%3:0))%RHYTHMS.length];
+      const phrasePosition=b%8;
+      const silent=restingBar || (phrasePosition===7) || (quiet && b%2===1) || (c.audioChannel==='ambient'&&b%3===2);
+      const melody=[];
+      if (!silent) {
+        const maxNotes=quiet?1:Math.round(1+c.density*4);
+        rhythm=rhythm.slice(0,maxNotes);
+        rhythm.forEach((position,j)=>{
+          if (j>0 && r()>.74+c.density*.22) return;
+          const motifIndex=((b%2)*3+j)%t.motif.length;
+          let contour=t.motif[motifIndex];
+          if (section==='development') contour=(Math.floor(b/4)%2?-contour:contour)+pick(r,[-1,0,0,1]);
+          else if (phrasePosition>=4) contour+=1; // answer phrase
+          const degree=t.home+contour;
+          const scale=SCALES[t.mode];
+          const target=60+t.key+12*Math.floor(degree/7)+scale[((degree%7)+7)%7]-12;
+          const strong=Number.isInteger(position)&&position%2===0 || j===rhythm.length-1;
+          const core=QUALITIES[chord.quality].tones.filter(n=>n<12).map(n=>pc(chord.root+n));
+          const allowed=strong?core:chord.pitchClasses;
+          const midi=nearPitch(target,allowed,this.previousMelody,64,83);
+          this.previousMelody=midi;
+          const swing=(position%1===.5)?t.swing:0;
+          const onset=position+swing+(r()-.5)*.025;
+          const nextPosition=rhythm[j+1]===undefined?3.95:rhythm[j+1];
+          const length=Math.min(nextPosition-onset-.09,3.98-onset,quiet?1.9:1.25);
+          if(length<.12) return;
+          const vel=(.060+(j===0?.008:0))*(.88+r()*.20)*dynamic;
+          add(t.lead,midi,Math.max(.01,onset),length,vel,t.pan);
+          melody.push(midi);
+        });
+      }
+      if(!quiet && !['ambient','nocturne'].includes(c.audioChannel)) {
+        for (const at of [1,3]) if(r()<.78) events.push({kind:'brush',offset:at*beat,duration:.20,velocity:.012*dynamic});
+      }
+      events.sort((a,z)=>a.offset-z.offset);
+      const result={
+        globalBar:this.globalBar, barInTheme:b, duration:t.barSeconds,
+        elapsedSeconds:this.elapsedSeconds, chord, nextChord, voicing, melody, section,
+        theme:{...t,motif:t.motif.slice()}, events
+      };
+      this.globalBar++; this.barInTheme++; this.elapsedSeconds+=t.barSeconds;
+      return result;
+    }
+  }
+
+  class PeommoodAudioEngine {
+    constructor(userConfig = {}, dependencies = {}) {
+      const initial=recipe(userConfig);
+      this.config=initial.config;
+      this.audioCtx=dependencies.audioContext || null;
+      this._ownsContext=!dependencies.audioContext;
+      this._offline=Boolean(dependencies.offline);
+      this._initialized=false; this._disposed=false;
+      this.isMusicPlaying=false; this._wantPlaying=false; this._generation=0;
+      this.musicLoopTimer=null; this._suspendTimer=null; this._startPromise=null;
+      this._voices=new Set(); this._persistent=[]; this._persistentSources=[];
+      this._noiseSources=[]; this._events=[]; this._metaQueue=[];
+      this._nextBarTime=0; this._composer=new Composer(this.config);
+      if(initial.snapshot)this._composer.restoreTheme(initial.snapshot);
+      this._activeThemeStart=this._composer.getThemeStart();
+      this.chordStep=0; this.onStateChange=null; this.onThemeChange=null; this.onError=null;
+      this.currentTrackMeta=this._metadata(null,this._composer.theme);
+      this.stats={ scheduledNotes:0, peakVoices:0, stolenVoices:0, resyncs:0, skippedEvents:0 };
+      this._visibilityHandler=()=>{if(this.isMusicPlaying)this._tick();};
+      this._stateHandler=()=>{
+        if(this.audioCtx?.state==='running'&&this.isMusicPlaying)this._tick();
+        this._emitChange();
+      };
+    }
+    static get version(){return VERSION;}
+    static get defaults(){return {...DEFAULTS};}
+    static fromCode(code){return new PeommoodAudioEngine(code);}
+    static decodeCode(code){return decodeCode(code);}
+    exportCode({scope='theme'}={}){
+      if(!['theme','journey'].includes(scope))throw new RangeError('Unknown code scope');
+      const snapshot=scope==='theme'?clone(this._activeThemeStart):null;
+      if(snapshot)snapshot.theme.resolvedAmbience=this.currentTrackMeta.resolvedAmbience;
+      return encodeCode(this.config,snapshot);
+    }
+    loadCode(code){
+      if(this._disposed)throw new Error('This Peommood engine has been disposed.');
+      const next=recipe(code); // Validate fully before touching the running transport.
+      this.config=next.config;
+      this.initializeSeedTrack(this.config.seed,next.snapshot);
+      return this.getState();
+    }
+    createSeededRandom(seed){return mulberry32(seed);}
+    _metadata(bar,theme) {
+      return { bpm:theme.bpm, keyName:theme.keyName, pitchFactor:Math.pow(2,theme.key/12),
+        barMs:theme.barSeconds*1000, themeIndex:theme.index, themeName:theme.name,
+        themeDurationSeconds:theme.durationSeconds, themeElapsedSeconds:(bar?.barInTheme||0)*theme.barSeconds,
+        section:bar?.section||'intro', chordName:bar?.chord.name||'',
+        resolvedAmbience:this.config.ambientLayer==='random'?theme.resolvedAmbience:this.config.ambientLayer,
+        globalBar:bar?.globalBar||0 };
+    }
+    _node(node){this._persistent.push(node);return node;}
+    _gain(value){const n=this._node(this.audioCtx.createGain());n.gain.value=value;return n;}
+    _filter(type,freq,q=.707){const n=this._node(this.audioCtx.createBiquadFilter());n.type=type;n.frequency.value=freq;n.Q.value=q;return n;}
+    initAudioEngine() {
+      if(this._disposed)throw new Error('This Peommood engine has been disposed.');
+      if(this._initialized)return;
+      if(!this.audioCtx){
+        const Context=root.AudioContext||root.webkitAudioContext;
+        if(!Context)throw new Error('Web Audio API is not available in this environment.');
+        this.audioCtx=new Context({latencyHint:'playback'});
+      }
+      const a=this.audioCtx;
+      this.masterGain=this._gain(0);
+      this.compressor=this._node(a.createDynamicsCompressor());
+      this.compressor.threshold.value=-12;this.compressor.knee.value=12;
+      this.compressor.ratio.value=2;this.compressor.attack.value=.012;this.compressor.release.value=.25;
+      this.masterGain.connect(this.compressor);this.compressor.connect(a.destination);
+      this.musicBus=this._gain(.85);this.ambientBus=this._gain(1);
+      this.toneFilter=this._filter('lowpass',2600);
+      this.musicBus.connect(this.toneFilter);this.toneFilter.connect(this.masterGain);
+      this.ambientBus.connect(this.masterGain);
+      this.rhodesBus=this._gain(1);this.leadBus=this._gain(1);this.bassBus=this._gain(1);
+      this.stereoPanner=this._node(a.createStereoPanner());
+      this.rhodesBus.connect(this.stereoPanner);this.stereoPanner.connect(this.musicBus);
+      this.leadBus.connect(this.musicBus);this.bassBus.connect(this.musicBus);
+      this.tremoloLfo=this._node(a.createOscillator());this.tremoloDepth=this._gain(.13);
+      this.tremoloLfo.frequency.value=2.7;
+      this.tremoloLfo.connect(this.tremoloDepth);this.tremoloDepth.connect(this.stereoPanner.pan);
+      this.tremoloLfo.start();this._persistentSources.push(this.tremoloLfo);
+      // Generated stereo room response: early reflections + diffuse, damped tail.
+      this.roomInput=this._filter('highpass',210);
+      this.room=this._node(a.createConvolver());this.room.normalize=true;
+      this.room.buffer=this._roomImpulse();this.reverbGain=this._gain(.13);
+      this.rhodesBus.connect(this.roomInput);this.leadBus.connect(this.roomInput);
+      this.roomInput.connect(this.room);this.room.connect(this.reverbGain);this.reverbGain.connect(this.musicBus);
+      // Optional quiet warm echo, separate from the diffuse room.
+      this.echoSend=this._gain(.07);this.reverbDelay=this._node(a.createDelay(1));
+      this.reverbDelay.delayTime.value=.29;
+      this.reverbFilter=this._filter('lowpass',1600);
+      this.echoHighpass=this._filter('highpass',220);
+      this.reverbFeedback=this._gain(.18);this.echoReturn=this._gain(.20);
+      this.rhodesBus.connect(this.echoSend);this.leadBus.connect(this.echoSend);
+      this.echoSend.connect(this.reverbDelay);this.reverbDelay.connect(this.reverbFilter);
+      this.reverbFilter.connect(this.echoHighpass);this.echoHighpass.connect(this.reverbFeedback);
+      this.reverbFeedback.connect(this.reverbDelay);this.echoHighpass.connect(this.echoReturn);
+      this.echoReturn.connect(this.musicBus);
+      this.noiseGain=this._gain(0);this.noiseFilter=this._filter('lowpass',1800);
+      this.noiseFilter.connect(this.noiseGain);this.noiseGain.connect(this.ambientBus);
+      this._hitBuffer=this._makeNoise(.3,hash(this.config.seed,80001),false);
+      this._rebuildNoise();this._applyMood();
+      this._initialized=true;
+      if(!this._offline){
+        a.addEventListener('statechange',this._stateHandler);
+        if(root.document)root.document.addEventListener('visibilitychange',this._visibilityHandler);
+      }
+    }
+    _roomImpulse() {
+      const a=this.audioCtx, sr=a.sampleRate, length=Math.ceil(sr*2.2);
+      const buffer=a.createBuffer(2,length,sr), r=mulberry32(0x506f656d);
+      for(let ch=0;ch<2;ch++){
+        const d=buffer.getChannelData(ch);let low=0;
+        for(let i=0;i<length;i++){
+          const time=i/sr;low=.68*low+.32*(r()*2-1);
+          const fade=Math.min(1,Math.max(0,(time-.014)/.025));
+          d[i]=low*Math.exp(-time/ .38)*fade*.17;
+        }
+        for(const [delay,level] of [[.021,.6],[.037,.37],[.061,.24],[.089,.12]]){
+          d[Math.floor((delay+ch*.003)*sr)]+=level;
+        }
+      }
+      return buffer;
+    }
+    _makeNoise(seconds,seed,loop=true) {
+      const a=this.audioCtx, n=Math.ceil(seconds*a.sampleRate), blend=Math.floor(a.sampleRate*.15);
+      const buffer=a.createBuffer(1,n,a.sampleRate), data=buffer.getChannelData(0), r=mulberry32(seed);
+      const raw=new Float32Array(n+(loop?blend:0));let brown=0,pink=0;
+      const alpha=Math.exp(-TAU*45/a.sampleRate);
+      for(let i=0;i<raw.length;i++){
+        const white=r()*2-1;
+        brown=alpha*brown+(1-alpha)*white;
+        pink=.96*pink+.04*white;
+        raw[i]=loop?(brown*2.4+pink*.65+white*.035):white;
+      }
+      for(let i=0;i<n;i++){
+        if(loop&&i<blend){const f=i/blend;data[i]=raw[n+i]*(1-f)+raw[i]*f;}
+        else data[i]=raw[i];
+      }
+      return buffer;
+    }
+    _rebuildNoise() {
+      for(const s of this._noiseSources){try{s.stop();}catch(_){}s.disconnect();}
+      this._noiseSources=[];
+      for(let i=0;i<2;i++){
+        const s=this.audioCtx.createBufferSource();
+        s.buffer=this._makeNoise(i?11.3:7.7,hash(this.config.seed,90000+i));s.loop=true;
+        s.connect(this.noiseFilter);s.start();this._noiseSources.push(s);
+      }
+    }
+    _hold(param,time){
+      if(typeof param.cancelAndHoldAtTime==='function')param.cancelAndHoldAtTime(time);
+      else {const value=param.value;param.cancelScheduledValues(time);param.setValueAtTime(value,time);}
+    }
+    _target(param,value,seconds=.25){
+      const now=this.audioCtx.currentTime;this._hold(param,now);
+      param.setTargetAtTime(value,now,seconds);
+    }
+    _applyMood(){
+      const c=this.config;
+      this._target(this.toneFilter.frequency,4200-c.warmth*2500,.6);
+      this._target(this.reverbGain.gain,(c.richAudio?.06:.025)+c.space*.17,.6);
+      this._target(this.echoSend.gain,c.richAudio?.025+c.space*.055:0,.6);
+      this._target(this.tremoloDepth.gain,c.richAudio?.10:0,.6);
+    }
+    getTargetNoiseGain(){
+      const amb=this.config.ambientLayer==='random'?this.currentTrackMeta.resolvedAmbience:this.config.ambientLayer;
+      return (amb==='none'?0:amb==='rain'?.045:amb==='birds'?.025:.018)*this.config.ambienceLevel/5;
+    }
+    _updateAmbience(){
+      this._target(this.noiseGain.gain,this.getTargetNoiseGain(),.8);
+      const amb=this.currentTrackMeta.resolvedAmbience;
+      this._target(this.noiseFilter.frequency,amb==='rain'?1400:amb==='birds'?1300:2200,.8);
+    }
+    _registerVoice(sources,nodes,gain,end) {
+      if(!this._offline && this._voices.size>=this.config.maxVoices){
+        const oldest=this._voices.values().next().value;
+        for(const s of oldest.sources){try{s.stop();}catch(_){}}
+        this._cleanVoice(oldest);this.stats.stolenVoices++;
+      }
+      const voice={sources,nodes,gain,end,remaining:sources.length,cleaned:false};
+      this._voices.add(voice);
+      for(const s of sources)s.onended=()=>{if(--voice.remaining===0)this._cleanVoice(voice);};
+      this.stats.scheduledNotes++;this.stats.peakVoices=Math.max(this.stats.peakVoices,this._voices.size);
+      return voice;
+    }
+    _cleanVoice(v){
+      if(v.cleaned)return;v.cleaned=true;
+      for(const s of v.sources)s.onended=null;
+      for(const n of v.nodes)n.disconnect();
+      this._voices.delete(v);
+    }
+    _releaseVoices(fade=.10){
+      if(!this.audioCtx)return;
+      const now=this.audioCtx.currentTime;
+      for(const v of this._voices){
+        this._hold(v.gain.gain,now);v.gain.gain.linearRampToValueAtTime(0,now+fade);
+        for(const s of v.sources){try{s.stop(now+fade+.01);}catch(_){}}
+      }
+    }
+    playInstrumentNote(freq,startTime,duration,inst='rhodes',velocity=.07,pan=0,ambient=false){
+      if(!this._initialized||(!this.isMusicPlaying&&!this._offline))return;
+      if(![freq,startTime,duration,velocity,pan].every(Number.isFinite)||freq<=0||duration<=0)return;
+      const a=this.audioCtx,t=Math.max(a.currentTime,startTime),d=Math.max(.05,duration),end=t+d;
+      const gain=a.createGain(),filter=a.createBiquadFilter(),panner=a.createStereoPanner();
+      const nodes=[gain,filter,panner],sources=[];
+      filter.type='lowpass';panner.pan.value=clamp(pan,-.5,.5);
+      filter.connect(gain);gain.connect(panner);
+      panner.connect(ambient?this.ambientBus:inst==='bass'?this.bassBus:inst==='rhodes'?this.rhodesBus:this.leadBus);
+      function partial(type,ratio,level,life=d+.03){
+        const osc=a.createOscillator(),g=a.createGain();nodes.push(osc,g);sources.push(osc);
+        osc.type=type;osc.frequency.setValueAtTime(Math.min(freq*ratio,a.sampleRate*.45),t);
+        g.gain.setValueAtTime(level,t);osc.connect(g);g.connect(filter);
+        osc.start(t);osc.stop(t+life);return {osc,g};
+      }
+      let attack=.012,decay=.22,sustain=.44;
+      if(inst==='bass'){
+        partial('triangle',1,.68);partial('sine',1,.32);
+        filter.Q.value=1.4;filter.frequency.setValueAtTime(Math.max(650,freq*6),t);
+        filter.frequency.exponentialRampToValueAtTime(Math.max(190,freq*2.1),t+.12);
+        attack=.008;decay=.12;sustain=.44;
+      }else if(inst==='jazz_guitar'){
+        partial('triangle',1,.85);partial('sine',2,.13);
+        filter.frequency.setValueAtTime(2100,t);filter.frequency.exponentialRampToValueAtTime(850,t+.25);
+        attack=.006;decay=.14;sustain=.32;
+      }else if(inst==='vibes'){
+        partial('sine',1,1);
+        const p=partial('sine',3.99,.12,Math.min(d,.45)+.03);
+        p.g.gain.exponentialRampToValueAtTime(EPS,t+Math.min(d,.45));
+        filter.frequency.value=4200;attack=.008;decay=.25;sustain=.52;
+      }else{
+        partial('sine',1,1);partial('sine',2,.17);partial('sine',3,.035);
+        filter.frequency.value=1900+clamp(velocity,0,.15)*4000;
+        if(this.config.richAudio){
+          const ratio=4.18+.10*clamp(Math.log2(freq/110)/4,0,1);
+          const p=partial('sine',ratio,.14,Math.min(d,.095)+.005);
+          p.g.gain.setValueAtTime(EPS,t);p.g.gain.linearRampToValueAtTime(.10+velocity*.6,t+.003);
+          p.g.gain.exponentialRampToValueAtTime(EPS,t+Math.min(d,.095));
+        }
+      }
+      attack=Math.min(attack,d*.15);decay=Math.min(decay,d*.45);
+      const v=clamp(velocity,0,.25);
+      gain.gain.setValueAtTime(EPS,t);gain.gain.linearRampToValueAtTime(Math.max(EPS,v),t+attack);
+      gain.gain.exponentialRampToValueAtTime(Math.max(EPS,v*sustain),t+Math.max(attack+.001,decay));
+      gain.gain.exponentialRampToValueAtTime(EPS,end);
+      gain.gain.linearRampToValueAtTime(0,end+.025);
+      this._registerVoice(sources,nodes,gain,end+.04).ambient=ambient;
+    }
+    _noiseHit(event,time){
+      const a=this.audioCtx,source=a.createBufferSource(),filter=a.createBiquadFilter(),g=a.createGain();
+      const t=Math.max(a.currentTime,time),d=event.duration;
+      source.buffer=this._hitBuffer;
+      filter.type=event.kind==='tick'?'highpass':'bandpass';
+      filter.frequency.value=event.kind==='tick'?1800:2600;filter.Q.value=.7;
+      g.gain.setValueAtTime(EPS,t);g.gain.linearRampToValueAtTime(event.velocity,t+.002);
+      g.gain.exponentialRampToValueAtTime(EPS,t+d);
+      source.connect(filter);filter.connect(g);g.connect(event.kind==='tick'?this.ambientBus:this.musicBus);
+      source.start(t);source.stop(t+d+.005);
+      this._registerVoice([source],[source,filter,g],g,t+d+.005).ambient=event.kind==='tick';
+    }
+    _ambientEvents(bar){
+      const amb=this.config.ambientLayer==='random'?bar.theme.resolvedAmbience:this.config.ambientLayer;
+      const level=this.config.ambienceLevel/5;
+      if(amb==='none'||level===0)return [];
+      const r=mulberry32(hash(this.config.seed,bar.globalBar+500000));
+      const out=[];
+      if(amb==='vinyl'&&this.config.richAudio){
+        let t=-Math.log(1-r())/.30;
+        while(t<bar.duration && out.length<4){
+          out.push({kind:'tick',offset:t,duration:.004+r()*.009,velocity:(.006+r()*.011)*level});
+          t+=-Math.log(1-r())/.30;
+        }
+      }
+      if(amb==='birds'&&bar.globalBar%2===0&&r()<.22){
+        out.push({kind:'note',inst:'vibes',midi:84+Math.floor(r()*6),offset:.8,
+          duration:.16,velocity:.009*level,pan:(r()-.5)*.7});
+      }
+      return out.map(event=>({...event,ambient:true}));
+    }
+    _renderEvent(event,time){
+      if(event.kind==='note')this.playInstrumentNote(hz(event.midi),time,event.duration,event.inst,event.velocity,event.pan||0,event.ambient||false);
+      else this._noiseHit(event,time);
+    }
+    _enqueueBar(time){
+      const bar=this._composer.nextBar();
+      for(const event of bar.events.concat(this._ambientEvents(bar)))this._events.push({...event,time:time+event.offset});
+      this._events.sort((a,b)=>a.time-b.time);
+      this._metaQueue.push({time,bar,startState:this._composer.getThemeStart()});
+      this._nextBarTime=time+bar.duration;
+    }
+    _tick(){
+      if(!this.isMusicPlaying||this._disposed)return;
+      if(this.musicLoopTimer!==null){clearTimeout(this.musicLoopTimer);this.musicLoopTimer=null;}
+      try{
+        const now=this.audioCtx.currentTime;
+        if(this.audioCtx.state==='running'){
+          // Never replay a backlog in a burst after a long main-thread stall.
+          const overdue=this._events.length?this._events[0].time:this._nextBarTime;
+          if(now-overdue>.55){
+            this.stats.resyncs++;this.stats.skippedEvents+=this._events.length;
+            this._events=[];this._metaQueue=[];this._nextBarTime=now+.07;
+          }
+          const horizon=now+this.config.lookAheadSeconds;
+          while(this._nextBarTime<horizon)this._enqueueBar(this._nextBarTime);
+          while(this._events.length&&this._events[0].time<horizon){
+            const e=this._events.shift();
+            if(e.time<now-.08){this.stats.skippedEvents++;continue;}
+            this._renderEvent(e,Math.max(e.time,now+.003));
+          }
+          while(this._metaQueue.length&&this._metaQueue[0].time<=now){
+            const {bar,startState}=this._metaQueue.shift();
+            this._activeThemeStart=startState;
+            const changed=bar.theme.index!==this.currentTrackMeta.themeIndex || this.chordStep===0;
+            this.currentTrackMeta=this._metadata(bar,bar.theme);this.chordStep=bar.globalBar+1;
+            this._updateAmbience();this._emitChange();
+            if(changed)this._callback(this.onThemeChange,{...this.currentTrackMeta});
+          }
+        }
+      }catch(error){
+        this.stop();this._callback(this.onError,error);return;
+      }
+      this.musicLoopTimer=setTimeout(()=>this._tick(),this.config.schedulerIntervalMs);
+    }
+    async start(){
+      if(this._disposed)throw new Error('This Peommood engine has been disposed.');
+      if(this.isMusicPlaying)return;
+      if(this._wantPlaying&&this._startPromise)return this._startPromise;
+      this._wantPlaying=true;const generation=++this._generation;
+      if(this._suspendTimer!==null){clearTimeout(this._suspendTimer);this._suspendTimer=null;}
+      const promise=(async()=>{
+        this.initAudioEngine();
+        if(this.audioCtx.state!=='running')await this.audioCtx.resume();
+        if(generation!==this._generation||!this._wantPlaying||this._disposed)return;
+        this.isMusicPlaying=true;
+        this._events=[];this._metaQueue=[];this._nextBarTime=this.audioCtx.currentTime+.08;
+        this._target(this.masterGain.gain,this.config.volume,.35);this._updateAmbience();
+        this._tick();this._emitChange();
+      })();
+      this._startPromise=promise;
+      try{await promise;}catch(error){
+        if(generation===this._generation){this._wantPlaying=false;this.isMusicPlaying=false;}
+        this._callback(this.onError,error);throw error;
+      }finally{if(this._startPromise===promise)this._startPromise=null;}
+    }
+    stop(){
+      this._wantPlaying=false;this.isMusicPlaying=false;const generation=++this._generation;
+      if(this.musicLoopTimer!==null){clearTimeout(this.musicLoopTimer);this.musicLoopTimer=null;}
+      if(this._suspendTimer!==null){clearTimeout(this._suspendTimer);this._suspendTimer=null;}
+      this._events=[];this._metaQueue=[];
+      if(this._initialized){
+        this._releaseVoices(.12);this._target(this.masterGain.gain,0,.045);
+        if(!this._offline&&this._ownsContext)this._suspendTimer=setTimeout(()=>{
+          this._suspendTimer=null;
+          if(generation===this._generation&&!this._wantPlaying&&this.audioCtx.state==='running'){
+            this.audioCtx.suspend().catch(e=>this._callback(this.onError,e));
+          }
+        },240);
+      }
+      this._emitChange();
+    }
+    setMusicState(on){if(on)return this.start();this.stop();return Promise.resolve();}
+    toggleMusic(){return this.setMusicState(!this._wantPlaying);}
+    toggleRichAudio(on){this.config.richAudio=Boolean(on);this._composer.config.richAudio=this.config.richAudio;if(this._initialized)this._applyMood();this._emitChange();}
+    updateVolume(value){this.config.volume=num(value,this.config.volume,0,1);if(this.isMusicPlaying)this._target(this.masterGain.gain,this.config.volume,.2);this._emitChange();}
+    _clearAmbientEvents(){
+      this._events=this._events.filter(e=>!e.ambient);
+      if(!this.audioCtx)return;
+      const time=this.audioCtx.currentTime;
+      for(const v of this._voices)if(v.ambient){
+        this._hold(v.gain.gain,time);v.gain.gain.linearRampToValueAtTime(0,time+.025);
+        for(const s of v.sources){try{s.stop(time+.03);}catch(_){}}
+      }
+    }
+    updateAmbienceLevel(value){this.config.ambienceLevel=num(value,this.config.ambienceLevel,0,10);this._clearAmbientEvents();if(this._initialized)this._updateAmbience();this._emitChange();}
+    setPoeticMood(mood={}){
+      for(const key of ['warmth','space','density','tension'])if(key in mood){
+        this.config[key]=num(mood[key],this.config[key],0,1);this._composer.config[key]=this.config[key];
+      }
+      if(this._initialized)this._applyMood();this._emitChange();
+    }
+    initializeSeedTrack(seed,snapshot=null){
+      this.config.seed=num(seed,DEFAULT_SEED,0,0xffffffff)>>>0;
+      this._composer=new Composer(this.config);this.chordStep=0;
+      if(snapshot)this._composer.restoreTheme(snapshot);
+      this._activeThemeStart=this._composer.getThemeStart();
+      this.currentTrackMeta=this._metadata(null,this._composer.theme);
+      if(this._initialized){
+        this._releaseVoices(.08);this._rebuildNoise();
+        this._hitBuffer=this._makeNoise(.3,hash(this.config.seed,80001),false);
+        this._updateAmbience();
+        this._applyMood();
+        if(this.isMusicPlaying)this._target(this.masterGain.gain,this.config.volume,.2);
+      }
+      this._events=[];this._metaQueue=[];
+      if(this.isMusicPlaying){this._nextBarTime=this.audioCtx.currentTime+.12;this._tick();}
+      this._emitChange();return this.config.seed;
+    }
+    changeAudioChannel(channel){
+      if(!CHANNELS.includes(channel))throw new RangeError('Unknown audio channel: '+channel);
+      this.config.audioChannel=channel;this.initializeSeedTrack(this.config.seed);
+      return this.isMusicPlaying?Promise.resolve():this.start();
+    }
+    changeAmbientLayer(layer){
+      if(!AMBIENCES.includes(layer))throw new RangeError('Unknown ambience: '+layer);
+      this.config.ambientLayer=layer;this._composer.config.ambientLayer=layer;
+      this._clearAmbientEvents();
+      const theme=this._composer.theme;
+      this.currentTrackMeta.resolvedAmbience=layer==='random'?
+        pick(mulberry32(hash(this.config.seed,theme.index+70000)),['rain','vinyl','birds']):layer;
+      theme.resolvedAmbience=this.currentTrackMeta.resolvedAmbience;
+      for(const pending of this._metaQueue)if(pending.bar.theme.index===theme.index)
+        pending.bar.theme.resolvedAmbience=theme.resolvedAmbience;
+      if(this._initialized)this._updateAmbience();this._emitChange();
+    }
+    nextTheme(){
+      // Musical changes happen when the next unplanned bar is generated.
+      this._composer.requestNextTheme();return this.getState();
+    }
+    nextRandomSeed(){
+      return this.initializeSeedTrack(randomSeed());
+    }
+    resetDefaultSeed(){return this.initializeSeedTrack(DEFAULT_SEED);}
+    getState(){return {isPlaying:this.isMusicPlaying,config:{...this.config},meta:{...this.currentTrackMeta},
+      diagnostics:{...this.stats,activeVoices:this._voices.size,queuedEvents:this._events.length,audioState:this.audioCtx?.state||'uninitialized'}};}
+    _callback(fn,value){if(typeof fn==='function'){try{fn(value);}catch(e){if(root.console)root.console.error('Peommood callback error',e);}}}
+    _emitChange(){this._callback(this.onStateChange,this.getState());}
+    async dispose(){
+      if(this._disposed)return;
+      this.stop();this._disposed=true;
+      if(this._suspendTimer!==null){clearTimeout(this._suspendTimer);this._suspendTimer=null;}
+      if(this.audioCtx){
+        if(!this._offline)this.audioCtx.removeEventListener('statechange',this._stateHandler);
+        if(root.document)root.document.removeEventListener('visibilitychange',this._visibilityHandler);
+        for(const v of Array.from(this._voices)){
+          for(const s of v.sources){try{s.stop();}catch(_){}}this._cleanVoice(v);
+        }
+        for(const s of this._noiseSources.concat(this._persistentSources)){try{s.stop();}catch(_){}s.disconnect();}
+        for(const n of this._persistent)n.disconnect();
+        if(this._ownsContext&&this.audioCtx.state!=='closed'&&typeof this.audioCtx.close==='function')await this.audioCtx.close();
+      }
+      this._noiseSources=[];this._persistentSources=[];this._persistent=[];
+      this._hitBuffer=null;if(this.room)this.room.buffer=null;
+      this.onStateChange=null;this.onThemeChange=null;this.onError=null;
+    }
+    /** Short deterministic audition; returns AudioBuffer, not an external sample dependency. */
+    static async renderPreview(config={},seconds=30,sampleRate=44100){
+      const Offline=root.OfflineAudioContext||root.webkitOfflineAudioContext;
+      if(!Offline)throw new Error('OfflineAudioContext is unavailable.');
+      const duration=num(seconds,30,5,120),sr=Math.round(num(sampleRate,44100,22050,48000));
+      const context=new Offline(2,Math.ceil(duration*sr),sr);
+      const e=new PeommoodAudioEngine(config,{audioContext:context,offline:true});
+      e.initAudioEngine();e.isMusicPlaying=true;
+      e.masterGain.gain.cancelScheduledValues(0);e.masterGain.gain.setValueAtTime(0,0);
+      e.masterGain.gain.linearRampToValueAtTime(e.config.volume,.5);
+      e.masterGain.gain.setValueAtTime(e.config.volume,duration-1.5);
+      e.masterGain.gain.linearRampToValueAtTime(0,duration);
+      e._updateAmbience();
+      let time=.1;
+      while(time<duration-.2){
+        const bar=e._composer.nextBar();
+        for(const event of bar.events.concat(e._ambientEvents(bar)))if(time+event.offset<duration){
+          e._renderEvent(event,time+event.offset);
+        }
+        time+=bar.duration;
+      }
+      try{return await context.startRendering();}finally{await e.dispose();}
+    }
+  }
+  PeommoodAudioEngine.Composer=Composer;
+  PeommoodAudioEngine.QUALITIES=QUALITIES;
+  PeommoodAudioEngine.midiToFrequency=hz;
+  return PeommoodAudioEngine;
+});
+
+    }
+  </script>
   <script>
     /* =========================================================================
-     * 0. 오프라인 비상용 내장 시 뱅크
+     * 0-B. 오프라인 비상용 내장 시 뱅크
      * ========================================================================= */
     const FALLBACK_POEMS = [
       {
@@ -1052,7 +2598,7 @@
     ];
 
     /* =========================================================================
-     * 1. 상태 관리 & 1회성 툴팁 제어 & 공유 링크 파라미터 처리
+     * 1. 상태 관리 & 1회성 툴팁 제어 & 클린 URL (/234/0, /poem/234/0) 라우터
      * ========================================================================= */
     let reflections = [];
     let currentPoemIndex = 0;
@@ -1067,9 +2613,8 @@
     let idleTimer = null;
     let hudTimer = null;
     let wakeLockSentinel = null;
-    let sharedInitialPoemIndex = null;
+    let sharedInitialPoemNumber = null; // 1-based 시 번호 (예: 234 -> index 233)
 
-    // 좌측 / 중앙 / 우측 영역 안내 1회 표출 기록 (각 영역당 딱 1회만 표출 후 영구 비표출)
     let zoneGuideShown = { left: false, center: false, right: false };
     try {
       const savedGuide = localStorage.getItem('poetry_zone_guide_once_v1');
@@ -1096,12 +2641,29 @@
       showBadge: false,
       audioChannel: 'jazz',
       ambientLayer: 'random',
-      ambienceLevel: 5,
+      ambienceLevel: 2,
       seed: 2494034659,
-      volume: 0.22,
-      richAudio: true
+      volume: 0.32,
+      pm1Code: '',
+      warmth: 0.68,
+      space: 0.48,
+      density: 0.42,
+      frameMode: 'poem_only',
+      photoFitMode: 'blur',
+      photoSortMode: 'people',
+      photoTransition: 'kenburns',
+      showWeather: true,
+      hybridPhotoRatio: 2,
+      albumFilter: 'all',
+      artToneMode: 'auto_warm',
+      nightMode: 'auto_solar',
+      screenBrightness: 100,
+      weatherAudioSync: true,
+      photoSource: 'auto',
+      githubRepoPath: 'poeticecho/dailypoem/photos'
     };
 
+    // URL 경로(/234/0, /poem/234/0), 해시(#/234/0), 쿼리(?poem=234&autoplay=0) 통합 파서
     function parseUrlParamsIntoConfig() {
       try {
         const params = new URLSearchParams(window.location.search);
@@ -1109,54 +2671,75 @@
         if (params.get('ambience')) CONFIG.ambientLayer = params.get('ambience');
         if (params.get('level')) CONFIG.ambienceLevel = Math.max(0, Math.min(10, parseInt(params.get('level'), 10)));
         if (params.get('seed')) CONFIG.seed = parseInt(params.get('seed'), 10) || 2494034659;
-        if (params.get('rich') === '0') CONFIG.richAudio = false;
-        else if (params.get('rich') === '1') CONFIG.richAudio = true;
-
-        // 1순위: /dailypoem/2341/ 형태의 경로 파싱 (404 리다이렉트 또는 직접 경로)
-        const path = window.location.pathname;
-        const pathMatch = path.match(/\/(\d{2,})\/?$/);
-        
-        // 2순위: 세션 스토리지(404 리다이렉트 거쳐온 경우)
-        const sessionCode = sessionStorage.getItem('dailypoem_redirect_code');
-        if (sessionCode) {
-          sessionStorage.removeItem('dailypoem_redirect_code');
+        if (params.get('mode') && ['poem_only', 'hybrid', 'photo_poem', 'photo_only'].includes(params.get('mode'))) {
+          CONFIG.frameMode = params.get('mode');
         }
-        
-        const cleanCode = pathMatch ? pathMatch[1] : sessionCode;
+        if (params.get('fit') && ['blur', 'white', 'black', 'hanji', 'crop_face', 'diptych'].includes(params.get('fit'))) {
+          CONFIG.photoFitMode = params.get('fit');
+        }
+        if (params.get('sort') && ['people', 'date_desc', 'date_asc', 'random'].includes(params.get('sort'))) {
+          CONFIG.photoSortMode = params.get('sort');
+        }
 
-        if (cleanCode && /^\d{2,}$/.test(cleanCode)) {
-          // 마지막 1자리는 오토플레이 여부 (1: ON, 0: OFF), 앞자리는 시 번호
-          const autoplayFlag = cleanCode.slice(-1);
-          const poemIdx = parseInt(cleanCode.slice(0, -1), 10);
+        // 1) 직접 경로 매칭: /dailypoem/234/0 또는 /dailypoem/poem/234/0
+        const pathMatch = window.location.pathname.match(/\/(?:poem\/)?(\d+)(?:\/([01]|on|off))?\/?$/i);
+        // 2) 해시 경로 매칭: #/234/0 또는 #/poem/234/0
+        const hashMatch = window.location.hash.match(/^#\/?(?:poem\/)?(\d+)(?:\/([01]|on|off))?\/?$/i);
 
-          if (!isNaN(poemIdx)) {
-            sharedInitialPoemIndex = poemIdx;
-            isAutoPlaying = (autoplayFlag === '1');
-          }
+        let rawPoemNum = null;
+        let rawAutoFlag = null;
+
+        if (pathMatch) {
+          rawPoemNum = parseInt(pathMatch[1], 10);
+          rawAutoFlag = typeof pathMatch[2] !== 'undefined' ? pathMatch[2] : null;
+        } else if (hashMatch) {
+          rawPoemNum = parseInt(hashMatch[1], 10);
+          rawAutoFlag = typeof hashMatch[2] !== 'undefined' ? hashMatch[2] : null;
         } else if (params.has('poem')) {
-          // 기존 ?poem=번호 쿼리 호환성 유지
-          const pIdx = parseInt(params.get('poem'), 10);
-          if (!isNaN(pIdx) && pIdx >= 0) {
-            sharedInitialPoemIndex = pIdx;
-            isAutoPlaying = false;
+          rawPoemNum = parseInt(params.get('poem'), 10);
+          rawAutoFlag = params.has('autoplay') ? params.get('autoplay') : '0';
+        }
+
+        // 이전 4자리 결합 코드 호환성 지원 (예: /dailypoem/2341/ 또는 /2340/)
+        if (rawPoemNum !== null && !isNaN(rawPoemNum)) {
+          if (rawAutoFlag === null) {
+            if (rawPoemNum >= 1000) {
+              const numStr = String(rawPoemNum);
+              rawAutoFlag = numStr.slice(-1);
+              rawPoemNum = parseInt(numStr.slice(0, -1), 10);
+            } else {
+              rawAutoFlag = '0';
+            }
           }
-        } else if (window.location.hash) {
-          // 해시(#2341) 호환성 유지
-          const hashCode = window.location.hash.replace('#', '');
-          if (/^\d{2,}$/.test(hashCode)) {
-            const autoplayFlag = hashCode.slice(-1);
-            const poemIdx = parseInt(hashCode.slice(0, -1), 10);
-            if (!isNaN(poemIdx)) {
-              sharedInitialPoemIndex = poemIdx;
-              isAutoPlaying = (autoplayFlag === '1');
+          sharedInitialPoemNumber = rawPoemNum;
+          const flagLower = String(rawAutoFlag).toLowerCase();
+          isAutoPlaying = (flagLower === '1' || flagLower === 'on' || flagLower === 'true');
+        }
+
+        // 구버전 sessionStorage 리다이렉트 코드 호환성 체크
+        const legacyCode = sessionStorage.getItem('dailypoem_redirect_code');
+        if (legacyCode) {
+          sessionStorage.removeItem('dailypoem_redirect_code');
+          if (rawPoemNum === null && /^\d{2,}$/.test(legacyCode)) {
+            const autoBit = legacyCode.slice(-1);
+            const pNum = parseInt(legacyCode.slice(0, -1), 10);
+            if (!isNaN(pNum)) {
+              sharedInitialPoemNumber = pNum;
+              isAutoPlaying = (autoBit === '1');
             }
           }
         }
 
-        if (params.get('autoplay') === '0') {
-          isAutoPlaying = false;
-        } else if (params.get('autoplay') === '1') {
-          isAutoPlaying = true;
+        // GitHub Pages 404.html을 거쳐 리다이렉트된 경우 주소창을 원래의 깔끔한 경로(/dailypoem/234/0)로 즉시 복원
+        if (params.get('_clean') === '1') {
+          const savedCleanPath = sessionStorage.getItem('dailypoem_clean_path');
+          if (savedCleanPath) {
+            sessionStorage.removeItem('dailypoem_clean_path');
+            window.history.replaceState(null, '', savedCleanPath);
+          } else if (sharedInitialPoemNumber !== null) {
+            const autoBit = isAutoPlaying ? '1' : '0';
+            window.history.replaceState(null, '', `${window.APP_ROOT}${sharedInitialPoemNumber}/${autoBit}`);
+          }
         }
       } catch (e) {}
     }
@@ -1194,13 +2777,18 @@
       if (badge) badge.style.display = CONFIG.showBadge ? 'inline' : 'none';
 
       document.getElementById('selAudioChannel').value = CONFIG.audioChannel;
-      const chkRich = document.getElementById('chkRichAudio');
-      if (chkRich) chkRich.checked = !!CONFIG.richAudio;
       document.getElementById('selAmbientLayer').value = CONFIG.ambientLayer;
       document.getElementById('rngAmbLevel').value = CONFIG.ambienceLevel;
       document.getElementById('lblAmbLevel').textContent = CONFIG.ambienceLevel;
       document.getElementById('inpSeed').value = String(CONFIG.seed);
       document.getElementById('rngVolume').value = CONFIG.volume;
+
+      // 통계 페이지 링크를 APP_ROOT 기준으로 설정 (/234/0 하위 경로 상태에서도 정상 이동 보장)
+      const statsHref = `${window.APP_ROOT}stats.html`;
+      const l1 = document.getElementById('linkPopupStats');
+      const l2 = document.getElementById('linkModalStats');
+      if (l1) l1.href = statsHref;
+      if (l2) l2.href = statsHref;
 
       if (currentPoemRawText) {
         applyArtisticTypographyForPoem(currentPoemRawText);
@@ -1323,8 +2911,7 @@
     }
 
     /* =========================================================================
-     * 3. 📖 전자책 3분할 터치 (1회성 툴팁) & 인스타그램 스타일 중앙 더블탭 하트(♥)
-     *    & 현재 시 공유하기 (자동 감상 OFF 링크 생성)
+     * 3. 📖 전자책 3분할 터치 & 더블탭 하트(♥) & 클린 URL 공유하기 (/234/0)
      * ========================================================================= */
     function showHudFeedback(icon, text) {
       const hud = document.getElementById('touch-hud');
@@ -1342,12 +2929,11 @@
       }, 1250);
     }
 
-    // 인스타그램 스타일 하트 공감 저장 (화면에는 숫자 노출 없이 하트 애니메이션만 피어남)
     function triggerPoemHeart() {
       const burst = document.getElementById('heart-burst');
       if (burst) {
         burst.classList.remove('animate');
-        void burst.offsetWidth; // reflow
+        void burst.offsetWidth;
         burst.classList.add('animate');
       }
 
@@ -1360,33 +2946,26 @@
       } catch (e) {}
     }
 
-    // 현재 시 공유하기 (현재 시 번호 + 오토플레이 상태(1 또는 0) 조합 Clean URL 링크 생성)
+    // 현재 시 공유하기: https://poeticecho.github.io/dailypoem/234/0 형태로 생성
     async function shareCurrentPoem() {
-      const autoplayCode = isAutoPlaying ? '1' : '0';
-      const shareCode = `${currentPoemIndex}${autoplayCode}`;
-      
-      let cleanPath = window.location.pathname.replace(/\/index\.html$/i, '').replace(/\/\d+\/?$/, '');
-      if (!cleanPath.endsWith('/')) cleanPath += '/';
-      const baseUrl = window.location.origin + cleanPath;
-      const shareUrl = `${baseUrl}${shareCode}/`;
+      const poemNum = currentPoemIndex + 1; // 1-based 시 번호 (예: 234번 시 -> 234)
+      const shareUrl = `${window.location.origin}${window.APP_ROOT}${poemNum}/0`;
       const firstLine = (currentPoemRawText || "").split('\n')[0] || "감성 타이핑 시집";
 
       if (navigator.share) {
         try {
           await navigator.share({
-            title: `감성 시집 · ${firstLine}`,
+            title: `감성 시집 #${poemNum} · ${firstLine}`,
             text: `${currentPoemRawText}\n\n— 감성 타이핑 시집에서`,
             url: shareUrl
           });
           return;
-        } catch (err) {
-          // 사용자가 공유 창을 닫은 경우 클립보드 복사로 폴백
-        }
+        } catch (err) {}
       }
 
       try {
         await navigator.clipboard.writeText(shareUrl);
-        showHudFeedback('🔗', '현재 시 공유 링크가 복사되었습니다');
+        showHudFeedback('🔗', `공유 링크 복사 완료 (${poemNum}/0)`);
       } catch (e) {
         const tempInput = document.createElement('input');
         tempInput.value = shareUrl;
@@ -1394,7 +2973,7 @@
         tempInput.select();
         document.execCommand('copy');
         document.body.removeChild(tempInput);
-        showHudFeedback('🔗', '현재 시 공유 링크가 복사되었습니다');
+        showHudFeedback('🔗', `공유 링크 복사 완료 (${poemNum}/0)`);
       }
     }
 
@@ -1403,7 +2982,6 @@
       const zoneCenter = document.getElementById('zone-center');
       const zoneNext = document.getElementById('zone-next');
 
-      // 마우스 호버 시 각 영역별로 딱 1회만 안내 툴팁 표출
       zonePrev.addEventListener('mouseenter', () => {
         if (!zoneGuideShown.left && window.matchMedia('(hover: hover)').matches) {
           markZoneGuideShown('left');
@@ -1423,21 +3001,18 @@
         }
       });
 
-      // 좌측 탭: 이전 시 감상
       zonePrev.addEventListener('click', () => {
         wakeActiveUi();
         showPrevPoem();
       });
 
-      // 중앙 탭: 원클릭 = 자동 시작/멈춤 토글 | 더블클릭(더블탭) = 인스타그램 하트 공감
       let centerClickTimer = null;
       let lastCenterTapTime = 0;
 
-      zoneCenter.addEventListener('click', (e) => {
+      zoneCenter.addEventListener('click', () => {
         wakeActiveUi();
         const now = Date.now();
         if (now - lastCenterTapTime < 280) {
-          // 더블클릭 / 더블탭 감지 ➔ 하트 블룸!
           if (centerClickTimer) {
             clearTimeout(centerClickTimer);
             centerClickTimer = null;
@@ -1453,13 +3028,11 @@
         }
       });
 
-      // 우측 탭: 다음 시 감상
       zoneNext.addEventListener('click', () => {
         wakeActiveUi();
         showRandomPoem(false);
       });
 
-      // 모바일 좌우 스와이프 제스처
       let touchStartX = 0;
       let touchStartY = 0;
       window.addEventListener('touchstart', (e) => {
@@ -1653,170 +3226,117 @@
     }
 
     /* =========================================================================
-     * 5. 자체 내장 Pixelmood Seed-Based Audio Engine
+     * 5. Peommood Audio Engine 2.1 통합 어댑터 (PM1 재현 코드 & 120~240초 연속 주제 생성)
      * ========================================================================= */
-    let audioCtx = null;
-    let masterGain = null;
-    let noiseNode = null;
-    let noiseFilter = null;
-    let noiseGain = null;
-    let reverbDelay = null;
-    let reverbFeedback = null;
-    let reverbFilter = null;
-    let reverbGain = null;
-    let isMusicPlaying = false;
-    let musicLoopTimer = null;
-
-    let prng = null;
-    let currentTrackMeta = { bpm: 72, keyName: 'Dm9', resolvedAmbience: 'rain', barMs: 4200 };
-    let chordStep = 0;
-
-    function createSeededRandom(seed) {
-      let a = seed >>> 0;
-      return function() {
-        let t = (a += 0x6D2B79F5);
-        t = Math.imul(t ^ (t >>> 15), t | 1);
-        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-      };
-    }
-
-    // 1) 기본 클래식 화성 루프
-    const CHORD_LIBRARIES = {
-      'jazz': [
-        [
-          [73.42, 146.83, 220.00, 261.63, 329.63, 440.00],
-          [98.00, 196.00, 246.94, 293.66, 349.23, 493.88],
-          [65.41, 130.81, 196.00, 246.94, 293.66, 392.00],
-          [110.00, 220.00, 277.18, 329.63, 392.00, 440.00]
-        ]
-      ],
-      'lofi': [
-        [
-          [87.31, 174.61, 220.00, 261.63, 329.63, 392.00],
-          [82.41, 164.81, 196.00, 246.94, 293.66, 392.00],
-          [73.42, 146.83, 220.00, 261.63, 329.63, 349.23],
-          [65.41, 130.81, 196.00, 246.94, 329.63, 392.00]
-        ]
-      ],
-      'late_fm': [
-        [
-          [73.42, 146.83, 220.00, 261.63, 329.63, 440.00],
-          [98.00, 196.00, 246.94, 293.66, 349.23, 440.00],
-          [65.41, 130.81, 196.00, 246.94, 293.66, 329.63],
-          [110.00, 220.00, 261.63, 329.63, 392.00, 493.88]
-        ]
-      ],
-      'nocturne': [
-        [
-          [110.00, 220.00, 261.63, 329.63, 440.00, 523.25],
-          [73.42, 146.83, 220.00, 293.66, 349.23, 587.33],
-          [98.00, 196.00, 246.94, 293.66, 392.00, 493.88],
-          [65.41, 130.81, 196.00, 246.94, 329.63, 523.25]
-        ]
-      ],
-      'ambient': [
-        [
-          [65.41, 130.81, 196.00, 293.66, 392.00],
-          [87.31, 174.61, 261.63, 329.63, 440.00],
-          [73.42, 146.83, 220.00, 293.66, 392.00]
-        ]
-      ]
+    const SECTION_KO_NAMES = {
+      intro: '시작',
+      theme: '주제',
+      development: '변주',
+      breathing: '여백',
+      reprise: '재현',
+      coda: '맺음'
     };
 
-    // 2) [풍부하게] 모드: Altered Dominant 턴어라운드, 트라이톤 대리코드 하강, 패싱 디미니쉬 등 고급 재즈 화성 풀
-    const CHORD_LIBRARIES_LUSH = {
-      'jazz': [
-        // 1-1. 빌 에반스 스타일 2-5-1-6 with A7(b9, b13) 강력한 반음 해결
-        [
-          [73.42, 146.83, 220.00, 261.63, 329.63, 440.00], // Dm9
-          [98.00, 196.00, 246.94, 293.66, 349.23, 440.00], // G13
-          [65.41, 130.81, 196.00, 246.94, 293.66, 392.00], // Cmaj9
-          [110.00, 220.00, 277.18, 349.23, 392.00, 466.16]  // A7(b9, b13) -> 다음 Dm9으로 반음 스무스 해결!
-        ],
-        // 1-2. 트라이톤 대리코드 반음 하강 진행 (D -> Db -> C -> B)
-        [
-          [73.42, 146.83, 220.00, 261.63, 329.63, 440.00], // Dm9
-          [69.30, 138.59, 174.61, 246.94, 277.18, 369.99], // Db7(#11) (G7의 트라이톤 대리)
-          [65.41, 130.81, 196.00, 246.94, 293.66, 392.00], // Cmaj9
-          [61.74, 123.47, 185.00, 246.94, 311.13, 392.00]  // B7(alt) (하강 텐션)
-        ],
-        // 1-3. 서정적 패싱 디미니쉬 발라드 진행 (Cmaj9 -> C#dim7 -> Dm9 -> G7b13)
-        [
-          [65.41, 130.81, 196.00, 246.94, 293.66, 392.00], // Cmaj9
-          [69.30, 138.59, 174.61, 233.08, 277.18, 329.63], // C#dim7
-          [73.42, 146.83, 220.00, 261.63, 329.63, 440.00], // Dm9
-          [98.00, 196.00, 246.94, 311.13, 349.23, 440.00]  // G7(b13)
-        ]
-      ],
-      'lofi': [
-        [
-          [87.31, 174.61, 220.00, 261.63, 329.63, 392.00], // Fmaj9
-          [82.41, 164.81, 196.00, 246.94, 293.66, 392.00], // Em7
-          [73.42, 146.83, 220.00, 261.63, 329.63, 349.23], // Dm9
-          [65.41, 130.81, 196.00, 246.94, 329.63, 392.00]  // Cmaj9
-        ],
-        [
-          [73.42, 146.83, 220.00, 261.63, 329.63, 440.00], // Dm9
-          [98.00, 196.00, 261.63, 293.66, 349.23, 440.00], // G13sus4
-          [65.41, 130.81, 196.00, 246.94, 293.66, 392.00], // Cmaj9
-          [110.00, 220.00, 261.63, 329.63, 392.00, 440.00] // Am9
-        ]
-      ],
-      'late_fm': [
-        [
-          [73.42, 146.83, 220.00, 261.63, 329.63, 440.00], // Dm9
-          [98.00, 196.00, 246.94, 311.13, 349.23, 440.00], // G13(b9)
-          [65.41, 130.81, 196.00, 246.94, 293.66, 392.00], // Cmaj9
-          [110.00, 220.00, 277.18, 349.23, 392.00, 466.16] // A7(b13)
-        ]
-      ],
-      'nocturne': [
-        [
-          [110.00, 220.00, 261.63, 329.63, 440.00, 523.25], // Am9
-          [73.42, 146.83, 220.00, 293.66, 349.23, 587.33],  // Dm11
-          [98.00, 196.00, 246.94, 311.13, 349.23, 493.88],  // G7(b9)
-          [65.41, 130.81, 196.00, 246.94, 329.63, 523.25]   // Cmaj9(add13)
-        ]
-      ],
-      'ambient': [
-        [
-          [65.41, 130.81, 196.00, 293.66, 392.00],
-          [87.31, 174.61, 261.63, 329.63, 440.00],
-          [73.42, 146.83, 220.00, 293.66, 392.00]
-        ]
-      ]
+    const PEOMMOOD_PRESETS = {
+      reading: { audioChannel: 'ambient', ambientLayer: 'none', ambienceLevel: 0, density: 0.22, space: 0.32, warmth: 0.76 },
+      rain:    { audioChannel: 'jazz',    ambientLayer: 'rain', ambienceLevel: 2, density: 0.42, space: 0.48, warmth: 0.68 },
+      night:   { audioChannel: 'nocturne',ambientLayer: 'vinyl',ambienceLevel: 1, density: 0.28, space: 0.56, warmth: 0.79 }
+    };
+
+    // 빈 문자열이면 랜덤 여정 생성, 저장한 PM1 코드가 있으면 해당 주제·설정을 복원합니다.
+    let initialPm1OrEmpty = "";
+    try {
+      const urlP = new URLSearchParams(window.location.search);
+      initialPm1OrEmpty = urlP.get('pm1') || localStorage.getItem('dailypoem_saved_pm1') || "";
+      if (initialPm1OrEmpty) {
+        PeommoodAudioEngine.decodeCode(initialPm1OrEmpty);
+      }
+    } catch (e) {
+      initialPm1OrEmpty = "";
+    }
+
+    const music = new PeommoodAudioEngine(initialPm1OrEmpty);
+    window.music = music;
+    window.engine = music;
+
+    // 하위 호환 및 상태 참조 변수
+    let audioCtx = null;
+    let masterGain = null;
+    let isMusicPlaying = false;
+    let currentTrackMeta = music.getState().meta;
+
+    function syncFromPeommoodState(state) {
+      if (!state) state = music.getState();
+      isMusicPlaying = Boolean(state.isPlaying);
+      currentTrackMeta = state.meta || currentTrackMeta;
+      audioCtx = music.audioCtx || null;
+      masterGain = music.masterGain || null;
+
+      if (state.config) {
+        CONFIG.seed = state.config.seed;
+        CONFIG.audioChannel = state.config.audioChannel;
+        CONFIG.ambientLayer = state.config.ambientLayer;
+        CONFIG.ambienceLevel = state.config.ambienceLevel;
+      }
+
+      updateWalkmanLcdUI(state);
+    }
+
+    music.onStateChange = (state) => {
+      syncFromPeommoodState(state);
+    };
+
+    music.onThemeChange = (meta) => {
+      updateWalkmanLcdUI(music.getState());
+      if (isMusicPlaying && meta?.themeName) {
+        showHudFeedback('🎷', `새로운 주제 · ${meta.themeName} (${meta.keyName})`);
+      }
+    };
+
+    music.onError = (err) => {
+      console.warn('Peommood Audio Engine warning:', err);
     };
 
     function initializeSeedTrack(seedVal) {
-      CONFIG.seed = seedVal >>> 0;
-      prng = createSeededRandom(CONFIG.seed);
-      chordStep = 0;
-
-      const bpmBase = CONFIG.audioChannel === 'ambient' ? 56 : 68;
-      currentTrackMeta.bpm = bpmBase + Math.floor(prng() * 14);
-      currentTrackMeta.barMs = Math.round((60 / currentTrackMeta.bpm) * 4 * 1000);
-      const semitoneShift = Math.floor(prng() * 5) - 2;
-      currentTrackMeta.pitchFactor = Math.pow(2, semitoneShift / 12);
-
-      if (CONFIG.ambientLayer === 'random') {
-        const ambChoices = ['rain', 'birds', 'vinyl'];
-        currentTrackMeta.resolvedAmbience = ambChoices[Math.floor(prng() * ambChoices.length)];
+      if (seedVal === undefined || seedVal === null || seedVal === '') {
+        CONFIG.seed = music.getState().config.seed;
       } else {
-        currentTrackMeta.resolvedAmbience = CONFIG.ambientLayer;
+        const strVal = String(seedVal).trim();
+        if (strVal.startsWith('PM1')) {
+          try {
+            music.loadCode(strVal);
+            CONFIG.pm1Code = strVal;
+          } catch (e) {}
+        } else {
+          const numSeed = parseInt(strVal, 10);
+          if (!isNaN(numSeed)) {
+            music.initializeSeedTrack(numSeed >>> 0);
+            CONFIG.seed = music.getState().config.seed;
+          }
+        }
       }
-
-      updateWalkmanLcdUI();
-      if (noiseGain && audioCtx) {
-        noiseGain.gain.setTargetAtTime(getTargetNoiseGain(), audioCtx.currentTime, 0.4);
-      }
+      updateWalkmanLcdUI(music.getState());
     }
 
-    function updateWalkmanLcdUI() {
+    function updateWalkmanLcdUI(stateObj) {
+      const st = stateObj || music.getState();
+      const meta = st.meta || currentTrackMeta || {};
+      const cfg = st.config || CONFIG;
+
       const styleMap = { 'jazz': 'JAZZ', 'lofi': 'LO-FI', 'late_fm': 'FM 93.1', 'nocturne': 'NOCTURNE', 'ambient': 'AMBIENT' };
-      const ambMap = { 'random': `RND·${currentTrackMeta.resolvedAmbience.toUpperCase()}`, 'rain': 'RAIN', 'birds': 'BIRDS', 'vinyl': 'VINYL', 'none': 'OFF' };
-      const stLabel = styleMap[CONFIG.audioChannel] || 'JAZZ';
-      const ambLabel = ambMap[CONFIG.ambientLayer] || 'RND';
+      const resolvedAmb = meta.resolvedAmbience || cfg.ambientLayer || 'rain';
+      const ambMap = {
+        'random': `RND·${String(resolvedAmb).toUpperCase()}`,
+        'rain': 'RAIN',
+        'birds': 'BIRDS',
+        'vinyl': 'VINYL',
+        'none': 'OFF'
+      };
+      const stLabel = styleMap[cfg.audioChannel] || 'JAZZ';
+      const ambLabel = ambMap[cfg.ambientLayer] || 'RAIN';
+      const secKo = SECTION_KO_NAMES[meta.section] || meta.section || '주제';
+      const themeTitle = meta.themeName || '종이 위의 햇살';
+      const chordLabel = meta.chordName || meta.keyName || 'Cmaj9';
 
       const elStyle = document.getElementById('pm-lcd-style');
       const elAmb = document.getElementById('pm-lcd-amb');
@@ -1825,432 +3345,201 @@
       const elChip = document.getElementById('pm-status-chip');
       const elPlayBtn = document.getElementById('pm-play-btn');
       const elRadioLabel = document.getElementById('radio-channel-label');
+      const elRadioBadge = document.getElementById('radio-status-badge');
       const inpSeed = document.getElementById('inpSeed');
       const popMusicText = document.getElementById('popMusicText');
       const popMusicIcon = document.getElementById('popMusicIcon');
       const popMusicBtn = document.getElementById('popMusicBtn');
       const chkMusicOn = document.getElementById('chkMusicOn');
+      const lblThemeInfo = document.getElementById('lblPeommoodThemeInfo');
 
-      if (elStyle) elStyle.textContent = `STYLE: ${stLabel}${CONFIG.richAudio ? '✦' : ''}`;
-      if (elAmb) elAmb.textContent = `AMB: ${ambLabel}(L${CONFIG.ambienceLevel})`;
-      if (elSeed) elSeed.textContent = `SEED ${CONFIG.seed}`;
-      if (elBpm) elBpm.textContent = `${currentTrackMeta.bpm} BPM`;
-      if (elChip) elChip.textContent = isMusicPlaying ? '-PLAYING-' : '-READY-';
+      if (elStyle) elStyle.textContent = `${themeTitle} · ${chordLabel}`;
+      if (elAmb) elAmb.textContent = `AMB: ${ambLabel}(L${cfg.ambienceLevel})`;
+      if (elSeed) elSeed.textContent = `CH.${String((meta.themeIndex || 0) + 1).padStart(2, '0')} · ${secKo}`;
+      if (elBpm) elBpm.textContent = `${meta.bpm || 72} BPM`;
+      if (elChip) elChip.textContent = isMusicPlaying ? '-COMPOSING-' : '-READY-';
       if (elPlayBtn) {
         elPlayBtn.textContent = isMusicPlaying ? '|| PAUSE' : '▶ PLAY';
         elPlayBtn.classList.toggle('pm-active', isMusicPlaying);
       }
-      if (elRadioLabel) elRadioLabel.textContent = `${stLabel}${CONFIG.richAudio ? ' (LUSH)' : ''} · SEED #${CONFIG.seed}`;
-      if (inpSeed) inpSeed.value = String(CONFIG.seed);
+      if (elRadioBadge) {
+        elRadioBadge.style.display = isMusicPlaying ? 'inline-flex' : 'none';
+      }
+      if (elRadioLabel) {
+        elRadioLabel.textContent = `${stLabel} · ${themeTitle} (${chordLabel} · ${meta.bpm || 72} BPM)`;
+      }
+      if (inpSeed && document.activeElement !== inpSeed) {
+        inpSeed.value = String(cfg.seed);
+      }
       if (chkMusicOn) chkMusicOn.checked = isMusicPlaying;
-      const chkRich = document.getElementById('chkRichAudio');
-      if (chkRich) chkRich.checked = !!CONFIG.richAudio;
 
-      if (popMusicText) popMusicText.textContent = isMusicPlaying ? '음악 끄기' : '음악 켜기 (Jazz)';
+      if (lblThemeInfo) {
+        const keyAndChord = (meta.chordName && meta.keyName && meta.chordName !== meta.keyName) ? `${meta.keyName} · ${meta.chordName}` : (meta.chordName || meta.keyName || "Cmaj9");
+        lblThemeInfo.textContent = `${themeTitle} · ${keyAndChord} · ${meta.bpm || 72} BPM (${secKo})`;
+      }
+
+      if (popMusicText) popMusicText.textContent = isMusicPlaying ? `음악 끄기 (${themeTitle})` : `음악 켜기 (${stLabel})`;
       if (popMusicIcon) popMusicIcon.textContent = isMusicPlaying ? '⏹' : '🎵';
       if (popMusicBtn) popMusicBtn.classList.toggle('active-toggle', isMusicPlaying);
     }
 
-    function initAudioEngine() {
-      if (audioCtx) return;
-      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AudioContextClass();
-      masterGain = audioCtx.createGain();
-      masterGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-      masterGain.connect(audioCtx.destination);
-
-      // 공간감 에코/리버브 버스 생성 (Stereo/Room Delay & Warm Damping)
-      try {
-        reverbDelay = audioCtx.createDelay(1.0);
-        reverbDelay.delayTime.setValueAtTime(0.32, audioCtx.currentTime);
-
-        reverbFeedback = audioCtx.createGain();
-        reverbFeedback.gain.setValueAtTime(0.24, audioCtx.currentTime);
-
-        reverbFilter = audioCtx.createBiquadFilter();
-        reverbFilter.type = 'lowpass';
-        reverbFilter.frequency.setValueAtTime(1600, audioCtx.currentTime);
-
-        reverbGain = audioCtx.createGain();
-        reverbGain.gain.setValueAtTime(CONFIG.richAudio ? 0.16 : 0.0, audioCtx.currentTime);
-
-        // 루프: Delay -> Filter -> Feedback -> Delay
-        reverbDelay.connect(reverbFilter);
-        reverbFilter.connect(reverbFeedback);
-        reverbFeedback.connect(reverbDelay);
-
-        // 출력: Filter -> ReverbGain -> MasterGain
-        reverbFilter.connect(reverbGain);
-        reverbGain.connect(masterGain);
-      } catch (e) {}
-
-      setupAmbientNoiseLayer();
-    }
-
-    function setupAmbientNoiseLayer() {
-      if (!audioCtx) return;
-      if (noiseNode) {
-        try { noiseNode.stop(); noiseNode.disconnect(); } catch (e) {}
-      }
-      const bufferSize = audioCtx.sampleRate * 3;
-      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-      const data = buffer.getChannelData(0);
-      let lastOut = 0.0;
-      for (let i = 0; i < bufferSize; i++) {
-        const white = Math.random() * 2 - 1;
-        data[i] = (lastOut + (0.025 * white)) / 1.025;
-        lastOut = data[i];
-        data[i] *= 0.45;
-      }
-
-      noiseNode = audioCtx.createBufferSource();
-      noiseNode.buffer = buffer;
-      noiseNode.loop = true;
-
-      noiseFilter = audioCtx.createBiquadFilter();
-      noiseFilter.type = 'lowpass';
-      noiseFilter.frequency.value = 920;
-
-      noiseGain = audioCtx.createGain();
-      noiseGain.gain.value = getTargetNoiseGain();
-
-      noiseNode.connect(noiseFilter);
-      noiseFilter.connect(noiseGain);
-      noiseGain.connect(masterGain);
-      noiseNode.start();
-    }
-
-    function getTargetNoiseGain() {
-      if (CONFIG.ambientLayer === 'none' || CONFIG.ambienceLevel === 0) return 0.0;
-      const levelScale = CONFIG.ambienceLevel / 5.0;
-      const activeAmb = CONFIG.ambientLayer === 'random' ? currentTrackMeta.resolvedAmbience : CONFIG.ambientLayer;
-      if (activeAmb === 'rain') return 0.13 * levelScale;
-      if (activeAmb === 'birds') return 0.055 * levelScale;
-      return 0.065 * levelScale;
-    }
-
-    function playVinylDustTick(time) {
-      if (!audioCtx || !isMusicPlaying || !CONFIG.richAudio) return;
-      try {
-        const tickOsc = audioCtx.createOscillator();
-        const tickGain = audioCtx.createGain();
-        const tickFilter = audioCtx.createBiquadFilter();
-
-        tickOsc.type = 'triangle';
-        tickOsc.frequency.setValueAtTime(2600 + Math.random() * 2000, time);
-
-        tickFilter.type = 'highpass';
-        tickFilter.frequency.setValueAtTime(1800, time);
-
-        tickGain.gain.setValueAtTime(0.0001, time);
-        tickGain.gain.linearRampToValueAtTime(0.012 + Math.random() * 0.016, time + 0.002);
-        tickGain.gain.exponentialRampToValueAtTime(0.0001, time + 0.012);
-
-        tickOsc.connect(tickFilter);
-        tickFilter.connect(tickGain);
-        tickGain.connect(masterGain);
-
-        tickOsc.start(time);
-        tickOsc.stop(time + 0.015);
-      } catch (e) {}
-    }
-
-    function playInstrumentNote(freq, startTime, duration, inst = 'rhodes', velocity = 0.12) {
-      if (!audioCtx || !isMusicPlaying) return;
-      const osc = audioCtx.createOscillator();
-      const subOsc = audioCtx.createOscillator();
-      const noteGain = audioCtx.createGain();
-      const filter = audioCtx.createBiquadFilter();
-
-      let tineOsc = null;
-      let tineGain = null;
-
-      if (inst === 'bass') {
-        osc.type = 'triangle';
-        subOsc.type = 'sine';
-        subOsc.frequency.setValueAtTime(freq, startTime);
-        filter.type = 'lowpass';
-
-        if (CONFIG.richAudio) {
-          // 어쿠스틱 콘트라베이스 우디(Woody) 핑거 어택 & 바디 공명
-          filter.Q.setValueAtTime(1.8, startTime);
-          filter.frequency.setValueAtTime(520, startTime);
-          filter.frequency.exponentialRampToValueAtTime(190, startTime + 0.12);
-        } else {
-          filter.frequency.setValueAtTime(340, startTime);
-        }
-      } else if (inst === 'jazz_guitar') {
-        osc.type = 'triangle';
-        subOsc.type = 'sine';
-        subOsc.frequency.setValueAtTime(freq * 2, startTime);
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(CONFIG.richAudio ? 980 : 1250, startTime);
-      } else if (inst === 'vibes') {
-        osc.type = 'sine';
-        subOsc.type = 'sine';
-        subOsc.frequency.setValueAtTime(freq * 3, startTime);
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(2200, startTime);
-      } else {
-        // rhodes
-        osc.type = 'sine';
-        subOsc.type = 'triangle';
-        subOsc.frequency.setValueAtTime(freq * 2, startTime);
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(CONFIG.richAudio ? 1200 : 1020, startTime);
-
-        if (CONFIG.richAudio) {
-          // 빈티지 Fender Rhodes 특유의 맑은 Tine(금속 타현) 어택 배음
-          try {
-            tineOsc = audioCtx.createOscillator();
-            tineGain = audioCtx.createGain();
-            tineOsc.type = 'sine';
-            tineOsc.frequency.setValueAtTime(freq * 4.25, startTime);
-            tineGain.gain.setValueAtTime(velocity * 0.24, startTime);
-            tineGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.055);
-            tineOsc.connect(tineGain);
-            tineGain.connect(masterGain);
-            if (reverbDelay) tineGain.connect(reverbDelay);
-            tineOsc.start(startTime);
-            tineOsc.stop(startTime + 0.06);
-          } catch (e) {}
-        }
-      }
-
-      osc.frequency.setValueAtTime(freq, startTime);
-      const subGain = audioCtx.createGain();
-      subGain.gain.setValueAtTime(velocity * (CONFIG.richAudio && inst === 'rhodes' ? 0.22 : 0.16), startTime);
-
-      const attack = inst === 'bass' ? 0.05 : (CONFIG.richAudio ? 0.07 : 0.14);
-      noteGain.gain.setValueAtTime(0.0001, startTime);
-      noteGain.gain.linearRampToValueAtTime(velocity, startTime + attack);
-
-      // Tremolo 효과 (풍부하게 모드일 때 은은한 감성 비브라토/트레몰로 감쇠)
-      if (CONFIG.richAudio && inst === 'rhodes' && duration > 0.8) {
-        noteGain.gain.setTargetAtTime(velocity * 0.68, startTime + attack + 0.12, 0.22);
-      }
-      noteGain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
-
-      osc.connect(filter);
-      subOsc.connect(subGain);
-      subGain.connect(filter);
-      filter.connect(noteGain);
-      noteGain.connect(masterGain);
-
-      // 리버브 버스로 여운 전달
-      if (reverbDelay && CONFIG.richAudio && inst !== 'bass') {
-        noteGain.connect(reverbDelay);
-      }
-
-      osc.start(startTime);
-      subOsc.start(startTime);
-      osc.stop(startTime + duration + 0.05);
-      subOsc.stop(startTime + duration + 0.05);
-    }
-
-    function playBrushPercussion(startTime, barDurSec) {
-      if (!audioCtx || !isMusicPlaying || CONFIG.audioChannel === 'ambient' || CONFIG.audioChannel === 'nocturne') return;
-      const beatSec = barDurSec / 4;
-      [0, 2].forEach(b => {
-        const t = startTime + b * beatSec;
-        const osc = audioCtx.createOscillator();
-        const g = audioCtx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(95, t);
-        osc.frequency.exponentialRampToValueAtTime(38, t + 0.16);
-        g.gain.setValueAtTime(0.06, t);
-        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
-        osc.connect(g);
-        g.connect(masterGain);
-        osc.start(t);
-        osc.stop(t + 0.2);
-      });
-    }
-
-    function maybePlayNatureAmbience(now) {
-      const activeAmb = CONFIG.ambientLayer === 'random' ? currentTrackMeta.resolvedAmbience : CONFIG.ambientLayer;
-      if (activeAmb === 'none' || CONFIG.ambienceLevel === 0) return;
-      const levelScale = CONFIG.ambienceLevel / 5.0;
-      const r = prng ? prng() : Math.random();
-
-      // 풍부하게 모드일 때: LP 바이닐 미세 먼지 틱 노이즈 발생
-      if (CONFIG.richAudio && (activeAmb === 'vinyl' || activeAmb === 'random' || activeAmb === 'rain')) {
-        const popCount = 1 + Math.floor(Math.random() * 3);
-        for (let p = 0; p < popCount; p++) {
-          playVinylDustTick(now + 0.4 + Math.random() * 3.2);
-        }
-      }
-
-      if (activeAmb === 'birds' && r < 0.55) {
-        const baseBird = 1400 + (prng ? prng() : Math.random()) * 520;
-        playInstrumentNote(baseBird, now + 1.4, 0.28, 'vibes', 0.016 * levelScale);
-        playInstrumentNote(baseBird * 1.19, now + 1.68, 0.38, 'vibes', 0.014 * levelScale);
-      } else if (activeAmb === 'rain' && r < 0.4) {
-        const dropFreq = 980 + (prng ? prng() : Math.random()) * 600;
-        playInstrumentNote(dropFreq, now + 2.1, 0.22, 'vibes', 0.01 * levelScale);
-      }
-    }
-
-    function scheduleGenerativeBar() {
-      if (!isMusicPlaying || !audioCtx) return;
-      if (!prng) initializeSeedTrack(CONFIG.seed);
-
-      const libGroup = (CONFIG.richAudio && CHORD_LIBRARIES_LUSH[CONFIG.audioChannel]) 
-        ? CHORD_LIBRARIES_LUSH[CONFIG.audioChannel] 
-        : (CHORD_LIBRARIES[CONFIG.audioChannel] || CHORD_LIBRARIES['jazz']);
-
-      // 풍부하게 모드에서는 4마디마다 다채로운 진행 풀(Progression Pool) 순환
-      const progIndex = CONFIG.richAudio 
-        ? (Math.floor(chordStep / 4) + CONFIG.seed) % libGroup.length 
-        : (CONFIG.seed % libGroup.length);
-      const prog = libGroup[progIndex];
-      const rawChord = prog[chordStep % prog.length];
-      const chord = rawChord.map(f => f * (currentTrackMeta.pitchFactor || 1.0));
-      chordStep++;
-
-      const now = audioCtx.currentTime;
-      const barDurSec = currentTrackMeta.barMs / 1000;
-      const isJazz = CONFIG.audioChannel === 'jazz' || CONFIG.audioChannel === 'late_fm';
-
-      playInstrumentNote(chord[0], now, barDurSec * 0.55, 'bass', 0.14);
-      if (isJazz && chord.length > 2) {
-        playInstrumentNote(chord[0] * 1.5, now + barDurSec * 0.5, barDurSec * 0.45, 'bass', 0.11);
-      }
-
-      const chordInst = CONFIG.audioChannel === 'nocturne' ? 'vibes' : 'rhodes';
-      chord.slice(1).forEach((freq, idx) => {
-        const swingDelay = isJazz ? (idx * 0.14 + (idx % 2 === 1 ? 0.04 : 0.0)) : (idx * 0.12);
-        // 탑 노트는 조금 더 또렷하게, 내성음은 부드럽게
-        const isTopNote = idx === chord.length - 2;
-        const vel = CONFIG.richAudio ? (isTopNote ? 0.088 : 0.065) : 0.075;
-        playInstrumentNote(freq, now + swingDelay, barDurSec * 0.92, chordInst, vel);
-      });
-
-      const soloCount = CONFIG.audioChannel === 'ambient' ? 1 : 3;
-      const soloInst = isJazz ? 'jazz_guitar' : 'vibes';
-      for (let m = 0; m < soloCount; m++) {
-        const rIdx = 1 + Math.floor(prng() * (chord.length - 1));
-        const pickFreq = chord[rIdx] * ((prng() > 0.45) ? 2.0 : 1.5);
-        const noteOffset = (0.95 + m * 1.12 + prng() * 0.22);
-        playInstrumentNote(pickFreq, now + noteOffset, 2.3, soloInst, 0.068);
-      }
-
-      playBrushPercussion(now, barDurSec);
-      maybePlayNatureAmbience(now);
-
-      musicLoopTimer = setTimeout(scheduleGenerativeBar, currentTrackMeta.barMs);
-    }
-
     function playGentleRadioChime() {
-      if (!isMusicPlaying || !audioCtx || CONFIG.audioChannel !== 'late_fm') return;
-      const now = audioCtx.currentTime;
-      playInstrumentNote(523.25, now, 1.5, 'vibes', 0.04);
-      playInstrumentNote(659.25, now + 0.25, 1.8, 'vibes', 0.045);
+      // Peommood 2.1 handles continuous bar-boundary voice-leading transitions natively
     }
 
-    function toggleMusic() {
-      setMusicState(!isMusicPlaying);
+    async function toggleMusic() {
+      try {
+        await music.toggleMusic();
+        const st = music.getState();
+        showHudFeedback(
+          st.isPlaying ? '🎵' : '⏹',
+          st.isPlaying ? `Peommood · ${st.meta.themeName} (${st.meta.keyName})` : '음악을 잠시 멈추었습니다'
+        );
+      } catch (e) {
+        console.error(e);
+      }
     }
 
-    function toggleRichAudio(turnOn) {
-      CONFIG.richAudio = turnOn;
-      saveConfig();
-      if (reverbGain && audioCtx) {
-        reverbGain.gain.setTargetAtTime(CONFIG.richAudio ? 0.16 : 0.0, audioCtx.currentTime, 0.25);
+    async function setMusicState(turnOn) {
+      try {
+        await music.setMusicState(Boolean(turnOn));
+        const st = music.getState();
+        showHudFeedback(
+          st.isPlaying ? '🎵' : '⏹',
+          st.isPlaying ? `Peommood · ${st.meta.themeName}` : '음악 멈춤'
+        );
+      } catch (e) {
+        console.error(e);
       }
-      showHudFeedback(CONFIG.richAudio ? '✨' : '🔈', `풍부한 사운드: ${CONFIG.richAudio ? 'ON (Altered 턴어라운드 & 룸 에코)' : 'OFF (클래식 모드)'}`);
-      updateWalkmanLcdUI();
     }
 
-    function setMusicState(turnOn) {
-      initAudioEngine();
-      if (audioCtx && audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-
-      isMusicPlaying = turnOn;
-      const radioBadge = document.getElementById('radio-status-badge');
-
-      if (isMusicPlaying) {
-        if (radioBadge) radioBadge.style.display = 'inline-flex';
-        showHudFeedback('🎵', 'Pixelmood 음악 재생');
-        if (noiseGain && audioCtx) {
-          noiseGain.gain.setTargetAtTime(getTargetNoiseGain(), audioCtx.currentTime, 0.5);
-        }
-        if (reverbGain && audioCtx) {
-          reverbGain.gain.setTargetAtTime(CONFIG.richAudio ? 0.16 : 0.0, audioCtx.currentTime, 0.5);
-        }
-        if (masterGain && audioCtx) {
-          masterGain.gain.setTargetAtTime(CONFIG.volume, audioCtx.currentTime, 0.8);
-        }
-        if (musicLoopTimer) clearTimeout(musicLoopTimer);
-        scheduleGenerativeBar();
-      } else {
-        if (radioBadge) radioBadge.style.display = 'none';
-        showHudFeedback('⏹', '음악 멈춤');
-        if (masterGain && audioCtx) {
-          masterGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.4);
-        }
-        if (reverbGain && audioCtx) {
-          reverbGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.4);
-        }
-        if (musicLoopTimer) {
-          clearTimeout(musicLoopTimer);
-          musicLoopTimer = null;
-        }
-      }
-      updateWalkmanLcdUI();
+    function nextMusicTheme() {
+      const st = music.nextTheme();
+      showHudFeedback('⏭', '다음 마디에서 새로운 주제로 넘어갑니다');
+      updateWalkmanLcdUI(st);
     }
 
     function prevPixelSeed() {
-      initializeSeedTrack(2494034659);
+      const s = music.resetDefaultSeed();
+      CONFIG.seed = s;
       saveConfig();
-      showHudFeedback('⏮', `기본 시드: 2494034659`);
+      showHudFeedback('⏮', `기본 시드로 복원: ${s}`);
     }
 
     function nextPixelSeed() {
-      const nextSeed = Math.floor(1000000000 + Math.random() * 3000000000);
-      initializeSeedTrack(nextSeed);
+      const s = music.nextRandomSeed();
+      CONFIG.seed = s;
       saveConfig();
-      showHudFeedback('🎲', `새로운 시드: ${nextSeed}`);
+      const st = music.getState();
+      showHudFeedback('🎲', `새로운 여정: ${st.meta.themeName} (#${s})`);
       if (!isMusicPlaying) setMusicState(true);
     }
 
     function applyCustomSeed(val) {
-      const parsed = parseInt(String(val).trim(), 10) || 2494034659;
-      initializeSeedTrack(parsed);
+      const trimmed = String(val || '').trim();
+      if (!trimmed) return;
+      if (trimmed.startsWith('PM1')) {
+        try {
+          music.loadCode(trimmed);
+          CONFIG.pm1Code = trimmed;
+          localStorage.setItem('dailypoem_saved_pm1', trimmed);
+          saveConfig();
+          showHudFeedback('🎼', `PM1 주제 코드 복원: ${music.getState().meta.themeName}`);
+          return;
+        } catch (e) {
+          showHudFeedback('⚠️', '유효하지 않은 PM1 코드입니다');
+          return;
+        }
+      }
+      const parsed = parseInt(trimmed, 10);
+      if (!isNaN(parsed)) {
+        music.initializeSeedTrack(parsed >>> 0);
+        CONFIG.seed = music.getState().config.seed;
+        saveConfig();
+        showHudFeedback('🎲', `시드 적용: ${CONFIG.seed}`);
+      }
+    }
+
+    async function exportAndCopyPm1Code() {
+      try {
+        const code = music.exportCode();
+        CONFIG.pm1Code = code;
+        localStorage.setItem('dailypoem_saved_pm1', code);
+        const inp = document.getElementById('inpPm1Code');
+        if (inp) inp.value = code;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(code);
+          showHudFeedback('📋', `현재 주제("${music.getState().meta.themeName}")의 PM1 코드를 복사했습니다`);
+        } else {
+          if (inp) { inp.focus(); inp.select(); }
+          showHudFeedback('📋', 'PM1 코드가 생성되었습니다 (선택된 코드를 복사하세요)');
+        }
+      } catch (e) {
+        showHudFeedback('⚠️', 'PM1 코드 생성에 실패했습니다');
+      }
+    }
+
+    async function loadPm1CodeFromInput() {
+      const inp = document.getElementById('inpPm1Code');
+      const code = inp ? inp.value.trim() : '';
+      if (!code) {
+        showHudFeedback('⚠️', '복원할 PM1 코드를 입력해 주세요');
+        return;
+      }
+      try {
+        music.loadCode(code);
+        CONFIG.pm1Code = code;
+        localStorage.setItem('dailypoem_saved_pm1', code);
+        applyConfigToUI();
+        await music.start();
+        showHudFeedback('🎼', `저장된 주제("${music.getState().meta.themeName}")부터 다시 연주합니다`);
+      } catch (e) {
+        showHudFeedback('⚠️', '올바른 PM1 재현 코드가 아닙니다');
+      }
+    }
+
+    async function applyPeommoodPreset(presetKey) {
+      const p = PEOMMOOD_PRESETS[presetKey];
+      if (!p) return;
+      music.setPoeticMood(p);
+      music.changeAmbientLayer(p.ambientLayer);
+      music.updateAmbienceLevel(p.ambienceLevel);
+      CONFIG.audioChannel = p.audioChannel;
+      CONFIG.ambientLayer = p.ambientLayer;
+      CONFIG.ambienceLevel = p.ambienceLevel;
+      applyConfigToUI();
       saveConfig();
-      showHudFeedback('🎲', `시드 적용: ${parsed}`);
+      await music.changeAudioChannel(p.audioChannel);
+      const labelMap = { reading: '📖 고요한 독서', rain: '🌧️ 비 오는 오후', night: '🌙 심야의 시' };
+      showHudFeedback('🎷', `${labelMap[presetKey]} 프리셋이 적용되었습니다`);
     }
 
     function updateVolume(val) {
       CONFIG.volume = parseFloat(val);
-      if (masterGain && audioCtx && isMusicPlaying) {
-        masterGain.gain.setTargetAtTime(CONFIG.volume, audioCtx.currentTime, 0.2);
-      }
+      const nightFactor = (typeof isAmbientNightNow !== 'undefined' && isAmbientNightNow) ? 0.72 : 1.0;
+      music.updateVolume(CONFIG.volume * nightFactor);
       saveConfig();
     }
 
     function updateAmbienceLevel(val) {
       CONFIG.ambienceLevel = parseInt(val, 10);
-      document.getElementById('lblAmbLevel').textContent = CONFIG.ambienceLevel;
-      if (noiseGain && audioCtx && isMusicPlaying) {
-        noiseGain.gain.setTargetAtTime(getTargetNoiseGain(), audioCtx.currentTime, 0.3);
-      }
-      updateWalkmanLcdUI();
+      const lbl = document.getElementById('lblAmbLevel');
+      if (lbl) lbl.textContent = CONFIG.ambienceLevel;
+      music.updateAmbienceLevel(CONFIG.ambienceLevel);
       saveConfig();
     }
 
-    function changeAudioChannel(ch) {
+    async function changeAudioChannel(ch) {
       CONFIG.audioChannel = ch;
-      initializeSeedTrack(CONFIG.seed);
       saveConfig();
-      if (!isMusicPlaying) setMusicState(true);
+      try {
+        await music.changeAudioChannel(ch);
+      } catch (e) {}
     }
 
     function changeAmbientLayer(layer) {
       CONFIG.ambientLayer = layer;
-      initializeSeedTrack(CONFIG.seed);
+      music.changeAmbientLayer(layer);
       saveConfig();
     }
 
@@ -2282,7 +3571,7 @@
         ctx.fillStyle = '#382E3C';
         ctx.fillRect(0, 24, W, 18);
 
-        const activeAmb = CONFIG.ambientLayer === 'random' ? currentTrackMeta.resolvedAmbience : CONFIG.ambientLayer;
+        const activeAmb = CONFIG.ambientLayer === 'random' ? (currentTrackMeta.resolvedAmbience || 'rain') : CONFIG.ambientLayer;
         for (let s = 0; s < 14; s++) {
           const sx = (s * 17 + (activeAmb === 'rain' ? tick : 0)) % W;
           const sy = (s * 7 + (activeAmb === 'rain' ? tick * 2 : 0)) % 28;
@@ -2292,7 +3581,7 @@
 
         buildings.forEach((b, idx) => {
           ctx.fillStyle = '#0D1017';
-          ctx.fillRect(b.x, H - b.h, b.w, b.h);
+          ctx.fillRect(b.x, H - b.h, b.w, H);
           for (let wy = H - b.h + 3; wy < H - 4; wy += 4) {
             for (let wx = b.x + 2; wx < b.x + b.w - 2; wx += 3) {
               if (((wx + wy + idx) % 3 === 0)) {
@@ -2358,7 +3647,7 @@
     }
 
     /* =========================================================================
-     * 7. 시 로드, 공유 시 진입 처리 및 타이핑 애니메이션
+     * 7. 시 로드, 공유 경로(/234/0, /poem/234/0) 진입 처리 및 타이핑 애니메이션
      * ========================================================================= */
     const LIGHT_PALETTES = [
       { background: "#FBF8F3", color: "#3C342C" },
@@ -2416,7 +3705,7 @@
 
     async function loadReflections() {
       try {
-        const res = await fetch('reflections.json?t=' + Date.now());
+        const res = await fetch(`${window.APP_ROOT}reflections.json?t=` + Date.now());
         reflections = await res.json();
         try { localStorage.setItem('poetry_self_hosted_cache_v2', JSON.stringify(reflections)); } catch (e) {}
       } catch (e) {
@@ -2428,10 +3717,14 @@
         }
       }
 
-      if (sharedInitialPoemIndex !== null && reflections[sharedInitialPoemIndex]) {
-        poemHistory.push(sharedInitialPoemIndex);
+      if (sharedInitialPoemNumber !== null) {
+        // 1-based 시 번호(예: 234 -> index 233) 매핑 (0이 입력된 경우 index 0)
+        const targetIdx = sharedInitialPoemNumber >= 1
+          ? Math.min(reflections.length - 1, sharedInitialPoemNumber - 1)
+          : 0;
+        poemHistory.push(targetIdx);
         historyPtr = poemHistory.length - 1;
-        showPoemByIndex(sharedInitialPoemIndex, '', true);
+        showPoemByIndex(targetIdx, '', true);
       } else {
         showRandomPoem(true);
       }
@@ -2446,7 +3739,6 @@
       poemHistory.push(nextIdx);
       historyPtr = poemHistory.length - 1;
 
-      // 우측 탭 안내도 최초 1회만 표출 후 생략
       let onceMsg = '';
       if (!isInitial && !zoneGuideShown.right) {
         onceMsg = '다음 시 ⏭';
@@ -2691,9 +3983,1306 @@
       if (document.visibilityState === 'visible') requestWakeLock();
     });
 
+
+    /* =========================================================================
+     * 9. DAILYPOEM 2.0 — GITHUB PAGES & SYNOLOGY DS420+ PHOTO/WEATHER ENGINE
+     * ========================================================================= */
+    /* === 5-WAY PHOTO SOURCE & GITHUB AUTO-SCANNER (v2.5) === */
+    // 오픈소스 사진 프로젝트(DMarby/picsum-photos & Unsplash Dataset) 기반 고화질 세로·가로 실사 샘플 앨범 12선
+    // index.html 파일 단 하나만 GitHub Pages에 올려도 별도 폴더 업로드 없이 즉시 세로 블러·화이트 여백·페어링이 작동합니다.
+    const CURATED_WEB_SAMPLE_ITEMS = [
+      {
+        id: "web_portrait_01",
+        filename: "sample_01_portrait_golden.jpg",
+        src: "https://picsum.photos/id/64/1080/1440",
+        localFallback: "./photos/sample_01_portrait_golden.jpg",
+        album: "인물_스냅",
+        title: "노을빛 산책길의 초상",
+        takenAt: "2026-09-28T17:42:10",
+        dateLabel: "2026년 9월 28일 · 노을빛 산책",
+        width: 1080,
+        height: 1440,
+        orientation: "portrait",
+        hasPerson: true,
+        faceCount: 1,
+        focalX: 50.0,
+        focalY: 32.0,
+        dominantHex: "#926b5a",
+        isDarkPhoto: false,
+        hearts: 24
+      },
+      {
+        id: "web_portrait_02",
+        filename: "sample_02_portrait_cafe.jpg",
+        src: "https://picsum.photos/id/65/1080/1620",
+        localFallback: "./photos/sample_02_portrait_cafe.jpg",
+        album: "인물_스냅",
+        title: "오후 세 시, 바람이 머무는 들녘",
+        takenAt: "2026-10-03T15:18:00",
+        dateLabel: "2026년 10월 3일 · 오후의 햇살",
+        width: 1080,
+        height: 1620,
+        orientation: "portrait",
+        hasPerson: true,
+        faceCount: 1,
+        focalX: 48.0,
+        focalY: 30.0,
+        dominantHex: "#8d8277",
+        isDarkPhoto: false,
+        hearts: 29
+      },
+      {
+        id: "web_portrait_03",
+        filename: "sample_03_portrait_twilight.jpg",
+        src: "https://picsum.photos/id/177/1080/1440",
+        localFallback: "./photos/sample_03_portrait_twilight.jpg",
+        album: "가족_일상",
+        title: "배낭을 메고 걸었던 언덕길",
+        takenAt: "2026-10-07T18:35:22",
+        dateLabel: "2026년 10월 7일 · 여행의 기록",
+        width: 1080,
+        height: 1440,
+        orientation: "portrait",
+        hasPerson: true,
+        faceCount: 1,
+        focalX: 52.0,
+        focalY: 36.0,
+        dominantHex: "#4d5968",
+        isDarkPhoto: false,
+        hearts: 22
+      },
+      {
+        id: "web_portrait_04",
+        filename: "sample_08_portrait_warmth.jpg",
+        src: "https://picsum.photos/id/338/1080/1440",
+        localFallback: "./photos/sample_08_portrait_warmth.jpg",
+        album: "가족_일상",
+        title: "파도 소리가 들리는 해변의 오후",
+        takenAt: "2026-10-14T10:12:00",
+        dateLabel: "2026년 10월 14일 · 바닷가 산책",
+        width: 1080,
+        height: 1440,
+        orientation: "portrait",
+        hasPerson: true,
+        faceCount: 1,
+        focalX: 50.0,
+        focalY: 35.0,
+        dominantHex: "#7b8b96",
+        isDarkPhoto: false,
+        hearts: 31
+      },
+      {
+        id: "web_portrait_05",
+        filename: "sample_04_vertical_autumn.jpg",
+        src: "https://picsum.photos/id/28/1080/1620",
+        localFallback: "./photos/sample_04_vertical_autumn.jpg",
+        album: "계절_풍경",
+        title: "초록빛 숲길이 열리는 아침",
+        takenAt: "2026-10-10T11:20:45",
+        dateLabel: "2026년 10월 10일 · 고요한 숲길",
+        width: 1080,
+        height: 1620,
+        orientation: "portrait",
+        hasPerson: false,
+        faceCount: 0,
+        focalX: 50.0,
+        focalY: 38.0,
+        dominantHex: "#46634b",
+        isDarkPhoto: true,
+        hearts: 19
+      },
+      {
+        id: "web_landscape_06",
+        filename: "sample_05_landscape_family.jpg",
+        src: "https://picsum.photos/id/1015/1920/1440",
+        localFallback: "./photos/sample_05_landscape_family.jpg",
+        album: "계절_풍경",
+        title: "협곡 사이로 흐르는 에메랄드빛 강물",
+        takenAt: "2026-10-11T16:50:12",
+        dateLabel: "2026년 10월 11일 · 강가의 오후",
+        width: 1920,
+        height: 1440,
+        orientation: "landscape",
+        hasPerson: false,
+        faceCount: 0,
+        focalX: 50.0,
+        focalY: 42.0,
+        dominantHex: "#5f7a85",
+        isDarkPhoto: false,
+        hearts: 34
+      },
+      {
+        id: "web_landscape_07",
+        filename: "sample_06_landscape_lake.jpg",
+        src: "https://picsum.photos/id/1018/1920/1440",
+        localFallback: "./photos/sample_06_landscape_lake.jpg",
+        album: "계절_풍경",
+        title: "물안개 피어오르는 새벽 능선",
+        takenAt: "2026-10-12T06:45:30",
+        dateLabel: "2026년 10월 12일 · 새벽 호수",
+        width: 1920,
+        height: 1440,
+        orientation: "landscape",
+        hasPerson: false,
+        faceCount: 0,
+        focalX: 54.0,
+        focalY: 40.0,
+        dominantHex: "#6e7a74",
+        isDarkPhoto: false,
+        hearts: 26
+      },
+      {
+        id: "web_landscape_08",
+        filename: "sample_07_wide_night.jpg",
+        src: "https://picsum.photos/id/1039/1920/1280",
+        localFallback: "./photos/sample_07_wide_night.jpg",
+        album: "계절_풍경",
+        title: "깊은 숲속 폭포와 안개의 호흡",
+        takenAt: "2026-10-13T21:15:00",
+        dateLabel: "2026년 10월 13일 · 숲의 여운",
+        width: 1920,
+        height: 1280,
+        orientation: "landscape",
+        hasPerson: false,
+        faceCount: 0,
+        focalX: 48.0,
+        focalY: 38.0,
+        dominantHex: "#2e483c",
+        isDarkPhoto: true,
+        hearts: 28
+      }
+    ];
+    const FALLBACK_MEDIA_ITEMS = CURATED_WEB_SAMPLE_ITEMS;
+
+    let mediaCatalog = [...FALLBACK_MEDIA_ITEMS];
+    let sortedPhotoQueue = [];
+    let currentPhotoCursor = -1;
+    let activePhotoSlot = 'a';
+    let currentDisplayedPhoto = null;
+    let isShowingPhotoScene = false;
+    let hybridStepCounter = 0;
+
+    // 대구광역시 (35.8714, 128.6014) 실시간 날씨 상태
+    let daeguWeather = {
+      temp: 18.4,
+      icon: '☀️',
+      label: '맑음',
+      city: '대구',
+      loaded: false
+    };
+
+    const FRAME_MODE_LABELS = {
+      poem_only: '시집 전용 (1.0)',
+      hybrid: '하이브리드 (시+사진)',
+      photo_poem: '포토 포엠 (시화전)',
+      photo_only: '사진 전용 액자'
+    };
+
+    const PHOTO_FIT_LABELS = {
+      blur: '가우시안 블러',
+      white: '깔끔한 흰색 여백',
+      black: '깔끔한 검은색 여백',
+      hanji: '따뜻한 한지 매트',
+      crop_face: '인물 중심 꽉 채움',
+      diptych: '세로 2장 페어링'
+    };
+
+
+    // 추억의 상대 시간 계산 ('오늘의 기억', '7일 전의 기록' 등)
+    function formatMemoryRelativeBadge(isoStr) {
+      if (!isoStr) return '';
+      try {
+        const taken = new Date(isoStr);
+        if (isNaN(taken.getTime())) return '';
+        const now = new Date();
+        const diffDays = Math.max(0, Math.floor((now - taken) / (1000 * 60 * 60 * 24)));
+        if (diffDays === 0) return '오늘의 기억';
+        if (diffDays === 1) return '어제의 기억';
+        if (diffDays < 30) return `${diffDays}일 전의 기억`;
+        const diffMonths = Math.floor(diffDays / 30);
+        if (diffMonths < 12) return `${diffMonths}개월 전의 추억`;
+        return `${Math.floor(diffDays / 365)}년 전 이맘때`;
+      } catch (e) {
+        return '';
+      }
+    }
+
+    // 4중 하이브리드 주변 밝기(조도) 감지 & 야간 모드 엔진
+    let ambientSensorInstance = null;
+    let cameraLuxStream = null;
+    let cameraLuxVideo = null;
+    let cameraLuxCanvas = null;
+    let cameraLuxTimer = null;
+    let currentMeasuredLux = null; // 0 ~ 255
+    let isAmbientNightNow = false;
+
+    const NIGHT_MODE_SHORT_LABELS = {
+      auto_solar: '자동(일몰·날씨)',
+      auto_camera: '실시간 조도센서',
+      always_night: '야간 모드 켜짐',
+      sleep_clock: '심야 달빛 시계',
+      off: '주간 밝기 고정'
+    };
+
+    function updateScreenBrightness(val) {
+      CONFIG.screenBrightness = Math.max(25, Math.min(100, parseInt(val, 10) || 100));
+      const lbl = document.getElementById('lblScreenBrightness');
+      if (lbl) lbl.textContent = String(CONFIG.screenBrightness);
+      saveConfig();
+      applyArtToneAndNightSchedule();
+    }
+
+    function cycleNightModeQuick() {
+      const order = ['auto_solar', 'always_night', 'auto_camera', 'sleep_clock', 'off'];
+      const cur = CONFIG.nightMode || 'auto_solar';
+      const next = order[(order.indexOf(cur) + 1) % order.length];
+      CONFIG.nightMode = next;
+      saveConfig();
+      syncV2ConfigToUI();
+      showHudFeedback(
+        next === 'always_night' || next === 'sleep_clock' ? '🌙' : (next === 'auto_camera' ? '💡' : '☀️'),
+        `야간·조도: ${NIGHT_MODE_SHORT_LABELS[next]}`
+      );
+    }
+
+    // 1) W3C AmbientLightSensor (지원 브라우저용) + 2) 전면 카메라 16x16 초저전력 조도 측정기 (아이패드/태블릿 웹 범용)
+    async function startRealtimeAmbientLuxSensor() {
+      stopRealtimeAmbientLuxSensor();
+
+      // (A) W3C AmbientLightSensor API 시도
+      if ('AmbientLightSensor' in window) {
+        try {
+          ambientSensorInstance = new window.AmbientLightSensor({ frequency: 0.5 });
+          ambientSensorInstance.addEventListener('reading', () => {
+            currentMeasuredLux = Math.min(255, Math.round(ambientSensorInstance.illuminance || 50));
+            applyArtToneAndNightSchedule();
+          });
+          ambientSensorInstance.start();
+          return;
+        } catch (e) {}
+      }
+
+      // (B) 아이패드 Safari / 범용 웹 브라우저용 전면 카메라 16x16 평균 휘도(Luminance) 샘플러
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        const statusEl = document.getElementById('lblAmbientLuxStatus');
+        if (statusEl) statusEl.textContent = '이 브라우저는 카메라 조도 감지를 지원하지 않아 일몰 모드로 작동합니다';
+        return;
+      }
+
+      try {
+        cameraLuxStream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: 'user', width: { ideal: 32 }, height: { ideal: 32 }, frameRate: { ideal: 2, max: 5 } },
+          audio: false
+        });
+        cameraLuxVideo = document.createElement('video');
+        cameraLuxVideo.setAttribute('playsinline', '');
+        cameraLuxVideo.muted = true;
+        cameraLuxVideo.srcObject = cameraLuxStream;
+        await cameraLuxVideo.play();
+
+        cameraLuxCanvas = document.createElement('canvas');
+        cameraLuxCanvas.width = 16;
+        cameraLuxCanvas.height = 16;
+        const ctx = cameraLuxCanvas.getContext('2d', { willReadFrequently: true });
+
+        const sampleRoomLuminance = () => {
+          if (!cameraLuxVideo || cameraLuxVideo.readyState < 2) return;
+          ctx.drawImage(cameraLuxVideo, 0, 0, 16, 16);
+          const pixels = ctx.getImageData(0, 0, 16, 16).data;
+          let sumLuma = 0;
+          const count = pixels.length / 4;
+          for (let i = 0; i < pixels.length; i += 4) {
+            sumLuma += (0.299 * pixels[i] + 0.587 * pixels[i + 1] + 0.114 * pixels[i + 2]);
+          }
+          currentMeasuredLux = Math.round(sumLuma / count);
+          applyArtToneAndNightSchedule();
+        };
+
+        setTimeout(sampleRoomLuminance, 500);
+        cameraLuxTimer = setInterval(sampleRoomLuminance, 4000);
+      } catch (err) {
+        const statusEl = document.getElementById('lblAmbientLuxStatus');
+        if (statusEl) statusEl.textContent = '카메라 권한 거부됨 · 대구 일몰 자동 모드로 대체 작동';
+        CONFIG.nightMode = 'auto_solar';
+        saveConfig();
+      }
+    }
+
+    function stopRealtimeAmbientLuxSensor() {
+      if (ambientSensorInstance) {
+        try { ambientSensorInstance.stop(); } catch (e) {}
+        ambientSensorInstance = null;
+      }
+      if (cameraLuxTimer) {
+        clearInterval(cameraLuxTimer);
+        cameraLuxTimer = null;
+      }
+      if (cameraLuxStream) {
+        cameraLuxStream.getTracks().forEach(t => t.stop());
+        cameraLuxStream = null;
+      }
+      cameraLuxVideo = null;
+      currentMeasuredLux = null;
+    }
+
+    function applyArtToneAndNightSchedule() {
+      if ( CONFIG.nightMode === 'auto_dim' ) CONFIG.nightMode = 'auto_solar';
+      const now = new Date();
+      const h = now.getHours() + now.getMinutes() / 60;
+      const isEveningOrNight = (h >= 18.0 || h < 6.8) || (daeguWeather.isDay === 0);
+      const isDeepNight = (h >= 23.0 || h < 6.0);
+      const osPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      document.body.classList.remove(
+        'art-tone-warm',
+        'art-tone-paper',
+        'night-dim-active',
+        'night-sleep-active',
+        'ambient-night-active',
+        'night-sleep-clock-mode'
+      );
+
+      if (CONFIG.artToneMode === 'paper_matte') {
+        document.body.classList.add('art-tone-paper');
+      } else if (CONFIG.artToneMode === 'auto_warm' && isEveningOrNight) {
+        document.body.classList.add('art-tone-warm');
+      }
+
+      // 기본 수동 밝기 슬라이더 감쇠율 (100% -> 0.0, 25% -> 0.75)
+      const manualDim = Math.max(0, Math.min(0.75, (100 - (CONFIG.screenBrightness || 100)) / 100));
+      let autoDim = 0;
+      let statusDesc = '';
+      isAmbientNightNow = false;
+
+      const mode = CONFIG.nightMode || 'auto_solar';
+
+      if (mode === 'always_night') {
+        isAmbientNightNow = true;
+        autoDim = 0.44;
+        statusDesc = '🌙 수동 야간 감광 활성화됨 (밝기 -44%)';
+      } else if (mode === 'sleep_clock') {
+        if (isDeepNight) {
+          isAmbientNightNow = true;
+          autoDim = 0.78;
+          document.body.classList.add('night-sleep-clock-mode');
+          statusDesc = '🌑 심야 달빛 시계 작동 중 (23~06시)';
+        } else {
+          isAmbientNightNow = isEveningOrNight;
+          autoDim = isEveningOrNight ? 0.32 : 0;
+          statusDesc = '심야(23~06시) 달빛 시계 대기 중';
+        }
+      } else if (mode === 'auto_camera') {
+        if (currentMeasuredLux !== null) {
+          // 0~255 휘도 기준: 45 이하면 방 불이 꺼진 어두운 상태, 95 이하면 은은한 간접조명
+          if (currentMeasuredLux < 42) {
+            isAmbientNightNow = true;
+            autoDim = 0.56;
+            statusDesc = `💡 주변 어두움 (${currentMeasuredLux} Lux) · 야간 감광 중`;
+          } else if (currentMeasuredLux < 95) {
+            isAmbientNightNow = true;
+            autoDim = 0.26;
+            statusDesc = `💡 은은한 실내조명 (${currentMeasuredLux} Lux) · 소프트 감광`;
+          } else {
+            isAmbientNightNow = false;
+            autoDim = 0;
+            statusDesc = `💡 밝은 실내 (${currentMeasuredLux} Lux) · 주간 100%`;
+          }
+        } else {
+          statusDesc = '💡 전면 카메라 주변 조도 센서 준비 중...';
+        }
+      } else if (mode === 'auto_solar') {
+        if (isDeepNight) {
+          isAmbientNightNow = true;
+          autoDim = 0.48;
+          statusDesc = '🌌 대구 심야 시간대 · 자동 감광 (-48%)';
+        } else if (isEveningOrNight) {
+          isAmbientNightNow = true;
+          autoDim = 0.28;
+          statusDesc = '🌇 대구 일몰 이후 · 야간 눈부심 보호 (-28%)';
+        } else if (daeguWeather.label && (daeguWeather.label.includes('비') || daeguWeather.label.includes('흐림'))) {
+          autoDim = 0.08;
+          statusDesc = `☁️ 대구 ${daeguWeather.label} · 차분한 조도 (-8%)`;
+        } else {
+          statusDesc = '☀️ 대구 주간 밝기 100% 연동 중';
+        }
+      } else {
+        statusDesc = '☀️ 수동 주간 밝기 고정';
+      }
+
+      if (isAmbientNightNow) {
+        document.body.classList.add('ambient-night-active');
+      }
+      if (typeof music !== 'undefined' && music) {
+        const nightFactor = isAmbientNightNow ? 0.75 : 1.0;
+        try {
+          music.updateVolume((CONFIG.volume || 0.32) * nightFactor);
+          music.setPoeticMood(
+            isAmbientNightNow
+              ? { warmth: 0.78, space: 0.56, density: 0.30 }
+              : { warmth: 0.68, space: 0.48, density: 0.42 }
+          );
+        } catch (e) {}
+      }
+
+      const finalDimOpacity = Math.min(0.86, Math.max(manualDim, autoDim + manualDim * 0.5));
+      document.documentElement.style.setProperty('--dynamic-dim-opacity', finalDimOpacity.toFixed(2));
+
+      const statusEl = document.getElementById('lblAmbientLuxStatus');
+      if (statusEl) statusEl.textContent = statusDesc;
+
+      const popIcon = document.getElementById('popNightModeIcon');
+      const popText = document.getElementById('popNightModeText');
+      if (popIcon && popText) {
+        popIcon.textContent = isAmbientNightNow ? '🌙' : (mode === 'auto_camera' ? '💡' : '☀️');
+        popText.textContent = `야간·조도: ${NIGHT_MODE_SHORT_LABELS[mode] || '자동'}`;
+      }
+    }
+
+    // 사진 모드에서 더블탭 시 사진에도 ♥ 하트 공감 누적
+    const _origTriggerPoemHeart = triggerPoemHeart;
+    triggerPoemHeart = function() {
+      if (isShowingPhotoScene && currentDisplayedPhoto) {
+        try {
+          const raw = localStorage.getItem('dailypoem_photo_hearts_v2') || '{}';
+          const map = JSON.parse(raw);
+          const pid = currentDisplayedPhoto.id || currentDisplayedPhoto.filename;
+          map[pid] = (map[pid] || 0) + 1;
+          localStorage.setItem('dailypoem_photo_hearts_v2', JSON.stringify(map));
+          currentDisplayedPhoto.hearts = (currentDisplayedPhoto.hearts || 0) + 1;
+          fetch(`${window.APP_ROOT || './'}api/heart`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ targetType: 'photo', id: pid })
+          }).catch(() => {});
+        } catch (e) {}
+        showHudFeedback('♥', '이 사진을 베스트컷(♥)에 담았습니다');
+        return;
+      }
+      _origTriggerPoemHeart();
+    };
+
+    function syncV2ConfigToUI() {
+      const selMode = document.getElementById('selFrameMode');
+      const selFit = document.getElementById('selPhotoFitMode');
+      const selSort = document.getElementById('selPhotoSortMode');
+      const selTrans = document.getElementById('selPhotoTransition');
+      const chkW = document.getElementById('chkShowWeather');
+
+      if (selMode) selMode.value = CONFIG.frameMode || 'poem_only';
+      if (selFit) selFit.value = CONFIG.photoFitMode || 'blur';
+      if (selSort) selSort.value = CONFIG.photoSortMode || 'people';
+      if (selTrans) selTrans.value = CONFIG.photoTransition || 'kenburns';
+      if (chkW) chkW.checked = CONFIG.showWeather !== false;
+      const selAlb = document.getElementById('selAlbumFilter');
+      const selArt = document.getElementById('selArtToneMode');
+      const selNight = document.getElementById('selNightMode');
+      const chkWSync = document.getElementById('chkWeatherAudioSync');
+      if (selAlb) selAlb.value = CONFIG.albumFilter || 'all';
+      if (selArt) selArt.value = CONFIG.artToneMode || 'auto_warm';
+      if (CONFIG.nightMode === 'auto_dim') CONFIG.nightMode = 'auto_solar';
+      if (selNight) selNight.value = CONFIG.nightMode || 'auto_solar';
+      const rngB = document.getElementById('rngScreenBrightness');
+      const lblB = document.getElementById('lblScreenBrightness');
+      if (rngB) rngB.value = CONFIG.screenBrightness || 100;
+      if (lblB) lblB.textContent = String(CONFIG.screenBrightness || 100);
+      if (CONFIG.nightMode === 'auto_camera' && !cameraLuxStream && !ambientSensorInstance) {
+        startRealtimeAmbientLuxSensor();
+      } else if (CONFIG.nightMode !== 'auto_camera') {
+        stopRealtimeAmbientLuxSensor();
+      }
+      if (chkWSync) chkWSync.checked = CONFIG.weatherAudioSync !== false;
+      const selSrc = document.getElementById('selPhotoSource');
+      const inpGh = document.getElementById('inpGithubRepoPath');
+      const rowGh = document.getElementById('rowGithubRepoInput');
+      if (selSrc) selSrc.value = CONFIG.photoSource || 'auto';
+      if (inpGh) inpGh.value = CONFIG.githubRepoPath || 'poeticecho/dailypoem/photos';
+      if (rowGh) rowGh.style.display = (CONFIG.photoSource === 'github_api') ? 'flex' : 'none';
+      applyArtToneAndNightSchedule();
+
+      const popModeTxt = document.getElementById('popFrameModeText');
+      if (popModeTxt) popModeTxt.textContent = `모드: ${FRAME_MODE_LABELS[CONFIG.frameMode] || '시집 전용'}`;
+
+      const popFitTxt = document.getElementById('popPhotoFitText');
+      if (popFitTxt) popFitTxt.textContent = `여백: ${PHOTO_FIT_LABELS[CONFIG.photoFitMode] || '가우시안 블러'}`;
+
+      applyPhotoFitClass();
+    }
+
+    function applyPhotoFitClass() {
+      const stage = document.getElementById('photo-stage');
+      if (!stage) return;
+      stage.classList.remove('fit-blur', 'fit-white', 'fit-black', 'fit-hanji', 'fit-crop_face', 'fit-diptych');
+      stage.classList.add(`fit-${CONFIG.photoFitMode || 'blur'}`);
+
+      const isLightMargin = (CONFIG.photoFitMode === 'white' || CONFIG.photoFitMode === 'hanji');
+      document.body.classList.toggle('photo-light-margin', isLightMargin);
+
+      const overlay = document.getElementById('photo-poem-overlay');
+      const dateCap = document.getElementById('photo-date-caption');
+      if (overlay) overlay.classList.toggle('light-card', isLightMargin);
+      if (dateCap) dateCap.classList.toggle('light-pill', isLightMargin);
+
+      if (currentDisplayedPhoto) {
+        applyFocalPointToSlot(activePhotoSlot, currentDisplayedPhoto);
+      }
+    }
+
+    function applyFocalPointToSlot(slotKey, photoItem) {
+      const fgImg = document.getElementById(`fg-img-${slotKey}`);
+      const blurImg = document.getElementById(`blur-img-${slotKey}`);
+      if (!fgImg || !photoItem) return;
+      const fx = typeof photoItem.focalX === 'number' ? photoItem.focalX : 50;
+      const fy = typeof photoItem.focalY === 'number' ? photoItem.focalY : 34;
+      fgImg.style.objectPosition = `${fx}% ${fy}%`;
+      fgImg.style.transformOrigin = `${fx}% ${fy}%`;
+      if (blurImg) {
+        blurImg.style.objectPosition = `${fx}% ${fy}%`;
+      }
+    }
+
+    function rebuildPhotoQueue() {
+      let photoHeartsMap = {};
+      try { photoHeartsMap = JSON.parse(localStorage.getItem('dailypoem_photo_hearts_v2') || '{}'); } catch (e) {}
+      let list = mediaCatalog.map(it => ({
+        ...it,
+        totalHearts: (it.hearts || 0) + (photoHeartsMap[it.id || it.filename] || 0)
+      }));
+      const af = CONFIG.albumFilter || 'all';
+      if (af === 'hearts_only') {
+        const liked = list.filter(it => it.totalHearts >= 20 || photoHeartsMap[it.id || it.filename] > 0);
+        if (liked.length > 0) list = liked;
+      } else if (af !== 'all') {
+        const filtered = list.filter(it => it.album === af);
+        if (filtered.length > 0) list = filtered;
+      }
+      const sortMode = CONFIG.photoSortMode || 'people';
+
+      if (sortMode === 'people') {
+        // 인물(얼굴) 포함 사진 최우선 + 하트 순 + 최신순
+        list.sort((a, b) => {
+          const pa = a.hasPerson ? 1 : 0;
+          const pb = b.hasPerson ? 1 : 0;
+          if (pb !== pa) return pb - pa;
+          return String(b.takenAt || '').localeCompare(String(a.takenAt || ''));
+        });
+      } else if (sortMode === 'date_desc') {
+        list.sort((a, b) => String(b.takenAt || '').localeCompare(String(a.takenAt || '')));
+      } else if (sortMode === 'date_asc') {
+        list.sort((a, b) => String(a.takenAt || '').localeCompare(String(b.takenAt || '')));
+      } else {
+        for (let i = list.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [list[i], list[j]] = [list[j], list[i]];
+        }
+      }
+      sortedPhotoQueue = list;
+      if (currentPhotoCursor >= sortedPhotoQueue.length) currentPhotoCursor = 0;
+    }
+
+    // 오프라인 또는 경로 누락 시에도 절대 엑스박스(깨진 이미지)가 뜨지 않도록 보장하는 즉석 캔버스 풍경 생성기
+    function createProceduralCanvasArt(item) {
+      try {
+        const isP = item?.orientation === 'portrait';
+        const c = document.createElement('canvas');
+        c.width = isP ? 720 : 960;
+        c.height = isP ? 960 : 720;
+        const ctx = c.getContext('2d');
+        const g = ctx.createLinearGradient(0, 0, 0, c.height);
+        g.addColorStop(0, item?.dominantHex || '#8c6d58');
+        g.addColorStop(0.55, '#c99e7e');
+        g.addColorStop(1, '#2d2930');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, c.width, c.height);
+        ctx.fillStyle = 'rgba(255, 244, 220, 0.16)';
+        ctx.beginPath();
+        ctx.arc(c.width * (item?.focalX || 50) / 100, c.height * (item?.focalY || 35) / 100, Math.min(c.width, c.height) * 0.18, 0, Math.PI * 2);
+        ctx.fill();
+        return c.toDataURL('image/jpeg', 0.86);
+      } catch (e) {
+        return '';
+      }
+    }
+
+    // GitHub 공개 저장소 폴더(예: poeticecho/dailypoem/photos)를 GitHub REST API로 자동 스캔하여 앨범 구성
+    async function fetchPhotosFromGithubContentsApi(repoPathStr) {
+      const cleaned = String(repoPathStr || '').trim().replace(/^https?:\/\/github\.com\//i, '').replace(/^\/|\/$/g, '');
+      const parts = cleaned.split('/');
+      if (parts.length < 2) return null;
+      const owner = parts[0];
+      const repo = parts[1];
+      const folder = parts.slice(2).join('/') || 'photos';
+      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;
+      const res = await fetch(apiUrl, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
+      if (!res.ok) return null;
+      const files = await res.json();
+      if (!Array.isArray(files)) return null;
+      const imgFiles = files.filter(f => f.type === 'file' && /\.(jpe?g|png|webp|gif)$/i.test(f.name));
+      if (imgFiles.length === 0) return null;
+
+      return imgFiles.map((f, idx) => {
+        const isPortraitName = /portrait|vert|세로|인물/i.test(f.name) || (idx % 2 === 0);
+        return {
+          id: `gh_${idx}_${f.sha ? f.sha.slice(0, 7) : idx}`,
+          filename: f.name,
+          src: f.download_url,
+          resolvedUrl: f.download_url,
+          album: folder.split('/').pop() || 'GitHub_앨범',
+          title: f.name.replace(/\.[^.]+$/, '').replace(/[_-]+/g, ' '),
+          takenAt: '2026-10-14T12:00:00',
+          dateLabel: `GitHub 앨범 · ${f.name.replace(/\.[^.]+$/, '')}`,
+          width: isPortraitName ? 1080 : 1920,
+          height: 1440,
+          orientation: isPortraitName ? 'portrait' : 'landscape',
+          hasPerson: isPortraitName,
+          faceCount: isPortraitName ? 1 : 0,
+          focalX: 50.0,
+          focalY: isPortraitName ? 33.0 : 42.0,
+          dominantHex: '#7d6e63',
+          isDarkPhoto: false,
+          hearts: 15 + (idx % 12)
+        };
+      });
+    }
+
+    async function loadPhotosFromCustomGithubRepo() {
+      const inp = document.getElementById('inpGithubRepoPath');
+      if (!inp || !inp.value.trim()) return;
+      CONFIG.githubRepoPath = inp.value.trim();
+      CONFIG.photoSource = 'github_api';
+      saveConfig();
+      showHudFeedback('🔗', 'GitHub 저장소 사진 폴더 스캔 중...');
+      const items = await fetchPhotosFromGithubContentsApi(CONFIG.githubRepoPath);
+      if (items && items.length > 0) {
+        mediaCatalog = items;
+        rebuildPhotoQueue();
+        currentPhotoCursor = -1;
+        if (CONFIG.frameMode === 'poem_only') CONFIG.frameMode = 'photo_poem';
+        syncV2ConfigToUI();
+        showHudFeedback('📸', `GitHub 폴더에서 사진 ${items.length}장을 불러왔습니다`);
+        showNextPhotoSlide(1);
+      } else {
+        showHudFeedback('⚠️', '해당 GitHub 경로에서 사진을 찾지 못해 기본 샘플 앨범을 유지합니다');
+      }
+    }
+
+    function changePhotoSourceMode(mode) {
+      CONFIG.photoSource = mode || 'auto';
+      const rowGh = document.getElementById('rowGithubRepoInput');
+      if (rowGh) rowGh.style.display = (CONFIG.photoSource === 'github_api') ? 'flex' : 'none';
+      saveConfig();
+      loadMediaCatalog().then(() => {
+        currentPhotoCursor = -1;
+        if (CONFIG.frameMode === 'poem_only') {
+          CONFIG.frameMode = 'photo_poem';
+          syncV2ConfigToUI();
+        }
+        showNextPhotoSlide(1);
+      });
+    }
+
+    async function loadMediaCatalog() {
+      const base = window.APP_ROOT || './';
+      const srcMode = CONFIG.photoSource || 'auto';
+
+      // A) 사용자가 명시적으로 '오픈소스 감성 샘플 앨범'을 선택한 경우
+      if (srcMode === 'web_sample') {
+        mediaCatalog = CURATED_WEB_SAMPLE_ITEMS.map(it => ({
+          ...it,
+          resolvedUrl: it.src
+        }));
+        rebuildPhotoQueue();
+        return;
+      }
+
+      // B) 사용자가 'GitHub 공개 저장소 스캔'을 선택한 경우
+      if (srcMode === 'github_api') {
+        try {
+          const ghItems = await fetchPhotosFromGithubContentsApi(CONFIG.githubRepoPath || 'poeticecho/dailypoem/photos');
+          if (ghItems && ghItems.length > 0) {
+            mediaCatalog = ghItems;
+            rebuildPhotoQueue();
+            return;
+          }
+        } catch (e) {}
+      }
+
+      // C) 자동(auto) 또는 내 저장소(./photos): 1순위 시놀로지 NAS (/api/media) -> 2순위 ./media_index.json
+      for (const url of [`${base}api/media`, `${base}media_index.json`]) {
+        try {
+          const res = await fetch(url, { cache: 'no-cache' });
+          if (res.ok) {
+            const data = await res.json();
+            const items = Array.isArray(data) ? data : (data.items || []);
+            if (items.length > 0) {
+              // 첫 번째 이미지가 실제로 존재하는지 HEAD/프로브 확인 (index.html만 올린 경우 자동 감지)
+              const firstLocalUrl = items[0].src
+                ? (items[0].src.startsWith('http') ? items[0].src : `${base}${items[0].src.replace(/^\.\//, '')}`)
+                : `${base}photos/${items[0].filename}`;
+              let localExists = true;
+              if (!firstLocalUrl.startsWith('http') && srcMode === 'auto') {
+                try {
+                  const checkRes = await fetch(firstLocalUrl, { method: 'HEAD' });
+                  if (!checkRes.ok) localExists = false;
+                } catch (e) {
+                  localExists = false;
+                }
+              }
+              if (localExists) {
+                mediaCatalog = items.map((it, idx) => ({
+                  ...it,
+                  webFallbackUrl: CURATED_WEB_SAMPLE_ITEMS[idx % CURATED_WEB_SAMPLE_ITEMS.length].src,
+                  resolvedUrl: it.src
+                    ? (it.src.startsWith('http') || it.src.startsWith('blob:') ? it.src : `${base}${it.src.replace(/^\.\//, '')}`)
+                    : `${base}photos/${it.filename}`
+                }));
+                rebuildPhotoQueue();
+                return;
+              }
+            }
+          }
+        } catch (e) {}
+      }
+
+      // D) github.io 도메인에서 실행 중이면 현재 저장소의 photos/ 폴더를 GitHub API로 자동 탐색 시도
+      if (window.location.hostname.endsWith('.github.io')) {
+        try {
+          const owner = window.location.hostname.split('.')[0];
+          const repo = (window.location.pathname.split('/').filter(Boolean)[0]) || '';
+          if (owner && repo) {
+            const ghAutoItems = await fetchPhotosFromGithubContentsApi(`${owner}/${repo}/photos`);
+            if (ghAutoItems && ghAutoItems.length > 0) {
+              mediaCatalog = ghAutoItems;
+              rebuildPhotoQueue();
+              return;
+            }
+          }
+        } catch (e) {}
+      }
+
+      // E) 기본 폴백: 별도 파일 업로드 없이도 즉시 작동하는 오픈소스 고화질 감성 샘플 앨범 8선
+      mediaCatalog = CURATED_WEB_SAMPLE_ITEMS.map(it => ({
+        ...it,
+        resolvedUrl: it.src
+      }));
+      rebuildPhotoQueue();
+    }
+
+    // GitHub Pages 웹에서 내 기기 사진/폴더를 바로 넣어 테스트하는 핸들러
+    function handleLocalPhotoFiles(fileList) {
+      if (!fileList || fileList.length === 0) return;
+      const imageFiles = Array.from(fileList).filter(f => f.type.startsWith('image/') || /\.(jpe?g|png|webp|heic)$/i.test(f.name));
+      if (imageFiles.length === 0) {
+        showHudFeedback('⚠️', '이미지 파일을 선택해 주세요');
+        return;
+      }
+
+      const loadedItems = [];
+      let remaining = imageFiles.length;
+
+      imageFiles.slice(0, 120).forEach((file, idx) => {
+        const blobUrl = URL.createObjectURL(file);
+        const probe = new Image();
+        probe.onload = () => {
+          const w = probe.naturalWidth || 1080;
+          const h = probe.naturalHeight || 1440;
+          const isPortrait = h > w * 1.05;
+          let domHex = '#8a7968';
+          let isDark = false;
+          try {
+            const c = document.createElement('canvas');
+            c.width = 16; c.height = 16;
+            const cx = c.getContext('2d');
+            cx.drawImage(probe, 0, 0, 16, 16);
+            const px = cx.getImageData(0, 0, 16, 16).data;
+            let r = 0, g = 0, b = 0;
+            for (let i = 0; i < px.length; i += 4) { r += px[i]; g += px[i+1]; b += px[i+2]; }
+            const n = px.length / 4;
+            r = Math.round(r / n); g = Math.round(g / n); b = Math.round(b / n);
+            domHex = '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
+            isDark = ((0.299 * r + 0.587 * g + 0.114 * b) / 255) < 0.45;
+          } catch (e) {}
+          const dt = new Date(file.lastModified || Date.now());
+          const iso = dt.toISOString().slice(0, 19);
+          const dateLabel = `${dt.getFullYear()}년 ${dt.getMonth() + 1}월 ${dt.getDate()}일의 사진`;
+          const folderName = (file.webkitRelativePath && file.webkitRelativePath.includes('/'))
+            ? file.webkitRelativePath.split('/')[0]
+            : '내_기기_테스트';
+
+          loadedItems.push({
+            id: `local_${idx}_${Date.now()}`,
+            filename: file.name,
+            resolvedUrl: blobUrl,
+            album: folderName,
+            title: file.name.replace(/\.[^.]+$/, ''),
+            takenAt: iso,
+            dateLabel: dateLabel,
+            width: w,
+            height: h,
+            orientation: isPortrait ? 'portrait' : 'landscape',
+            hasPerson: isPortrait,
+            faceCount: isPortrait ? 1 : 0,
+            focalX: 50.0,
+            focalY: isPortrait ? 32.0 : 42.0,
+            dominantHex: domHex,
+            isDarkPhoto: isDark,
+            hearts: 1
+          });
+
+          remaining--;
+          if (remaining === 0) {
+            mediaCatalog = loadedItems;
+            rebuildPhotoQueue();
+            currentPhotoCursor = -1;
+            if (CONFIG.frameMode === 'poem_only') {
+              CONFIG.frameMode = 'photo_poem';
+              saveConfig();
+            }
+            syncV2ConfigToUI();
+            const popLocalTxt = document.getElementById('popLocalPhotoText');
+            if (popLocalTxt) popLocalTxt.textContent = `내 사진 (${loadedItems.length}장 테스트 중)`;
+            showHudFeedback('📸', `내 사진 ${loadedItems.length}장 로드 완료 (${PHOTO_FIT_LABELS[CONFIG.photoFitMode]})`);
+            showNextPhotoSlide(1);
+          }
+        };
+        probe.onerror = () => {
+          remaining--;
+        };
+        probe.src = blobUrl;
+      });
+    }
+
+    /* === ORGANIC SYNERGY ENGINE (v2.4) === */
+    // [유기적 연동 ①] 사진의 촬영 계절·시간대·인물 여부·밝기 및 대구 실시간 날씨와 공명하는 시 자동 매칭
+    function pickResonantPoemForPhoto(photoItem) {
+      if (!reflections || reflections.length === 0) return FALLBACK_POEMS[0];
+      const shortCandidates = reflections.filter(p => {
+        const lines = (p.text || '').split('\n').map(l => l.trim()).filter(Boolean);
+        return lines.length <= 7;
+      });
+      const pool = shortCandidates.length > 0 ? shortCandidates : reflections;
+
+      // 사진 및 현재 환경에서 시적 키워드 추출
+      const targetKeywords = [];
+      const takenStr = String(photoItem?.takenAt || '');
+      const monthMatch = takenStr.match(/-(\d{2})-/);
+      const month = monthMatch ? parseInt(monthMatch[1], 10) : (new Date().getMonth() + 1);
+      const hourMatch = takenStr.match(/T(\d{2}):/);
+      const hour = hourMatch ? parseInt(hourMatch[1], 10) : new Date().getHours();
+
+      // 1) 계절 키워드
+      if (month >= 3 && month <= 5) targetKeywords.push('봄', '꽃', '햇살', '연둣빛', '바람', '새순');
+      else if (month >= 6 && month <= 8) targetKeywords.push('여름', '초록', '그늘', '파도', '숲', '소나기');
+      else if (month >= 9 && month <= 11) targetKeywords.push('가을', '노을', '단풍', '낙엽', '갈대', '바람', '산책');
+      else targetKeywords.push('겨울', '눈', '온기', '찻잔', '목도리', '난로');
+
+      // 2) 촬영 시간대 & 사진 명도 키워드
+      if (hour >= 5 && hour < 10) targetKeywords.push('아침', '새벽', '이슬', '햇살', '창가');
+      else if (hour >= 17 && hour < 20) targetKeywords.push('노을', '저녁', '황혼', '집으로', '그림자');
+      else if (hour >= 20 || hour < 5 || photoItem?.isDarkPhoto) targetKeywords.push('밤', '별', '달빛', '고요', '불빛', '어둠');
+      else targetKeywords.push('오후', '구름', '산책', '차 한 잔', '여유');
+
+      // 3) 인물 사진 vs 풍경 사진 키워드
+      if (photoItem?.hasPerson) {
+        targetKeywords.push('미소', '웃음', '손', '마음', '다정한', '눈빛', '기억', '함께');
+      } else {
+        targetKeywords.push('풍경', '길', '나무', '하늘', '호수', '바다', '산');
+      }
+
+      // 4) 대구 실시간 날씨 키워드 반영
+      if (daeguWeather?.label) {
+        if (daeguWeather.label.includes('비')) targetKeywords.push('비', '빗소리', '창가', '우산', '물방울');
+        else if (daeguWeather.label.includes('눈')) targetKeywords.push('눈', '첫눈', '하얀', '겨울');
+      }
+
+      // 공명 점수(Resonance Score) 계산 후 상위 후보군에서 선택
+      const scored = pool.map(poem => {
+        const txt = poem.text || '';
+        let score = 0;
+        for (const kw of targetKeywords) {
+          if (txt.includes(kw)) score += 3;
+        }
+        score += Math.random() * 4.5; // 매번 같은 시만 나오지 않도록 자연스러운 다양성 부여
+        return { poem, score };
+      });
+      scored.sort((a, b) => b.score - a.score);
+      const topSlice = scored.slice(0, Math.min(8, scored.length));
+      return topSlice[Math.floor(Math.random() * topSlice.length)].poem;
+    }
+
+    function pickShortHealingPoem() {
+      return pickResonantPoemForPhoto(currentDisplayedPhoto);
+    }
+
+    function showNextPhotoSlide(direction = 1) {
+      if (!sortedPhotoQueue || sortedPhotoQueue.length === 0) {
+        rebuildPhotoQueue();
+      }
+      if (!sortedPhotoQueue || sortedPhotoQueue.length === 0) return;
+
+      currentPhotoCursor = (currentPhotoCursor + direction + sortedPhotoQueue.length) % sortedPhotoQueue.length;
+      const item = sortedPhotoQueue[currentPhotoCursor];
+      currentDisplayedPhoto = item;
+      isShowingPhotoScene = true;
+
+      const stage = document.getElementById('photo-stage');
+      const poemContainer = document.getElementById('poem-container');
+      const overlay = document.getElementById('photo-poem-overlay');
+      const dateCap = document.getElementById('photo-date-caption');
+      const badge = document.getElementById('poem-index-badge');
+
+      if (typeTimer) {
+        clearTimeout(typeTimer);
+        typeTimer = null;
+      }
+      isTyping = false;
+      isTransitioning = false;
+
+      if (poemContainer) poemContainer.style.opacity = '0';
+      if (stage) stage.classList.add('active');
+      document.body.classList.add('photo-mode-active');
+      applyPhotoFitClass();
+
+      const nextSlotKey = activePhotoSlot === 'a' ? 'b' : 'a';
+      const prevSlotEl = document.getElementById(`photo-slot-${activePhotoSlot}`);
+      const nextSlotEl = document.getElementById(`photo-slot-${nextSlotKey}`);
+      const nextFgImg = document.getElementById(`fg-img-${nextSlotKey}`);
+      const nextBlurImg = document.getElementById(`blur-img-${nextSlotKey}`);
+
+      const transitions = ['kenburns', 'dissolve', 'paper', 'slide', 'polaroid'];
+      const chosenTrans = CONFIG.photoTransition === 'random'
+        ? transitions[Math.floor(Math.random() * transitions.length)]
+        : (CONFIG.photoTransition || 'kenburns');
+
+      nextSlotEl.classList.remove('visible', 'kb-active', 'trans-slide-enter', 'trans-polaroid');
+      if (chosenTrans === 'slide') nextSlotEl.classList.add('trans-slide-enter');
+      if (chosenTrans === 'polaroid') nextSlotEl.classList.add('trans-polaroid');
+
+      const imgSrc = item.resolvedUrl || item.src || `./photos/${item.filename}`;
+      applyFocalPointToSlot(nextSlotKey, item);
+
+      // Aura Carver Mat 스타일: 세로 2장 페어링 (diptych) 모드일 때 짝꿍 세로 사진 찾기
+      const nextPairImg = document.getElementById(`fg-pair-${nextSlotKey}`);
+      let pairItem = null;
+      if (CONFIG.photoFitMode === 'diptych' && item.orientation === 'portrait') {
+        const portraitCandidates = sortedPhotoQueue.filter(p => p.orientation === 'portrait' && p.id !== item.id);
+        if (portraitCandidates.length > 0) {
+          pairItem = portraitCandidates[ currentPhotoCursor % portraitCandidates.length ];
+        }
+      }
+      if (pairItem && nextPairImg) {
+        nextSlotEl.classList.add('has-pair');
+        nextPairImg.src = pairItem.resolvedUrl || pairItem.src || `./photos/${pairItem.filename}`;
+      } else {
+        nextSlotEl.classList.remove('has-pair');
+        if (nextPairImg) nextPairImg.removeAttribute('src');
+      }
+
+      nextFgImg.onerror = () => {
+        const fallbackWeb = item.webFallbackUrl || CURATED_WEB_SAMPLE_ITEMS[currentPhotoCursor % CURATED_WEB_SAMPLE_ITEMS.length]?.src;
+        if (fallbackWeb && nextFgImg.src !== fallbackWeb) {
+          nextFgImg.src = fallbackWeb;
+          nextBlurImg.src = fallbackWeb;
+        } else {
+          const canvasDataUrl = createProceduralCanvasArt(item);
+          if (canvasDataUrl && nextFgImg.src !== canvasDataUrl) {
+            nextFgImg.src = canvasDataUrl;
+            nextBlurImg.src = canvasDataUrl;
+          }
+        }
+      };
+
+      nextFgImg.onload = () => {
+        // 로드된 실제 이미지 비율을 자동 감지해 세로(portrait)/가로(landscape) 메타데이터 실시간 보정
+        if (nextFgImg.naturalWidth && nextFgImg.naturalHeight) {
+          item.width = nextFgImg.naturalWidth;
+          item.height = nextFgImg.naturalHeight;
+          item.orientation = (item.height > item.width * 1.04) ? 'portrait' : 'landscape';
+        }
+        nextBlurImg.src = nextFgImg.src;
+        requestAnimationFrame(() => {
+          nextSlotEl.classList.add('visible');
+          if (chosenTrans === 'kenburns') {
+            nextSlotEl.classList.add('kb-active');
+          }
+          if (prevSlotEl) {
+            prevSlotEl.classList.remove('visible', 'kb-active');
+          }
+          activePhotoSlot = nextSlotKey;
+        });
+      };
+      nextFgImg.src = imgSrc;
+
+      // 다이나믹 시계를 사진 속 인물 얼굴(focalX, focalY)과 겹치지 않는 반대편 코너로 이동
+      if (CONFIG.clockPos === 'dynamic') {
+        const clockEl = document.getElementById('ambient-clock');
+        if (clockEl) {
+          clockEl.classList.remove('pos-top-left', 'pos-top-right', 'pos-bottom-left', 'pos-bottom-right', 'pos-bottom-center');
+          const fx = item.focalX || 50;
+          const fy = item.focalY || 35;
+          if (fy < 48) {
+            clockEl.classList.add(fx < 50 ? 'pos-top-right' : 'pos-top-left');
+          } else {
+            clockEl.classList.add(fx < 50 ? 'pos-bottom-right' : 'pos-bottom-left');
+          }
+        }
+      }
+
+      // 포토 포엠 모드 vs 사진 전용 모드 오버레이 처리
+      if (CONFIG.frameMode === 'photo_poem') {
+        const shortPoem = pickResonantPoemForPhoto(item);
+        if (shortPoem && Array.isArray(reflections)) {
+          const foundIdx = reflections.indexOf(shortPoem);
+          if (foundIdx !== -1) currentPoemIndex = foundIdx;
+        }
+        if (overlay && item.dominantHex) {
+          overlay.style.borderColor = `${item.dominantHex}55`;
+        }
+        const ppoText = document.getElementById('ppo-text');
+        const ppoMeta = document.getElementById('ppo-meta');
+        if (ppoText) {
+          ppoText.textContent = formatPoemText(shortPoem.text || '');
+          ppoText.style.fontFamily = normalizeEliteFont(shortPoem.style?.fontFamily, true);
+        }
+        const relBadge = formatMemoryRelativeBadge(item.takenAt);
+        if (ppoMeta) ppoMeta.textContent = `${relBadge ? relBadge + ' · ' : ''}${item.dateLabel || item.title || ''} · ${item.album || '갤러리'}`;
+
+        overlay.classList.remove('pos-bottom-left', 'pos-bottom-right', 'pos-bottom-center', 'pos-top-left');
+        const fx = item.focalX || 50;
+        overlay.classList.add(fx > 52 ? 'pos-bottom-left' : 'pos-bottom-right');
+        overlay.classList.add('visible');
+        if (dateCap) dateCap.classList.remove('visible');
+      } else {
+        if (overlay) overlay.classList.remove('visible');
+        if (dateCap) {
+          const relBadge = formatMemoryRelativeBadge(item.takenAt);
+          const orientTag = pairItem ? '세로 2장 페어링' : (item.orientation === 'portrait' ? '세로 사진' : '가로 사진');
+          dateCap.textContent = `${relBadge ? relBadge + ' · ' : ''}${item.dateLabel || item.title || ''} · ${orientTag}`;
+          dateCap.classList.add('visible');
+        }
+      }
+
+      if (badge) {
+        badge.style.display = CONFIG.showBadge ? 'inline' : 'none';
+        badge.textContent = `사진 #${currentPhotoCursor + 1} / ${sortedPhotoQueue.length} (${PHOTO_FIT_LABELS[CONFIG.photoFitMode]})`;
+      }
+    }
+
+    function returnToPoemStage() {
+      isShowingPhotoScene = false;
+      const stage = document.getElementById('photo-stage');
+      const poemContainer = document.getElementById('poem-container');
+      const overlay = document.getElementById('photo-poem-overlay');
+      const dateCap = document.getElementById('photo-date-caption');
+
+      if (stage) stage.classList.remove('active');
+      if (overlay) overlay.classList.remove('visible');
+      if (dateCap) dateCap.classList.remove('visible');
+      if (poemContainer) poemContainer.style.opacity = '1';
+      document.body.classList.remove('photo-mode-active', 'photo-light-margin');
+    }
+
+    function cycleFrameMode() {
+      const order = ['poem_only', 'hybrid', 'photo_poem', 'photo_only'];
+      const idx = order.indexOf(CONFIG.frameMode || 'poem_only');
+      CONFIG.frameMode = order[(idx + 1) % order.length];
+      saveConfig();
+      syncV2ConfigToUI();
+      showHudFeedback('🖼️', `액자 모드: ${FRAME_MODE_LABELS[CONFIG.frameMode]}`);
+
+      if (CONFIG.frameMode === 'poem_only') {
+        returnToPoemStage();
+        showPoemByIndex(currentPoemIndex >= 0 ? currentPoemIndex : 0, '', true);
+      } else {
+        showNextPhotoSlide(1);
+      }
+    }
+
+    function cyclePhotoFitMode() {
+      const order = ['blur', 'white', 'black', 'hanji', 'crop_face', 'diptych'];
+      const idx = order.indexOf(CONFIG.photoFitMode || 'blur');
+      CONFIG.photoFitMode = order[(idx + 1) % order.length];
+      saveConfig();
+      // 여백 테스트를 바로 볼 수 있도록 시집 전용 상태면 포토 포엠으로 자연스럽게 전환
+      if (CONFIG.frameMode === 'poem_only') {
+        CONFIG.frameMode = 'photo_poem';
+        syncV2ConfigToUI();
+        showNextPhotoSlide(1);
+      } else {
+        syncV2ConfigToUI();
+      }
+      showHudFeedback('✨', `여백 모드: ${PHOTO_FIT_LABELS[CONFIG.photoFitMode]}`);
+    }
+
+    function updateV2FrameConfig() {
+      const selMode = document.getElementById('selFrameMode');
+      const selFit = document.getElementById('selPhotoFitMode');
+      const selSort = document.getElementById('selPhotoSortMode');
+      const selTrans = document.getElementById('selPhotoTransition');
+      const chkW = document.getElementById('chkShowWeather');
+
+      const prevMode = CONFIG.frameMode;
+      const prevSort = CONFIG.photoSortMode;
+
+      if (selMode) CONFIG.frameMode = selMode.value;
+      if (selFit) CONFIG.photoFitMode = selFit.value;
+      if (selSort) CONFIG.photoSortMode = selSort.value;
+      if (selTrans) CONFIG.photoTransition = selTrans.value;
+      if (chkW) CONFIG.showWeather = chkW.checked;
+      const selAlb = document.getElementById('selAlbumFilter');
+      const selArt = document.getElementById('selArtToneMode');
+      const selNight = document.getElementById('selNightMode');
+      const chkWSync = document.getElementById('chkWeatherAudioSync');
+      const prevAlb = CONFIG.albumFilter;
+      if (selAlb) CONFIG.albumFilter = selAlb.value;
+      if (selArt) CONFIG.artToneMode = selArt.value;
+      if (selNight) CONFIG.nightMode = selNight.value;
+      if (chkWSync) CONFIG.weatherAudioSync = chkWSync.checked;
+      if (prevAlb !== CONFIG.albumFilter) rebuildPhotoQueue();
+
+      if (prevSort !== CONFIG.photoSortMode) {
+        rebuildPhotoQueue();
+      }
+
+      saveConfig();
+      syncV2ConfigToUI();
+      renderClock();
+
+      if (CONFIG.frameMode === 'poem_only') {
+        returnToPoemStage();
+        if (prevMode !== 'poem_only') {
+          showPoemByIndex(currentPoemIndex >= 0 ? currentPoemIndex : 0, '', true);
+        }
+      } else {
+        showNextPhotoSlide(0);
+      }
+    }
+
+    // 대구광역시 (lat=35.8714, lon=128.6014) 날씨 조회 (NAS /api/weather 우선 -> GitHub Pages Open-Meteo 직접 호출)
+    function mapWmoWeatherCode(code) {
+      if (code === 0) return { icon: '☀️', label: '맑음' };
+      if (code === 1 || code === 2) return { icon: '🌤️', label: '구름 조금' };
+      if (code === 3) return { icon: '☁️', label: '흐림' };
+      if (code === 45 || code === 48) return { icon: '🌫️', label: '안개' };
+      if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) return { icon: '🌧️', label: '비' };
+      if (code >= 71 && code <= 77) return { icon: '❄️', label: '눈' };
+      if (code >= 95) return { icon: '⛈️', label: '뇌우' };
+      return { icon: '🌤️', label: '선선함' };
+    }
+
+    async function fetchDaeguWeather() {
+      try {
+        const cachedRaw = localStorage.getItem('dailypoem_daegu_weather_v2');
+        if (cachedRaw) {
+          const parsed = JSON.parse(cachedRaw);
+          if (Date.now() - (parsed.ts || 0) < 30 * 60 * 1000) {
+            daeguWeather = parsed;
+            renderClock();
+            return;
+          }
+        }
+      } catch (e) {}
+
+      const base = window.APP_ROOT || './';
+      // 1) 시놀로지 NAS 로컬 캐시 엔드포인트 시도
+      try {
+        const nasRes = await fetch(`${base}api/weather?lat=35.8714&lon=128.6014`);
+        if (nasRes.ok) {
+          const data = await nasRes.json();
+          if (typeof data.temp === 'number') {
+            daeguWeather = { ...data, ts: Date.now(), loaded: true };
+            localStorage.setItem('dailypoem_daegu_weather_v2', JSON.stringify(daeguWeather));
+            renderClock();
+            return;
+          }
+        }
+      } catch (e) {}
+
+      // 2) GitHub Pages (github.io) 용 Open-Meteo 직접 CORS 호출
+      try {
+        const url = 'https://api.open-meteo.com/v1/forecast?latitude=35.8714&longitude=128.6014&current=temperature_2m,weather_code,is_day&timezone=Asia%2FSeoul';
+        const res = await fetch(url);
+        if (res.ok) {
+          const json = await res.json();
+          const cur = json.current || {};
+          const wmo = mapWmoWeatherCode(cur.weather_code ?? 0);
+          daeguWeather = {
+            temp: Math.round((cur.temperature_2m ?? 18.4) * 10) / 10,
+            icon: wmo.icon,
+            label: wmo.label,
+            city: '대구',
+            isDay: typeof cur.is_day === 'number' ? cur.is_day : 1,
+            loaded: true,
+            ts: Date.now()
+          };
+          localStorage.setItem('dailypoem_daegu_weather_v2', JSON.stringify(daeguWeather));
+          renderClock();
+          if (CONFIG.weatherAudioSync && CONFIG.ambientLayer === 'random') {
+            if (daeguWeather.label.includes('비') || daeguWeather.label.includes('눈')) {
+              changeAmbientLayer('rain');
+            }
+          }
+        }
+      } catch (e) {}
+    }
+
+    // 기존 showRandomPoem / showPrevPoem을 2.0 액자 모드(시집 / 하이브리드 / 포토포엠 / 사진전용)와 통합
+    const _origShowRandomPoem = showRandomPoem;
+    showRandomPoem = function(isInitial = false) {
+      if (CONFIG.frameMode === 'photo_only' || CONFIG.frameMode === 'photo_poem') {
+        showNextPhotoSlide(1);
+        return;
+      }
+      if (CONFIG.frameMode === 'hybrid' && !isInitial) {
+        hybridStepCounter++;
+        const photoQuota = CONFIG.hybridPhotoRatio || 2;
+        if (hybridStepCounter % (photoQuota + 1) !== 0) {
+          showNextPhotoSlide(1);
+          return;
+        }
+      }
+      returnToPoemStage();
+      _origShowRandomPoem(isInitial);
+    };
+
+    const _origShowPrevPoem = showPrevPoem;
+    showPrevPoem = function() {
+      if (CONFIG.frameMode === 'photo_only' || CONFIG.frameMode === 'photo_poem' || isShowingPhotoScene) {
+        showNextPhotoSlide(-1);
+        showHudFeedback('⏮', '이전 사진');
+        return;
+      }
+      _origShowPrevPoem();
+    };
+
+    // 시계 렌더링 후 대구 날씨 한 줄을 우아하게 추가
+    const _origRenderClock = renderClock;
+    renderClock = function() {
+      _origRenderClock();
+      if (CONFIG.showWeather === false) return;
+      const contentEl = document.getElementById('clock-content');
+      if (!contentEl) return;
+      const weatherHtml = `<div class="clock-weather-line"><span>${daeguWeather.icon}</span><span>${daeguWeather.city} ${daeguWeather.temp}°C · ${daeguWeather.label}</span></div>`;
+      if (!contentEl.innerHTML.includes('clock-weather-line')) {
+        contentEl.insertAdjacentHTML('beforeend', weatherHtml);
+      }
+    };
+
     // 초기화 실행
     loadSavedConfig();
-    initializeSeedTrack(CONFIG.seed);
+    if (!initialPm1OrEmpty) {
+      music.changeAmbientLayer(CONFIG.ambientLayer || 'rain');
+      music.updateAmbienceLevel(CONFIG.ambienceLevel ?? 2);
+      music.updateVolume(CONFIG.volume ?? 0.32);
+    }
+    syncFromPeommoodState(music.getState());
+    syncV2ConfigToUI();
+    loadMediaCatalog().then(() => {
+      if (CONFIG.frameMode === 'photo_only' || CONFIG.frameMode === 'photo_poem') {
+        showNextPhotoSlide(1);
+      }
+    });
+    fetchDaeguWeather();
+    setInterval(fetchDaeguWeather, 30 * 60 * 1000);
     startPixelmoodCanvasRenderer();
     renderClock();
     setInterval(renderClock, 10000);

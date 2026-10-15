@@ -1,107 +1,113 @@
-# 📜 감성 타이핑 시집 (Daily Poem · Self-Hosted Edition)
+# 📋 [작업지시서 v2.1] DailyPoem 2.0 : GitHub Pages 웹 선(先)검증 & 시놀로지 DS420+ 이식 명세서
 
-<p align="center">
-  <a href="https://poeticecho.github.io/dailypoem/">
-    <img src="https://img.shields.io/badge/GitHub%20Pages-Live%20Demo%20%E2%96%B6-brightgreen?style=for-the-badge&logo=github" alt="Live Demo" />
-  </a>
-  <a href="https://poeticecho.github.io/dailypoem/stats.html">
-    <img src="https://img.shields.io/badge/Library%20%26%20Stats-TOP%2010%20%E2%99%A5-pink?style=for-the-badge" alt="Library Stats" />
-  </a>
-  <a href="https://github.com/PoeticEcho/dailypoem/raw/main/daily-poem-self-hosted.zip">
-    <img src="https://img.shields.io/badge/Self--Hosted%20Package-ZIP%20Download-blue?style=for-the-badge&logo=archive" alt="Download ZIP" />
-  </a>
-  <img src="https://img.shields.io/badge/Poetry%20Collection-340%20%2F%201000-orange?style=for-the-badge" alt="Poem Count" />
-  <img src="https://img.shields.io/badge/Zero%20Dependency-100%25%20Pure%20Web-purple?style=for-the-badge" alt="Zero Dependency" />
-</p>
+## 1. 추진 전략: GitHub Pages (`github.io`) 선검증 ➔ 시놀로지 DS420+ 무수정 이식
 
-<p align="center">
-  <img src="./og-image.png" alt="감성 타이핑 시집 미리보기" width="760" style="border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);" />
-</p>
-
-> **"기술은 조용히 뒤로 물러나고, 화면 위에는 오직 다정한 문장과 여백만 남는다."**
->
-> 지친 하루의 끝에 한 글자씩 천천히 필사되듯 피어나는 한국어 서정시와 시드(Seed) 기반의 잔잔한 재즈·자연의 소리를 담은 **독립형 전자책 & 태블릿 감성 시집 액자**입니다.
-
-👉 **[실시간 웹 시집 감상하기 (Live Demo)](https://poeticecho.github.io/dailypoem/)**  
-📊 **[인기 시 TOP 10 & 주간 신작 서재 (stats.html)](https://poeticecho.github.io/dailypoem/stats.html)**  
-📦 **[독립형 자체 호스팅 패키지 다운로드 (daily-poem-self-hosted.zip)](https://github.com/PoeticEcho/dailypoem/raw/main/daily-poem-self-hosted.zip)**
+| 단계 | 구동 환경 | 핵심 목표 및 검증 내용 |
+| :--- | :--- | :--- |
+| **Step 1**<br>(현재 단계) | **GitHub Pages (`github.io`) 웹 프리뷰** | • 시놀로지 NAS에 올리기 전, 웹(`https://poeticecho.github.io/dailypoem/`)에서 **세로 사진 가우시안 블러 여백**, **인샷(InShot) 스타일 흰색·검은색 단색 여백**, **인물 중심 크롭**, **시+사진 교차 연출**, **대구 날씨 시계**를 즉시 확인하고 완성도를 극대화합니다.<br>• 웹에서도 **`📁 내 사진/폴더 불러오기 (웹 테스트)`** 버튼을 눌러 내 PC/아이패드의 실제 가족·인물 사진(세로/가로)을 서버 업로드 없이 브라우저에서 즉시 테스트할 수 있습니다. |
+| **Step 2**<br>(최종 이식) | **시놀로지 DS420+ Docker (`Container Manager`)** | • 웹에서 검증 완료된 **동일한 `index.html`, `stats.html`, `reflections.json` 소스**를 단 한 줄의 수정 없이 그대로 시놀로지 DS420+ 컨테이너에 마운트합니다.<br>• DS420+에서는 **새벽 03:00 저부하 배치 인덱서(`batch_indexer.py`)**와 **FHD(`1920px`) 사전 캐싱 스트리밍(`server.py`)**이 자동 결합됩니다. |
 
 ---
 
-## 1. 우리의 철학 (Core Philosophy)
+## 2. 시놀로지 DS420+ 하드웨어 호환성 및 새벽 03:00 배치 인덱서 설계
 
-### ① 글자(시) 최우선주의와 예술적 조판 (Artistic Typography)
-이 앱에서 가장 중요한 주인공은 언제나 **‘시 본문’**입니다.
-- **다이내믹 에디토리얼 타이포그래피 엔진**: 시의 전체 줄 수(4~7줄 단시 vs 9~10줄 중시 vs 11줄 이상 장시)와 가장 긴 행의 글자 수를 실시간 계산하여, 글자 포인트(11줄 이상 시 `-0.5pt ~ -0.8pt` 자동 조율), 행간(`line-height`), 연 구분 빈 줄(`.stanza-gap: 0.68em ➔ 0.44em ➔ 0.34em`)을 예술적으로 자동 조판합니다.
-- **95% 표출 영역 & 줄바꿈(강제 꺾임) 원천 방지**: 화면 폭의 95%를 온전히 시 표출 영역으로 활용하며, 한 줄에 글자가 많아도 의도치 않은 줄바꿈(`white-space: pre`)이나 상하 잘림이 절대 일어나지 않습니다.
-- **본문 서체와 일체화된 활자 커서**: 마지막 글자 끝에서 숨 쉬듯 점멸하는 커서(`|`)는 현재 시의 서체를 그대로 상속받으며, 한글 자모의 시각적 중심에 맞춰 `3px` 아래로 정밀 정렬되어 이질감이 없습니다.
+### ① DS420+ (`Intel Celeron J4025`) OpenCV 얼굴 인식 구동 검증
+- **하드웨어 사양**: Intel Celeron J4025 (2코어 / 2스레드, 기본 2.0GHz / 버스트 2.9GHz, `x86_64` 아키텍처, 기본 2GB DDR4 RAM).
+- **경량 CV 엔진 채택 이유**:
+  - 무거운 딥러닝 프레임워크(PyTorch, dlib 등)는 1GB 이상의 RAM을 점유하고 2코어 CPU를 100% 포화시켜 NAS 본연의 파일 서버/Plex 기능을 저하시킵니다.
+  - 반면 `python:3.11-slim (linux/amd64)` + `opencv-python-headless` 조합은 X11/GPU 없이 순수 CPU 명령어(SSE4.2/AVX)만으로 구동되며, 이미지를 메모리에서 `640px`로 축소한 뒤 얼굴 검출(Haar Frontal/Profile Cascade + Saliency)을 수행하므로 **사진 1장당 얼굴 좌표(`focalX, focalY`) 검출에 약 15~25ms**만 소요됩니다.
 
-### ② 낭독의 호흡과 필사의 시간성 (Breathing Typography)
-빠르게 스크롤하며 소비하는 디지털 텍스트와 달리, 사람이 직접 만년필로 꾹꾹 눌러 적고 소리 내어 읽는 호흡을 코드로 구현했습니다.
-글자 사이(82~115ms), 띄어쓰기(150ms), 쉼표(420ms), 줄바꿈(650ms), 마침표(800ms)마다 서로 다른 여운의 시간을 두어 독자의 호흡이 시의 리듬과 자연스럽게 동기화됩니다.
-
-### ③ 완전한 기술적 자립 (100% Self-Hosted & Zero Dependency)
-- **서체(Font)**: 5대 정예 한글 서체(`고운돋움`, `고운바탕`, `마루부리`, `본명조`, `나눔명조`)를 내 서버의 `./fonts/` 폴더에 직접 보관하여 서빙합니다.
-- **음악(Audio)**: 외부 MP3나 외부 `iframe`에 의존하지 않고, 브라우저 내장 Web Audio API와 결정론적 시드(`Mulberry32 PRNG`, 기본 `seed=2494034659`) 알고리즘으로 재즈 화성과 빗소리·새소리를 실시간 자가 합성합니다. **[풍부하게 (Lush Jazz)]** 모드를 켜면 Altered 턴어라운드(`A7b9,b13`), 트라이톤 대리코드 반음 하강(`Dm9 → Db7#11 → Cmaj9 → B7alt`), 펜더 로즈 메탈릭 틴(Tine) 어택음, 어쿠스틱 콘트라베이스 우디 공명, LP 바이닐 먼지 틱 노이즈 및 아날로그 룸 에코 리버브가 100% 무손실 Web Audio 알고리즘으로 더해집니다.
-- **시(Poetry)**: 정밀 교정된 240편에 더해 **최대 7줄 이내의 짧고 여운 깊은 힐링 단시 100편**을 추가 수록하여 총 **340편**으로 출발하며, 매일 오전 10시 자동 큐레이션을 통해 **총 1,000편**의 시를 내 저장소에 영구 축적합니다.
-- **브랜드 에셋(Favicon & OG Image)**: 카카오톡·슬랙의 300KB 용량 제한을 여유 있게 통과하는 초경량 자체 호스팅 PNG 에셋(`favicon.png` 1.6KB, `apple-touch-icon.png` 3.7KB, `og-image.png` 25.9KB)을 기본 탑재했습니다.
-
----
-
-## 2. 조작 방식 · 공유 · 공감(♥) · 서재 통계 (`index.html`, `stats.html`)
-
-### ① 전자책(E-Reader) 3분할 터치 & 1회성 안내 & 더블탭 공감(♥)
-```
-┌─────────────────┬───────────────────────────┬─────────────────┐
-│   좌측 (28%)    │        중앙 (44%)         │   우측 (28%)    │
-│    ⏮ 이전 시    │  1회 탭: ⏸/▶ 자동 넘김   │    ⏭ 다음 시    │
-│  (1회 안내 표출)│  2회 탭: 💖 하트 공감 저장│  (1회 안내 표출)│
-└─────────────────┴───────────────────────────┴─────────────────┘
-```
-- **구역별 최초 1회 가이드 표출**: 좌측 탭, 중앙부, 우측 탭 각각의 안내 메시지는 사용자가 처음 인식할 때 **딱 1회만 표출**된 뒤 영구적으로 숨겨져 시 감상을 방해하지 않습니다.
-- **인스타그램 스타일 중앙 더블탭 하트(`♥`)**: 마음에 와닿는 시에서 화면 중앙을 두 번 클릭(더블탭)하면 본 화면에는 숫자 노출 없이 따뜻한 하트 애니메이션만 피어나며, 데이터는 서재 통계용으로 조용히 누적됩니다.
-- **현재 시 공유하기 (`/dailypoem/2341/`)**: 우상단 설정 메뉴 최상단의 **‘현재 시 공유하기’**를 누르면 현재 시 번호와 자동 감상 상태(`1`: ON, `0`: OFF)가 결합된 깔끔한 Clean URL 형식(`.../dailypoem/2341/`)의 전용 링크가 공유·복사됩니다. GitHub Pages의 `404.html` 라우팅 리다이렉트와 연동되어 주소창의 쿼리 지저분함 없이 깔끔하게 접속할 수 있으며, 기존의 `?poem=번호` 쿼리 파라미터도 하위 호환됩니다.
-
-### ② 서재 & 통계 페이지 (`stats.html`)
-- 전체 시집과 동일한 한지(`#FBF8F3`)·밤하늘(`#181A20`) 감성 디자인과 5대 정예 서체로 통일된 공개 통계 페이지입니다.
-- **💖 공감 하트 1위 ~ 10위 (TOP 10)**: 독자들의 더블탭 공감 수가 가장 높은 인기 시 1위부터 10위까지를 순위별로 감상하고 바로 액자로 열거나 공유할 수 있습니다.
-- **🌿 지난 7일 동안 올라온 최신 시**: 최근 7일 동안 새로 생성·수록된 따끈따끈한 신작 시들을 등록일과 함께 모아 볼 수 있습니다.
+### ② 새벽 03:00 저부하 배치 프로세서 (`batch_indexer.py`) & 주간 CPU 0% 캐싱 스트리밍
+1. **적당한 프로세스 소모를 위한 3중 스로틀링 (Resource Throttling)**:
+   - **`os.nice(15)` 최저 우선순위 실행**: DSM 시스템 작업이나 파일 전송이 발생하면 즉시 CPU 제어권을 양보합니다.
+   - **단일 코어 제한 (`cv2.setNumThreads(1)`, `OMP_NUM_THREADS=1`)**: DS420+의 2개 코어 중 최대 1개 코어만 사용하며, 사진과 사진 사이에 `80ms` 호흡 간격(`BATCH_SLEEP_MS=80`)을 두어 새벽 인덱싱 중에도 **CPU 점유율을 15~25% 이하**로 잔잔하게 유지합니다.
+   - **증분(Delta) 스캔**: 이미 인덱싱 및 FHD 캐싱이 끝난 사진은 파일 수정 시각(`mtime`)과 크기만 비교하여 **0.001초 만에 건너뜁니다.**
+2. **사전 생성된 FHD(`1920px`) 캐시 스트리밍 (`cache_fhd/`)**:
+   - 새벽 03:00 배치 작업 시 원본 사진(장당 5~15MB)을 EXIF 회전 보정 후 **긴 변 1920px · 품질 86% JPEG(약 150~300KB)**로 `/data/cache_fhd/{id}.jpg`에 미리 구워 둡니다.
+   - 낮 시간대에 아이패드 프로 / 아이패드 6세대가 액자를 재생할 때는 **얼굴 인식도, 이미지 리사이징도 전혀 수행하지 않고(CPU 0%)** 캐시된 FHD 파일만 즉시 스트리밍합니다.
 
 ---
 
-## 3. 설치 및 자체 호스팅 실행 가이드
+## 3. 세로 사진 및 화면 비율(4:3) 여백 처리 5대 기법 (`CONFIG.photoFitMode`)
 
+아이패드(4:3 가로)나 웹 모니터(16:9 가로)에서 스마트폰 세로 사진(9:16, 3:4)을 출력할 때 사진이 잘리거나 어색한 빈 공간이 생기지 않도록 **5가지 여백·비율 처리 모드**를 완벽히 구현했습니다.
+
+| 모드 코드 | 여백 처리 방식 | 구현 원리 및 시각적 특징 |
+| :--- | :--- | :--- |
+| **`blur`**<br>(기본값) | **① 가우시안 블러 배경 채우기**<br>*(유튜브 세로 영상 · 방송 표준)* | 1. 사진 레이어를 복제하여 2개 레이어(`.photo-backdrop-blur`, `.photo-fg-img`)로 구성합니다.<br>2. 아래쪽 배경 사진을 화면 전체에 꽉 차도록 확대한 뒤(`object-fit: cover; transform: scale(1.16)`), **가우시안 블러(`filter: blur(38px) brightness(0.78) saturate(1.18)`)** 효과를 주어 흐릿하게 깔아줍니다.<br>3. 위쪽 원본 사진은 단 1픽셀도 잘리지 않게(`object-fit: contain`) 정중앙에 선명하게 띄웁니다. |
+| **`white`** | **② 깔끔한 흰색 단색 여백**<br>*(인샷 InShot · 인스타 화이트 카드)* | • 배경을 순백색(`#FFFFFF`)으로 지정하고 사진 원본 비율을 그대로 살려 깔끔한 카드 뉴스·갤러리 형태로 세로/가로 비율을 맞춥니다.<br>• 시계·대구 날씨·시 오버레이 글자색이 자동으로 다크 차콜(`#222428`)로 전환됩니다. |
+| **`black`** | **③ 깔끔한 검은색 단색 여백**<br>*(인샷 InShot · 시네마틱 블랙)* | • 배경을 깊은 블랙(`#0D0E11`)으로 지정하여 어두운 거실이나 밤 시간대에 눈부심 없이 사진 본연의 색감과 대비에 집중하게 합니다. |
+| **`hanji`** | **④ 따뜻한 한지 매트 여백**<br>*(DailyPoem 시집 갤러리)* | • DailyPoem 고유의 따뜻한 한지 색감(`#FBF8F3`) 배경 위에 화이트 액자 매트 테두리를 둘러 시집 화면과 사진 화면이 이질감 없이 이어집니다. |
+| **`crop_face`** | **⑤ 인물 위주 스마트 크롭**<br>*(얼굴 좌표 중심 꽉 채우기)* | • 여백 없이 아이패드 4:3 화면을 100% 채우되(`object-fit: cover`), OpenCV가 검출한 **인물 얼굴 중심 좌표(`focalX%, focalY%`)**를 기준축으로 삼아 인물의 얼굴이나 이마가 잘리는 현상을 방지합니다. |
+
+---
+
+## 4. GitHub Pages 웹 확인 방법 및 시놀로지 이식 절차
+
+### ① GitHub Pages (`github.io`)에서 바로 확인하기
+1. 제공된 `dailypoem-v2.0-github-and-nas.zip` 압축을 풀고 GitHub 저장소에 그대로 Push 합니다.
+2. 웹 브라우저에서 접속 후 우측 상단 설정(`⚙️`) 팝업을 열면 다음 버튼으로 즉시 체험할 수 있습니다:
+   - **`🖼️ 모드: 시집 전용 ➔ 하이브리드(시+사진) ➔ 포토 포엠 ➔ 사진 전용`** 원클릭 전환
+   - **`✨ 여백: 가우시안 블러 ➔ 깔끔한 흰색 여백 ➔ 깔끔한 검은색 여백 ➔ 따뜻한 한지 매트 ➔ 인물 중심 꽉 채움`** 원클릭 비교
+   - **`📁 내 사진 넣어보기 (웹 테스트)`**: 내 PC나 아이패드에 있는 세로 인물 사진·가족 사진들을 선택하면 서버 업로드 없이 브라우저에서 즉시 블러 여백과 인샷 흰색/검은색 여백을 적용해 보여줍니다.
+   - **URL 파라미터 바로가기**:
+     - 가우시안 블러 포토 포엠 모드: `index.html?mode=photo_poem&fit=blur`
+     - 인샷 화이트 여백 모드: `index.html?mode=photo_poem&fit=white`
+     - 인샷 블랙 여백 모드: `index.html?mode=photo_poem&fit=black`
+     - 인물 중심 크롭 모드: `index.html?mode=photo_only&fit=crop_face`
+
+### ② 웹 검증 완료 후 시놀로지 DS420+ 이식하기
 ```bash
-# 1. 최초 1회: 5대 정예 서체(.woff2)를 ./fonts/ 폴더로 다운로드하여 외부 의존성 제거
-python setup_self_hosted.py
+# 시놀로지 NAS SSH 또는 Container Manager(프로젝트)에서 실행
+docker compose up -d --build
 
-# 2. 로컬 웹서버 구동 (또는 NAS / Nginx / GitHub Pages / Netlify에 그대로 배포)
-python -m http.server 8080
-
-# 3. 새로운 힐링 단시(4~7줄) 수동 생성 테스트 (환경 변수에 GEMINI_API_KEY 설정 시)
-GEMINI_API_KEY="your_api_key" POEM_COUNT=1 python generate_poem.py
+# (선택) 사진을 처음 대량으로 넣었을 때 즉시 1회 저부하 인덱싱 실행
+docker exec -it dailypoem-v2-frame python3 batch_indexer.py --photos /photos --cache /data/cache_fhd --index /data/media_index.json
 ```
 
-### 폴더 구조
-```text
-├── index.html                   # 독립형 전자책 터치 시집 & 더블탭 공감 & 공유 & 내장 Pixelmood
-├── stats.html                   # 누구나 볼 수 있는 서재 통계 (공감 하트 TOP 10 & 지난 7일 신작 시)
-├── 404.html                     # GitHub Pages Clean URL(/2341/) 리다이렉트 대응용 라우터
-├── reflections.json             # 5대 정예 서체·등록일·공감 수가 포함된 감성 시 340편 (목표 1,000편)
-├── favicon.png                  # 브라우저 탭 파비콘 (64x64, 1.6KB 초경량 PNG)
-├── apple-touch-icon.png         # 모바일/태블릿 홈 화면 아이콘 (180x180, 3.7KB 초경량 PNG)
-├── og-image.png                 # 카카오톡·SNS 공유용 오픈그래프 썸네일 (1200x630, 25.9KB < 300KB)
-├── generate_poem.py             # 4~7줄 힐링 단시 기준·24종 모티프 순환·유사도 검증 시 생성 봇
-├── setup_self_hosted.py         # 5대 정예 서체(.woff2) 로컬 ./fonts/ 영구 보관 스크립트
-├── daily-poem-self-hosted.zip   # 1-Click 독립 배포용 자체 호스팅 압축 패키지 (에셋 전수 포함)
-├── fonts/                       # 로컬 보관된 5대 정예 서체 및 local-fonts.css
-├── .github/workflows/
-│   └── auto-poem.yml            # GitHub Actions 1,000편 자동 큐레이션 워크플로
-└── README.md                    # 철학, 구현 아키텍처 및 운용 가이드 문서
-```
 
 ---
 
-<p align="center">
-  <sub>Made with pure warmth and poetic heart. Dedicated to quiet evenings and gentle mornings.</sub>
-</p>
+## 5. 글로벌 유명 디지털 액자 벤치마킹 및 탑재 기능 (v2.2 Flagship Features)
+
+세계적으로 가장 완성도가 높은 4대 스마트 액자 제품군의 핵심 기능을 분석하여 DailyPoem 2.0(`index.html`)에 기본 내장했습니다.
+
+| 벤치마킹 제품 | 대표 시그니처 기능 | DailyPoem 2.0 탑재 및 구현 방식 |
+| :--- | :--- | :--- |
+| **Aura Frames**<br>(`Carver Mat`) | • **세로 사진 2장 스마트 페어링 (Portrait Pairing)**<br>• 야간 슬립 스케줄 | • **`세로 2장 스마트 페어링 (fit=diptych)`**: 가로(4:3) 액자에서 세로(`portrait`) 사진이 나올 때 연관된 세로 사진 2장을 좌·우 나란히 화보집처럼 배합하고 배경은 가우시안 블러로 메웁니다. |
+| **Samsung The Frame**<br>(`Art Mode`) | • **아트 모드 인화지 색온도 보정 (Art Effect)**<br>• 미술관 베벨 매트 보드 | • **`더 프레임 색온도 보정 (artToneMode)`**: 저녁·야간에 차가운 LCD 블루라이트 느낌을 없애고 실제 한지·인화지 같은 따뜻한 색온도(`sepia(0.07)`)와 내부 베벨 테두리 음영을 적용합니다. |
+| **Google Nest Hub**<br>(`Photo Frame`) | • **즐겨찾기·인물 라이브 앨범 필터**<br>• 추억 시점(Relative Time) 표시 | • **`앨범 · ♥ 베스트컷 전용 상영 (albumFilter)`**: 더블탭으로 하트(♥)를 누른 베스트 사진만 모아 상영하거나 특정 폴더만 골라 상영하며, `N일 전의 기억 · 촬영일` 캡션을 자동 계산해 띄웁니다. |
+| **Netgear Meural**<br>(`Canvas II`) | • **도슨트 아트 카드 (Art Card)**<br>• 시간대별 취침 스케줄러 | • **`포토 포엠 시화전 카드 & 심야 자동 디밍 (nightMode)`**: 23:00~06:00 심야 시간대에 화면 밝기를 50% 낮추거나 올블랙 달빛 시계로 전환하여 침실·거실 눈부심을 방지합니다. |
+
+
+---
+
+## 6. 스마트 조도 감지(Ambient Light) 및 야간 눈부심 방지 아키텍처 (v2.3)
+
+네이티브 APK/IPA 앱을 별도로 설치하지 않고도 웹 브라우저(iPad Safari / Chrome)만으로 거실·침실 주변 밝기에 맞춰 액자 밝기와 테마가 자동 조절되도록 **4계층 하이브리드 조도 적응 엔진**을 구축했습니다.
+
+| 계층 | 작동 방식 | 설명 및 특징 |
+| :--- | :--- | :--- |
+| **① 하드웨어 백라이트 계층** | **아이패드 OS 자체 조도 센서 (`자동 밝기` + `True Tone`)** | • 아이패드 프로 및 아이패드 6세대 내장 물리 조도 센서가 실내 조도에 맞춰 실제 LCD 백라이트 광량(nits)과 색온도를 하드웨어 단에서 1차 조절합니다. |
+| **② 실시간 카메라 조도 센서 계층** | **`auto_camera` (`MediaDevices.getUserMedia` 16×16 휘도 측정)** | • 설정에서 **`💡 카메라 실시간 조도 센서`** 선택 시, 4초 주기로 전면 카메라의 `16×16` 초저해상도 평균 밝기(Lux)만 메모리에서 계산합니다(영상 저장·전송 0%).<br>• **거실 불을 끄면 4초 이내에 `42 Lux` 이하 저조도를 감지**하여 즉시 야간 감광 모드(`-56%`)로 전환되고, 불을 켜면 주간 밝기로 복귀합니다. |
+| **③ 대구 일출·일몰 & 기상 계층** | **`auto_solar` (Open-Meteo `is_day` + 시간대 곡선, 기본값)** | • 별도 카메라 권한 없이도 대구광역시 실시간 주야간(`is_day`)·구름/강수 상태·심야 시간대를 결합해 **주간(100%) ➔ 흐린 날(-8%) ➔ 일몰 후 야간 감광(-28%) ➔ 심야(-48%)**로 자동 조절합니다. |
+| **④ 야간 화이트 여백 자동 보호** | **Night Matte Guard (`ambient-night-active`)** | • 낮 동안 깔끔한 **인샷 화이트 여백(`fit=white`)**이나 **한지 매트(`fit=hanji`)**를 쓰더라도, 야간 감광이 켜지면 눈부신 흰색 배경을 자동으로 **다크 차콜 갤러리 매트(`#121418`)**로 전환하여 어두운 방에서 눈부심을 원천 차단합니다. |
+
+
+---
+
+## 7. 전체 기능 체계 및 모듈 간 7대 유기적 연동 아키텍처 (Organic Synergy Blueprint)
+
+DailyPoem 2.0은 시집·사진·시계·날씨·음악·조도 센서가 각각 따로 노는 위젯이 아니라, **하나의 유기체처럼 서로의 데이터를 주고받으며 화면과 소리를 조율**하도록 설계되었습니다.
+
+### ① 7대 유기적 연동 루프 (Cross-Module Organic Synergy)
+
+| 연동 루프 | 연결되는 모듈 | 유기적 작동 메커니즘 (`index.html` · `batch_indexer.py` 구현 완료) |
+| :--- | :--- | :--- |
+| **1. 시맨틱 공명 루프**<br>*(사진·날씨 ⇄ 시 큐레이션)* | `사진 EXIF(계절·시간·인물)` + `대구 날씨` ➔ `감성 시 매칭(pickResonantPoemForPhoto)` | • **포토 포엠**이나 **하이브리드 모드**에서 무작위 시를 띄우지 않고, 사진이 찍힌 계절(봄·여름·가을·겨울), 시간대(새벽·오후·노을·밤), 인물 유무(`hasPerson`), 그리고 현재 대구 날씨(비·눈·맑음)와 어휘가 공명하는 짧은 치유 시(7줄 이하)를 가중치 매칭해 띄웁니다. |
+| **2. 공간 회피 안무 루프**<br>*(인물 얼굴 좌표 ⇄ UI 배치)* | `OpenCV 얼굴 좌표(focalX, focalY)` ➔ `켄 번즈` + `스마트 크롭` + `시계·시 카드 위치` | • 새벽 배치 인덱서가 찾은 얼굴 좌표(`focalX, focalY`)를 향해 켄 번즈 줌이 천천히 들어가며, **다이나믹 시계·대구 날씨 위젯**과 **포토 포엠 카드**는 얼굴이 없는 **반대편 대각선 코너**로 스스로 이동해 인물의 얼굴을 절대 가리지 않습니다. |
+| **3. 색채 하모니 루프**<br>*(사진 대표색 ⇄ 오버레이·가독성)* | `사진 대표색(dominantHex) & 명도(isDarkPhoto)` ➔ `시화전 카드 테두리 & 텍스트 반전` | • 사진에서 추출한 대표 색상(`dominantHex`)을 포토 포엠 유리 카드의 미세한 테두리 광채로 반영하고, 여백 모드(화이트/한지 vs 블러/블랙)와 사진 밝기에 맞춰 시계·날씨 글자색을 다크 차콜(`#222428`) 또는 아이보리(`#F7F4EE`)로 자동 반전합니다. |
+| **4. 주야간 서카디안 루프**<br>*(주변 조도·일몰 ⇄ 여백·색온도)* | `전면 카메라 조도(Lux)` + `대구 일몰(is_day)` ➔ `화이트 여백 차콜 보호` + `더 프레임 색온도` | • 낮에는 화사한 인샷 화이트 여백(`#FFFFFF`)이나 한지 매트(`#FBF8F3`)로 보여주다가도, **거실 불을 끄거나(`42 Lux` 이하) 대구 일몰 시각이 지나면** 눈부신 흰색 여백을 자동으로 **다크 차콜(`#121418`)**로 바꾸고 화면 밝기와 색온도를 낮춥니다. |
+| **5. 공감각 사운드 루프**<br>*(날씨·조도 ⇄ 재즈·자연음·볼륨)* | `대구 실시간 날씨` + `야간 감광 상태` ➔ `Pixelmood 자연음 & 나이트 위스퍼 볼륨` | • 바깥에 비나 눈이 오면 배경 자연음을 자동으로 `창가 빗소리(Rain)`로 동기화하고, 야간 감광 모드가 켜지면 음악 마스터 볼륨을 자동으로 `-28%` 낮추어(Night Whisper) 고요한 밤 분위기에 맞춥니다. |
+| **6. 독자 큐레이션 순환 루프**<br>*(더블탭 하트 ⇄ 베스트컷 상영)* | `화면 중앙 더블탭(♥)` ➔ `NAS/로컬 하트 DB` ➔ `베스트컷 전용 앨범` + `통계 TOP 10` | • 시집이든 사진이든 감상 중 중앙을 두 번 탭하면 하트(`♥`)가 기록되며, 설정에서 **`♥ 하트 베스트컷만 상영`**을 켜면 가족이 하트를 누른 사진과 시만 우선 큐레이션됩니다. |
+| **7. 무수정 환경 브리지 루프**<br>*(GitHub Pages ⇄ 시놀로지 NAS)* | `정적 파일(media_index.json)` + `로컬 폴더 피커` ⇄ `NAS FastAPI(/api/*)` | • 동일한 `index.html` 파일 하나가 GitHub Pages에서는 서버 없이 정적 인덱스·브라우저 로컬 파일 분석·Open-Meteo 직접 호출로 작동하고, 시놀로지 DS420+ 도커에 넣으면 자동으로 `/api/media`, `/api/photo/{id}`, `/api/weather`, `/api/heart` 백엔드와 결합됩니다. |

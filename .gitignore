@@ -2,3 +2,5 @@ __pycache__/
 *.py[cod]
 *$py.class
 temp*/
+*.pdf
+dailypoem-v2.0-github-and-nas.zip

@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  dailypoem-frame:
+    build: .
+    container_name: dailypoem-v2-frame
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - TZ=Asia/Seoul
+      - PHOTOS_DIR=/photos
+      - DATA_DIR=/data
+      - CACHE_DIR=/data/cache_fhd
+      - BATCH_INDEX_HOUR=3      # 매일 새벽 03:00 저부하 인덱싱 & FHD 캐시 생성
+      - BATCH_SLEEP_MS=80       # 사진당 80ms 호흡 간격으로 DS420+ CPU 점유율 20% 이하 유지
+    # DS420+ (2코어 Celeron J4025 / 2GB~6GB RAM) 자원 보호 리미트
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 384M
+    volumes:
+      - /volume1/photo/dailyframe:/photos:ro
+      - /volume1/docker/dailypoem/data:/data

@@ -22,13 +22,13 @@ FILENAME = os.environ.get("REFLECTIONS_FILE", "reflections.json")
 
 # 지원 모델 목록 (최신 모델 및 기존 검증된 모델 폴백 체인)
 MODELS = [
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite",
     "gemini-3.5-flash-lite",
     "gemini-3.5-flash",
     "gemini-3.8-flash",
-    "gemini-flash-latest",
-    "gemini-2.5-flash",
-    "gemini-2.5-flash-lite",
     "gemini-2.0-flash",
+    "gemini-flash-latest",
 ]
 
 # 🎨 5대 정예 서체 기반 12가지 감성 팔레트 프리셋

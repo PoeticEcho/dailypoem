@@ -1,22 +1,45 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <title>감성 타이핑 시집</title>
+  <meta charset="UTF-8">
+  <title>오늘의 감성 시집 · 이동 중</title>
   <script>
-    const path = window.location.pathname;
-    const match = path.match(/^(.*\/)(\d{2,})\/?$/);
-    if (match && match[1] && match[2]) {
-      sessionStorage.setItem('dailypoem_redirect_code', match[2]);
-      window.location.replace(match[1]);
-    } else {
-      if (path.includes('/dailypoem')) {
-        window.location.replace('/dailypoem/');
+    (function() {
+      var l = window.location;
+      var path = l.pathname;
+      var match = path.match(/^(.*?)\/(?:poem\/)?(\d+)(?:\/([01]|on|off))?\/?$/i);
+      if (match) {
+        var base = match[1] || '';
+        var num = match[2];
+        var autoFlag = typeof match[3] !== 'undefined' ? match[3] : null;
+
+        // 구버전 4자리 결합 코드 호환: /dailypoem/2341/ 또는 /dailypoem/2340/
+        if (autoFlag === null) {
+          if (num.length >= 4 && parseInt(num, 10) >= 1000) {
+            autoFlag = num.slice(-1);
+            num = num.slice(0, -1);
+          } else {
+            autoFlag = '0';
+          }
+        }
+
+        try {
+          // 세션 스토리지에 복원용 클린 경로 및 구버전 redirect_code 모두 기록
+          sessionStorage.setItem('dailypoem_clean_path', base + '/' + num + '/' + autoFlag + l.search);
+          sessionStorage.setItem('dailypoem_redirect_code', num + autoFlag);
+        } catch (e) {}
+
+        var extraQuery = l.search ? '&' + l.search.slice(1) : '';
+        l.replace(l.origin + base + '/?poem=' + num + '&autoplay=' + autoFlag + '&_clean=1' + extraQuery + l.hash);
       } else {
-        window.location.replace('./');
+        if (path.includes('/dailypoem')) {
+          l.replace(l.origin + '/dailypoem/' + l.search + l.hash);
+        } else {
+          l.replace(l.origin + '/' + l.search + l.hash);
+        }
       }
-    }
+    })();
   </script>
 </head>
-<body></body>
+<body style="background:#FBF8F3;"></body>
 </html>
