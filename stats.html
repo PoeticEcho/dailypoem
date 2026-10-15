@@ -260,11 +260,14 @@
     </div>
     <div class="grid-2" id="recentContainer"></div>
 
-    <div class="section-title" id="photo-manager">
-      <span>🗂️ 스마트 액자 사진 순서 · 상영 제외 관리 스튜디오</span>
-      <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
-        <button class="btn" onclick="resetStatsPhotoExclusions()">✅ 전체 상영 포함</button>
-        <a class="btn btn-primary" href="./index.html?mode=photo_poem&sort=custom">▶ 설정한 순서로 액자 상영</a>
+    <div class="section-title" id="photo-manager" style="flex-wrap:wrap;gap:0.6rem;">
+      <span>🗂️ 스마트 액자 사진 관리 & ♥ 하트 모아보기</span>
+      <div style="display:flex;gap:0.35rem;flex-wrap:wrap;">
+        <button class="btn btn-primary" id="stTabAll" onclick="setStatsGalleryFilter('all')">전체 사진</button>
+        <button class="btn" id="stTabHearts" onclick="setStatsGalleryFilter('hearts')">♥ 하트 누른 사진 모아보기</button>
+        <button class="btn" id="stTabExcluded" onclick="setStatsGalleryFilter('excluded')">🚫 제외된 사진만</button>
+        <button class="btn" onclick="resetStatsPhotoExclusions()">✅ 전체 복원</button>
+        <a class="btn" href="./index.html?mode=photo_poem&sort=custom">▶ 액자 상영</a>
       </div>
     </div>
     <p style="margin-top:-0.5rem;margin-bottom:1rem;font-size:0.84rem;color:var(--muted);font-family:'Gowun Dodum',sans-serif;">
@@ -398,6 +401,15 @@
       saveCuration(c);
       renderStatsPhotoManager();
     }
+    let statsPhotoFilter = 'all';
+    function setStatsGalleryFilter(f) {
+      statsPhotoFilter = f || 'all';
+      ['All', 'Hearts', 'Excluded'].forEach(k => {
+        const b = document.getElementById('stTab' + k);
+        if (b) b.classList.toggle('btn-primary', k.toLowerCase() === statsPhotoFilter);
+      });
+      renderStatsPhotoManager();
+    }
     function renderStatsPhotoManager(webFallbacks) {
       const fbList = webFallbacks || [
         "https://picsum.photos/id/64/600/800",
@@ -421,7 +433,16 @@
       let playSeq = 0;
       const pgEl = document.getElementById('photoGalleryContainer');
       if (!pgEl) return;
-      pgEl.innerHTML = sorted.map((it, idx) => {
+      const filtered = sorted.filter(it => {
+        const key = it.id || it.filename;
+        const isExc = Boolean(c.excludedMap && c.excludedMap[key]);
+        const userH = photoHearts[key] || 0;
+        const totalH = (it.hearts || 0) + userH;
+        if (statsPhotoFilter === 'hearts') return !isExc && (userH > 0);
+        if (statsPhotoFilter === 'excluded') return isExc;
+        return true;
+      });
+      pgEl.innerHTML = filtered.map((it, idx) => {
         const key = it.id || it.filename;
         const isExc = Boolean(c.excludedMap && c.excludedMap[key]);
         if (!isExc) playSeq++;

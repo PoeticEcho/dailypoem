@@ -1482,6 +1482,87 @@
       background: inherit;
     }
 
+  
+    /* === TOP-RIGHT QUICK EXCLUDE (X) & HEARTS COLLECTION (v2.8) === */
+    #nav-trigger-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .top-quick-circle-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(128, 128, 128, 0.14);
+      color: inherit;
+      border: 1px solid rgba(128, 128, 128, 0.22);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.38;
+      transition: opacity 0.4s ease, transform 0.25s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      font-family: 'Gowun Dodum', sans-serif;
+      font-size: 0.92rem;
+      padding: 0;
+    }
+    .top-quick-circle-btn:hover,
+    .top-quick-circle-btn:focus-visible {
+      opacity: 1 !important;
+      transform: scale(1.07);
+      background: rgba(128, 128, 128, 0.26);
+    }
+
+    /* 사진 감상 중일 때만 상단 X(즉시 제외) 버튼 표시 */
+    #quick-exclude-btn {
+      display: none;
+    }
+    body.photo-mode-active #quick-exclude-btn {
+      display: flex;
+    }
+    #quick-exclude-btn:hover {
+      background: rgba(205, 76, 68, 0.85) !important;
+      border-color: rgba(255, 200, 195, 0.65) !important;
+      color: #FFFFFF !important;
+    }
+
+    /* 하트 모아보기(♥) 활성화 상태 디자인 */
+    #quick-hearts-filter-btn.hearts-filter-active {
+      opacity: 0.92;
+      background: rgba(217, 107, 107, 0.88) !important;
+      border-color: rgba(255, 225, 225, 0.7) !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 6px 20px rgba(217, 107, 107, 0.35);
+    }
+
+    /* 사진 모드에서는 상단 버튼 가독성을 위해 반투명 다크 캡슐 배경 보강 */
+    body.photo-mode-active .top-quick-circle-btn,
+    body.photo-mode-active #gear-trigger-btn {
+      background: rgba(18, 20, 26, 0.42);
+      border-color: rgba(255, 255, 255, 0.22);
+      color: #F7F4EE;
+    }
+    body.photo-mode-active.photo-light-margin:not(.ambient-night-active) .top-quick-circle-btn,
+    body.photo-mode-active.photo-light-margin:not(.ambient-night-active) #gear-trigger-btn {
+      background: rgba(251, 248, 243, 0.82);
+      border-color: rgba(0, 0, 0, 0.14);
+      color: #222428;
+    }
+
+    /* 감상 몰입 중(idle-zen)에는 ♥, ✕, ⚙️ 모두 0% 투명도로 완전히 소멸 */
+    body.idle-zen .top-quick-circle-btn {
+      opacity: 0 !important;
+      pointer-events: none;
+    }
+    body.active-touch .top-quick-circle-btn {
+      opacity: 0.52;
+      pointer-events: auto;
+    }
+
   </style>
 </head>
 <body>
@@ -1518,9 +1599,18 @@
     <div id="clock-content"></div>
   </aside>
 
-  <!-- 🪶 상단 미니멀 설정 트리거 버튼 -->
-  <div id="nav-trigger-wrap" onmouseenter="openControlsPopupOnHover()">
-    <button id="gear-trigger-btn" onclick="toggleControlsPopup()" aria-label="설정 메뉴 열기">
+  <!-- 🪶 상단 미니멀 액션 바 (♥ 하트 모아보기 · ✕ 현재 사진 즉시 제외 · ⚙️ 설정) -->
+  <div id="nav-trigger-wrap">
+    <button id="quick-hearts-filter-btn" class="top-quick-circle-btn" onclick="toggleQuickHeartsFilter()" title="하트(♥) 누른 사진·시만 모아서 보기" aria-label="하트 누른 작품 모아보기">
+      <span id="quick-hearts-icon">♡</span>
+    </button>
+    <button id="quick-exclude-btn" class="top-quick-circle-btn" onclick="excludeCurrentPhotoQuick()" title="현재 사진을 상영 목록에서 즉시 제외 (✕)" aria-label="현재 사진 상영 목록에서 즉시 제외">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <button id="gear-trigger-btn" onmouseenter="openControlsPopupOnHover()" onclick="toggleControlsPopup()" aria-label="설정 메뉴 열기">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="3"></circle>
         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
@@ -1563,6 +1653,16 @@
       <button class="popup-item-btn" onclick="document.getElementById('inpLocalPhotos').click(); closeControlsPopup();">
         <span>📁</span>
         <span id="popLocalPhotoText">내 사진 넣어보기 (웹 테스트)</span>
+      </button>
+
+      <button class="popup-item-btn" id="popHeartsOnlyBtn" onclick="toggleQuickHeartsFilter(); closeControlsPopup();">
+        <span id="popHeartsOnlyIcon">♡</span>
+        <span id="popHeartsOnlyText">하트(♥) 모음만 보기</span>
+      </button>
+
+      <button class="popup-item-btn" id="popUndoExcludeBtn" style="display:none;" onclick="undoLastQuickExclude(); closeControlsPopup();">
+        <span>↩️</span>
+        <span id="popUndoExcludeText">방금 제외한 사진 복원</span>
       </button>
 
       <button class="popup-item-btn" onclick="openPhotoManagerModal(); closeControlsPopup();">
@@ -4119,7 +4219,16 @@
       if (!reflections || reflections.length === 0) return;
       if (isTransitioning) return;
 
-      const nextIdx = Math.floor(Math.random() * reflections.length);
+      let nextIdx = Math.floor(Math.random() * reflections.length);
+      if (CONFIG.albumFilter === 'hearts_only') {
+        try {
+          const poemHeartsMap = JSON.parse(localStorage.getItem('poetry_hearts_v1') || '{}');
+          const userIndices = Object.keys(poemHeartsMap).filter(k => poemHeartsMap[k] > 0).map(Number).filter(n => n >= 0 && n < reflections.length);
+          if (userIndices.length > 0) {
+            nextIdx = userIndices[Math.floor(Math.random() * userIndices.length)];
+          }
+        } catch (e) {}
+      }
       poemHistory.push(nextIdx);
       historyPtr = poemHistory.length - 1;
 
@@ -4827,11 +4936,11 @@
     triggerPoemHeart = function() {
       if (isShowingPhotoScene && currentDisplayedPhoto) {
         try {
-          const raw = localStorage.getItem('dailypoem_photo_hearts_v2') || '{}';
-          const map = JSON.parse(raw);
-          const pid = currentDisplayedPhoto.id || currentDisplayedPhoto.filename;
+          const map = readPhotoHeartsMap();
+          const pid = getPhotoKey(currentDisplayedPhoto);
           map[pid] = (map[pid] || 0) + 1;
-          localStorage.setItem('dailypoem_photo_hearts_v2', JSON.stringify(map));
+          writePhotoHeartsMap(map);
+          updateHeartsFilterUI();
           currentDisplayedPhoto.hearts = (currentDisplayedPhoto.hearts || 0) + 1;
           fetch(`${window.APP_ROOT || './'}api/heart`, {
             method: 'POST',
@@ -4890,6 +4999,7 @@
       if (popFitTxt) popFitTxt.textContent = `여백: ${PHOTO_FIT_LABELS[CONFIG.photoFitMode] || '가우시안 블러'}`;
 
       applyPhotoFitClass();
+      if (typeof updateHeartsFilterUI === 'function') updateHeartsFilterUI();
     }
 
     function applyPhotoFitClass() {
@@ -4925,6 +5035,22 @@
     }
 
     // 사진 큐레이션 영구 저장소 (제외 목록 excludedMap, 사용자 지정 순서 customOrder, 초점 focalMap, 제목 titleMap)
+    // file:// 직접 실행이나 사파리 프라이빗 모드에서도 하트(♥)가 100% 유지되도록 메모리+localStorage 이중 보관
+    const _memPhotoHearts = {};
+    const _memPoemHearts = {};
+    function readPhotoHeartsMap() {
+      try {
+        const s = JSON.parse(localStorage.getItem("dailypoem_photo_hearts_v2") || "{}");
+        Object.assign(_memPhotoHearts, s);
+      } catch (e) {}
+      return _memPhotoHearts;
+    }
+    function writePhotoHeartsMap(map) {
+      if (map && map !== _memPhotoHearts) {
+        Object.assign(_memPhotoHearts, map);
+      }
+      try { localStorage.setItem("dailypoem_photo_hearts_v2", JSON.stringify(_memPhotoHearts)); } catch (e) {}
+    }
     const PHOTO_CURATION_STORAGE_KEY = 'dailypoem_photo_curation_v2';
     let photoCurationState = {
       excludedMap: {}, // { [id_or_filename]: true }
@@ -4997,8 +5123,7 @@
     function rebuildPhotoQueue() {
       applyCurationOverridesToCatalog();
 
-      let photoHeartsMap = {};
-      try { photoHeartsMap = JSON.parse(localStorage.getItem('dailypoem_photo_hearts_v2') || '{}'); } catch (e) {}
+      const photoHeartsMap = readPhotoHeartsMap();
 
       // 1) 상영 제외(excluded === true)된 사진은 슬라이드쇼 큐에서 제외! (단, 모두 제외된 경우 최소 1장은 유지)
       let allEnriched = mediaCatalog.map(it => ({
@@ -5013,8 +5138,13 @@
       // 2) 앨범 · 베스트컷 필터
       const af = CONFIG.albumFilter || 'all';
       if (af === 'hearts_only') {
-        const liked = list.filter(it => it.totalHearts >= 20 || photoHeartsMap[getPhotoKey(it)] > 0);
-        if (liked.length > 0) list = liked;
+        const userLiked = list.filter(it => (photoHeartsMap[getPhotoKey(it)] || 0) > 0);
+        if (userLiked.length > 0) {
+          list = userLiked;
+        } else {
+          const topLiked = list.filter(it => it.totalHearts >= 25);
+          if (topLiked.length > 0) list = topLiked;
+        }
       } else if (af !== 'all') {
         const filtered = list.filter(it => it.album === af);
         if (filtered.length > 0) list = filtered;
@@ -5058,6 +5188,161 @@
         popMgr.textContent = exc > 0
           ? `사진 관리 (상영 ${inc} / 제외 ${exc})`
           : `사진 순서 · 제외 관리 (${inc}장)`;
+      }
+    }
+
+    let lastQuickExcludedKey = null;
+    let lastQuickExcludedTitle = '';
+    let isHeartsOnlyCollectionActive = false;
+
+    // 상단 ✕ 버튼 클릭 시: 현재 화면에 떠 있는 사진을 목록에서 즉시 제외하고 다음 사진으로 전환
+    function excludeCurrentPhotoQuick() {
+      if (!isShowingPhotoScene || !currentDisplayedPhoto) {
+        showHudFeedback('ℹ️', '사진 상영 모드에서 현재 사진을 제외할 수 있습니다');
+        return;
+      }
+      const totalIncluded = mediaCatalog.filter(it => !it.excluded).length;
+      if (totalIncluded <= 1) {
+        showHudFeedback('⚠️', '최소 1장의 사진은 상영 목록에 남아 있어야 합니다');
+        return;
+      }
+
+      const key = getPhotoKey(currentDisplayedPhoto);
+      const title = currentDisplayedPhoto.title || currentDisplayedPhoto.filename || '사진';
+      currentDisplayedPhoto.excluded = true;
+      photoCurationState.excludedMap[key] = true;
+      lastQuickExcludedKey = key;
+      lastQuickExcludedTitle = title;
+
+      savePhotoCurationState();
+      rebuildPhotoQueue();
+      renderPhotoManagerGrid();
+
+      const undoBtn = document.getElementById('popUndoExcludeBtn');
+      const undoTxt = document.getElementById('popUndoExcludeText');
+      if (undoBtn) undoBtn.style.display = 'flex';
+      if (undoTxt) undoTxt.textContent = `방금 제외한 "${title.slice(0, 10)}" 복원`;
+
+      // 현재 인덱스가 줄어든 큐에 맞춰 자연스럽게 다음 사진 표시
+      currentPhotoCursor = Math.max(-1, currentPhotoCursor - 1);
+      showNextPhotoSlide(1);
+      showHudFeedback('🚫', `"${title}" 사진을 상영 목록에서 제외했습니다`);
+    }
+
+    function undoLastQuickExclude() {
+      if (!lastQuickExcludedKey) return;
+      const target = mediaCatalog.find(it => getPhotoKey(it) === lastQuickExcludedKey);
+      if (target) target.excluded = false;
+      photoCurationState.excludedMap[lastQuickExcludedKey] = false;
+      const restoredTitle = lastQuickExcludedTitle;
+      const restoredKey = lastQuickExcludedKey;
+      lastQuickExcludedKey = null;
+
+      const undoBtn = document.getElementById('popUndoExcludeBtn');
+      if (undoBtn) undoBtn.style.display = 'none';
+
+      savePhotoCurationState();
+      rebuildPhotoQueue();
+      renderPhotoManagerGrid();
+
+      const qIdx = sortedPhotoQueue.findIndex(it => getPhotoKey(it) === restoredKey);
+      if (qIdx !== -1 && CONFIG.frameMode !== 'poem_only') {
+        currentPhotoCursor = qIdx - 1;
+        showNextPhotoSlide(1);
+      }
+      showHudFeedback('↩️', `"${restoredTitle}" 사진을 다시 목록에 복원했습니다`);
+    }
+
+    // 내가 더블탭으로 하트(♥)를 누른 사진/시 개수 계산
+    function getUserHeartedCounts() {
+      const photoHeartsMap = readPhotoHeartsMap();
+      let poemHeartsMap = {};
+      try { poemHeartsMap = JSON.parse(localStorage.getItem('poetry_hearts_v1') || '{}'); } catch (e) {}
+
+      const heartedPhotos = mediaCatalog.filter(it => !it.excluded && (photoHeartsMap[getPhotoKey(it)] || 0) > 0);
+      const heartedPoemIndices = [];
+      if (Array.isArray(reflections)) {
+        reflections.forEach((p, idx) => {
+          if ((poemHeartsMap[String(idx)] || 0) > 0) {
+            heartedPoemIndices.push(idx);
+          }
+        });
+      }
+      return {
+        photoHeartsMap,
+        poemHeartsMap,
+        heartedPhotosCount: heartedPhotos.length,
+        heartedPoemIndices
+      };
+    }
+
+    function updateHeartsFilterUI() {
+      isHeartsOnlyCollectionActive = (CONFIG.albumFilter === 'hearts_only');
+      const topBtn = document.getElementById('quick-hearts-filter-btn');
+      const topIcon = document.getElementById('quick-hearts-icon');
+      const popBtn = document.getElementById('popHeartsOnlyBtn');
+      const popIcon = document.getElementById('popHeartsOnlyIcon');
+      const popText = document.getElementById('popHeartsOnlyText');
+
+      if (topBtn) topBtn.classList.toggle('hearts-filter-active', isHeartsOnlyCollectionActive);
+      if (topIcon) topIcon.textContent = isHeartsOnlyCollectionActive ? '♥' : '♡';
+      if (popBtn) popBtn.classList.toggle('active-toggle', isHeartsOnlyCollectionActive);
+      if (popIcon) popIcon.textContent = isHeartsOnlyCollectionActive ? '♥' : '♡';
+      if (popText) {
+        popText.textContent = isHeartsOnlyCollectionActive ? '하트(♥) 모음 감상 중 (해제)' : '하트(♥) 누른 것만 모아보기';
+      }
+    }
+
+    function togglePhotoHeartByKey(photoKey) {
+      try {
+        const map = readPhotoHeartsMap();
+        if (map[photoKey] > 0) {
+          delete map[photoKey];
+          showHudFeedback('♡', '하트 모음에서 해제했습니다');
+        } else {
+          map[photoKey] = 1;
+          showHudFeedback('♥', '하트 모음에 추가했습니다');
+        }
+        writePhotoHeartsMap(map);
+        rebuildPhotoQueue();
+        renderPhotoManagerGrid();
+      } catch (e) {}
+    }
+
+    function toggleQuickHeartsFilter() {
+      const nextState = (CONFIG.albumFilter !== 'hearts_only');
+      if (nextState) {
+        const counts = getUserHeartedCounts();
+        if (CONFIG.frameMode !== 'poem_only' && counts.heartedPhotosCount === 0) {
+          showHudFeedback('♥', '아직 하트 누른 사진이 없습니다 (화면 중앙을 두 번 탭해 하트를 눌러보세요!)');
+          return;
+        }
+        if (CONFIG.frameMode === 'poem_only' && counts.heartedPoemIndices.length === 0) {
+          showHudFeedback('♥', '아직 하트 누른 시가 없습니다 (화면 중앙을 두 번 탭해 하트를 눌러보세요!)');
+          return;
+        }
+      }
+      CONFIG.albumFilter = nextState ? 'hearts_only' : 'all';
+      isHeartsOnlyCollectionActive = nextState;
+      saveConfig();
+      syncV2ConfigToUI();
+      rebuildPhotoQueue();
+      updateHeartsFilterUI();
+
+      if (nextState) {
+        const counts = getUserHeartedCounts();
+        showHudFeedback('♥', `하트 모음 보기 ON (사진 ${sortedPhotoQueue.length}장 · 시 ${counts.heartedPoemIndices.length || 10}편)`);
+        if (CONFIG.frameMode !== 'poem_only') {
+          currentPhotoCursor = -1;
+          showNextPhotoSlide(1);
+        } else {
+          showRandomPoem(false);
+        }
+      } else {
+        showHudFeedback('📖', '전체 작품 감상 모드로 돌아갑니다');
+        if (CONFIG.frameMode !== 'poem_only') {
+          showNextPhotoSlide(0);
+        }
       }
     }
 
@@ -5252,13 +5537,12 @@
       const grid = document.getElementById('pmgrGrid');
       if (!grid) return;
 
-      let photoHeartsMap = {};
-      try { photoHeartsMap = JSON.parse(localStorage.getItem('dailypoem_photo_hearts_v2') || '{}'); } catch (e) {}
+      const photoHeartsMap = readPhotoHeartsMap();
 
       const ordered = getOrderedCatalogForManager();
       const incList = ordered.filter(it => !it.excluded);
       const excList = ordered.filter(it => it.excluded);
-      const heartList = ordered.filter(it => ((it.hearts || 0) + (photoHeartsMap[getPhotoKey(it)] || 0)) >= 20 || photoHeartsMap[getPhotoKey(it)] > 0);
+      const heartList = ordered.filter(it => (photoHeartsMap[getPhotoKey(it)] || 0) > 0);
 
       const elAll = document.getElementById('pmgrCntAll');
       const elInc = document.getElementById('pmgrCntInc');
@@ -5312,7 +5596,7 @@
               <input type="text" class="pmgr-title-input" value="${safeTitle}" onchange="updatePhotoTitleInline('${key}', this.value)" aria-label="사진 제목 수정" />
               <div class="pmgr-meta-row">
                 <span>📁 ${it.album || '기본'}</span>
-                <span>♥ ${hCount}</span>
+                <button class="pmgr-mini-btn" style="border-color:rgba(217,107,107,0.4);color:${(photoHeartsMap[key] || 0) > 0 ? '#D96B6B' : 'inherit'};" onclick="togglePhotoHeartByKey('${key}')" title="클릭하여 내 하트(♥) 모음에 추가/해제">${(photoHeartsMap[key] || 0) > 0 ? '♥ 하트됨' : '♡ 하트'}</button>
               </div>
               <div class="pmgr-btn-bar">
                 <button class="pmgr-mini-btn ${it.excluded ? 'btn-include-off' : 'btn-include-on'}" onclick="togglePhotoExclude('${key}')">
