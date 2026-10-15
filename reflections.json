@@ -3738,5 +3738,16 @@
     "id": 340,
     "createdAt": "2026-10-14",
     "hearts": 37
+  },
+  {
+    "id": 341,
+    "text": "나른한 오후 세 시의 볕\n하얀 이불이 숨을 쉰다\n\n바스락거리는 온기 속에\n오늘의 지친 마음도 함께\n곱게 널어두는 시간",
+    "createdAt": "2026-10-15",
+    "hearts": 0,
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
   }
 ]
