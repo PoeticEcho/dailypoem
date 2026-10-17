@@ -3760,5 +3760,16 @@
       "color": "#4E3E32",
       "fontFamily": "'MaruBuri', serif"
     }
+  },
+  {
+    "id": 343,
+    "text": "베란다 하얀 빨래가\n오후 볕을 삼키며\n\n바스락거리는 숨소리\n오늘도 수고했다며\n내 마음을 안아준다",
+    "createdAt": "2026-10-17",
+    "hearts": 0,
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
   }
 ]
