@@ -3771,5 +3771,16 @@
       "color": "#3C342C",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "id": 344,
+    "text": "지친 발걸음 멈춘 모퉁이\n노란 불빛이 손을 내밀고\n\n차가워진 어깨 위로\n조용히 온기를 덮어준다",
+    "createdAt": "2026-10-18",
+    "hearts": 0,
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#4E3E32",
+      "fontFamily": "'MaruBuri', serif"
+    }
   }
 ]
