@@ -3782,5 +3782,38 @@
       "color": "#4E3E32",
       "fontFamily": "'MaruBuri', serif"
     }
+  },
+  {
+    "id": 345,
+    "text": "초록 잎사귀에 적시는 물방울\n내 마음에도 닿아라\n\n바짝 마른 목마름이\n조용히 숨을 고르는 아침",
+    "createdAt": "2026-10-18",
+    "hearts": 0,
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "id": 346,
+    "text": "낡은 마루에 기대어\n먼 하늘을 올려다본다\n\n백 년 전의 그 눈으로\n흘러가는 구름을 만나네\n\n잠시 숨을 고르는 시간",
+    "createdAt": "2026-10-18",
+    "hearts": 0,
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#4E3E32",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "id": 347,
+    "text": "작은 볕이 머물다 가는\n베란다의 오후 세 시\n\n바스락거리는 햇살을 품고\n하얗게 피어나는 마음의 결",
+    "createdAt": "2026-10-18",
+    "hearts": 0,
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
   }
 ]
