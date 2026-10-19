@@ -3815,5 +3815,16 @@
       "color": "#3C342C",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "id": 348,
+    "text": "빗소리 굵어지는 길\n너에게 건네는 마음\n\n조금 더 젖어도 좋아서\n스스로 기울어지던\n우리의 푸른 날",
+    "createdAt": "2026-10-19",
+    "hearts": 0,
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
   }
 ]
