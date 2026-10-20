@@ -3826,5 +3826,16 @@
       "color": "#2E4235",
       "fontFamily": "'Gowun Dodum', sans-serif"
     }
+  },
+  {
+    "id": 349,
+    "text": "시간을 건너온 밑줄 하나\n지난 계절이 건네는 안부\n\n잊고 지낸 바람결이\n가만히 마음을 흔든다",
+    "createdAt": "2026-10-20",
+    "hearts": 0,
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Batang', serif"
+    }
   }
 ]
