@@ -3837,5 +3837,16 @@
       "color": "#4A3B32",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "id": 350,
+    "text": "모서리를 세우지 않고\n스스로 몸을 굽힐 줄 아는\n\n억새의 얇은 허리에서\n비로소 배우는\n바람을 견디는 법",
+    "createdAt": "2026-10-21",
+    "hearts": 0,
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
   }
 ]
