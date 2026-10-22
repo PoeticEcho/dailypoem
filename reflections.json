@@ -3848,5 +3848,16 @@
       "color": "#3E4337",
       "fontFamily": "'Gowun Dodum', sans-serif"
     }
+  },
+  {
+    "id": 351,
+    "text": "새벽 네 시의 푸른 안개 속에서\n홀로 깨어 마시는\n미지근한 물 한 모금\n\n지친 속을 데우며 스며드는\n가장 조용한 형태의 위로",
+    "createdAt": "2026-10-22",
+    "hearts": 0,
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
   }
 ]
