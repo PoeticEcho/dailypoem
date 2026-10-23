@@ -3859,5 +3859,16 @@
       "color": "#2D3748",
       "fontFamily": "'Nanum Myeongjo', serif"
     }
+  },
+  {
+    "id": 352,
+    "text": "모서리가 닳은 스웨터는\n가만히 내 체온을 품어 안고\n\n지친 마음의 주름까지도\n둥글고 따스하게 덮어준다",
+    "createdAt": "2026-10-23",
+    "hearts": 0,
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
   }
 ]
