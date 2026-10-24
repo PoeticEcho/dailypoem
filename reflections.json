@@ -3870,5 +3870,16 @@
       "color": "#3C342C",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "id": 353,
+    "text": "비 갠 뒤 돌담길을 걷다\n풀잎 끝에 매달린 빛을 본다\n\n지친 하루의 무거움도\n맑은 방울 하나로 떨어져\n내 마음은 다시 투명해지고",
+    "createdAt": "2026-10-24",
+    "hearts": 0,
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
   }
 ]
