@@ -3892,5 +3892,38 @@
       "color": "#4E3E32",
       "fontFamily": "'MaruBuri', serif"
     }
+  },
+  {
+    "id": 355,
+    "text": "나란히 걷는 좁은 길목에서\n우산은 너에게 조금 더 기울고\n\n젖어드는 내 어깨 위로\n다정한 온기가 피어난다",
+    "createdAt": "2026-10-25",
+    "hearts": 0,
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "id": 356,
+    "text": "세찬 바람 불어올 때\n몸을 낮추는 법을 배우고\n\n부러지지 않는 대신\n조용히 눕는 법을 안다\n\n오늘의 나도 그들처럼",
+    "createdAt": "2026-10-25",
+    "hearts": 0,
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "id": 357,
+    "text": "간이역 철길 끝에서\n스쳐 가는 바람처럼\n\n머물지 않아 아름다운\n오늘의 안부를 묻는다",
+    "createdAt": "2026-10-25",
+    "hearts": 0,
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
   }
 ]
