@@ -3881,5 +3881,16 @@
       "color": "#2E4235",
       "fontFamily": "'Gowun Dodum', sans-serif"
     }
+  },
+  {
+    "id": 354,
+    "text": "한 장 남은 달력 앞에\n조용히 손을 모으고\n\n못다 이룬 꿈보다\n견뎌낸 날들을 쓰다듬는다",
+    "createdAt": "2026-10-25",
+    "hearts": 0,
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#4E3E32",
+      "fontFamily": "'MaruBuri', serif"
+    }
   }
 ]
