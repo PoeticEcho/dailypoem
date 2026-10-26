@@ -3925,5 +3925,16 @@
       "color": "#2D3748",
       "fontFamily": "'Nanum Myeongjo', serif"
     }
+  },
+  {
+    "id": 358,
+    "text": "안경을 천천히 벗어두면\n세상의 날 선 모서리들이\n\n부드러운 물결처럼\n포근하게 흐려지는 밤",
+    "createdAt": "2026-10-26",
+    "hearts": 0,
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Gowun Batang', serif"
+    }
   }
 ]
