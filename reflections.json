@@ -3936,5 +3936,16 @@
       "color": "#EAE6DE",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "id": 359,
+    "text": "세상이 등을 밀어낼 때\n몸을 낮추는 법을 배운다\n\n부러지지 않고 흘러가며\n다시 푸르게 일어서는\n유연한 숨결 하나",
+    "createdAt": "2026-10-27",
+    "hearts": 0,
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
   }
 ]
