@@ -3947,5 +3947,16 @@
       "color": "#3E4337",
       "fontFamily": "'Gowun Dodum', sans-serif"
     }
+  },
+  {
+    "id": 360,
+    "text": "오후 세 시의 빛을 입고\n베란다에 매달려\n\n바스락 바스락\n마음까지 하얘지는 소리",
+    "createdAt": "2026-10-28",
+    "hearts": 0,
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
   }
 ]
