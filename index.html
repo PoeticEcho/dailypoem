@@ -418,18 +418,19 @@
       position: absolute;
       top: calc(100% + 0.5rem);
       right: 0;
-      background: rgba(250, 247, 242, 0.96);
+      background: rgba(250, 247, 242, 0.97);
       color: #2E2925;
       border: 1px solid rgba(128, 128, 128, 0.28);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-radius: 18px;
-      padding: 0.45rem 0.52rem;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+      padding: 0.52rem 0.58rem;
+      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.22);
       display: flex;
       flex-direction: column;
-      gap: 0.26rem;
-      min-width: 182px;
+      gap: 0.28rem;
+      min-width: 242px;
+      max-width: 288px;
       opacity: 0;
       pointer-events: none;
       transform: translateY(-8px) scale(0.96);
@@ -438,7 +439,7 @@
       z-index: 170;
     }
     body.dark-ui #controls-popup {
-      background: rgba(26, 29, 36, 0.96);
+      background: rgba(26, 29, 36, 0.97);
       color: #E6E9EF;
       border-color: rgba(255, 255, 255, 0.16);
     }
@@ -448,27 +449,53 @@
       transform: translateY(0) scale(1);
     }
 
+    .popup-section-header {
+      font-size: 0.67rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: rgba(128, 128, 128, 0.88);
+      padding: 0.22rem 0.38rem 0.06rem;
+      font-family: 'Gowun Dodum', sans-serif;
+    }
+    .popup-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.24rem;
+    }
+    .popup-row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.22rem;
+    }
+
     .popup-item-btn {
-      background: rgba(128, 128, 128, 0.06);
+      background: rgba(128, 128, 128, 0.07);
       border: 1px solid transparent;
       color: inherit;
       font-family: 'Gowun Dodum', sans-serif;
       font-size: 0.81rem;
-      padding: 0.38rem 0.62rem;
-      border-radius: 10px;
+      padding: 0.38rem 0.58rem;
+      border-radius: 9px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      transition: all 0.2s ease;
+      gap: 0.44rem;
+      transition: all 0.18s ease;
       white-space: nowrap;
       text-align: left;
       width: 100%;
       text-decoration: none;
     }
+    .popup-row-2 .popup-item-btn,
+    .popup-row-3 .popup-item-btn {
+      justify-content: center;
+      padding: 0.36rem 0.32rem;
+      gap: 0.28rem;
+      font-size: 0.77rem;
+    }
     .popup-item-btn:hover {
-      background: rgba(128, 128, 128, 0.16);
-      transform: translateX(-2px);
+      background: rgba(128, 128, 128, 0.17);
+      transform: translateY(-1px);
     }
     .popup-item-btn.active-toggle {
       background: rgba(128, 128, 128, 0.24);
@@ -477,8 +504,8 @@
     }
     .popup-divider {
       height: 1px;
-      background: rgba(128, 128, 128, 0.18);
-      margin: 0.1rem 0.2rem;
+      background: rgba(128, 128, 128, 0.16);
+      margin: 0.14rem 0.2rem;
     }
 
     /* 🎷 자체 내장 Pixelmood Graphite 카세트 플레이어 위젯 */
@@ -1619,22 +1646,7 @@
 
     <!-- 일반 설정 팝업 메뉴 -->
     <div id="controls-popup" role="menu">
-      <button class="popup-item-btn" id="popShareBtn" onclick="shareCurrentPoem(); closeControlsPopup();">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="18" cy="5" r="3"></circle>
-          <circle cx="6" cy="12" r="3"></circle>
-          <circle cx="18" cy="19" r="3"></circle>
-          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-        </svg>
-        <span>현재 시 공유하기</span>
-      </button>
-
-      <button class="popup-item-btn" id="popMusicBtn" onclick="toggleMusic(); closeControlsPopup();">
-        <span id="popMusicIcon">🎵</span>
-        <span id="popMusicText">음악 켜기 (Jazz)</span>
-      </button>
-
+      <div class="popup-section-header">액자 &amp; 사운드</div>
       <button class="popup-item-btn" id="popFrameModeBtn" onclick="cycleFrameMode();">
         <span>🖼️</span>
         <span id="popFrameModeText">모드: 시집 전용 (1.0)</span>
@@ -1645,16 +1657,20 @@
         <span id="popPhotoFitText">여백: 가우시안 블러</span>
       </button>
 
-      <button class="popup-item-btn" id="popNightModeBtn" onclick="cycleNightModeQuick();">
-        <span id="popNightModeIcon">🌙</span>
-        <span id="popNightModeText">야간 조도: 자동(일몰)</span>
-      </button>
+      <div class="popup-row-2">
+        <button class="popup-item-btn" id="popMusicBtn" onclick="toggleMusic(); closeControlsPopup();">
+          <span id="popMusicIcon">🎵</span>
+          <span id="popMusicText">음악 켜기 (Jazz)</span>
+        </button>
+        <button class="popup-item-btn" id="popNightModeBtn" onclick="cycleNightModeQuick();">
+          <span id="popNightModeIcon">🌙</span>
+          <span id="popNightModeText">야간 조도: 자동</span>
+        </button>
+      </div>
 
-      <button class="popup-item-btn" onclick="document.getElementById('inpLocalPhotos').click(); closeControlsPopup();">
-        <span>📁</span>
-        <span id="popLocalPhotoText">내 사진 넣어보기 (웹 테스트)</span>
-      </button>
+      <div class="popup-divider"></div>
 
+      <div class="popup-section-header">사진 큐레이션</div>
       <button class="popup-item-btn" id="popHeartsOnlyBtn" onclick="toggleQuickHeartsFilter(); closeControlsPopup();">
         <span id="popHeartsOnlyIcon">♡</span>
         <span id="popHeartsOnlyText">하트(♥) 모음만 보기</span>
@@ -1665,54 +1681,71 @@
         <span id="popUndoExcludeText">방금 제외한 사진 복원</span>
       </button>
 
-      <button class="popup-item-btn" onclick="openPhotoManagerModal(); closeControlsPopup();">
-        <span>🗂️</span>
-        <span id="popPhotoMgrText">사진 순서 · 제외 관리</span>
-      </button>
-
-      <div class="popup-divider"></div>
-
-      <button class="popup-item-btn" onclick="showPrevPoem(); closeControlsPopup();">
-        <span>⏮</span>
-        <span>이전 시 (좌측 탭)</span>
-      </button>
-
-      <button class="popup-item-btn" onclick="showRandomPoem(false); closeControlsPopup();">
-        <span>⏭</span>
-        <span>다음 시 (우측 탭)</span>
-      </button>
-
-      <button class="popup-item-btn" id="popAutoplayBtn" onclick="toggleAutoPlay(); closeControlsPopup();">
-        <span id="popAutoplayIcon">⏸</span>
-        <span id="popAutoplayText">자동 감상 중 (중앙 탭)</span>
-      </button>
-
-      <button class="popup-item-btn" onclick="cycleAlign(); closeControlsPopup();">
-        <span>↔</span>
-        <span id="popAlignText">정렬: 중앙</span>
-      </button>
-
-      <button class="popup-item-btn" id="popFullscreenBtn" onclick="toggleFullscreen(); closeControlsPopup();">
-        <span>⛶</span>
-        <span id="popFullscreenText">전체 화면 모드</span>
-      </button>
-
-      <div class="popup-divider"></div>
-
-      <div style="display:flex;gap:0.25rem;padding:0.1rem 0.15rem;">
-        <button class="popup-item-btn" style="justify-content:center;padding:0.32rem 0;" onclick="changeFontSize(-1)">가−</button>
-        <button class="popup-item-btn" style="justify-content:center;padding:0.32rem 0;" onclick="changeFontSize(1)">가+</button>
+      <div class="popup-row-2">
+        <button class="popup-item-btn" onclick="openPhotoManagerModal(); closeControlsPopup();">
+          <span>🗂️</span>
+          <span id="popPhotoMgrText">사진 큐레이션</span>
+        </button>
+        <button class="popup-item-btn" onclick="document.getElementById('inpLocalPhotos').click(); closeControlsPopup();">
+          <span>📁</span>
+          <span id="popLocalPhotoText">내 사진 불러오기</span>
+        </button>
       </div>
 
-      <a class="popup-item-btn" id="linkPopupStats" href="./stats.html">
-        <span>📊</span>
-        <span>인기 시 · 신작 통계</span>
-      </a>
+      <div class="popup-divider"></div>
 
-      <button class="popup-item-btn" onclick="toggleSettings(true); closeControlsPopup();">
-        <span>⚙️</span>
-        <span>상세 액자 설정</span>
-      </button>
+      <div class="popup-section-header">감상 &amp; 도구</div>
+      <div class="popup-row-3">
+        <button class="popup-item-btn" onclick="showPrevPoem(); closeControlsPopup();" title="이전 (좌측 탭 / ←키)">
+          <span>⏮</span>
+          <span>이전</span>
+        </button>
+        <button class="popup-item-btn" id="popAutoplayBtn" onclick="toggleAutoPlay(); closeControlsPopup();" title="자동 넘김 재생/일시정지 (스페이스바)">
+          <span id="popAutoplayIcon">⏸</span>
+          <span id="popAutoplayText">자동</span>
+        </button>
+        <button class="popup-item-btn" onclick="showRandomPoem(false); closeControlsPopup();" title="다음 (우측 탭 / →키)">
+          <span>⏭</span>
+          <span>다음</span>
+        </button>
+      </div>
+
+      <div class="popup-row-3">
+        <button class="popup-item-btn" onclick="changeFontSize(-1)" title="글자 작게">가−</button>
+        <button class="popup-item-btn" onclick="changeFontSize(1)" title="글자 크게">가+</button>
+        <button class="popup-item-btn" onclick="cycleAlign(); closeControlsPopup();" title="문단 정렬 변경">
+          <span>↔</span>
+          <span id="popAlignText">중앙</span>
+        </button>
+      </div>
+
+      <div class="popup-row-2">
+        <button class="popup-item-btn" id="popShareBtn" onclick="shareCurrentPoem(); closeControlsPopup();" title="현재 시 링크 복사">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+          <span>시 공유</span>
+        </button>
+        <button class="popup-item-btn" id="popFullscreenBtn" onclick="toggleFullscreen(); closeControlsPopup();" title="전체화면 전환 (F키)">
+          <span>⛶</span>
+          <span id="popFullscreenText">전체화면</span>
+        </button>
+      </div>
+
+      <div class="popup-row-2">
+        <a class="popup-item-btn" id="linkPopupStats" href="./stats.html" title="서재 통계 및 전체 갤러리 관리">
+          <span>📊</span>
+          <span>서재·통계</span>
+        </a>
+        <button class="popup-item-btn" onclick="toggleSettings(true); closeControlsPopup();" title="상세 액자 설정">
+          <span>⚙️</span>
+          <span>상세 설정</span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -1764,10 +1797,10 @@
     <span id="poem-index-badge" style="display:none;"></span>
   </div>
 
-  <!-- 🎷 자체 내장 Pixelmood Graphite 카세트 플레이어 위젯 -->
-  <aside id="pixelmood-dock" aria-label="내장 Pixelmood 플레이어">
+  <!-- 🎷 자체 내장 Poemmood Graphite 카세트 플레이어 위젯 -->
+  <aside id="pixelmood-dock" aria-label="내장 Poemmood 플레이어">
     <div class="pm-top-row">
-      <span>PIXELMOOD · SELF-HOSTED</span>
+      <span>POEMMOOD 2.1 · STUDIO</span>
       <span class="pm-badge" id="pm-status-chip">-READY-</span>
       <button class="pm-close-btn" onclick="togglePixelmoodDock(false)">✕</button>
     </div>
@@ -1941,7 +1974,7 @@
       </div>
       <div class="settings-section">
         <div class="sec-label">
-          <span>🎷 배경 음악 · Peommood 2.1</span>
+          <span>🎷 배경 음악 · Poemmood 2.1</span>
           <label class="toggle-switch">
             <input type="checkbox" id="chkMusicOn" onchange="setMusicState(this.checked)">
             <span class="slider-round"></span>
@@ -4202,6 +4235,8 @@
       }
 
       if (sharedInitialPoemNumber !== null) {
+        CONFIG.frameMode = 'poem_only';
+        syncV2ConfigToUI();
         // 1-based 시 번호(예: 234 -> index 233) 매핑 (0이 입력된 경우 index 0)
         const targetIdx = sharedInitialPoemNumber >= 1
           ? Math.min(reflections.length - 1, sharedInitialPoemNumber - 1)
@@ -4485,164 +4520,244 @@
     // index.html 파일 단 하나만 GitHub Pages에 올려도 별도 폴더 업로드 없이 즉시 세로 블러·화이트 여백·페어링이 작동합니다.
     const CURATED_WEB_SAMPLE_ITEMS = [
       {
-        id: "web_portrait_01",
+        id: "sample_01",
         filename: "sample_01_portrait_golden.jpg",
         src: "https://picsum.photos/id/64/1080/1440",
         localFallback: "./photos/sample_01_portrait_golden.jpg",
         album: "인물_스냅",
-        title: "노을빛 산책길의 초상",
+        title: "들꽃과 노을빛 미소",
         takenAt: "2026-09-28T17:42:10",
-        dateLabel: "2026년 9월 28일 · 노을빛 산책",
-        width: 1080,
-        height: 1440,
-        orientation: "portrait",
-        hasPerson: true,
-        faceCount: 1,
-        focalX: 50.0,
-        focalY: 32.0,
-        dominantHex: "#926b5a",
-        isDarkPhoto: false,
-        hearts: 24
-      },
-      {
-        id: "web_portrait_02",
-        filename: "sample_02_portrait_cafe.jpg",
-        src: "https://picsum.photos/id/65/1080/1620",
-        localFallback: "./photos/sample_02_portrait_cafe.jpg",
-        album: "인물_스냅",
-        title: "오후 세 시, 바람이 머무는 들녘",
-        takenAt: "2026-10-03T15:18:00",
-        dateLabel: "2026년 10월 3일 · 오후의 햇살",
-        width: 1080,
-        height: 1620,
-        orientation: "portrait",
-        hasPerson: true,
-        faceCount: 1,
-        focalX: 48.0,
-        focalY: 30.0,
-        dominantHex: "#8d8277",
-        isDarkPhoto: false,
-        hearts: 29
-      },
-      {
-        id: "web_portrait_03",
-        filename: "sample_03_portrait_twilight.jpg",
-        src: "https://picsum.photos/id/177/1080/1440",
-        localFallback: "./photos/sample_03_portrait_twilight.jpg",
-        album: "가족_일상",
-        title: "배낭을 메고 걸었던 언덕길",
-        takenAt: "2026-10-07T18:35:22",
-        dateLabel: "2026년 10월 7일 · 여행의 기록",
+        dateLabel: "2026 · 가을 오후의 산책",
         width: 1080,
         height: 1440,
         orientation: "portrait",
         hasPerson: true,
         faceCount: 1,
         focalX: 52.0,
-        focalY: 36.0,
-        dominantHex: "#4d5968",
+        focalY: 40.0,
+        dominantHex: "#8d6b56",
         isDarkPhoto: false,
-        hearts: 22
+        hearts: 28
       },
       {
-        id: "web_portrait_04",
-        filename: "sample_08_portrait_warmth.jpg",
-        src: "https://picsum.photos/id/338/1080/1440",
-        localFallback: "./photos/sample_08_portrait_warmth.jpg",
-        album: "가족_일상",
-        title: "파도 소리가 들리는 해변의 오후",
-        takenAt: "2026-10-14T10:12:00",
-        dateLabel: "2026년 10월 14일 · 바닷가 산책",
+        id: "sample_02",
+        filename: "sample_02_portrait_breeze.jpg",
+        src: "https://picsum.photos/id/65/1080/1440",
+        localFallback: "./photos/sample_02_portrait_breeze.jpg",
+        album: "인물_스냅",
+        title: "초원 위 바람의 결",
+        takenAt: "2026-10-03T15:18:00",
+        dateLabel: "2026 · 해질녘 들판",
+        width: 1080,
+        height: 1440,
+        orientation: "portrait",
+        hasPerson: true,
+        faceCount: 1,
+        focalX: 35.0,
+        focalY: 42.0,
+        dominantHex: "#9c8368",
+        isDarkPhoto: false,
+        hearts: 32
+      },
+      {
+        id: "sample_03",
+        filename: "sample_03_portrait_ridge.jpg",
+        src: "https://picsum.photos/id/177/1080/1440",
+        localFallback: "./photos/sample_03_portrait_ridge.jpg",
+        album: "인물_스냅",
+        title: "운해 너머의 능선",
+        takenAt: "2026-10-07T06:35:22",
+        dateLabel: "2026 · 새벽 산행의 기록",
         width: 1080,
         height: 1440,
         orientation: "portrait",
         hasPerson: true,
         faceCount: 1,
         focalX: 50.0,
-        focalY: 35.0,
-        dominantHex: "#7b8b96",
+        focalY: 62.0,
+        dominantHex: "#78848b",
         isDarkPhoto: false,
-        hearts: 31
+        hearts: 25
       },
       {
-        id: "web_portrait_05",
-        filename: "sample_04_vertical_autumn.jpg",
-        src: "https://picsum.photos/id/28/1080/1620",
-        localFallback: "./photos/sample_04_vertical_autumn.jpg",
-        album: "계절_풍경",
-        title: "초록빛 숲길이 열리는 아침",
-        takenAt: "2026-10-10T11:20:45",
-        dateLabel: "2026년 10월 10일 · 고요한 숲길",
+        id: "sample_04",
+        filename: "sample_04_portrait_waves.jpg",
+        src: "https://picsum.photos/id/338/1080/1440",
+        localFallback: "./photos/sample_04_portrait_waves.jpg",
+        album: "인물_스냅",
+        title: "파도 소리에 머무는 시선",
+        takenAt: "2026-10-14T17:12:00",
+        dateLabel: "2026 · 늦오후의 해변",
         width: 1080,
-        height: 1620,
+        height: 1440,
+        orientation: "portrait",
+        hasPerson: true,
+        faceCount: 1,
+        focalX: 70.0,
+        focalY: 55.0,
+        dominantHex: "#6e6a68",
+        isDarkPhoto: true,
+        hearts: 34
+      },
+      {
+        id: "sample_05",
+        filename: "sample_05_family_sunlight.jpg",
+        src: "https://picsum.photos/id/342/1080/1440",
+        localFallback: "./photos/sample_05_family_sunlight.jpg",
+        album: "가족_일상",
+        title: "햇살 속 가벼운 발걸음",
+        takenAt: "2026-10-15T14:20:00",
+        dateLabel: "2026 · 주말 오후의 나들이",
+        width: 1080,
+        height: 1440,
+        orientation: "portrait",
+        hasPerson: true,
+        faceCount: 1,
+        focalX: 52.0,
+        focalY: 52.0,
+        dominantHex: "#7c8188",
+        isDarkPhoto: false,
+        hearts: 29
+      },
+      {
+        id: "sample_06",
+        filename: "sample_06_family_forest.jpg",
+        src: "https://picsum.photos/id/28/1080/1440",
+        localFallback: "./photos/sample_06_family_forest.jpg",
+        album: "가족_일상",
+        title: "초록빛 숲길의 숨결",
+        takenAt: "2026-10-10T11:20:45",
+        dateLabel: "2026 · 숲속 산책로",
+        width: 1080,
+        height: 1440,
         orientation: "portrait",
         hasPerson: false,
         faceCount: 0,
         focalX: 50.0,
-        focalY: 38.0,
-        dominantHex: "#46634b",
+        focalY: 45.0,
+        dominantHex: "#35543c",
         isDarkPhoto: true,
-        hearts: 19
+        hearts: 21
       },
       {
-        id: "web_landscape_06",
-        filename: "sample_05_landscape_family.jpg",
-        src: "https://picsum.photos/id/1015/1920/1440",
-        localFallback: "./photos/sample_05_landscape_family.jpg",
-        album: "계절_풍경",
-        title: "협곡 사이로 흐르는 에메랄드빛 강물",
-        takenAt: "2026-10-11T16:50:12",
-        dateLabel: "2026년 10월 11일 · 강가의 오후",
+        id: "sample_07",
+        filename: "sample_07_family_lake.jpg",
+        src: "https://picsum.photos/id/1011/1920/1080",
+        localFallback: "./photos/sample_07_family_lake.jpg",
+        album: "가족_일상",
+        title: "윤슬 위를 미끄러지는 조각배",
+        takenAt: "2026-10-12T15:30:00",
+        dateLabel: "2026 · 호숫가의 휴일",
         width: 1920,
-        height: 1440,
+        height: 1080,
+        orientation: "landscape",
+        hasPerson: true,
+        faceCount: 1,
+        focalX: 48.0,
+        focalY: 44.0,
+        dominantHex: "#49737a",
+        isDarkPhoto: true,
+        hearts: 36
+      },
+      {
+        id: "sample_08",
+        filename: "sample_08_family_valley.jpg",
+        src: "https://picsum.photos/id/1043/1920/1080",
+        localFallback: "./photos/sample_08_family_valley.jpg",
+        album: "가족_일상",
+        title: "거울 같은 강물과 바위산",
+        takenAt: "2026-10-13T10:45:00",
+        dateLabel: "2026 · 고요한 계곡 캠핑",
+        width: 1920,
+        height: 1080,
+        orientation: "landscape",
+        hasPerson: false,
+        faceCount: 0,
+        focalX: 52.0,
+        focalY: 46.0,
+        dominantHex: "#575c42",
+        isDarkPhoto: true,
+        hearts: 23
+      },
+      {
+        id: "sample_09",
+        filename: "sample_09_season_fjord.jpg",
+        src: "https://picsum.photos/id/1015/1920/1080",
+        localFallback: "./photos/sample_09_season_fjord.jpg",
+        album: "계절_풍경",
+        title: "청록빛 협곡과 하늘의 경계",
+        takenAt: "2026-08-18T14:10:00",
+        dateLabel: "2026 · 깊은 여름의 협곡",
+        width: 1920,
+        height: 1080,
         orientation: "landscape",
         hasPerson: false,
         faceCount: 0,
         focalX: 50.0,
         focalY: 42.0,
-        dominantHex: "#5f7a85",
-        isDarkPhoto: false,
-        hearts: 34
-      },
-      {
-        id: "web_landscape_07",
-        filename: "sample_06_landscape_lake.jpg",
-        src: "https://picsum.photos/id/1018/1920/1440",
-        localFallback: "./photos/sample_06_landscape_lake.jpg",
-        album: "계절_풍경",
-        title: "물안개 피어오르는 새벽 능선",
-        takenAt: "2026-10-12T06:45:30",
-        dateLabel: "2026년 10월 12일 · 새벽 호수",
-        width: 1920,
-        height: 1440,
-        orientation: "landscape",
-        hasPerson: false,
-        faceCount: 0,
-        focalX: 54.0,
-        focalY: 40.0,
-        dominantHex: "#6e7a74",
-        isDarkPhoto: false,
-        hearts: 26
-      },
-      {
-        id: "web_landscape_08",
-        filename: "sample_07_wide_night.jpg",
-        src: "https://picsum.photos/id/1039/1920/1280",
-        localFallback: "./photos/sample_07_wide_night.jpg",
-        album: "계절_풍경",
-        title: "깊은 숲속 폭포와 안개의 호흡",
-        takenAt: "2026-10-13T21:15:00",
-        dateLabel: "2026년 10월 13일 · 숲의 여운",
-        width: 1920,
-        height: 1280,
-        orientation: "landscape",
-        hasPerson: false,
-        faceCount: 0,
-        focalX: 48.0,
-        focalY: 38.0,
-        dominantHex: "#2e483c",
+        dominantHex: "#4b686e",
         isDarkPhoto: true,
-        hearts: 28
+        hearts: 38
+      },
+      {
+        id: "sample_10",
+        filename: "sample_10_season_highland.jpg",
+        src: "https://picsum.photos/id/1018/1920/1080",
+        localFallback: "./photos/sample_10_season_highland.jpg",
+        album: "계절_풍경",
+        title: "안개 낀 초록 언덕의 길",
+        takenAt: "2026-09-05T09:15:30",
+        dateLabel: "2026 · 비 개인 뒤의 고원",
+        width: 1920,
+        height: 1080,
+        orientation: "landscape",
+        hasPerson: false,
+        faceCount: 0,
+        focalX: 55.0,
+        focalY: 45.0,
+        dominantHex: "#4f5d3e",
+        isDarkPhoto: true,
+        hearts: 27
+      },
+      {
+        id: "sample_11",
+        filename: "sample_11_season_waterfall.jpg",
+        src: "https://picsum.photos/id/1039/1920/1080",
+        localFallback: "./photos/sample_11_season_waterfall.jpg",
+        album: "계절_풍경",
+        title: "비취색 숲과 은빛 폭포",
+        takenAt: "2026-07-22T13:40:00",
+        dateLabel: "2026 · 깊은 산속의 여름",
+        width: 1920,
+        height: 1080,
+        orientation: "landscape",
+        hasPerson: false,
+        faceCount: 0,
+        focalX: 35.0,
+        focalY: 48.0,
+        dominantHex: "#345828",
+        isDarkPhoto: true,
+        hearts: 30
+      },
+      {
+        id: "sample_12",
+        filename: "sample_12_season_blossom.jpg",
+        src: "https://picsum.photos/id/106/1920/1080",
+        localFallback: "./photos/sample_12_season_blossom.jpg",
+        album: "계절_풍경",
+        title: "푸른 하늘 아래 피어난 봄꽃",
+        takenAt: "2026-04-16T11:25:00",
+        dateLabel: "2026 · 따스한 봄날의 정원",
+        width: 1920,
+        height: 1080,
+        orientation: "landscape",
+        hasPerson: false,
+        faceCount: 0,
+        focalX: 40.0,
+        focalY: 50.0,
+        dominantHex: "#7b95a8",
+        isDarkPhoto: false,
+        hearts: 31
       }
     ];
     const FALLBACK_MEDIA_ITEMS = CURATED_WEB_SAMPLE_ITEMS;
@@ -5018,6 +5133,24 @@
 
       if (currentDisplayedPhoto) {
         applyFocalPointToSlot(activePhotoSlot, currentDisplayedPhoto);
+
+        // 세로 2장 페어링(diptych) 실시간 반영
+        const slotEl = document.getElementById(`photo-slot-${activePhotoSlot}`);
+        const pairImg = document.getElementById(`fg-pair-${activePhotoSlot}`);
+        if (slotEl && pairImg) {
+          if (CONFIG.photoFitMode === 'diptych' && currentDisplayedPhoto.orientation === 'portrait') {
+            const portraitCandidates = sortedPhotoQueue.filter(p => p.orientation === 'portrait' && p.id !== currentDisplayedPhoto.id);
+            if (portraitCandidates.length > 0) {
+              const pairItem = portraitCandidates[Math.max(0, currentPhotoCursor) % portraitCandidates.length];
+              slotEl.classList.add('has-pair');
+              pairImg.src = pairItem.resolvedUrl || pairItem.src || `./photos/${pairItem.filename}`;
+            } else {
+              slotEl.classList.remove('has-pair');
+            }
+          } else {
+            slotEl.classList.remove('has-pair');
+          }
+        }
       }
     }
 
@@ -6176,7 +6309,22 @@
         syncV2ConfigToUI();
         showNextPhotoSlide(1);
       } else {
+        // FHD 모니터 시연 시 가로 사진 상태에서 여백/페어링 모드로 바꾸면 세로 사진으로 즉시 점프해 여백 효과를 실시간 체감
+        if (currentDisplayedPhoto && currentDisplayedPhoto.orientation !== 'portrait') {
+          const pIdx = sortedPhotoQueue.findIndex(p => p.orientation === 'portrait');
+          if (pIdx !== -1) {
+            currentPhotoCursor = pIdx - 1;
+            syncV2ConfigToUI();
+            showNextPhotoSlide(1);
+            showHudFeedback('✨', `여백 모드: ${PHOTO_FIT_LABELS[CONFIG.photoFitMode]}`);
+            return;
+          }
+        }
         syncV2ConfigToUI();
+        const badge = document.getElementById('poem-index-badge');
+        if (badge && isShowingPhotoScene && sortedPhotoQueue.length > 0) {
+          badge.textContent = `사진 #${currentPhotoCursor + 1} / ${sortedPhotoQueue.length} (${PHOTO_FIT_LABELS[CONFIG.photoFitMode]})`;
+        }
       }
       showHudFeedback('✨', `여백 모드: ${PHOTO_FIT_LABELS[CONFIG.photoFitMode]}`);
     }
@@ -6335,6 +6483,37 @@
       }
     };
 
+    // 키보드 단축키 지원 (FHD 대화면 모니터 및 전시·출품 시연용)
+    window.addEventListener('keydown', (e) => {
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
+
+      if (e.key === 'ArrowLeft') {
+        showPrevPoem();
+      } else if (e.key === 'ArrowRight') {
+        showRandomPoem(false);
+      } else if (e.key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        toggleAutoPlay();
+      } else if (e.key === 'm' || e.key === 'M') {
+        toggleMusic();
+      } else if (e.key === 'v' || e.key === 'V') {
+        cycleFrameMode();
+      } else if (e.key === 'b' || e.key === 'B') {
+        cyclePhotoFitMode();
+      } else if (e.key === 'c' || e.key === 'C') {
+        openPhotoManagerModal();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      } else if (e.key === 'h' || e.key === 'H') {
+        triggerPoemHeart();
+      } else if (e.key === 'Escape') {
+        closeControlsPopup();
+        toggleSettings(false);
+        closePhotoManagerModal();
+        togglePixelmoodDock(false);
+      }
+    });
+
     // 초기화 실행
     loadSavedConfig();
     if (!initialPm1OrEmpty) {
@@ -6344,11 +6523,6 @@
     }
     syncFromPeommoodState(music.getState());
     syncV2ConfigToUI();
-    loadMediaCatalog().then(() => {
-      if (CONFIG.frameMode === 'photo_only' || CONFIG.frameMode === 'photo_poem') {
-        showNextPhotoSlide(1);
-      }
-    });
     fetchDaeguWeather();
     setInterval(fetchDaeguWeather, 30 * 60 * 1000);
     startPixelmoodCanvasRenderer();
@@ -6357,7 +6531,11 @@
     setupEreaderTouchZones();
     wakeActiveUi();
     requestWakeLock();
-    loadReflections();
+
+    // 시작 레이스 컨디션 방지: mediaCatalog를 먼저 확보한 후 loadReflections()를 구동하여 최초 1회만 화면 전환
+    loadMediaCatalog().finally(() => {
+      loadReflections();
+    });
   </script>
 </body>
 </html>

@@ -286,12 +286,14 @@
 
       let localHearts = {};
       try {
-        localHearts = JSON.parse(localStorage.getItem('poetry_user_hearts_v1') || '{}');
+        const h1 = JSON.parse(localStorage.getItem('poetry_hearts_v1') || '{}');
+        const h2 = JSON.parse(localStorage.getItem('poetry_user_hearts_v1') || '{}');
+        localHearts = { ...h2, ...h1 };
       } catch (e) {}
 
       const enriched = poems.map((p, i) => {
         const id = p.id || (i + 1);
-        const add = localHearts[id] || 0;
+        const add = localHearts[String(id)] || localHearts[String(i)] || 0;
         return {
           ...p,
           id,
@@ -348,14 +350,18 @@
           const items = mData.items || [];
           document.getElementById('statTotalPhotos').textContent = `${items.length}장 (${mData.albums?.length || 1}개 앨범)`;
           const webFallbacks = [
-            "https://picsum.photos/id/64/600/800",
-            "https://picsum.photos/id/65/600/900",
-            "https://picsum.photos/id/177/600/800",
-            "https://picsum.photos/id/28/600/900",
-            "https://picsum.photos/id/1015/800/600",
-            "https://picsum.photos/id/1018/800/600",
-            "https://picsum.photos/id/1039/800/540",
-            "https://picsum.photos/id/338/600/800"
+            "https://picsum.photos/id/64/1080/1440",
+            "https://picsum.photos/id/65/1080/1440",
+            "https://picsum.photos/id/177/1080/1440",
+            "https://picsum.photos/id/338/1080/1440",
+            "https://picsum.photos/id/342/1080/1440",
+            "https://picsum.photos/id/28/1080/1440",
+            "https://picsum.photos/id/1011/1920/1080",
+            "https://picsum.photos/id/1043/1920/1080",
+            "https://picsum.photos/id/1015/1920/1080",
+            "https://picsum.photos/id/1018/1920/1080",
+            "https://picsum.photos/id/1039/1920/1080",
+            "https://picsum.photos/id/106/1920/1080"
           ];
           window._statsMediaItems = items;
           renderStatsPhotoManager(webFallbacks);
@@ -380,6 +386,13 @@
       c.excludedMap = c.excludedMap || {};
       c.excludedMap[key] = !c.excludedMap[key];
       saveCuration(c);
+      renderStatsPhotoManager();
+    }
+    function toggleStatsPhotoHeart(key) {
+      let photoHearts = {};
+      try { photoHearts = JSON.parse(localStorage.getItem('dailypoem_photo_hearts_v2') || '{}'); } catch (e) {}
+      photoHearts[key] = (photoHearts[key] || 0) > 0 ? 0 : 1;
+      localStorage.setItem('dailypoem_photo_hearts_v2', JSON.stringify(photoHearts));
       renderStatsPhotoManager();
     }
     function moveStatsPhotoOrder(key, delta) {
@@ -412,14 +425,18 @@
     }
     function renderStatsPhotoManager(webFallbacks) {
       const fbList = webFallbacks || [
-        "https://picsum.photos/id/64/600/800",
-        "https://picsum.photos/id/65/600/900",
-        "https://picsum.photos/id/177/600/800",
-        "https://picsum.photos/id/28/600/900",
-        "https://picsum.photos/id/1015/800/600",
-        "https://picsum.photos/id/1018/800/600",
-        "https://picsum.photos/id/1039/800/540",
-        "https://picsum.photos/id/338/600/800"
+        "https://picsum.photos/id/64/1080/1440",
+        "https://picsum.photos/id/65/1080/1440",
+        "https://picsum.photos/id/177/1080/1440",
+        "https://picsum.photos/id/338/1080/1440",
+        "https://picsum.photos/id/342/1080/1440",
+        "https://picsum.photos/id/28/1080/1440",
+        "https://picsum.photos/id/1011/1920/1080",
+        "https://picsum.photos/id/1043/1920/1080",
+        "https://picsum.photos/id/1015/1920/1080",
+        "https://picsum.photos/id/1018/1920/1080",
+        "https://picsum.photos/id/1039/1920/1080",
+        "https://picsum.photos/id/106/1920/1080"
       ];
       let photoHearts = {};
       try { photoHearts = JSON.parse(localStorage.getItem('dailypoem_photo_hearts_v2') || '{}'); } catch (e) {}
@@ -437,16 +454,32 @@
         const key = it.id || it.filename;
         const isExc = Boolean(c.excludedMap && c.excludedMap[key]);
         const userH = photoHearts[key] || 0;
-        const totalH = (it.hearts || 0) + userH;
         if (statsPhotoFilter === 'hearts') return !isExc && (userH > 0);
         if (statsPhotoFilter === 'excluded') return isExc;
         return true;
       });
+
+      if (filtered.length === 0) {
+        pgEl.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 3.5rem 1rem; color: var(--muted); font-family: 'Gowun Dodum', sans-serif;">
+            <div style="font-size: 2.4rem; margin-bottom: 0.6rem;">${statsPhotoFilter === 'hearts' ? '♡' : '🗂️'}</div>
+            <div style="font-size: 1.05rem; font-weight: 700; color: var(--ink); margin-bottom: 0.35rem;">
+              ${statsPhotoFilter === 'hearts' ? '아직 하트를 누른 사진이 없습니다' : '해당 조건의 사진이 없습니다'}
+            </div>
+            <div style="font-size: 0.85rem; max-width: 420px; margin: 0 auto;">
+              ${statsPhotoFilter === 'hearts' ? '액자 감상 중 사진을 더블탭하거나 아래 전체 사진에서 하트(♥)를 누르면 베스트컷에 모입니다.' : '전체 사진 탭에서 전체 앨범 목록을 확인하실 수 있습니다.'}
+            </div>
+          </div>
+        `;
+        return;
+      }
+
       pgEl.innerHTML = filtered.map((it, idx) => {
         const key = it.id || it.filename;
         const isExc = Boolean(c.excludedMap && c.excludedMap[key]);
         if (!isExc) playSeq++;
         const fb = fbList[idx % fbList.length];
+        const isHearted = (photoHearts[key] || 0) > 0;
         const hCount = (it.hearts || 0) + (photoHearts[key] || 0);
         const title = (c.titleMap && c.titleMap[key]) || it.title;
         return `
@@ -461,9 +494,11 @@
             <div class="photo-meta">
               <div style="display:flex;justify-content:space-between;align-items:center;">
                 <span style="font-weight:600;color:var(--ink);">${title}</span>
-                <span style="color:var(--accent);font-weight:600;">♥ ${hCount}</span>
+                <button class="btn" style="padding:0.18rem 0.5rem;font-size:0.72rem;color:${isHearted ? 'var(--accent)' : 'inherit'};border-color:${isHearted ? 'rgba(184,93,82,0.45)' : 'var(--border)'};" onclick="toggleStatsPhotoHeart('${key}')" title="내 하트(♥) 공감 토글">
+                  ${isHearted ? '♥' : '♡'} ${hCount}
+                </button>
               </div>
-              <div style="color:var(--muted);margin-top:0.15rem;">${it.orientation === 'portrait' ? '📱 세로 비율' : '🖼️ 가로 비율'} · ${it.hasPerson ? `👤 인물 초점(${it.focalX}%, ${it.focalY}%)` : '🌿 풍경 중심'}</div>
+              <div style="color:var(--muted);margin-top:0.15rem;">📁 ${it.album || '갤러리'} · ${it.orientation === 'portrait' ? '📱 세로' : '🖼️ 가로'} · ${it.hasPerson ? `👤 인물 초점(${it.focalX}%, ${it.focalY}%)` : '🌿 풍경'}</div>
               <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.55rem;padding-top:0.45rem;border-top:1px dashed var(--border);">
                 <button class="btn" style="padding:0.2rem 0.55rem;font-size:0.72rem;" onclick="toggleStatsPhotoExclude('${key}')">
                   ${isExc ? '🚫 제외됨 (복원)' : '✅ 상영 포함'}
