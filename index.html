@@ -416,7 +416,7 @@
     /* 일반 설정 팝업 메뉴 */
     #controls-popup {
       position: absolute;
-      top: calc(100% + 0.5rem);
+      top: calc(100% + 0.45rem);
       right: 0;
       background: rgba(250, 247, 242, 0.97);
       color: #2E2925;
@@ -424,13 +424,16 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-radius: 18px;
-      padding: 0.52rem 0.58rem;
+      padding: 0.44rem 0.5rem;
       box-shadow: 0 16px 42px rgba(0, 0, 0, 0.22);
       display: flex;
       flex-direction: column;
-      gap: 0.28rem;
-      min-width: 242px;
-      max-width: 288px;
+      gap: 0.22rem;
+      width: 272px;
+      max-width: calc(100vw - 1.6rem);
+      box-sizing: border-box;
+      overflow-x: hidden;
+      overflow-y: hidden;
       opacity: 0;
       pointer-events: none;
       transform: translateY(-8px) scale(0.96);
@@ -450,22 +453,26 @@
     }
 
     .popup-section-header {
-      font-size: 0.67rem;
+      font-size: 0.65rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      color: rgba(128, 128, 128, 0.88);
-      padding: 0.22rem 0.38rem 0.06rem;
+      letter-spacing: 0.05em;
+      color: rgba(128, 128, 128, 0.85);
+      padding: 0.16rem 0.32rem 0.04rem;
       font-family: 'Gowun Dodum', sans-serif;
     }
     .popup-row-2 {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 0.24rem;
+      width: 100%;
+      box-sizing: border-box;
     }
     .popup-row-3 {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
       gap: 0.22rem;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .popup-item-btn {
@@ -473,25 +480,34 @@
       border: 1px solid transparent;
       color: inherit;
       font-family: 'Gowun Dodum', sans-serif;
-      font-size: 0.81rem;
-      padding: 0.38rem 0.58rem;
+      font-size: 0.78rem;
+      padding: 0.32rem 0.48rem;
       border-radius: 9px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.44rem;
+      gap: 0.36rem;
       transition: all 0.18s ease;
       white-space: nowrap;
       text-align: left;
       width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
       text-decoration: none;
+      overflow: hidden;
+    }
+    .popup-item-btn span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
     }
     .popup-row-2 .popup-item-btn,
     .popup-row-3 .popup-item-btn {
       justify-content: center;
-      padding: 0.36rem 0.32rem;
-      gap: 0.28rem;
-      font-size: 0.77rem;
+      padding: 0.3rem 0.24rem;
+      gap: 0.22rem;
+      font-size: 0.74rem;
     }
     .popup-item-btn:hover {
       background: rgba(128, 128, 128, 0.17);
@@ -504,8 +520,8 @@
     }
     .popup-divider {
       height: 1px;
-      background: rgba(128, 128, 128, 0.16);
-      margin: 0.14rem 0.2rem;
+      background: rgba(128, 128, 128, 0.15);
+      margin: 0.1rem 0.2rem;
     }
 
     /* 🎷 자체 내장 Pixelmood Graphite 카세트 플레이어 위젯 */
@@ -1660,11 +1676,11 @@
       <div class="popup-row-2">
         <button class="popup-item-btn" id="popMusicBtn" onclick="toggleMusic(); closeControlsPopup();">
           <span id="popMusicIcon">🎵</span>
-          <span id="popMusicText">음악 켜기 (Jazz)</span>
+          <span id="popMusicText">음악 (Jazz)</span>
         </button>
         <button class="popup-item-btn" id="popNightModeBtn" onclick="cycleNightModeQuick();">
           <span id="popNightModeIcon">🌙</span>
-          <span id="popNightModeText">야간 조도: 자동</span>
+          <span id="popNightModeText">조도: 자동</span>
         </button>
       </div>
 
@@ -1673,7 +1689,7 @@
       <div class="popup-section-header">사진 큐레이션</div>
       <button class="popup-item-btn" id="popHeartsOnlyBtn" onclick="toggleQuickHeartsFilter(); closeControlsPopup();">
         <span id="popHeartsOnlyIcon">♡</span>
-        <span id="popHeartsOnlyText">하트(♥) 모음만 보기</span>
+        <span id="popHeartsOnlyText">♥ 하트 모음 보기</span>
       </button>
 
       <button class="popup-item-btn" id="popUndoExcludeBtn" style="display:none;" onclick="undoLastQuickExclude(); closeControlsPopup();">
@@ -1684,11 +1700,11 @@
       <div class="popup-row-2">
         <button class="popup-item-btn" onclick="openPhotoManagerModal(); closeControlsPopup();">
           <span>🗂️</span>
-          <span id="popPhotoMgrText">사진 큐레이션</span>
+          <span id="popPhotoMgrText">사진 관리</span>
         </button>
         <button class="popup-item-btn" onclick="document.getElementById('inpLocalPhotos').click(); closeControlsPopup();">
           <span>📁</span>
-          <span id="popLocalPhotoText">내 사진 불러오기</span>
+          <span id="popLocalPhotoText">내 사진 추가</span>
         </button>
       </div>
 
@@ -1702,7 +1718,7 @@
         </button>
         <button class="popup-item-btn" id="popAutoplayBtn" onclick="toggleAutoPlay(); closeControlsPopup();" title="자동 넘김 재생/일시정지 (스페이스바)">
           <span id="popAutoplayIcon">⏸</span>
-          <span id="popAutoplayText">자동</span>
+          <span id="popAutoplayText">자동 재생</span>
         </button>
         <button class="popup-item-btn" onclick="showRandomPoem(false); closeControlsPopup();" title="다음 (우측 탭 / →키)">
           <span>⏭</span>
@@ -1715,7 +1731,7 @@
         <button class="popup-item-btn" onclick="changeFontSize(1)" title="글자 크게">가+</button>
         <button class="popup-item-btn" onclick="cycleAlign(); closeControlsPopup();" title="문단 정렬 변경">
           <span>↔</span>
-          <span id="popAlignText">중앙</span>
+          <span id="popAlignText">중앙 정렬</span>
         </button>
       </div>
 
@@ -3384,7 +3400,7 @@
       const container = document.getElementById('poem-container');
       if (container) container.style.textAlign = align;
       const popText = document.getElementById('popAlignText');
-      if (popText) popText.textContent = `정렬: ${ALIGN_LABELS[align]}`;
+      if (popText) popText.textContent = `${ALIGN_LABELS[align]} 정렬`;
     }
 
     function cycleAlign() {
@@ -3895,7 +3911,7 @@
         lblThemeInfo.textContent = `${themeTitle} · ${keyAndChord} · ${meta.bpm || 72} BPM (${secKo})`;
       }
 
-      if (popMusicText) popMusicText.textContent = isMusicPlaying ? `음악 끄기 (${themeTitle})` : `음악 켜기 (${stLabel})`;
+      if (popMusicText) popMusicText.textContent = isMusicPlaying ? "음악 끄기" : `음악 (${stLabel || "재생"})`;
       if (popMusicIcon) popMusicIcon.textContent = isMusicPlaying ? '⏹' : '🎵';
       if (popMusicBtn) popMusicBtn.classList.toggle('active-toggle', isMusicPlaying);
     }
@@ -4396,7 +4412,7 @@
       const popText = document.getElementById("popAutoplayText");
       if (popIcon && popText) {
         popIcon.textContent = isAutoPlaying ? "⏸" : "▶";
-        popText.textContent = isAutoPlaying ? "자동 감상 중 (중앙 탭)" : "자동 넘김 멈춤";
+        popText.textContent = isAutoPlaying ? "자동 재생" : "일시정지";
       }
     }
 
@@ -4825,11 +4841,11 @@
     let isAmbientNightNow = false;
 
     const NIGHT_MODE_SHORT_LABELS = {
-      auto_solar: '자동(일몰·날씨)',
-      auto_camera: '실시간 조도센서',
-      always_night: '야간 모드 켜짐',
-      sleep_clock: '심야 달빛 시계',
-      off: '주간 밝기 고정'
+      auto_solar: '자동',
+      auto_camera: '센서',
+      always_night: '야간',
+      sleep_clock: '심야',
+      off: '주간'
     };
 
     function updateScreenBrightness(val) {
@@ -5042,7 +5058,7 @@
       const popText = document.getElementById('popNightModeText');
       if (popIcon && popText) {
         popIcon.textContent = isAmbientNightNow ? '🌙' : (mode === 'auto_camera' ? '💡' : '☀️');
-        popText.textContent = `야간·조도: ${NIGHT_MODE_SHORT_LABELS[mode] || '자동'}`;
+        popText.textContent = `조도: ${NIGHT_MODE_SHORT_LABELS[mode] || '자동'}`;
       }
     }
 
@@ -5319,8 +5335,8 @@
       const popMgr = document.getElementById('popPhotoMgrText');
       if (popMgr) {
         popMgr.textContent = exc > 0
-          ? `사진 관리 (상영 ${inc} / 제외 ${exc})`
-          : `사진 순서 · 제외 관리 (${inc}장)`;
+          ? `사진 관리 (${inc}/${exc})`
+          : `사진 관리 (${inc}장)`;
       }
     }
 
@@ -5422,7 +5438,7 @@
       if (popBtn) popBtn.classList.toggle('active-toggle', isHeartsOnlyCollectionActive);
       if (popIcon) popIcon.textContent = isHeartsOnlyCollectionActive ? '♥' : '♡';
       if (popText) {
-        popText.textContent = isHeartsOnlyCollectionActive ? '하트(♥) 모음 감상 중 (해제)' : '하트(♥) 누른 것만 모아보기';
+        popText.textContent = isHeartsOnlyCollectionActive ? '♥ 모음 해제' : '♥ 하트 모음 보기';
       }
     }
 
@@ -6039,7 +6055,7 @@
             }
             syncV2ConfigToUI();
             const popLocalTxt = document.getElementById('popLocalPhotoText');
-            if (popLocalTxt) popLocalTxt.textContent = `내 사진 (${loadedItems.length}장 테스트 중)`;
+            if (popLocalTxt) popLocalTxt.textContent = `내 사진 (${loadedItems.length}장)`;
             renderPhotoManagerGrid();
             showHudFeedback('📸', `내 사진 ${loadedItems.length}장 로드 완료 (🗂️ 사진 관리에서 순서·제외 가능)`);
             showNextPhotoSlide(1);
@@ -6058,7 +6074,7 @@
       if (!reflections || reflections.length === 0) return FALLBACK_POEMS[0];
       const shortCandidates = reflections.filter(p => {
         const lines = (p.text || '').split('\n').map(l => l.trim()).filter(Boolean);
-        return lines.length <= 7;
+        return lines.length <= 8;
       });
       const pool = shortCandidates.length > 0 ? shortCandidates : reflections;
 

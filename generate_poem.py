@@ -142,6 +142,80 @@ POETIC_THEMES = [
     "한 해의 달력이 얇아질 무렵, 이루지 못한 일보다 무사히 견뎌낸 날들을 쓰다듬는 마음",
 ]
 
+# 📜 시적 다양성을 위한 4대 서정시 구조 스타일 (기존 시 DB 4~8행 황금비율 기반)
+POEM_FORM_STYLES = [
+    {
+        "name": "6~8행 3연 점층 서정시 (사유와 깊은 여운)",
+        "target_lines": "6~8행 (3연 구성: 2~3행 / 2~3행 / 2~3행)",
+        "structure_guide": (
+            "- 1연 (2~3행): 계절의 온도, 창밖 풍경, 일상의 작은 사물에 대한 스냅사진적 포착\n"
+            "- 2연 (2~3행): 내면의 고요한 관조와 시선의 전환\n"
+            "- 3연 (2~3행): 마음을 조용히 안아주는 따뜻한 위로와 긴 여운"
+        ),
+        "example": (
+            "가만히 귀 기울이면\n"
+            "바람에도 제각기 다른 결이 있다\n\n"
+            "흔들리며 피어난 풀잎이\n"
+            "서로의 어깨를 괼 때\n\n"
+            "세상은 비로소\n"
+            "따스한 온도로 물든다\n"
+            "너의 오늘 하루도 그러하기를"
+        ),
+        "example_lines": "7행",
+    },
+    {
+        "name": "7~8행 2~3연 서정 산책시 (이야기와 따스한 독백)",
+        "target_lines": "7~8행 (2연 또는 3연 구성)",
+        "structure_guide": (
+            "- 1연 (3~4행): 퇴근길 골목길, 식탁 위 찻잔, 책상 모퉁이 등 친근한 일상의 순간\n"
+            "- 2연 (3~4행): 서두르지 않고 묵묵히 걸어온 시간에 건네는 다정한 인정과 축복"
+        ),
+        "example": (
+            "골목길 끝 작은 등불이 켜지면\n"
+            "하루의 그림자들도\n"
+            "제 집을 찾아 순해진다\n\n"
+            "서투른 발걸음으로 헤맨 오늘이지만\n"
+            "길을 잃었던 것은 아니다\n\n"
+            "모퉁이를 돌 때마다\n"
+            "조금씩 단단해지던 우리들의 마음"
+        ),
+        "example_lines": "8행",
+    },
+    {
+        "name": "5~6행 2연 대화 서정시 (시선의 발견과 울림)",
+        "target_lines": "5~6행 (2연 구성: 2~3행 / 2~3행)",
+        "structure_guide": (
+            "- 1연 (2~3행): 빗방울, 창가의 화분, 그늘처럼 작은 존재의 발견\n"
+            "- 2연 (2~3행): 그 존재가 내게 건네는 무언의 격려"
+        ),
+        "example": (
+            "유리창에 맺힌 빗방울 하나\n"
+            "길을 내며 천천히 흘러내린다\n\n"
+            "서두르지 않아도\n"
+            "어느새 닿아야 할 곳에 가 닿는\n"
+            "너의 묵묵한 발걸음처럼"
+        ),
+        "example_lines": "5행",
+    },
+    {
+        "name": "4~5행 압축 단시 (순간의 스냅사진과 온기)",
+        "target_lines": "4~5행 (2연 구성)",
+        "structure_guide": (
+            "- 군더더기를 덜어내고 맑고 투명한 시어로 순간의 온기를 포착\n"
+            "- 짧지만 잔잔하게 퍼져나가는 마음의 파문"
+        ),
+        "example": (
+            "창가에 놓인 물 한 잔이\n"
+            "아침 햇살을 둥글게 모은다\n\n"
+            "비워져 있기에\n"
+            "빛을 가득 담는 마음\n"
+            "오늘의 나도 그렇게 맑기를"
+        ),
+        "example_lines": "5행",
+    },
+]
+
+
 
 def split_poetic_line(line: str, max_chars: int = 19) -> list[str]:
     """어절과 문장 호흡 단위로 자연스럽게 행갈이하여 모든 행이 max_chars 이하가 되도록 다듬습니다."""
@@ -193,23 +267,22 @@ def split_poetic_line(line: str, max_chars: int = 19) -> list[str]:
     return split_poetic_line(left_str, max_chars) + split_poetic_line(right_str, max_chars)
 
 
-def polish_poem_breathing(text: str, max_chars: int = 19, max_total_lines: int = 7) -> str:
-    """시의 연(stanza)과 행(line) 호흡을 다듬고, 행갈이 후 7줄을 초과하면 연 단위로 깔끔하게 갈무리합니다."""
+def polish_poem_breathing(text: str, max_chars: int = 19, max_total_lines: int = 8) -> str:
+    """시의 연(stanza)과 행(line) 호흡을 다듬고, 행갈이 후 최대 행 수(기본 8줄)를 초과하면 연 단위로 갈무리합니다."""
     text = re.sub(r"\r\n?", "\n", text.strip())
     text = re.sub(r"\n{3,}", "\n\n", text)
     raw_stanzas = [s.strip() for s in text.split("\n\n") if s.strip()]
 
     if len(raw_stanzas) == 1:
         raw_lines = [l.strip() for l in raw_stanzas[0].split("\n") if l.strip()]
-        raw_stanzas = []
-        chunk = []
-        for l in raw_lines:
-            chunk.append(l)
-            if len(chunk) >= 2:
-                raw_stanzas.append("\n".join(chunk))
-                chunk = []
-        if chunk:
-            raw_stanzas.append("\n".join(chunk))
+        if len(raw_lines) >= 6:
+            mid = len(raw_lines) // 2
+            raw_stanzas = ["\n".join(raw_lines[:mid]), "\n".join(raw_lines[mid:])]
+        elif len(raw_lines) >= 4:
+            mid = len(raw_lines) // 2
+            raw_stanzas = ["\n".join(raw_lines[:mid]), "\n".join(raw_lines[mid:])]
+        else:
+            raw_stanzas = ["\n".join(raw_lines)]
 
     new_stanzas = []
     for st in raw_stanzas:
@@ -230,7 +303,7 @@ def polish_poem_breathing(text: str, max_chars: int = 19, max_total_lines: int =
                 acc += len(st)
             else:
                 remain = max_total_lines - acc
-                if remain >= 2 and len(trimmed_stanzas) == 1:
+                if remain >= 2:
                     trimmed_stanzas.append(st[:remain])
                 break
         if len(trimmed_stanzas) >= 2:
@@ -288,21 +361,21 @@ def is_too_similar(candidate: str, existing_poems: list[dict], threshold: float 
 
 
 def validate_poem_quality(text: str, existing_poems: list[dict]) -> tuple[bool, str]:
-    """생성된 시가 감성 시집의 기준(4~7줄 이내의 단시 호흡, 연 구분, 독창성)을 충족하는지 검증합니다."""
+    """생성된 시가 감성 시집의 기준(4~8줄 서정시 호흡, 적정 행 길이, 표절/중복 방지)을 충족하는지 검증합니다."""
     if not text or len(text.strip()) < 24:
         return False, "시 본문이 너무 짧습니다."
 
     stanzas = [s.strip() for s in text.strip().split("\n\n") if s.strip()]
-    if len(stanzas) < 2 or len(stanzas) > 3:
-        return False, f"연(stanza) 개수가 부적절합니다 ({len(stanzas)}연). 2~3연이어야 합니다."
+    if len(stanzas) < 1 or len(stanzas) > 4:
+        return False, f"연(stanza) 개수가 부적절합니다 ({len(stanzas)}연). 1~4연 사이여야 합니다."
 
     lines = [l.strip() for l in text.strip().split("\n") if l.strip()]
-    if len(lines) < 4 or len(lines) > 7:
-        return False, f"전체 행 수가 부적절합니다 ({len(lines)}행). 최대 7줄(4~7행) 이내여야 합니다."
+    if len(lines) < 4 or len(lines) > 8:
+        return False, f"전체 행 수가 부적절합니다 ({len(lines)}행). 4~8행 범위여야 합니다."
 
     max_len = max(len(l) for l in lines)
-    if max_len > 20:
-        return False, f"행 길이가 너무 깁니다 (최대 {max_len}자). 19자 이하여야 합니다."
+    if max_len > 22:
+        return False, f"행 길이가 너무 깁니다 (최대 {max_len}자). 20자 내외여야 합니다."
 
     if is_too_similar(text, existing_poems):
         return False, "기존 시집에 수록된 시와 표현/소재 유사도가 높습니다."
@@ -310,7 +383,10 @@ def validate_poem_quality(text: str, existing_poems: list[dict]) -> tuple[bool, 
     return True, "통과"
 
 
-def build_prompt(theme: str, recent_openings: list[str]) -> str:
+def build_prompt(theme: str, recent_openings: list[str], style_spec: dict = None) -> str:
+    if not style_spec:
+        style_spec = random.choice(POEM_FORM_STYLES)
+
     palette_descriptions = "\n".join(
         [
             f"{i}: 배경 {p['background']}, 글자색 {p['color']}, 5대 정예 글꼴 {p['fontFamily']} ({p['name']})"
@@ -319,30 +395,33 @@ def build_prompt(theme: str, recent_openings: list[str]) -> str:
     )
     recent_str = "\n".join(f"- {op}" for op in recent_openings[-12:]) if recent_openings else "- (없음)"
 
-    return f"""당신은 지친 하루 끝에 짧은 호흡으로 깊은 여운과 힐링을 전하는 한국 현대 서정시인입니다.
-나태주, 류시화 시인의 단시(짧은 시)처럼 4~7줄 이내의 간결하고 투명한 언어로 마음을 조용히 안아주는 감성 시를 씁니다.
+    return f"""당신은 지친 하루 끝에 깊은 여운과 힐링을 전하는 한국 현대 서정시인입니다.
+나태주, 류시화, 기형도 시인의 감수성처럼 정갈하고 투명한 언어로 마음을 조용히 안아주는 감성 시를 씁니다.
 
 이번 시의 중심 모티프(소재):
 👉 「{theme}」
 
+오늘 지어낼 시의 지향 형식:
+✨ **{style_spec['name']}**
+- 목표 행(줄) 수: **{style_spec['target_lines']}**
+- 형식 및 호흡 가이드:
+{style_spec['structure_guide']}
+
 다음 엄격한 작시 기준을 반드시 지켜 한국어 힐링 감성 시 한 편을 지어주세요:
 
-1. **최대 7줄 이내의 응축된 단시 호흡 (가장 중요)**:
-   - 전체 행(줄) 수는 빈 줄을 제외하고 **반드시 4행~6행(최대 7행 이하)**으로 간결하게 쓰세요.
-   - 한 행은 **8~16자 내외(최대 18자 이하)**로 짧게 끊어 한 줄이 화면에서 절대 두 줄로 꺾이지 않게 하세요.
-   - 총 **2연 또는 3연**으로 구성하고, 연과 연 사이에는 반드시 빈 줄(\\n\\n)을 넣어주세요.
+1. **4~8행 이내의 정제된 서정시 호흡 (가장 중요)**:
+   - 전체 행(줄) 수는 빈 줄을 제외하고 **반드시 4행~8행 사이(최소 4행, 최대 8행 이하)**로 작성하세요. (절대 8행을 초과하거나 3행 이하가 되지 않도록 하세요)
+   - 한 행은 **8~16자 내외(최대 18자 이하)**로 알맞게 끊어 한 줄이 화면에서 두 줄로 어색하게 꺾이지 않게 하세요.
+   - 연과 연 사이에는 반드시 빈 줄(\\n\\n)을 넣어 호흡을 쉬어가게 해주세요. (총 2연~3연 권장)
 
 2. **정서와 표현의 품격**:
-   - 설명하려 하지 말고, 한 장면의 이미지와 온기를 스냅사진처럼 포착해 깊은 여운을 남기세요.
+   - 직접 설명하거나 교훈을 주려 하지 말고, 한 장면의 이미지와 온기를 스냅사진처럼 포착해 깊은 여운을 남기세요.
+   - 매일 똑같은 4행 틀에 갇히지 말고, 오늘은 위에 제시된 **{style_spec['target_lines']}**의 호흡과 리듬을 살려 자연스럽고 깊이 있게 펼쳐주세요.
    - 최근 생성된 아래 첫 행들과 겹치지 않는 새로운 시적 첫 문장으로 시작하세요:
 {recent_str}
 
-3. **우수 단시(4~6행) 예시**:
-[예시 1]
-느리게 걸어도 괜찮다\\n길가의 들꽃은\\n\\n천천히 걷는 사람에게만\\n제 얼굴을 보여준다
-
-[예시 2]
-창가에 놓인 물 한 잔이\\n아침 햇살을 둥글게 모은다\\n\\n비워져 있기에\\n빛을 가득 담는 마음\\n\\n오늘의 나도 그렇게 맑기를
+3. **오늘의 형식에 맞춘 우수 시 예시 ({style_spec['example_lines']})**:
+{style_spec['example']}
 
 4. **5대 정예 서체 & 감성 팔레트 선택**:
    - 아래 팔레트(0~{len(PALETTES)-1}) 중 시의 분위기에 가장 잘 어울리는 번호를 골라주세요.
@@ -350,8 +429,8 @@ def build_prompt(theme: str, recent_openings: list[str]) -> str:
 
 반드시 아래 JSON 형식으로만 응답하세요:
 {{
-  "critique": "7줄 이하 준수 여부, 행갈이 호흡, 시적 여운에 대한 자체 점검 메모",
-  "text": "최종 완성된 시 본문 (4~6행 권장, 행 구분은 \\n, 연 구분은 \\n\\n)",
+  "critique": "4~8행 준수 여부(행수 카운트), 행갈이 호흡, 시적 여운에 대한 자체 점검 메모",
+  "text": "최종 완성된 시 본문 (4~8행 준수, 행 구분은 \\n, 연 구분은 \\n\\n)",
   "quality_score": 9,
   "palette_index": 0
 }}
@@ -431,15 +510,17 @@ def main():
         theme_idx = (len(data) + n + random.randint(0, len(POETIC_THEMES) - 1)) % len(POETIC_THEMES)
         selected_theme = POETIC_THEMES[theme_idx]
 
+        selected_style = POEM_FORM_STYLES[(len(data) + n) % len(POEM_FORM_STYLES)]
         accepted_poem = None
         for retry in range(4):
-            prompt_text = build_prompt(selected_theme, recent_openings)
+            cur_style = selected_style if retry == 0 else random.choice(POEM_FORM_STYLES)
+            prompt_text = build_prompt(selected_theme, recent_openings, cur_style)
             result_raw = call_gemini_api(api_key, prompt_text)
             if not result_raw:
                 continue
 
             raw_poem = result_raw.get("text", "").strip()
-            polished_text = polish_poem_breathing(raw_poem, max_chars=19, max_total_lines=7)
+            polished_text = polish_poem_breathing(raw_poem, max_chars=19, max_total_lines=8)
             ok, reason = validate_poem_quality(polished_text, data)
 
             if ok:
