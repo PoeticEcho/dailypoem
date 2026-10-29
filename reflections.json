@@ -3958,5 +3958,16 @@
       "color": "#3C342C",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "id": 361,
+    "text": "미지근한 바람이 스며드는\n어스름한 골목 어귀\n\n이름 모를 풀벌레 소리가\n어둠을 조용히 깨우고\n\n지친 마음 내려놓는 곳에\n평화는 이토록\n가만히 찾아오는 것을",
+    "createdAt": "2026-10-29",
+    "hearts": 0,
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
   }
 ]
