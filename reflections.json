@@ -3980,5 +3980,16 @@
       "color": "#4A3B32",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "id": 363,
+    "text": "하얗게 비워낸 찻잔 바닥에\n가만히 누워 있는 찻잎 하나\n\n모질었던 하루의 끝에서\n오래도록 따스한 숨결을 건네네",
+    "createdAt": "2026-10-30",
+    "hearts": 0,
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Batang', serif"
+    }
   }
 ]
