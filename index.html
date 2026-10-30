@@ -11,6 +11,7 @@
   <title>감성 타이핑 시집 · 독립형 전자책 & 태블릿 시집 액자</title>
   <meta name="description" content="지친 하루 끝에 한 글자씩 천천히 필사되듯 피어나는 1,000편의 한국어 위로시와 시드 기반 재즈·자연의 소리를 담은 독립형 전자책 감성 시집" />
   <meta name="theme-color" content="#FBF8F3" />
+  <meta name="app-version" content="2.9.0" />
 
   <script>
     /* =========================================================================
@@ -310,23 +311,39 @@
       transform: translate(-50%, -50%) scale(1);
     }
 
-    /* 🕰️ 다이나믹 감성 시계 */
+    /* 🕰️ 다이나믹 감성 시계 (v2.9 클릭형 미니 설정 연동 & 자석 N-N극 반발 배치) */
     #ambient-clock {
       position: fixed;
-      z-index: 10;
-      pointer-events: none;
+      z-index: 140;
+      pointer-events: auto;
+      cursor: pointer;
+      padding: 0.36rem 0.68rem;
+      border-radius: 12px;
+      border: 1px solid transparent;
       opacity: var(--clock-opacity);
       transform: scale(var(--clock-scale));
-      transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
-                  top 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-                  bottom 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-                  left 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-                  right 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-                  transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                  background 0.28s ease,
+                  border-color 0.28s ease,
+                  box-shadow 0.28s ease,
+                  top 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                  bottom 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                  left 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                  right 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
       display: flex;
       flex-direction: column;
       gap: 0.25rem;
       max-width: 320px;
+      user-select: none;
+    }
+    #ambient-clock:hover,
+    #ambient-clock.mini-open,
+    #ambient-clock:focus-visible {
+      opacity: 0.96 !important;
+      background: rgba(128, 128, 128, 0.12);
+      border-color: rgba(128, 128, 128, 0.24);
+      outline: none;
     }
     #ambient-clock.clock-fade { opacity: 0 !important; }
     #ambient-clock.clock-hidden { display: none !important; }
@@ -742,8 +759,10 @@
         width: 95%;
         padding: var(--container-v-pad) 0.2rem;
       }
-      #ambient-clock.pos-top-left, #ambient-clock.pos-top-right { top: 1rem; }
-      #ambient-clock.pos-bottom-left, #ambient-clock.pos-bottom-right { bottom: 2rem; }
+      #ambient-clock.pos-top-left { top: 1.1rem; left: 1.1rem; }
+      #ambient-clock.pos-top-right { top: 4.1rem; right: 1.1rem; }
+      #ambient-clock.pos-bottom-left { bottom: 1.6rem; left: 1.1rem; }
+      #ambient-clock.pos-bottom-right { bottom: 1.6rem; right: 1.1rem; }
       #pixelmood-dock {
         right: 50%;
         transform: translateX(50%);
@@ -1000,6 +1019,15 @@
     #photo-poem-overlay.pos-bottom-right { bottom: 2.4rem; right: 2.4rem; text-align: right; }
     #photo-poem-overlay.pos-bottom-center { bottom: 2.3rem; left: 50%; transform: translateX(-50%); text-align: center; }
     #photo-poem-overlay.pos-top-left { top: 2.4rem; left: 2.4rem; text-align: left; }
+    #photo-poem-overlay.pos-top-right { top: 4.8rem; right: 2.4rem; text-align: right; }
+
+    @media (max-width: 640px) {
+      #photo-poem-overlay { max-width: calc(100vw - 2.2rem); padding: 0.95rem 1.2rem; }
+      #photo-poem-overlay.pos-bottom-left { bottom: 1.6rem; left: 1.1rem; }
+      #photo-poem-overlay.pos-bottom-right { bottom: 1.6rem; right: 1.1rem; }
+      #photo-poem-overlay.pos-top-left { top: 1.4rem; left: 1.1rem; }
+      #photo-poem-overlay.pos-top-right { top: 4.1rem; right: 1.1rem; }
+    }
 
     /* 사진 전용 촬영일·앨범 미니 캡션 */
     #photo-date-caption {
@@ -1017,7 +1045,11 @@
       color: rgba(255, 255, 255, 0.86);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.6s ease;
+      transition: opacity 0.6s ease, left 0.5s ease, right 0.5s ease;
+    }
+    #photo-date-caption.pos-right {
+      left: auto;
+      right: 2.2rem;
     }
     #photo-date-caption.visible {
       opacity: 1;
@@ -1172,16 +1204,21 @@
 
   
     /* === UI/UX POLISH v2.6 === */
-    /* 1) 퀵 팝업(#controls-popup) 가로모드/소형 화면 세로 넘침 방지 */
+    /* 1) 퀵 팝업(#controls-popup) 가로·세로 스크롤바 비노출 및 소형 화면 터치 스크롤 지원 */
     #controls-popup {
       max-height: calc(100vh - 4.2rem);
       max-height: calc(100dvh - 4.2rem);
+      overflow-x: hidden;
       overflow-y: auto;
       overscroll-behavior: contain;
-      scrollbar-width: thin;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    #controls-popup::-webkit-scrollbar {
+      display: none;
     }
     #controls-popup .popup-item-btn {
-      padding: 0.42rem 0.68rem;
+      padding: 0.33rem 0.5rem;
     }
 
     /* 2) 감상 몰입 중(4초 무입력 후 UI 소멸 시) 마우스 커서까지 완전히 숨김 */
@@ -1606,6 +1643,139 @@
       pointer-events: auto;
     }
 
+    /* === MAGNETIC N-N REPULSION & CLOCK/REGION MINI BAR (v2.9) === */
+    body.photo-mode-active #ambient-clock:hover,
+    body.photo-mode-active #ambient-clock.mini-open {
+      background: rgba(18, 20, 26, 0.64);
+      border-color: rgba(255, 255, 255, 0.28);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+    }
+    body.photo-mode-active.photo-light-margin:not(.ambient-night-active) #ambient-clock:hover,
+    body.photo-mode-active.photo-light-margin:not(.ambient-night-active) #ambient-clock.mini-open {
+      background: rgba(251, 248, 243, 0.95);
+      border-color: rgba(0, 0, 0, 0.16);
+      box-shadow: 0 10px 26px rgba(30, 24, 18, 0.12);
+    }
+
+    #clock-mini-bar {
+      position: fixed;
+      z-index: 175;
+      width: min(92vw, 318px);
+      background: rgba(250, 247, 242, 0.97);
+      color: #2E2925;
+      border: 1px solid rgba(128, 128, 128, 0.26);
+      border-radius: 18px;
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.24);
+      font-family: 'Gowun Dodum', sans-serif;
+      font-size: 0.78rem;
+      padding: 0.68rem 0.85rem 0.78rem;
+      box-sizing: border-box;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px) scale(0.96);
+      transition: opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    body.dark-ui #clock-mini-bar,
+    body.ambient-night-active #clock-mini-bar,
+    body.photo-mode-active:not(.photo-light-margin) #clock-mini-bar {
+      background: rgba(22, 25, 32, 0.95);
+      color: #EAECEF;
+      border-color: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.48);
+    }
+    #clock-mini-bar.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+    .mini-bar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 0.45rem;
+      margin-bottom: 0.48rem;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.18);
+    }
+    .mini-bar-title {
+      font-family: 'Gowun Batang', serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.32rem;
+    }
+    .mini-bar-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .mini-bar-link-btn {
+      background: rgba(128, 128, 128, 0.10);
+      border: 1px solid rgba(128, 128, 128, 0.24);
+      color: inherit;
+      font-family: inherit;
+      font-size: 0.69rem;
+      padding: 0.16rem 0.44rem;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .mini-bar-link-btn:hover {
+      background: rgba(128, 128, 128, 0.22);
+    }
+    .mini-close-btn {
+      width: 24px;
+      height: 24px;
+      font-size: 0.76rem;
+    }
+    .mini-dual-toggles {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.35rem;
+      margin-bottom: 0.46rem;
+    }
+    .mini-toggle-pill {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.3rem;
+      padding: 0.28rem 0.5rem;
+      border-radius: 10px;
+      background: rgba(128, 128, 128, 0.08);
+      border: 1px solid rgba(128, 128, 128, 0.16);
+      font-size: 0.73rem;
+      white-space: nowrap;
+    }
+    #clock-mini-bar .setting-row {
+      margin-bottom: 0.34rem;
+      font-size: 0.75rem;
+    }
+    #clock-mini-bar .setting-select {
+      width: 156px;
+      max-width: 54vw;
+      font-size: 0.73rem;
+      padding: 0.22rem 0.4rem;
+    }
+    #clock-mini-bar .setting-range {
+      width: 132px;
+    }
+    body.photo-mode-active:not(.photo-light-margin) #clock-mini-bar input:checked + .slider-round,
+    body.ambient-night-active #clock-mini-bar input:checked + .slider-round {
+      background-color: #8FA89B;
+    }
+    .setting-select option {
+      background-color: #FAF7F2;
+      color: #2E2925;
+    }
+    body.dark-ui .setting-select option,
+    body.ambient-night-active #clock-mini-bar .setting-select option,
+    body.photo-mode-active:not(.photo-light-margin) #clock-mini-bar .setting-select option {
+      background-color: #1E222B;
+      color: #EAECEF;
+    }
+
   </style>
 </head>
 <body>
@@ -1637,10 +1807,89 @@
     <span id="hud-text"></span>
   </div>
 
-  <!-- 🕰️ 다이나믹 감성 시계 -->
-  <aside id="ambient-clock" class="pos-bottom-right" aria-label="현재 시간">
+  <!-- 🕰️ 다이나믹 감성 시계 (클릭 시 미니 설정바 오픈) -->
+  <aside id="ambient-clock" class="pos-bottom-right" role="button" tabindex="0" onclick="onAmbientClockClick(event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();onAmbientClockClick(event);}" title="클릭하여 다이나믹 감성시계 및 날씨 지역 설정" aria-label="현재 시간 및 날씨 (클릭하여 설정 열기)">
     <div id="clock-content"></div>
   </aside>
+
+  <!-- 🧭 다이나믹 감성시계 & 날씨 지역 미니 설정바 (v2.9) -->
+  <section id="clock-mini-bar" role="dialog" aria-label="다이나믹 감성시계 및 지역 설정" onclick="event.stopPropagation()">
+    <div class="mini-bar-header">
+      <div class="mini-bar-title">
+        <span>🕰️</span>
+        <span>다이나믹 감성시계 · 지역</span>
+      </div>
+      <div class="mini-bar-actions">
+        <button type="button" class="mini-bar-link-btn" onclick="closeClockMiniBar(); toggleSettings(true);" title="전체 상세 설정 열기">상세 ↗</button>
+        <button type="button" class="close-btn mini-close-btn" onclick="closeClockMiniBar()" aria-label="닫기">✕</button>
+      </div>
+    </div>
+
+    <div class="mini-dual-toggles">
+      <div class="mini-toggle-pill">
+        <span>시계 표시</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="miniChkClockShow" checked onchange="applyClockSettingChange('mini')">
+          <span class="slider-round"></span>
+        </label>
+      </div>
+      <div class="mini-toggle-pill">
+        <span>날씨 병기</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="miniChkShowWeather" checked onchange="setShowWeatherState(this.checked)">
+          <span class="slider-round"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="setting-row">
+      <span>날씨 · 일몰 지역</span>
+      <div style="display:flex;gap:0.24rem;align-items:center;">
+        <select id="miniSelWeatherRegion" class="setting-select" style="width:124px;" onchange="changeWeatherRegion(this.value)"></select>
+        <button type="button" class="setting-action-btn" onclick="detectUserGpsRegion()" title="내 현재 위치(GPS)로 지역 자동 설정">📍</button>
+      </div>
+    </div>
+
+    <div class="setting-row">
+      <span>시계 위치</span>
+      <select id="miniSelClockPos" class="setting-select" onchange="applyClockSettingChange('mini')">
+        <option value="dynamic">다이나믹 (여백·척력 자동)</option>
+        <option value="pos-bottom-right">우측 하단 고정</option>
+        <option value="pos-bottom-left">좌측 하단 고정</option>
+        <option value="pos-top-left">좌측 상단 고정</option>
+        <option value="pos-top-right">우측 상단 고정</option>
+        <option value="pos-bottom-center">하단 중앙 고정</option>
+      </select>
+    </div>
+
+    <div class="setting-row">
+      <span>시계 형태</span>
+      <select id="miniSelClockFormat" class="setting-select" onchange="applyClockSettingChange('mini')">
+        <option value="poetic">감성 한글 시계</option>
+        <option value="digital24">미니멀 디지털 (24시)</option>
+        <option value="digital12">클래식 디지털 (12시)</option>
+        <option value="vertical">세로형 시집 책갈피</option>
+        <option value="analog">미니멀 아날로그 바늘</option>
+      </select>
+    </div>
+
+    <div class="setting-row">
+      <span>시계 서체</span>
+      <select id="miniSelClockFont" class="setting-select" onchange="applyClockSettingChange('mini')">
+        <option value="sync">시 본문 서체와 동기화</option>
+        <option value="'Gowun Dodum', sans-serif">고운돋움 (정돈된 돋움)</option>
+        <option value="'Gowun Batang', serif">고운바탕 (감성 명조)</option>
+        <option value="'MaruBuri', serif">마루부리 (화면용 명조)</option>
+        <option value="'Noto Serif KR', serif">본명조 (다크 최적화)</option>
+        <option value="'Nanum Myeongjo', serif">나눔명조 (고전 명조)</option>
+      </select>
+    </div>
+
+    <div class="setting-row">
+      <span>시계 농도 (<span id="miniLblClockOpacity">52</span>%)</span>
+      <input type="range" id="miniRngClockOpacity" class="setting-range" min="0.2" max="0.85" step="0.05" value="0.52" oninput="applyClockSettingChange('mini')">
+    </div>
+  </section>
 
   <!-- 🪶 상단 미니멀 액션 바 (♥ 하트 모아보기 · ✕ 현재 사진 즉시 제외 · ⚙️ 설정) -->
   <div id="nav-trigger-wrap">
@@ -1683,6 +1932,11 @@
           <span id="popNightModeText">조도: 자동</span>
         </button>
       </div>
+
+      <button class="popup-item-btn" id="popClockMiniBtn" onclick="closeControlsPopup(); toggleClockMiniBar(true);" title="다이나믹 감성시계 및 날씨 지역 설정">
+        <span>🕰️</span>
+        <span id="popClockRegionText">감성시계 · 대구 날씨</span>
+      </button>
 
       <div class="popup-divider"></div>
 
@@ -1846,14 +2100,14 @@
   <div id="settings-backdrop" onclick="toggleSettings(false)"></div>
   <section id="settings-modal" role="dialog" aria-labelledby="settingsModalTitle">
     <div class="settings-header">
-      <h2 class="settings-title" id="settingsModalTitle">✨ 상세 액자 설정</h2>
+      <h2 class="settings-title" id="settingsModalTitle">✨ 상세 액자 설정 <span style="font-size:0.7rem;font-weight:400;opacity:0.62;margin-left:0.25rem;">v2.9</span></h2>
       <button class="close-btn" onclick="toggleSettings(false)" aria-label="닫기">✕</button>
     </div>
 
     <div class="settings-body">
       <div class="settings-section">
         <div class="sec-label">
-          <span>🖼️ 전자액자 & 세로 여백 (2.0)</span>
+          <span>🖼️ 전자액자 &amp; 여백</span>
           <div style="display:flex;gap:0.25rem;">
             <button class="setting-action-btn" onclick="toggleSettings(false); openPhotoManagerModal();">🗂️ 순서·제외 관리</button>
             <button class="setting-action-btn" onclick="document.getElementById('inpLocalPhotos').click()">📁 사진 추가</button>
@@ -1906,11 +2160,19 @@
         </div>
 
         <div class="setting-row">
-          <span>시계에 대구 날씨 병기</span>
+          <span id="lblSettingWeatherToggle">시계에 대구 날씨 병기</span>
           <label class="toggle-switch">
-            <input type="checkbox" id="chkShowWeather" checked onchange="updateV2FrameConfig()">
+            <input type="checkbox" id="chkShowWeather" checked onchange="setShowWeatherState(this.checked)">
             <span class="slider-round"></span>
           </label>
+        </div>
+
+        <div class="setting-row">
+          <span>날씨 · 일몰 기준 지역</span>
+          <div style="display:flex;gap:0.25rem;align-items:center;">
+            <select id="selWeatherRegionFrame" class="setting-select" style="width:128px;" onchange="changeWeatherRegion(this.value)"></select>
+            <button type="button" class="setting-action-btn" onclick="detectUserGpsRegion()" title="내 현재 위치(GPS)로 지역 자동 설정">📍</button>
+          </div>
         </div>
 
         <div class="setting-row">
@@ -1936,7 +2198,7 @@
         <div class="setting-row">
           <span>야간 · 주변 조도 모드</span>
           <select id="selNightMode" class="setting-select" onchange="updateV2FrameConfig()">
-            <option value="auto_solar">대구 일몰·날씨 자동 감광</option>
+            <option value="auto_solar" id="optNightAutoSolar">대구 일몰·날씨 자동 감광</option>
             <option value="auto_camera">💡 카메라 실시간 조도 센서</option>
             <option value="always_night">🌙 야간 모드 항상 켜기</option>
             <option value="sleep_clock">🌑 심야 올블랙 달빛 시계</option>
@@ -2073,15 +2335,31 @@
         <div class="sec-label">
           <span>🕰️ 다이나믹 감성 시계</span>
           <label class="toggle-switch">
-            <input type="checkbox" id="chkClockShow" checked onchange="updateClockConfig()">
+            <input type="checkbox" id="chkClockShow" checked onchange="applyClockSettingChange('modal')">
+            <span class="slider-round"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <span>날씨 · 일몰 지역</span>
+          <div style="display:flex;gap:0.25rem;align-items:center;">
+            <select id="selWeatherRegionClock" class="setting-select" style="width:128px;" onchange="changeWeatherRegion(this.value)"></select>
+            <button type="button" class="setting-action-btn" onclick="detectUserGpsRegion()" title="내 현재 위치(GPS)로 지역 자동 설정">📍</button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <span id="lblClockWeatherToggle">시계에 대구 날씨 병기</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="chkClockShowWeather" checked onchange="setShowWeatherState(this.checked)">
             <span class="slider-round"></span>
           </label>
         </div>
 
         <div class="setting-row">
           <span>시계 위치</span>
-          <select id="selClockPos" class="setting-select" onchange="updateClockConfig()">
-            <option value="dynamic">다이나믹 (여백 자동 이동)</option>
+          <select id="selClockPos" class="setting-select" onchange="applyClockSettingChange('modal')">
+            <option value="dynamic">다이나믹 (여백·척력 자동)</option>
             <option value="pos-bottom-right">우측 하단 고정</option>
             <option value="pos-bottom-left">좌측 하단 고정</option>
             <option value="pos-top-left">좌측 상단 고정</option>
@@ -2092,7 +2370,7 @@
 
         <div class="setting-row">
           <span>시계 형태</span>
-          <select id="selClockFormat" class="setting-select" onchange="updateClockConfig()">
+          <select id="selClockFormat" class="setting-select" onchange="applyClockSettingChange('modal')">
             <option value="poetic">감성 한글 시계</option>
             <option value="digital24">미니멀 디지털 (24시)</option>
             <option value="digital12">클래식 디지털 (12시)</option>
@@ -2103,7 +2381,7 @@
 
         <div class="setting-row">
           <span>시계 서체</span>
-          <select id="selClockFont" class="setting-select" onchange="updateClockConfig()">
+          <select id="selClockFont" class="setting-select" onchange="applyClockSettingChange('modal')">
             <option value="sync">시 본문 서체와 동기화</option>
             <option value="'Gowun Dodum', sans-serif">고운돋움 (정돈된 돋움)</option>
             <option value="'Gowun Batang', serif">고운바탕 (감성 명조)</option>
@@ -2114,8 +2392,8 @@
         </div>
 
         <div class="setting-row">
-          <span>시계 농도</span>
-          <input type="range" id="rngClockOpacity" class="setting-range" min="0.2" max="0.85" step="0.05" value="0.52" oninput="updateClockConfig()">
+          <span>시계 농도 (<span id="lblClockOpacityPct">52</span>%)</span>
+          <input type="range" id="rngClockOpacity" class="setting-range" min="0.2" max="0.85" step="0.05" value="0.52" oninput="applyClockSettingChange('modal')">
         </div>
       </div>
 
@@ -3186,6 +3464,10 @@
       photoSortMode: 'people',
       photoTransition: 'kenburns',
       showWeather: true,
+      weatherRegion: 'daegu',
+      customRegionName: '',
+      customRegionLat: null,
+      customRegionLon: null,
       hybridPhotoRatio: 2,
       albumFilter: 'all',
       artToneMode: 'auto_warm',
@@ -3212,6 +3494,9 @@
         }
         if (params.get('sort') && ['custom', 'people', 'date_desc', 'date_asc', 'random'].includes(params.get('sort'))) {
           CONFIG.photoSortMode = params.get('sort');
+        }
+        if (params.get('region')) {
+          CONFIG.weatherRegion = params.get('region');
         }
 
         // 1) 직접 경로 매칭: /dailypoem/234/0 또는 /dailypoem/poem/234/0
@@ -3300,6 +3585,7 @@
       document.getElementById('selClockFormat').value = CONFIG.clockFormat;
       document.getElementById('selClockFont').value = CONFIG.clockFont;
       document.getElementById('rngClockOpacity').value = CONFIG.clockOpacity;
+      if (typeof syncClockAndRegionUI === 'function') syncClockAndRegionUI();
 
       document.getElementById('selAutoInterval').value = String(CONFIG.autoIntervalMs);
       document.getElementById('selTypingSpeed').value = CONFIG.typingSpeed;
@@ -3407,9 +3693,7 @@
       const nextIdx = (ALIGNMENTS.indexOf(currentAlign) + 1) % ALIGNMENTS.length;
       setAlignment(ALIGNMENTS[nextIdx]);
       showHudFeedback('↔', `정렬: ${ALIGN_LABELS[ALIGNMENTS[nextIdx]]}`);
-      if (CONFIG.clockPos === 'dynamic') {
-        relocateDynamicClock(ALIGNMENTS[nextIdx]);
-      }
+      relocateDynamicClock(ALIGNMENTS[nextIdx]);
     }
 
     function formatPoemText(text) {
@@ -3598,12 +3882,23 @@
     }
 
     /* =========================================================================
-     * 4. 다이나믹 감성 시계
+     * 4. 다이나믹 감성 시계 & 자석 N-N극 반발 배치 엔진 (v2.9)
      * ========================================================================= */
+    const ALL_CLOCK_POS_CLASSES = ['pos-top-left', 'pos-top-right', 'pos-bottom-left', 'pos-bottom-right', 'pos-bottom-center'];
+    const ALL_POEM_OVERLAY_POS_CLASSES = ['pos-bottom-left', 'pos-bottom-right', 'pos-top-left', 'pos-top-right', 'pos-bottom-center'];
+
+    const CORNER_META = {
+      'pos-top-left':      { x: 10, y: 12, hSide: 'left',   vSide: 'top' },
+      'pos-top-right':     { x: 90, y: 16, hSide: 'right',  vSide: 'top' },
+      'pos-bottom-left':   { x: 10, y: 88, hSide: 'left',   vSide: 'bottom' },
+      'pos-bottom-right':  { x: 90, y: 88, hSide: 'right',  vSide: 'bottom' },
+      'pos-bottom-center': { x: 50, y: 90, hSide: 'center', vSide: 'bottom' }
+    };
+
     const DYNAMIC_POSITIONS_BY_ALIGN = {
-      'left': ['pos-bottom-right', 'pos-top-right', 'pos-bottom-center'],
-      'right': ['pos-bottom-left', 'pos-top-left', 'pos-bottom-center'],
-      'center': ['pos-bottom-right', 'pos-bottom-left', 'pos-top-left', 'pos-top-right']
+      'left': ['pos-bottom-right', 'pos-top-right'],
+      'right': ['pos-bottom-left', 'pos-top-left'],
+      'center': ['pos-bottom-right', 'pos-top-left', 'pos-bottom-left', 'pos-top-right']
     };
     let currentClockPosClass = 'pos-bottom-right';
 
@@ -3698,64 +3993,421 @@
       ensurePoemPriorityNoOverlap();
     }
 
-    function relocateDynamicClock(poemAlign) {
+    function setClockPositionClass(nextPos, animate = false) {
+      const clockEl = document.getElementById('ambient-clock');
+      if (!clockEl || !nextPos) return;
+      if (animate && nextPos !== currentClockPosClass && CONFIG.clockShow) {
+        clockEl.classList.add('clock-fade');
+        setTimeout(() => {
+          ALL_CLOCK_POS_CLASSES.forEach(p => clockEl.classList.remove(p));
+          clockEl.classList.add(nextPos);
+          currentClockPosClass = nextPos;
+          clockEl.classList.remove('clock-fade');
+          ensurePoemPriorityNoOverlap();
+        }, 260);
+      } else {
+        ALL_CLOCK_POS_CLASSES.forEach(p => clockEl.classList.remove(p));
+        clockEl.classList.add(nextPos);
+        currentClockPosClass = nextPos;
+      }
+    }
+
+    function setPoemOverlayPositionClass(nextPos) {
+      const overlay = document.getElementById('photo-poem-overlay');
+      if (!overlay || !nextPos) return;
+      ALL_POEM_OVERLAY_POS_CLASSES.forEach(p => overlay.classList.remove(p));
+      overlay.classList.add(nextPos);
+    }
+
+    // 자석 N-N극 반발 원리: 시구와 시계·캡션·플레이어가 절대 같은 구석에 놓이지 않고 대척점으로 밀어냄
+    function applyMagneticLayout(opts = {}) {
       const clockEl = document.getElementById('ambient-clock');
       if (!clockEl) return;
 
-      const allPos = ['pos-top-left', 'pos-bottom-left', 'pos-bottom-right', 'pos-top-right', 'pos-bottom-center'];
-      let nextPos = CONFIG.clockPos;
+      const poemAlign = opts.poemAlign || currentAlign || 'center';
+      const photoModeActive = (typeof isShowingPhotoScene !== 'undefined' && isShowingPhotoScene);
+      const item = opts.photoItem || (typeof currentDisplayedPhoto !== 'undefined' ? currentDisplayedPhoto : null);
+      const animateClock = Boolean(opts.animateClock);
+      const dockOpen = Boolean(document.getElementById('pixelmood-dock')?.classList.contains('open'));
+      const isNarrow = window.innerWidth < 980;
 
-      if (CONFIG.clockPos === 'dynamic') {
-        const candidates = DYNAMIC_POSITIONS_BY_ALIGN[poemAlign] || DYNAMIC_POSITIONS_BY_ALIGN['center'];
-        nextPos = candidates[Math.floor(Math.random() * candidates.length)];
+      // 1) 포토 포엠 모드 (사진 + 시구 오버레이 카드 + 시계)
+      if (photoModeActive && CONFIG.frameMode === 'photo_poem') {
+        const fx = typeof item?.focalX === 'number' ? item.focalX : 50;
+        const fy = typeof item?.focalY === 'number' ? item.focalY : 40;
+        const hasPerson = Boolean(item?.hasPerson);
+
+        if (!CONFIG.clockShow) {
+          const soloPoemPos = (fx > 52 || dockOpen) ? 'pos-bottom-left' : 'pos-bottom-right';
+          setPoemOverlayPositionClass(soloPoemPos);
+          return;
+        }
+
+        if (CONFIG.clockPos === 'dynamic') {
+          // 시구 카드를 피사체(focalX) 반대편 하단에 먼저 배치한 뒤, 시계를 N-N극 대척점으로 반발 이동
+          const poemPos = (fx > 52 || dockOpen) ? 'pos-bottom-left' : 'pos-bottom-right';
+          setPoemOverlayPositionClass(poemPos);
+          const pMeta = CORNER_META[poemPos];
+
+          let candidates = ['pos-top-left', 'pos-top-right', 'pos-bottom-left', 'pos-bottom-right']
+            .filter(c => c !== poemPos && !(dockOpen && c === 'pos-bottom-right'));
+          if (isNarrow) {
+            const topOnly = candidates.filter(c => CORNER_META[c].vSide === 'top');
+            if (topOnly.length > 0) candidates = topOnly;
+          }
+
+          let bestClockPos = candidates[0] || 'pos-top-left';
+          let bestScore = -9999;
+          for (const c of candidates) {
+            const cMeta = CORNER_META[c];
+            let score = 0;
+            // N-N극 대각선 반대극 최우선 가산점
+            if (cMeta.hSide !== pMeta.hSide && cMeta.vSide !== pMeta.vSide) score += 55;
+            else if (cMeta.hSide !== pMeta.hSide) score += 32;
+            else if (cMeta.vSide !== pMeta.vSide) score += 28;
+            // 피사체 초점 회피 거리 반영
+            const distFocal = Math.hypot(cMeta.x - fx, cMeta.y - fy);
+            score += distFocal * 0.55;
+            if (hasPerson && distFocal < 32) score -= 45;
+            if (score > bestScore) {
+              bestScore = score;
+              bestClockPos = c;
+            }
+          }
+          setClockPositionClass(bestClockPos, animateClock);
+        } else {
+          // 사용자가 시계 위치를 수동 고정한 경우: 시계는 고정하고 시구 카드를 N-N극 반대편으로 반발 이동!
+          const fixedClockPos = CONFIG.clockPos;
+          setClockPositionClass(fixedClockPos, animateClock);
+          const cMeta = CORNER_META[fixedClockPos] || CORNER_META['pos-bottom-right'];
+
+          let pCandidates = ['pos-bottom-left', 'pos-bottom-right', 'pos-top-left', 'pos-top-right']
+            .filter(p => p !== fixedClockPos && !(dockOpen && p === 'pos-bottom-right'));
+
+          if (isNarrow || fixedClockPos === 'pos-bottom-center') {
+            const targetVSide = cMeta.vSide === 'bottom' ? 'top' : 'bottom';
+            const vFiltered = pCandidates.filter(p => CORNER_META[p].vSide === targetVSide);
+            if (vFiltered.length > 0) pCandidates = vFiltered;
+          }
+
+          let bestPoemPos = pCandidates[0] || 'pos-bottom-left';
+          let bestScore = -9999;
+          for (const p of pCandidates) {
+            const pMeta = CORNER_META[p];
+            let score = 0;
+            if (pMeta.hSide !== cMeta.hSide && pMeta.vSide !== cMeta.vSide) score += 48;
+            else if (pMeta.hSide !== cMeta.hSide) score += 38;
+            else if (pMeta.vSide !== cMeta.vSide) score += 26;
+            if (pMeta.vSide === 'bottom' && cMeta.vSide !== 'bottom') score += 12;
+            if (pMeta.vSide === 'bottom' && !isNarrow && fixedClockPos !== 'pos-bottom-center' && pMeta.hSide !== cMeta.hSide) score += 14;
+            const distFocal = Math.hypot(pMeta.x - fx, pMeta.y - fy);
+            score += distFocal * 0.45;
+            if (hasPerson && distFocal < 30) score -= 35;
+            if (score > bestScore) {
+              bestScore = score;
+              bestPoemPos = p;
+            }
+          }
+          setPoemOverlayPositionClass(bestPoemPos);
+        }
+        return;
       }
 
-      if (nextPos !== currentClockPosClass) {
-        clockEl.classList.add('clock-fade');
-        setTimeout(() => {
-          allPos.forEach(p => clockEl.classList.remove(p));
-          clockEl.classList.add(nextPos);
-          currentClockPosClass = nextPos;
-          renderClock();
-          clockEl.classList.remove('clock-fade');
-        }, 350);
+      // 2) 사진 전용 모드 (photo_only / hybrid 사진 슬라이드): 촬영일 캡션(#photo-date-caption)과 시계 반발
+      if (photoModeActive) {
+        const fx = typeof item?.focalX === 'number' ? item.focalX : 50;
+        const fy = typeof item?.focalY === 'number' ? item.focalY : 40;
+        const dateCap = document.getElementById('photo-date-caption');
+
+        let chosenClockPos = CONFIG.clockPos;
+        if (CONFIG.clockPos === 'dynamic') {
+          // 촬영일 캡션이 기본 좌하단(bottom-left)에 있으므로 좌하단을 제외한 코너 중 초점 반대편 선택
+          let candidates = ['pos-bottom-right', 'pos-top-right', 'pos-top-left']
+            .filter(c => !(dockOpen && c === 'pos-bottom-right'));
+          let best = candidates[0] || 'pos-top-right';
+          let bestDist = -1;
+          for (const c of candidates) {
+            const m = CORNER_META[c];
+            const d = Math.hypot(m.x - fx, m.y - fy);
+            if (d > bestDist) {
+              bestDist = d;
+              best = c;
+            }
+          }
+          chosenClockPos = best;
+        }
+        setClockPositionClass(chosenClockPos, animateClock);
+        if (dateCap) {
+          dateCap.classList.toggle('pos-right', Boolean(CONFIG.clockShow && chosenClockPos === 'pos-bottom-left'));
+        }
+        return;
+      }
+
+      // 3) 시집 전용 모드 (poem_only / hybrid 시 슬라이드)
+      if (CONFIG.clockPos === 'dynamic') {
+        let candidates = (DYNAMIC_POSITIONS_BY_ALIGN[poemAlign] || DYNAMIC_POSITIONS_BY_ALIGN['center'])
+          .filter(c => !(dockOpen && c === 'pos-bottom-right'));
+        if (candidates.length === 0) candidates = ['pos-top-left', 'pos-top-right'];
+        const nextPos = candidates[Math.floor(Math.random() * candidates.length)];
+        setClockPositionClass(nextPos, animateClock);
       } else {
-        allPos.forEach(p => clockEl.classList.remove(p));
-        clockEl.classList.add(nextPos);
-        renderClock();
+        setClockPositionClass(CONFIG.clockPos, animateClock);
+        // 사용자가 좌/우 코너에 시계를 고정했는데 랜덤 시 정렬이 같은 쪽으로 걸린 경우 반대 정렬로 밀어냄
+        const cMeta = CORNER_META[CONFIG.clockPos];
+        if (CONFIG.clockShow && cMeta && (cMeta.hSide === 'left' || cMeta.hSide === 'right') && poemAlign === cMeta.hSide) {
+          const repelledAlign = cMeta.hSide === 'left' ? 'right' : 'left';
+          setAlignment(repelledAlign);
+        }
       }
     }
 
-    function ensurePoemPriorityNoOverlap() {
-      const clockEl = document.getElementById('ambient-clock');
-      const poemEl = document.getElementById('poem');
-      if (!clockEl || !poemEl || !CONFIG.clockShow) return;
+    function relocateDynamicClock(poemAlign) {
+      applyMagneticLayout({ poemAlign: poemAlign || currentAlign, animateClock: true });
+      renderClock();
+    }
 
-      const cRect = clockEl.getBoundingClientRect();
-      const pRect = poemEl.getBoundingClientRect();
-      const margin = 18;
-
-      const overlaps = !(
-        cRect.right < pRect.left - margin ||
-        cRect.left > pRect.right + margin ||
-        cRect.bottom < pRect.top - margin ||
-        cRect.top > pRect.bottom + margin
+    function rectsOverlapWithMargin(r1, r2, margin = 22) {
+      if (!r1 || !r2 || (r1.width === 0 && r1.height === 0) || (r2.width === 0 && r2.height === 0)) return false;
+      return !(
+        r1.right < r2.left - margin ||
+        r1.left > r2.right + margin ||
+        r1.bottom < r2.top - margin ||
+        r1.top > r2.bottom + margin
       );
+    }
 
-      clockEl.style.opacity = overlaps
-        ? String(Math.min(CONFIG.clockOpacity, 0.22))
-        : String(CONFIG.clockOpacity);
+    function rectCenterDistanceSq(r1, r2) {
+      const c1x = (r1.left + r1.right) * 0.5;
+      const c1y = (r1.top + r1.bottom) * 0.5;
+      const c2x = (r2.left + r2.right) * 0.5;
+      const c2y = (r2.top + r2.bottom) * 0.5;
+      return (c1x - c2x) * (c1x - c2x) + (c1y - c2y) * (c1y - c2y);
+    }
+
+    let _isResolvingRepulsion = false;
+    function ensurePoemPriorityNoOverlap() {
+      if (_isResolvingRepulsion) return;
+      const clockEl = document.getElementById('ambient-clock');
+      if (!clockEl || !CONFIG.clockShow || clockEl.classList.contains('clock-hidden')) return;
+
+      const photoModeActive = (typeof isShowingPhotoScene !== 'undefined' && isShowingPhotoScene);
+      let targetEl = null;
+      if (photoModeActive && CONFIG.frameMode === 'photo_poem') {
+        const ov = document.getElementById('photo-poem-overlay');
+        if (ov && ov.classList.contains('visible')) targetEl = ov;
+      } else if (photoModeActive) {
+        const dc = document.getElementById('photo-date-caption');
+        if (dc && dc.classList.contains('visible')) targetEl = dc;
+      } else {
+        const typedEl = document.getElementById('typed');
+        const poemEl = document.getElementById('poem');
+        const tRect = typedEl ? typedEl.getBoundingClientRect() : null;
+        targetEl = (tRect && tRect.width > 4 && tRect.height > 4) ? typedEl : poemEl;
+      }
+
+      if (!targetEl) {
+        clockEl.style.opacity = '';
+        return;
+      }
+
+      const margin = 22;
+      let cRect = clockEl.getBoundingClientRect();
+      let pRect = targetEl.getBoundingClientRect();
+      if (!rectsOverlapWithMargin(cRect, pRect, margin)) {
+        clockEl.style.opacity = '';
+        return;
+      }
+
+      // 실제 DOM 바운딩 박스 충돌 감지 시 즉시 N-N극 빈 코너로 물리적 반발 재배치!
+      _isResolvingRepulsion = true;
+      try {
+        const dockOpen = Boolean(document.getElementById('pixelmood-dock')?.classList.contains('open'));
+        if (CONFIG.clockPos === 'dynamic') {
+          const candidates = ['pos-top-left', 'pos-top-right', 'pos-bottom-left', 'pos-bottom-right']
+            .filter(c => !(dockOpen && c === 'pos-bottom-right'));
+          let bestPos = null;
+          let bestDist = -1;
+          const origPos = currentClockPosClass;
+
+          for (const cand of candidates) {
+            ALL_CLOCK_POS_CLASSES.forEach(p => clockEl.classList.remove(p));
+            clockEl.classList.add(cand);
+            const testRect = clockEl.getBoundingClientRect();
+            if (!rectsOverlapWithMargin(testRect, pRect, margin)) {
+              const dist = rectCenterDistanceSq(testRect, pRect);
+              if (dist > bestDist) {
+                bestDist = dist;
+                bestPos = cand;
+              }
+            }
+          }
+
+          if (bestPos) {
+            ALL_CLOCK_POS_CLASSES.forEach(p => clockEl.classList.remove(p));
+            clockEl.classList.add(bestPos);
+            currentClockPosClass = bestPos;
+            clockEl.style.opacity = '';
+            return;
+          } else {
+            ALL_CLOCK_POS_CLASSES.forEach(p => clockEl.classList.remove(p));
+            clockEl.classList.add(origPos);
+          }
+        } else if (photoModeActive && CONFIG.frameMode === 'photo_poem') {
+          const ov = document.getElementById('photo-poem-overlay');
+          if (ov) {
+            const pCandidates = ['pos-bottom-left', 'pos-bottom-right', 'pos-top-left', 'pos-top-right']
+              .filter(p => p !== CONFIG.clockPos && !(dockOpen && p === 'pos-bottom-right'));
+            let bestP = null;
+            let bestDist = -1;
+            const origClasses = ALL_POEM_OVERLAY_POS_CLASSES.filter(p => ov.classList.contains(p));
+
+            for (const cand of pCandidates) {
+              ALL_POEM_OVERLAY_POS_CLASSES.forEach(p => ov.classList.remove(p));
+              ov.classList.add(cand);
+              const testPRect = ov.getBoundingClientRect();
+              if (!rectsOverlapWithMargin(cRect, testPRect, margin)) {
+                const dist = rectCenterDistanceSq(cRect, testPRect);
+                if (dist > bestDist) {
+                  bestDist = dist;
+                  bestP = cand;
+                }
+              }
+            }
+
+            if (bestP) {
+              ALL_POEM_OVERLAY_POS_CLASSES.forEach(p => ov.classList.remove(p));
+              ov.classList.add(bestP);
+              clockEl.style.opacity = '';
+              return;
+            } else {
+              ALL_POEM_OVERLAY_POS_CLASSES.forEach(p => ov.classList.remove(p));
+              origClasses.forEach(p => ov.classList.add(p));
+            }
+          }
+        } else if (photoModeActive && targetEl.id === 'photo-date-caption') {
+          targetEl.classList.toggle('pos-right');
+          if (!rectsOverlapWithMargin(clockEl.getBoundingClientRect(), targetEl.getBoundingClientRect(), margin)) {
+            clockEl.style.opacity = '';
+            return;
+          }
+        }
+
+        // 초소형 화면 등에서 모든 코너가 시 본문과 맞닿을 경우에만 시계 농도를 낮춰 시 가독성 보호
+        clockEl.style.opacity = String(Math.min(CONFIG.clockOpacity, 0.20));
+      } finally {
+        _isResolvingRepulsion = false;
+      }
+    }
+
+    function applyClockSettingChange(source = 'modal') {
+      if (source === 'mini') {
+        const mShow = document.getElementById('miniChkClockShow');
+        const mPos = document.getElementById('miniSelClockPos');
+        const mFmt = document.getElementById('miniSelClockFormat');
+        const mFont = document.getElementById('miniSelClockFont');
+        const mOp = document.getElementById('miniRngClockOpacity');
+        if (mShow) CONFIG.clockShow = mShow.checked;
+        if (mPos) CONFIG.clockPos = mPos.value;
+        if (mFmt) CONFIG.clockFormat = mFmt.value;
+        if (mFont) CONFIG.clockFont = mFont.value;
+        if (mOp) CONFIG.clockOpacity = parseFloat(mOp.value);
+      } else {
+        const cShow = document.getElementById('chkClockShow');
+        const cPos = document.getElementById('selClockPos');
+        const cFmt = document.getElementById('selClockFormat');
+        const cFont = document.getElementById('selClockFont');
+        const cOp = document.getElementById('rngClockOpacity');
+        if (cShow) CONFIG.clockShow = cShow.checked;
+        if (cPos) CONFIG.clockPos = cPos.value;
+        if (cFmt) CONFIG.clockFormat = cFmt.value;
+        if (cFont) CONFIG.clockFont = cFont.value;
+        if (cOp) CONFIG.clockOpacity = parseFloat(cOp.value);
+      }
+      document.documentElement.style.setProperty('--clock-opacity', CONFIG.clockOpacity);
+      saveConfig();
+      if (typeof syncClockAndRegionUI === 'function') syncClockAndRegionUI();
+      applyMagneticLayout({ poemAlign: currentAlign, animateClock: false });
+      renderClock();
     }
 
     function updateClockConfig() {
-      CONFIG.clockShow = document.getElementById('chkClockShow').checked;
-      CONFIG.clockPos = document.getElementById('selClockPos').value;
-      CONFIG.clockFormat = document.getElementById('selClockFormat').value;
-      CONFIG.clockFont = document.getElementById('selClockFont').value;
-      CONFIG.clockOpacity = parseFloat(document.getElementById('rngClockOpacity').value);
-      document.documentElement.style.setProperty('--clock-opacity', CONFIG.clockOpacity);
-      saveConfig();
-      relocateDynamicClock(currentAlign);
+      applyClockSettingChange('modal');
+    }
+
+    function anchorClockMiniBar() {
+      const miniBar = document.getElementById('clock-mini-bar');
+      const clockEl = document.getElementById('ambient-clock');
+      if (!miniBar) return;
+
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const barW = Math.min(vw * 0.92, 318);
+      const barH = miniBar.offsetHeight || 312;
+
+      miniBar.style.top = 'auto';
+      miniBar.style.bottom = 'auto';
+      miniBar.style.left = 'auto';
+      miniBar.style.right = 'auto';
+
+      if (!clockEl || !CONFIG.clockShow || clockEl.classList.contains('clock-hidden')) {
+        miniBar.style.top = '3.8rem';
+        miniBar.style.right = '1.2rem';
+        return;
+      }
+
+      const rect = clockEl.getBoundingClientRect();
+      const centerX = rect.left + rect.width * 0.5;
+      const isBottomHalf = rect.top > vh * 0.46;
+
+      if (isBottomHalf) {
+        const desiredBottom = Math.max(14, vh - rect.top + 10);
+        if (vh - desiredBottom - barH < 10) {
+          miniBar.style.top = '12px';
+        } else {
+          miniBar.style.bottom = `${Math.round(desiredBottom)}px`;
+        }
+      } else {
+        const desiredTop = Math.min(Math.max(12, vh - barH - 14), Math.max(14, rect.bottom + 10));
+        miniBar.style.top = `${Math.round(desiredTop)}px`;
+      }
+
+      if (centerX > vw * 0.56) {
+        miniBar.style.right = `${Math.max(12, Math.round(vw - rect.right))}px`;
+      } else if (centerX < vw * 0.44) {
+        miniBar.style.left = `${Math.max(12, Math.min(Math.round(vw - barW - 12), Math.round(rect.left)))}px`;
+      } else {
+        miniBar.style.left = `${Math.max(12, Math.round((vw - barW) * 0.5))}px`;
+      }
+    }
+
+    function toggleClockMiniBar(forceState) {
+      const miniBar = document.getElementById('clock-mini-bar');
+      const clockEl = document.getElementById('ambient-clock');
+      if (!miniBar) return;
+      const shouldOpen = typeof forceState === 'boolean' ? forceState : !miniBar.classList.contains('open');
+      if (shouldOpen) {
+        if (typeof syncClockAndRegionUI === 'function') syncClockAndRegionUI();
+        anchorClockMiniBar();
+        miniBar.classList.add('open');
+        if (clockEl) clockEl.classList.add('mini-open');
+      } else {
+        miniBar.classList.remove('open');
+        if (clockEl) clockEl.classList.remove('mini-open');
+      }
+    }
+
+    function closeClockMiniBar() {
+      toggleClockMiniBar(false);
+    }
+
+    function onAmbientClockClick(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      wakeActiveUi();
+      closeControlsPopup();
+      toggleClockMiniBar();
     }
 
     /* =========================================================================
@@ -4080,6 +4732,8 @@
       const dock = document.getElementById('pixelmood-dock');
       const shouldOpen = typeof forceState === 'boolean' ? forceState : !dock.classList.contains('open');
       dock.classList.toggle('open', shouldOpen);
+      applyMagneticLayout({ poemAlign: currentAlign, animateClock: true });
+      requestAnimationFrame(() => ensurePoemPriorityNoOverlap());
     }
 
     function startPixelmoodCanvasRenderer() {
@@ -4163,6 +4817,18 @@
       if (wrap && !wrap.contains(e.target)) {
         closeControlsPopup();
       }
+      const miniBar = document.getElementById('clock-mini-bar');
+      const clockEl = document.getElementById('ambient-clock');
+      const popClockBtn = document.getElementById('popClockMiniBtn');
+      if (
+        miniBar &&
+        miniBar.classList.contains('open') &&
+        !miniBar.contains(e.target) &&
+        !(clockEl && clockEl.contains(e.target)) &&
+        !(popClockBtn && popClockBtn.contains(e.target))
+      ) {
+        closeClockMiniBar();
+      }
     });
 
     function wakeActiveUi() {
@@ -4172,7 +4838,8 @@
       idleTimer = setTimeout(() => {
         const isPopOpen = document.getElementById('controls-popup')?.classList.contains('open');
         const isModalOpen = document.getElementById('settings-modal')?.classList.contains('open');
-        if (!isPopOpen && !isModalOpen) {
+        const isMiniOpen = document.getElementById('clock-mini-bar')?.classList.contains('open');
+        if (!isPopOpen && !isModalOpen && !isMiniOpen) {
           document.body.classList.remove('active-touch');
           document.body.classList.add('idle-zen');
         }
@@ -4520,7 +5187,11 @@
       if (currentPoemRawText) {
         applyArtisticTypographyForPoem(currentPoemRawText);
       }
+      applyMagneticLayout({ poemAlign: currentAlign, animateClock: false });
       ensurePoemPriorityNoOverlap();
+      if (document.getElementById('clock-mini-bar')?.classList.contains('open')) {
+        anchorClockMiniBar();
+      }
     });
 
     document.addEventListener('visibilitychange', () => {
@@ -4786,12 +5457,211 @@
     let isShowingPhotoScene = false;
     let hybridStepCounter = 0;
 
-    // 대구광역시 (35.8714, 128.6014) 실시간 날씨 상태
+    // 전국 20대 주요 도시 및 GPS 현위치 기반 실시간 날씨·일몰 좌표 프리셋 (v2.9)
+    const WEATHER_REGIONS = [
+      { key: 'seoul',     short: '서울', name: '서울특별시',       lat: 37.5665, lon: 126.9780 },
+      { key: 'busan',     short: '부산', name: '부산광역시',       lat: 35.1796, lon: 129.0756 },
+      { key: 'daegu',     short: '대구', name: '대구광역시',       lat: 35.8714, lon: 128.6014 },
+      { key: 'incheon',   short: '인천', name: '인천광역시',       lat: 37.4563, lon: 126.7052 },
+      { key: 'gwangju',   short: '광주', name: '광주광역시',       lat: 35.1595, lon: 126.8526 },
+      { key: 'daejeon',   short: '대전', name: '대전광역시',       lat: 36.3504, lon: 127.3845 },
+      { key: 'ulsan',     short: '울산', name: '울산광역시',       lat: 35.5384, lon: 129.3114 },
+      { key: 'sejong',    short: '세종', name: '세종특별자치시',   lat: 36.4800, lon: 127.2890 },
+      { key: 'suwon',     short: '수원', name: '경기 수원·판교',   lat: 37.2636, lon: 127.0286 },
+      { key: 'goyang',    short: '고양', name: '경기 고양·일산',   lat: 37.6584, lon: 126.8320 },
+      { key: 'chuncheon', short: '춘천', name: '강원 춘천',        lat: 37.8813, lon: 127.7298 },
+      { key: 'gangneung', short: '강릉', name: '강원 강릉·동해',   lat: 37.7519, lon: 128.8761 },
+      { key: 'cheongju',  short: '청주', name: '충북 청주',        lat: 36.6424, lon: 127.4890 },
+      { key: 'cheonan',   short: '천안', name: '충남 천안·아산',   lat: 36.8151, lon: 127.1139 },
+      { key: 'jeonju',    short: '전주', name: '전북 전주',        lat: 35.8242, lon: 127.1480 },
+      { key: 'yeosu',     short: '여수', name: '전남 여수·순천',   lat: 34.7604, lon: 127.6622 },
+      { key: 'pohang',    short: '포항', name: '경북 포항·경주',   lat: 36.0190, lon: 129.3435 },
+      { key: 'andong',    short: '안동', name: '경북 안동·영주',   lat: 36.5684, lon: 128.7294 },
+      { key: 'changwon',  short: '창원', name: '경남 창원·김해',   lat: 35.2280, lon: 128.6811 },
+      { key: 'jeju',      short: '제주', name: '제주특별자치도',   lat: 33.4996, lon: 126.5312 }
+    ];
+
+    function getSelectedRegionInfo() {
+      if (
+        CONFIG.weatherRegion === 'custom_gps' &&
+        typeof CONFIG.customRegionLat === 'number' &&
+        typeof CONFIG.customRegionLon === 'number'
+      ) {
+        const cname = CONFIG.customRegionName || '현위치';
+        return {
+          key: 'custom_gps',
+          short: cname,
+          name: `📍 현위치 (${cname})`,
+          lat: CONFIG.customRegionLat,
+          lon: CONFIG.customRegionLon
+        };
+      }
+      const found = WEATHER_REGIONS.find(r => r.key === CONFIG.weatherRegion);
+      return found || WEATHER_REGIONS.find(r => r.key === 'daegu') || WEATHER_REGIONS[0];
+    }
+
+    function populateWeatherRegionSelects() {
+      const selIds = ['miniSelWeatherRegion', 'selWeatherRegionFrame', 'selWeatherRegionClock'];
+      const hasCustom = (typeof CONFIG.customRegionLat === 'number' && typeof CONFIG.customRegionLon === 'number');
+      const customLabel = `📍 현위치 (${CONFIG.customRegionName || 'GPS'})`;
+
+      selIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        let optsHtml = WEATHER_REGIONS.map(r => `<option value="${r.key}">${r.name}</option>`).join('');
+        if (hasCustom || CONFIG.weatherRegion === 'custom_gps') {
+          optsHtml = `<option value="custom_gps">${customLabel}</option>` + optsHtml;
+        }
+        el.innerHTML = optsHtml;
+        el.value = (CONFIG.weatherRegion === 'custom_gps' && hasCustom)
+          ? 'custom_gps'
+          : getSelectedRegionInfo().key;
+      });
+    }
+
+    function syncClockAndRegionUI() {
+      populateWeatherRegionSelects();
+      const reg = getSelectedRegionInfo();
+      const cityName = reg.short;
+
+      // 1) 상세 설정 <-> 미니 설정바 양방향 동기화
+      const opPct = Math.round((CONFIG.clockOpacity || 0.52) * 100);
+      const pairs = [
+        ['chkClockShow', 'checked', Boolean(CONFIG.clockShow)],
+        ['miniChkClockShow', 'checked', Boolean(CONFIG.clockShow)],
+        ['chkShowWeather', 'checked', CONFIG.showWeather !== false],
+        ['chkClockShowWeather', 'checked', CONFIG.showWeather !== false],
+        ['miniChkShowWeather', 'checked', CONFIG.showWeather !== false],
+        ['selClockPos', 'value', CONFIG.clockPos || 'dynamic'],
+        ['miniSelClockPos', 'value', CONFIG.clockPos || 'dynamic'],
+        ['selClockFormat', 'value', CONFIG.clockFormat || 'poetic'],
+        ['miniSelClockFormat', 'value', CONFIG.clockFormat || 'poetic'],
+        ['selClockFont', 'value', CONFIG.clockFont || 'sync'],
+        ['miniSelClockFont', 'value', CONFIG.clockFont || 'sync'],
+        ['rngClockOpacity', 'value', String(CONFIG.clockOpacity ?? 0.52)],
+        ['miniRngClockOpacity', 'value', String(CONFIG.clockOpacity ?? 0.52)]
+      ];
+      for (const [id, prop, val] of pairs) {
+        const el = document.getElementById(id);
+        if (el) el[prop] = val;
+      }
+      const lblPct1 = document.getElementById('lblClockOpacityPct');
+      const lblPct2 = document.getElementById('miniLblClockOpacity');
+      if (lblPct1) lblPct1.textContent = String(opPct);
+      if (lblPct2) lblPct2.textContent = String(opPct);
+
+      // 2) 선택 지역명 동적 반영 (전자액자 설정 · 다이나믹 시계 · 야간 조도 모드 · 상단 설정 팝업)
+      const lblW1 = document.getElementById('lblSettingWeatherToggle');
+      const lblW2 = document.getElementById('lblClockWeatherToggle');
+      if (lblW1) lblW1.textContent = `시계에 ${cityName} 날씨 병기`;
+      if (lblW2) lblW2.textContent = `시계에 ${cityName} 날씨 병기`;
+
+      const optSolar = document.getElementById('optNightAutoSolar');
+      if (optSolar) optSolar.textContent = `${cityName} 일몰·날씨 자동 감광`;
+
+      const popClockTxt = document.getElementById('popClockRegionText');
+      if (popClockTxt) {
+        popClockTxt.textContent = CONFIG.showWeather !== false
+          ? `감성시계 · ${cityName} 날씨`
+          : `감성시계 설정 (${cityName})`;
+      }
+    }
+
+    function setShowWeatherState(checked) {
+      CONFIG.showWeather = Boolean(checked);
+      saveConfig();
+      syncClockAndRegionUI();
+      renderClock();
+      showHudFeedback('🌤️', CONFIG.showWeather ? `${getSelectedRegionInfo().short} 날씨 표시 켜짐` : '시계 날씨 표시 꺼짐');
+    }
+
+    function changeWeatherRegion(regionKey) {
+      if (regionKey === 'custom_gps' && typeof CONFIG.customRegionLat !== 'number') {
+        detectUserGpsRegion();
+        return;
+      }
+      CONFIG.weatherRegion = regionKey;
+      const reg = getSelectedRegionInfo();
+      daeguWeather.city = reg.short;
+      saveConfig();
+      syncClockAndRegionUI();
+      applyArtToneAndNightSchedule();
+      renderClock();
+      fetchRegionalWeather(true);
+      showHudFeedback('🌤️', `날씨·일몰 기준 지역: ${reg.short}`);
+    }
+
+    function findNearestPresetCity(lat, lon) {
+      let nearest = WEATHER_REGIONS[0];
+      let minKm = Infinity;
+      const toRad = d => (d * Math.PI) / 180;
+      for (const r of WEATHER_REGIONS) {
+        const dLat = toRad(r.lat - lat);
+        const dLon = toRad(r.lon - lon);
+        const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat)) * Math.cos(toRad(r.lat)) * Math.sin(dLon / 2) ** 2;
+        const km = 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        if (km < minKm) {
+          minKm = km;
+          nearest = r;
+        }
+      }
+      return { nearest, minKm };
+    }
+
+    function detectUserGpsRegion() {
+      if (!navigator.geolocation) {
+        showHudFeedback('⚠️', '이 브라우저는 GPS 위치 감지를 지원하지 않습니다');
+        return;
+      }
+      showHudFeedback('📍', '현재 위치의 지역과 날씨를 확인하고 있습니다...');
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          const lat = Math.round(pos.coords.latitude * 10000) / 10000;
+          const lon = Math.round(pos.coords.longitude * 10000) / 10000;
+          const { nearest, minKm } = findNearestPresetCity(lat, lon);
+          let resolvedName = minKm <= 28 ? nearest.short : '현위치';
+
+          try {
+            const geoRes = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=ko`);
+            if (geoRes.ok) {
+              const g = await geoRes.json();
+              const rawCity = (g.city || g.locality || g.principalSubdivision || '').trim();
+              if (rawCity) {
+                resolvedName = rawCity
+                  .replace(/(특별시|광역시|특별자치시|특별자치도)$/, '')
+                  .replace(/^(경기도|강원특별자치도|강원도|충청북도|충청남도|전북특별자치도|전라북도|전라남도|경상북도|경상남도)\s*/, '')
+                  .replace(/시$/, '')
+                  .trim() || resolvedName;
+              }
+            }
+          } catch (e) {}
+
+          CONFIG.customRegionLat = lat;
+          CONFIG.customRegionLon = lon;
+          CONFIG.customRegionName = resolvedName;
+          CONFIG.weatherRegion = 'custom_gps';
+          daeguWeather.city = resolvedName;
+          saveConfig();
+          syncClockAndRegionUI();
+          applyArtToneAndNightSchedule();
+          renderClock();
+          fetchRegionalWeather(true);
+          showHudFeedback('📍', `현재 위치(${resolvedName}) 날씨·일몰로 설정되었습니다`);
+        },
+        () => {
+          showHudFeedback('⚠️', '위치 권한이 허용되지 않아 목록에서 지역을 선택해주세요');
+        },
+        { enableHighAccuracy: false, timeout: 7000, maximumAge: 600000 }
+      );
+    }
+
+    // 선택된 지역(기본 대구) 실시간 날씨 상태
     let daeguWeather = {
       temp: 18.4,
       icon: '☀️',
       label: '맑음',
       city: '대구',
+      isDay: 1,
       loaded: false
     };
 
@@ -4926,7 +5796,7 @@
         cameraLuxTimer = setInterval(sampleRoomLuminance, 4000);
       } catch (err) {
         const statusEl = document.getElementById('lblAmbientLuxStatus');
-        if (statusEl) statusEl.textContent = '카메라 권한 거부됨 · 대구 일몰 자동 모드로 대체 작동';
+        if (statusEl) statusEl.textContent = `카메라 권한 거부됨 · ${getSelectedRegionInfo().short} 일몰 자동 모드로 대체 작동`;
         CONFIG.nightMode = 'auto_solar';
         saveConfig();
       }
@@ -5015,19 +5885,20 @@
           statusDesc = '💡 전면 카메라 주변 조도 센서 준비 중...';
         }
       } else if (mode === 'auto_solar') {
+        const regCity = getSelectedRegionInfo().short;
         if (isDeepNight) {
           isAmbientNightNow = true;
           autoDim = 0.48;
-          statusDesc = '🌌 대구 심야 시간대 · 자동 감광 (-48%)';
+          statusDesc = `🌌 ${regCity} 심야 시간대 · 자동 감광 (-48%)`;
         } else if (isEveningOrNight) {
           isAmbientNightNow = true;
           autoDim = 0.28;
-          statusDesc = '🌇 대구 일몰 이후 · 야간 눈부심 보호 (-28%)';
+          statusDesc = `🌇 ${regCity} 일몰 이후 · 야간 눈부심 보호 (-28%)`;
         } else if (daeguWeather.label && (daeguWeather.label.includes('비') || daeguWeather.label.includes('흐림'))) {
           autoDim = 0.08;
-          statusDesc = `☁️ 대구 ${daeguWeather.label} · 차분한 조도 (-8%)`;
+          statusDesc = `☁️ ${regCity} ${daeguWeather.label} · 차분한 조도 (-8%)`;
         } else {
-          statusDesc = '☀️ 대구 주간 밝기 100% 연동 중';
+          statusDesc = `☀️ ${regCity} 주간 밝기 100% 연동 중`;
         }
       } else {
         statusDesc = '☀️ 수동 주간 밝기 고정';
@@ -5097,6 +5968,7 @@
       if (selSort) selSort.value = CONFIG.photoSortMode || 'people';
       if (selTrans) selTrans.value = CONFIG.photoTransition || 'kenburns';
       if (chkW) chkW.checked = CONFIG.showWeather !== false;
+      syncClockAndRegionUI();
       const selAlb = document.getElementById('selAlbumFilter');
       const selArt = document.getElementById('selArtToneMode');
       const selNight = document.getElementById('selNightMode');
@@ -6069,7 +6941,7 @@
     }
 
     /* === ORGANIC SYNERGY ENGINE (v2.4) === */
-    // [유기적 연동 ①] 사진의 촬영 계절·시간대·인물 여부·밝기 및 대구 실시간 날씨와 공명하는 시 자동 매칭
+    // [유기적 연동 ①] 사진의 촬영 계절·시간대·인물 여부·밝기 및 설정 지역 실시간 날씨와 공명하는 시 자동 매칭
     function pickResonantPoemForPhoto(photoItem) {
       if (!reflections || reflections.length === 0) return FALLBACK_POEMS[0];
       const shortCandidates = reflections.filter(p => {
@@ -6105,7 +6977,7 @@
         targetKeywords.push('풍경', '길', '나무', '하늘', '호수', '바다', '산');
       }
 
-      // 4) 대구 실시간 날씨 키워드 반영
+      // 4) 설정 지역 실시간 날씨 키워드 반영
       if (daeguWeather?.label) {
         if (daeguWeather.label.includes('비')) targetKeywords.push('비', '빗소리', '창가', '우산', '물방울');
         else if (daeguWeather.label.includes('눈')) targetKeywords.push('눈', '첫눈', '하얀', '겨울');
@@ -6229,22 +7101,7 @@
       };
       nextFgImg.src = imgSrc;
 
-      // 다이나믹 시계를 사진 속 인물 얼굴(focalX, focalY)과 겹치지 않는 반대편 코너로 이동
-      if (CONFIG.clockPos === 'dynamic') {
-        const clockEl = document.getElementById('ambient-clock');
-        if (clockEl) {
-          clockEl.classList.remove('pos-top-left', 'pos-top-right', 'pos-bottom-left', 'pos-bottom-right', 'pos-bottom-center');
-          const fx = item.focalX || 50;
-          const fy = item.focalY || 35;
-          if (fy < 48) {
-            clockEl.classList.add(fx < 50 ? 'pos-top-right' : 'pos-top-left');
-          } else {
-            clockEl.classList.add(fx < 50 ? 'pos-bottom-right' : 'pos-bottom-left');
-          }
-        }
-      }
-
-      // 포토 포엠 모드 vs 사진 전용 모드 오버레이 처리
+      // 포토 포엠 모드 vs 사진 전용 모드 오버레이 구성 후 자석 N-N극 반발 배치 적용
       if (CONFIG.frameMode === 'photo_poem') {
         const shortPoem = pickResonantPoemForPhoto(item);
         if (shortPoem && Array.isArray(reflections)) {
@@ -6263,10 +7120,7 @@
         const relBadge = formatMemoryRelativeBadge(item.takenAt);
         if (ppoMeta) ppoMeta.textContent = `${relBadge ? relBadge + ' · ' : ''}${item.dateLabel || item.title || ''} · ${item.album || '갤러리'}`;
 
-        overlay.classList.remove('pos-bottom-left', 'pos-bottom-right', 'pos-bottom-center', 'pos-top-left');
-        const fx = item.focalX || 50;
-        overlay.classList.add(fx > 52 ? 'pos-bottom-left' : 'pos-bottom-right');
-        overlay.classList.add('visible');
+        if (overlay) overlay.classList.add('visible');
         if (dateCap) dateCap.classList.remove('visible');
       } else {
         if (overlay) overlay.classList.remove('visible');
@@ -6277,6 +7131,9 @@
           dateCap.classList.add('visible');
         }
       }
+
+      applyMagneticLayout({ photoItem: item, animateClock: false });
+      requestAnimationFrame(() => ensurePoemPriorityNoOverlap());
 
       if (badge) {
         badge.style.display = CONFIG.showBadge ? 'inline' : 'none';
@@ -6389,7 +7246,7 @@
       }
     }
 
-    // 대구광역시 (lat=35.8714, lon=128.6014) 날씨 조회 (NAS /api/weather 우선 -> GitHub Pages Open-Meteo 직접 호출)
+    // 전국 설정 지역 날씨·일몰 조회 (NAS /api/weather 우선 -> GitHub Pages Open-Meteo 직접 호출)
     function mapWmoWeatherCode(code) {
       if (code === 0) return { icon: '☀️', label: '맑음' };
       if (code === 1 || code === 2) return { icon: '🌤️', label: '구름 조금' };
@@ -6401,29 +7258,43 @@
       return { icon: '🌤️', label: '선선함' };
     }
 
-    async function fetchDaeguWeather() {
-      try {
-        const cachedRaw = localStorage.getItem('dailypoem_daegu_weather_v2');
-        if (cachedRaw) {
-          const parsed = JSON.parse(cachedRaw);
-          if (Date.now() - (parsed.ts || 0) < 30 * 60 * 1000) {
-            daeguWeather = parsed;
-            renderClock();
-            return;
+    async function fetchRegionalWeather(forceRefresh = false) {
+      const reg = getSelectedRegionInfo();
+      const cacheKey = `dailypoem_weather_v3_${reg.key}_${reg.lat.toFixed(2)}_${reg.lon.toFixed(2)}`;
+      daeguWeather.city = reg.short;
+
+      if (!forceRefresh) {
+        try {
+          const cachedRaw = localStorage.getItem(cacheKey);
+          if (cachedRaw) {
+            const parsed = JSON.parse(cachedRaw);
+            if (Date.now() - (parsed.ts || 0) < 30 * 60 * 1000) {
+              daeguWeather = { ...parsed, city: reg.short };
+              renderClock();
+              applyArtToneAndNightSchedule();
+              return;
+            }
           }
-        }
-      } catch (e) {}
+        } catch (e) {}
+      }
 
       const base = window.APP_ROOT || './';
       // 1) 시놀로지 NAS 로컬 캐시 엔드포인트 시도
       try {
-        const nasRes = await fetch(`${base}api/weather?lat=35.8714&lon=128.6014`);
+        const nasRes = await fetch(`${base}api/weather?lat=${reg.lat}&lon=${reg.lon}&city=${encodeURIComponent(reg.short)}`);
         if (nasRes.ok) {
           const data = await nasRes.json();
           if (typeof data.temp === 'number') {
-            daeguWeather = { ...data, ts: Date.now(), loaded: true };
-            localStorage.setItem('dailypoem_daegu_weather_v2', JSON.stringify(daeguWeather));
+            daeguWeather = {
+              ...data,
+              city: reg.short,
+              isDay: typeof data.isDay === 'number' ? data.isDay : 1,
+              ts: Date.now(),
+              loaded: true
+            };
+            try { localStorage.setItem(cacheKey, JSON.stringify(daeguWeather)); } catch (e) {}
             renderClock();
+            applyArtToneAndNightSchedule();
             return;
           }
         }
@@ -6431,7 +7302,7 @@
 
       // 2) GitHub Pages (github.io) 용 Open-Meteo 직접 CORS 호출
       try {
-        const url = 'https://api.open-meteo.com/v1/forecast?latitude=35.8714&longitude=128.6014&current=temperature_2m,weather_code,is_day&timezone=Asia%2FSeoul';
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${reg.lat}&longitude=${reg.lon}&current=temperature_2m,weather_code,is_day&timezone=Asia%2FSeoul`;
         const res = await fetch(url);
         if (res.ok) {
           const json = await res.json();
@@ -6441,13 +7312,14 @@
             temp: Math.round((cur.temperature_2m ?? 18.4) * 10) / 10,
             icon: wmo.icon,
             label: wmo.label,
-            city: '대구',
+            city: reg.short,
             isDay: typeof cur.is_day === 'number' ? cur.is_day : 1,
             loaded: true,
             ts: Date.now()
           };
-          localStorage.setItem('dailypoem_daegu_weather_v2', JSON.stringify(daeguWeather));
+          try { localStorage.setItem(cacheKey, JSON.stringify(daeguWeather)); } catch (e) {}
           renderClock();
+          applyArtToneAndNightSchedule();
           if (CONFIG.weatherAudioSync && CONFIG.ambientLayer === 'random') {
             if (daeguWeather.label.includes('비') || daeguWeather.label.includes('눈')) {
               changeAmbientLayer('rain');
@@ -6456,6 +7328,8 @@
         }
       } catch (e) {}
     }
+
+    const fetchDaeguWeather = fetchRegionalWeather;
 
     // 기존 showRandomPoem / showPrevPoem을 2.0 액자 모드(시집 / 하이브리드 / 포토포엠 / 사진전용)와 통합
     const _origShowRandomPoem = showRandomPoem;
@@ -6486,17 +7360,19 @@
       _origShowPrevPoem();
     };
 
-    // 시계 렌더링 후 대구 날씨 한 줄을 우아하게 추가
+    // 시계 렌더링 후 설정 지역 실시간 날씨 한 줄을 우아하게 추가하고 충돌 재검증
     const _origRenderClock = renderClock;
     renderClock = function() {
       _origRenderClock();
-      if (CONFIG.showWeather === false) return;
-      const contentEl = document.getElementById('clock-content');
-      if (!contentEl) return;
-      const weatherHtml = `<div class="clock-weather-line"><span>${daeguWeather.icon}</span><span>${daeguWeather.city} ${daeguWeather.temp}°C · ${daeguWeather.label}</span></div>`;
-      if (!contentEl.innerHTML.includes('clock-weather-line')) {
-        contentEl.insertAdjacentHTML('beforeend', weatherHtml);
+      if (CONFIG.showWeather !== false) {
+        const contentEl = document.getElementById('clock-content');
+        if (contentEl && !contentEl.innerHTML.includes('clock-weather-line')) {
+          const cityLabel = daeguWeather.city || getSelectedRegionInfo().short;
+          const weatherHtml = `<div class="clock-weather-line"><span>${daeguWeather.icon}</span><span>${cityLabel} ${daeguWeather.temp}°C · ${daeguWeather.label}</span></div>`;
+          contentEl.insertAdjacentHTML('beforeend', weatherHtml);
+        }
       }
+      ensurePoemPriorityNoOverlap();
     };
 
     // 키보드 단축키 지원 (FHD 대화면 모니터 및 전시·출품 시연용)
@@ -6524,6 +7400,7 @@
         triggerPoemHeart();
       } else if (e.key === 'Escape') {
         closeControlsPopup();
+        closeClockMiniBar();
         toggleSettings(false);
         closePhotoManagerModal();
         togglePixelmoodDock(false);

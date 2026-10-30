@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-DailyPoem 2.0 — Synology DS420+ (Intel Celeron J4025) FastAPI Backend & 03:00 AM Batch Scheduler
+DailyPoem v2.9 — Synology DS420+ (Intel Celeron J4025) FastAPI Backend & 03:00 AM Batch Scheduler
 - Daytime: 0% CV / 0% image resize overhead — streams pre-cached FHD (1920px) JPEGs from /data/cache_fhd
 - Nighttime (03:00 AM KST): Triggers DS420BatchIndexer in a low-priority background thread (os.nice(15), 1 thread)
-- Weather Proxy: Caches Daegu (35.8714, 128.6014) Open-Meteo weather for 30 minutes
+- Weather Proxy: Caches regional Open-Meteo weather (default Daegu, supports nationwide regions & GPS) for 30 minutes
 """
 
 import asyncio
@@ -30,7 +30,7 @@ INDEX_FILE = DATA_DIR / "media_index.json"
 BATCH_HOUR = int(os.environ.get("BATCH_INDEX_HOUR", "3"))  # Default: 03:00 AM
 BATCH_SLEEP_MS = int(os.environ.get("BATCH_SLEEP_MS", "80"))
 
-WEATHER_CACHE = {"data": None, "ts": 0.0}
+WEATHER_CACHE = {}
 LAST_BATCH_DATE = None
 
 
@@ -65,7 +65,7 @@ async def lifespan(app: FastAPI):
     task.cancel()
 
 
-app = FastAPI(title="DailyPoem 2.0 Synology DS420+ Frame Server", lifespan=lifespan)
+app = FastAPI(title="DailyPoem v2.9 Synology DS420+ Frame Server", lifespan=lifespan)
 
 
 @app.get("/api/media")
@@ -102,18 +102,25 @@ async def trigger_manual_scan(force: bool = Query(False)):
 
 
 @app.get("/api/weather")
-async def get_daegu_weather(lat: float = 35.8714, lon: float = 128.6014):
+async def get_regional_weather(
+    lat: float = 35.8714,
+    lon: float = 128.6014,
+    city: str = "대구",
+):
     now = time.time()
-    if WEATHER_CACHE["data"] and (now - WEATHER_CACHE["ts"] < 1800):
-        return WEATHER_CACHE["data"]
+    safe_city = (city or "대구").strip()[:24]
+    cache_key = (round(lat, 3), round(lon, 3), safe_city)
+    cached_entry = WEATHER_CACHE.get(cache_key)
+    if cached_entry and (now - cached_entry["ts"] < 1800):
+        return cached_entry["data"]
 
     url = (
         f"https://api.open-meteo.com/v1/forecast?"
-        f"latitude={lat}&longitude={lon}&current=temperature_2m,weather_code&timezone=Asia%2FSeoul"
+        f"latitude={lat}&longitude={lon}&current=temperature_2m,weather_code,is_day&timezone=Asia%2FSeoul"
     )
     try:
         def _fetch():
-            req = urllib.request.Request(url, headers={"User-Agent": "DailyPoemFrame/2.0"})
+            req = urllib.request.Request(url, headers={"User-Agent": "DailyPoemFrame/2.9"})
             with urllib.request.urlopen(req, timeout=5) as resp:
                 return json.loads(resp.read().decode("utf-8"))
 
@@ -131,19 +138,23 @@ async def get_daegu_weather(lat: float = 35.8714, lon: float = 128.6014):
             icon, label = "🌧️", "비"
         elif 71 <= code <= 77:
             icon, label = "❄️", "눈"
+        elif code >= 95:
+            icon, label = "⛈️", "뇌우"
 
         payload = {
             "temp": round(float(cur.get("temperature_2m", 18.4)), 1),
             "icon": icon,
             "label": label,
-            "city": "대구",
+            "city": safe_city,
+            "isDay": int(cur.get("is_day", 1)),
             "updatedAt": datetime.now().strftime("%Y-%m-%d %H:%M"),
         }
-        WEATHER_CACHE["data"] = payload
-        WEATHER_CACHE["ts"] = now
+        WEATHER_CACHE[cache_key] = {"data": payload, "ts": now}
         return payload
     except Exception:
-        return WEATHER_CACHE["data"] or {"temp": 18.4, "icon": "☀️", "label": "맑음", "city": "대구"}
+        if cached_entry:
+            return cached_entry["data"]
+        return {"temp": 18.4, "icon": "☀️", "label": "맑음", "city": safe_city, "isDay": 1}
 
 
 
