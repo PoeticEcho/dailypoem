@@ -3991,5 +3991,16 @@
       "color": "#4A3B32",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "id": 364,
+    "text": "무심히 건네받은 캔커피 하나\n손끝에 묵직하게 고이는 온도\n\n지친 하루의 바닥을 적시며\n조용히 속도를 낮추게 하는 힘",
+    "createdAt": "2026-10-31",
+    "hearts": 0,
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#4E3E32",
+      "fontFamily": "'MaruBuri', serif"
+    }
   }
 ]
