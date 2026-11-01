@@ -4013,5 +4013,38 @@
       "color": "#E3E7ED",
       "fontFamily": "'Noto Serif KR', serif"
     }
+  },
+  {
+    "id": 366,
+    "text": "뿌연 유리창 위에 손끝을 얹고\n없는 길을 더듬어 그려보는 저녁\n가로등 불빛이 물감처럼 번져간다\n\n조급하게 달리던 마음을 내려놓고\n창가에 맺힌 온기 하나를 바라보며\n오늘도 수고했다, 작은 목소리로\n스스로를 토닥여 재우는 시간",
+    "createdAt": "2026-11-01",
+    "hearts": 0,
+    "style": {
+      "background": "#161922",
+      "color": "#D8E0EB",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
+  },
+  {
+    "id": 367,
+    "text": "비 갠 뒤의 돌담길을 걷다가\n풀잎 끝에 매달린 빛을 본다\n\n지나간 비바람이\n남겨둔 눈물마저\n스스로 맑아지는 시간",
+    "createdAt": "2026-11-01",
+    "hearts": 0,
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "id": 368,
+    "text": "미지근한 바람 불어오는 골목 끝에서\n풀벌레 소리 마중 나오는 저녁\n수고로웠던 하루의 짐을 내려놓는다\n\n서두르지 않아도 괜찮다고\n묵묵히 걸어온 네 등 뒤를\n조용히 어루만지는\n다정한 여름의 숨결",
+    "createdAt": "2026-11-01",
+    "hearts": 0,
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
   }
 ]
