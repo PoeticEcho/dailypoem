@@ -4002,5 +4002,16 @@
       "color": "#4E3E32",
       "fontFamily": "'MaruBuri', serif"
     }
+  },
+  {
+    "id": 365,
+    "text": "까만 레코드판 위로\n바늘이 스며드는 밤\n\n지지직 숨결을 고르며\n재즈가 피어오르고\n\n지친 마음의 결마다\n따스한 온기가 스민다",
+    "createdAt": "2026-11-01",
+    "hearts": 0,
+    "style": {
+      "background": "#1C2026",
+      "color": "#E3E7ED",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
   }
 ]
