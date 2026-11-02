@@ -4046,5 +4046,16 @@
       "color": "#3E4337",
       "fontFamily": "'Gowun Dodum', sans-serif"
     }
+  },
+  {
+    "id": 369,
+    "text": "노란 편지처럼 쌓이는 잎사귀들\n보도블록 위로 걸음이 느려진다\n\n조용히 스쳐 가는 계절의 뒤에서\n내 마음도 한 줌 낙엽이 되고\n\n괜찮다, 다독이며 딛는 길마다\n고운 노을처럼 번지는 온기\n너의 걸음에도 스며들기를",
+    "createdAt": "2026-11-02",
+    "hearts": 0,
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#4E3E32",
+      "fontFamily": "'MaruBuri', serif"
+    }
   }
 ]
