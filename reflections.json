@@ -4079,5 +4079,16 @@
       "color": "#4A3B32",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "id": 372,
+    "text": "연필 깎는 사각 소리가\n고요의 테두리를 가만히 다듬고\n\n종이 위 맺힌 잉크가 마를 때까지\n숨을 고르며 기다리는 저녁\n단단해진 마음 하나를 적는다",
+    "createdAt": "2026-11-05",
+    "hearts": 0,
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#4E3E32",
+      "fontFamily": "'MaruBuri', serif"
+    }
   }
 ]
