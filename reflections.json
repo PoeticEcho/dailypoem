@@ -4090,5 +4090,16 @@
       "color": "#4E3E32",
       "fontFamily": "'MaruBuri', serif"
     }
+  },
+  {
+    "id": 373,
+    "text": "새벽 네 시의 푸른 안개가\n유리창에 조용히 머물고\n\n잠들지 못한 마음 위로\n미지근한 물 한 모금을 적신다\n\n오늘도 견뎌낸 네 안의 고요가\n따스하게 흘러내리기를",
+    "createdAt": "2026-11-06",
+    "hearts": 0,
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
   }
 ]
