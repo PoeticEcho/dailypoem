@@ -4101,5 +4101,16 @@
       "color": "#2D3748",
       "fontFamily": "'Nanum Myeongjo', serif"
     }
+  },
+  {
+    "id": 374,
+    "text": "창문을 가만히 열면\n푸른 안개 침묵 속에 내려앉고\n컵에 담은 미지근한 물 한 모금\n목을 적시며 밤을 비워낸다\n\n헤매어 온 어제의 무거운 걸음도\n소란했던 마음의 조각들도\n이 고요 속에서 가만히 스러지니\n잘 견뎌주었다, 참 고마운 아침이다",
+    "createdAt": "2026-11-07",
+    "hearts": 0,
+    "style": {
+      "background": "#161922",
+      "color": "#D8E0EB",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
   }
 ]
