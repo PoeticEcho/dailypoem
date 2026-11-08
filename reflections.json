@@ -4112,5 +4112,16 @@
       "color": "#D8E0EB",
       "fontFamily": "'Noto Serif KR', serif"
     }
+  },
+  {
+    "id": 375,
+    "text": "보도블록 위에 쌓인 노란 편지들\n우리가 남몰래 쓴 그리움처럼\n가만히 밟히며 엎드려 있다\n\n천천히 걸어가는 너의 발걸음마다\n환하게 피어나는 눈부신 고독",
+    "createdAt": "2026-11-08",
+    "hearts": 0,
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#4E3E32",
+      "fontFamily": "'MaruBuri', serif"
+    }
   }
 ]
