@@ -4123,5 +4123,38 @@
       "color": "#4E3E32",
       "fontFamily": "'MaruBuri', serif"
     }
+  },
+  {
+    "id": 376,
+    "text": "나란히 쓴 작은 우산 아래\n너에게로 기울던 어깨의 기억\n\n젖지 않은 너의 그늘이\n내겐 가장 따뜻한 품이었다",
+    "createdAt": "2026-11-08",
+    "hearts": 0,
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#4E3E32",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "id": 377,
+    "text": "어깨를 적시던 빗속을 걸으며\n너를 향해 살짝 기울었던 마음\n\n지나고 보니 그것은 사랑이었네\n누군가를 더 아프게 품으려\n내 한쪽이 젖어드는 줄도 모르고\n환하게 웃던 그 날의 온기여",
+    "createdAt": "2026-11-08",
+    "hearts": 0,
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#4E3E32",
+      "fontFamily": "'MaruBuri', serif"
+    }
+  },
+  {
+    "id": 378,
+    "text": "빈 찻잔 바닥에 가라앉은\n초록의 누운 잎사귀 하나\n\n지친 하루의 끝에서도\n맑은 향기는 오래 남는다\n너의 마음처럼",
+    "createdAt": "2026-11-08",
+    "hearts": 0,
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Batang', serif"
+    }
   }
 ]
