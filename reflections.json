@@ -4156,5 +4156,16 @@
       "color": "#4A3B32",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "id": 379,
+    "text": "모퉁이 돌아돌아 스며드는\n작은 서점의 노란 불빛 하나\n마음을 데우고\n\n애써 숨겨둔 추운 날의 어깨를\n말없이 감싸 안아주는\n다정한 눈길 같아서",
+    "createdAt": "2026-11-09",
+    "hearts": 0,
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#4E3E32",
+      "fontFamily": "'MaruBuri', serif"
+    }
   }
 ]
