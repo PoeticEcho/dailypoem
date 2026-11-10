@@ -4167,5 +4167,16 @@
       "color": "#4E3E32",
       "fontFamily": "'MaruBuri', serif"
     }
+  },
+  {
+    "id": 380,
+    "text": "빗속을 나란히 걸으며\n네 쪽으로 기울던 우산\n\n젖어드는 어깨마저\n따스했던 너의 온도",
+    "createdAt": "2026-11-10",
+    "hearts": 0,
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
   }
 ]
