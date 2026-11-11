@@ -4178,5 +4178,16 @@
       "color": "#2E4235",
       "fontFamily": "'Gowun Dodum', sans-serif"
     }
+  },
+  {
+    "id": 381,
+    "text": "책장을 넘기다 멈춘 곳에\n희미한 밑줄 하나 고여 있고\n\n문득 스며드는 바람결에\n잊었던 계절의 안부가 묻어난다\n\n지나온 날의 온기가\n오늘의 시린 마음을\n가만히 감싸 안는\n조용한 저녁이다",
+    "createdAt": "2026-11-11",
+    "hearts": 0,
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#4E3E32",
+      "fontFamily": "'MaruBuri', serif"
+    }
   }
 ]
