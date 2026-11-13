@@ -4200,5 +4200,16 @@
       "color": "#4E3E32",
       "fontFamily": "'MaruBuri', serif"
     }
+  },
+  {
+    "id": 383,
+    "text": "간이역 벤치 끝에\n머무는 바람 한 점\n옷깃을 여미며 조용히 머물다 가고\n\n지나온 길 돌아보지 않아도 괜찮다고\n스쳐 가는 발걸음마다\n다정한 온기가 묻어난다",
+    "createdAt": "2026-11-13",
+    "hearts": 0,
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
   }
 ]
