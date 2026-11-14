@@ -4211,5 +4211,16 @@
       "color": "#2D3748",
       "fontFamily": "'Nanum Myeongjo', serif"
     }
+  },
+  {
+    "id": 384,
+    "text": "돌담길 돌아돌아 흐르던 비 그치고\n풀잎 끝마다 맑은 별 하나 매달렸다\n\n지나간 슬픔이 기도가 되는 순간\n세상은 어제보다 더 순해지고\n내 마음에도 투명한 물방울이 맺힌다",
+    "createdAt": "2026-11-14",
+    "hearts": 0,
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
   }
 ]
