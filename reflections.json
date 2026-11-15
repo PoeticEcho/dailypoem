@@ -4233,5 +4233,38 @@
       "color": "#2D3748",
       "fontFamily": "'Nanum Myeongjo', serif"
     }
+  },
+  {
+    "id": 386,
+    "text": "눈이 부시도록 파란 수면 위로\n낮은 햇살이 스러지듯 부서지고\n물결마다 눈부신 윤슬이 피어난다\n\n흔들리며 살아온 모든 날들이여\n그 가벼운 떨림마저 눈부셔라\n오늘도 잘 견뎌낸 네 마음 위에\n따스한 빛의 서정이 머무는 저녁",
+    "createdAt": "2026-11-15",
+    "hearts": 0,
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "id": 387,
+    "text": "오래된 책장을 열면\n멈춰 있던 계절이 건네는 안부\n\n바랜 밑줄 그어진 자리마다\n그날의 내가 서서 웃고 있다",
+    "createdAt": "2026-11-15",
+    "hearts": 0,
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "id": 388,
+    "text": "노란 편지처럼 쌓이는 길 위로\n우리의 느린 발걸음이 겹친다\n\n조급하지 않아도 괜찮다고\n바닥을 구르는 잎사귀들이\n조용히 어깨를 토닥이는 저녁",
+    "createdAt": "2026-11-15",
+    "hearts": 0,
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#4E3E32",
+      "fontFamily": "'MaruBuri', serif"
+    }
   }
 ]
