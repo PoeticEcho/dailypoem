@@ -4222,5 +4222,16 @@
       "color": "#2E4235",
       "fontFamily": "'Gowun Dodum', sans-serif"
     }
+  },
+  {
+    "id": 385,
+    "text": "잠들지 못한 어둠 속에서\n창가에 맺힌 푸른 안개를 보네\n\n고요히 가라앉은 숨결 위로\n미지근한 물 한 모금 입에 물면\n\n아프던 시간마저\n스르로 풀려나 내리는 밤",
+    "createdAt": "2026-11-15",
+    "hearts": 0,
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
   }
 ]
