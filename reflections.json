@@ -4266,5 +4266,16 @@
       "color": "#4E3E32",
       "fontFamily": "'MaruBuri', serif"
     }
+  },
+  {
+    "id": 389,
+    "text": "창밖의 숲이 조용히 머리를 숙이고\n바람은 그저 스쳐 지나갈 뿐입니다\n\n부러지지 않는 법을 아는 이들은\n몸을 눕혀 훗날을 도모하지요\n\n거센 결심보다 부드러운 순응이\n오늘의 지친 너를 안아주듯\n잠시 숨을 고르는 저녁입니다",
+    "createdAt": "2026-11-16",
+    "hearts": 0,
+    "style": {
+      "background": "#F4F6F7",
+      "color": "#2D3748",
+      "fontFamily": "'Nanum Myeongjo', serif"
+    }
   }
 ]
