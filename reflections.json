@@ -4288,5 +4288,16 @@
       "color": "#3C342C",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "id": 391,
+    "text": "먼 날의 숨결이 머문 자리\n희미한 밑줄 하나 고개를 든다\n\n지나온 계절의 찬 바람 속에서도\n너는 혼자가 아니었다고\n조용히 어깨를 감싸 쥐는 손길",
+    "createdAt": "2026-11-18",
+    "hearts": 0,
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Batang', serif"
+    }
   }
 ]
