@@ -4310,5 +4310,16 @@
       "color": "#4E3E32",
       "fontFamily": "'MaruBuri', serif"
     }
+  },
+  {
+    "id": 393,
+    "text": "유리창에 작은 길을 내고\n가만히 손끝을 얹어본다\n\n번지는 불빛 속으로\n조용히 스며드는 밤\n\n젖은 마음마다\n따스한 온기가 닿아\n오늘을 품어 안기를",
+    "createdAt": "2026-11-20",
+    "hearts": 0,
+    "style": {
+      "background": "#161922",
+      "color": "#D8E0EB",
+      "fontFamily": "'Noto Serif KR', serif"
+    }
   }
 ]
