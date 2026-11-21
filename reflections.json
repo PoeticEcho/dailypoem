@@ -4321,5 +4321,16 @@
       "color": "#D8E0EB",
       "fontFamily": "'Noto Serif KR', serif"
     }
+  },
+  {
+    "id": 394,
+    "text": "느린 걸음으로 딛는 보도블록 위마다\n노란 편지처럼 수줍게 쌓이는\n가을의 마지막 안부들\n\n조급하지 않게 여기까지 건너온\n당신의 수많았던 그 날들에\n남몰래 얹어주는\n따스한 오후의 입맞춤",
+    "createdAt": "2026-11-21",
+    "hearts": 0,
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#4E3E32",
+      "fontFamily": "'MaruBuri', serif"
+    }
   }
 ]
