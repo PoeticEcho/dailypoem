@@ -4332,5 +4332,16 @@
       "color": "#4E3E32",
       "fontFamily": "'MaruBuri', serif"
     }
+  },
+  {
+    "id": 395,
+    "text": "모서리를 치고 가는 바람 앞에\n잠시 몸을 낮추는 숲의 허리처럼\n\n견디려 애쓰지 않고\n스스로를 부드럽게 비워내며\n흐르는 길을 따라 웃어보는 일",
+    "createdAt": "2026-11-22",
+    "hearts": 0,
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
   }
 ]
