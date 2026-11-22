@@ -4343,5 +4343,38 @@
       "color": "#3E4337",
       "fontFamily": "'Gowun Dodum', sans-serif"
     }
+  },
+  {
+    "id": 396,
+    "text": "주머니 속에서 건네진\n작은 캔커피의 서늘한 무게\n\n손바닥을 감싸 안으며\n천천히 번져오는 봄날 같은 온기",
+    "createdAt": "2026-11-22",
+    "hearts": 0,
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
+  },
+  {
+    "id": 397,
+    "text": "비 갠 뒤 젖은 돌담길을 돌아\n작은 풀잎 끝을 바라보면\n마음까지 투명해지는 물방울 하나\n\n서두르지 않고 견뎌낸 시간들이\n동그랗게 모여 빛나는 순간\n오늘도 수고로웠던 너의 발걸음 위에\n고요히 안기는 찬란한 축복",
+    "createdAt": "2026-11-22",
+    "hearts": 0,
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
+  },
+  {
+    "id": 398,
+    "text": "사각사각 연필심이 닿을 때마다\n마음의 결이 고요히 다듬어지고\n\n젖은 잉크가 마를 때를 기다리며\n오늘도 나를 깊이 들여다본다",
+    "createdAt": "2026-11-22",
+    "hearts": 0,
+    "style": {
+      "background": "#FAF6F0",
+      "color": "#4E3E32",
+      "fontFamily": "'MaruBuri', serif"
+    }
   }
 ]
