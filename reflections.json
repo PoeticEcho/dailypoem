@@ -4387,5 +4387,16 @@
       "color": "#3C342C",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "id": 400,
+    "text": "볕이 스며든 자리마다\n사락사락 마르는 하얀 마음들\n\n지친 하루의 어깨를 토닥이듯\n바람이 품고 간 온기 하나",
+    "createdAt": "2026-11-24",
+    "hearts": 0,
+    "style": {
+      "background": "#FBF8F3",
+      "color": "#3C342C",
+      "fontFamily": "'Gowun Batang', serif"
+    }
   }
 ]
