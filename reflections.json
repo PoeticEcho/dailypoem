@@ -4398,5 +4398,16 @@
       "color": "#3C342C",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "id": 401,
+    "text": "어깨를 적시던 빗방울 속에서\n우린 서로를 향해 기울었다\n\n조금 더 젖는 쪽이\n더 환하게 웃던 그늘\n\n세상의 모든 비가 멎은 뒤에도\n기울어진 마음은 마르지 않는다",
+    "createdAt": "2026-11-25",
+    "hearts": 0,
+    "style": {
+      "background": "#F2F5F1",
+      "color": "#2E4235",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
   }
 ]
