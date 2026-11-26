@@ -4409,5 +4409,16 @@
       "color": "#2E4235",
       "fontFamily": "'Gowun Dodum', sans-serif"
     }
+  },
+  {
+    "id": 402,
+    "text": "모서리를 돌아서는 바람 앞에서도\n억새는 꺾이지 않고\n제 몸을 부드럽게 뉘였다\n\n모나지 않게 살아낸 날들이\n결국 우리를 살리는 힘이 되어\n오늘도 조용히\n어깨를 다독이는 저녁",
+    "createdAt": "2026-11-26",
+    "hearts": 0,
+    "style": {
+      "background": "#F7F3EE",
+      "color": "#4A3B32",
+      "fontFamily": "'Gowun Batang', serif"
+    }
   }
 ]
