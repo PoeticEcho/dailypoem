@@ -4420,5 +4420,16 @@
       "color": "#4A3B32",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "id": 403,
+    "text": "안경을 조용히 내려놓으면\n세상의 뾰족한 날들이 무뎌지고\n\n스탠드 불빛을 한 단계 낮춘 밤\n흐릿해진 풍경 속에서 비로소\n내 마음이 편히 숨을 쉰다",
+    "createdAt": "2026-11-27",
+    "hearts": 0,
+    "style": {
+      "background": "#181A20",
+      "color": "#EAE6DE",
+      "fontFamily": "'Gowun Batang', serif"
+    }
   }
 ]
