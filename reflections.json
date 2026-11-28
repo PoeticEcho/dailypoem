@@ -4431,5 +4431,16 @@
       "color": "#EAE6DE",
       "fontFamily": "'Gowun Batang', serif"
     }
+  },
+  {
+    "id": 404,
+    "text": "거센 바람이 머물다 가는 곳에서\n유연하게 몸을 눕히는 억새처럼\n\n부러지지 않기 위해\n더 낮게 허리를 굽히며\n오늘도 부드러운 마음을 배운다",
+    "createdAt": "2026-11-28",
+    "hearts": 0,
+    "style": {
+      "background": "#F5F3ED",
+      "color": "#3E4337",
+      "fontFamily": "'Gowun Dodum', sans-serif"
+    }
   }
 ]
